@@ -8,7 +8,7 @@ const styles = theme => ({
     paddingBottom: theme.spacing(2)
   },
   grid: {
-    marginTop: theme.spacing(10)
+    marginTop: theme.spacing(8)
   },
   input: {
     width: '40%'
