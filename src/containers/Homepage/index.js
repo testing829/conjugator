@@ -7,12 +7,17 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
+import { GET_USERS } from '../../gql/users.gql';
 import Header from '../../components/Header/index';
+
+import { useQuery } from 'react-apollo-hooks';
 
 import styles from './HomepageStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
 
 const Homepage = ({ classes }) => {
+  const { data } = useQuery(GET_USERS);
+  console.log('TCL: Homepage -> data', data);
   return (
     <>
       <Header />
