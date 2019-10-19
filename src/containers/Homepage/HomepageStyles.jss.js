@@ -1,5 +1,6 @@
 const styles = theme => ({
   card: {
+    backgroundColor: '#fafafa',
     display: 'flex',
     height: theme.spacing(45),
     flexDirection: 'column',
@@ -10,10 +11,9 @@ const styles = theme => ({
     marginTop: theme.spacing(10)
   },
   input: {
-    width: '60%'
+    width: '40%'
   },
   inputContainer: {
-    // border: '2px solid red',
     display: 'flex',
     justifyContent: 'center'
   },
