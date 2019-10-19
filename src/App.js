@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo-hooks';
 import { Route, Switch } from 'react-router-dom';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,13 +10,21 @@ import Homepage from './containers/Homepage/index';
 import Nav from './components/Nav/index';
 
 function App() {
+  const [level, setLevel] = useState(0);
+  const [latam, setLatam] = useState(true);
+  const [token, setToken] = useState('');
+
+  const client = new ApolloClient({
+    uri: process.env.REACT_APP_HEROKU_URL
+  });
   return (
     <>
-      <CssBaseline />
-      <Nav />
-      <Switch>
-        <Route exact path="/" render={() => <Homepage />} />
-        {/* <Route
+      <ApolloProvider client={client}>
+        <CssBaseline />
+        <Nav />
+        <Switch>
+          <Route exact path="/" render={() => <Homepage />} />
+          {/* <Route
         path="/signup"
         render={props => <Signup {...props} updateToken={updateToken} />}
       />
@@ -29,8 +39,9 @@ function App() {
         render={props => <Dashboard {...props} token={token} />}
       />
       <Route exact path="/settings" render={props => <Settings {...props} />} /> */}
-        <Route render={() => <h1>URL not found!</h1>} />
-      </Switch>
+          <Route render={() => <h1>URL not found!</h1>} />
+        </Switch>
+      </ApolloProvider>
     </>
   );
 }
