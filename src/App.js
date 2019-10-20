@@ -7,6 +7,7 @@ import { Route, Switch } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Homepage from './containers/Homepage/index';
+import Login from './containers/Account/Login';
 import Nav from './components/Nav/index';
 import Settings from './containers/Settings/index';
 
@@ -31,6 +32,7 @@ function App() {
             path="/settings"
             render={props => <Settings {...props} />}
           />
+          <Route exact path="/login" render={props => <Login {...props} />} />
           {/* <Route
         path="/signup"
         render={props => <Signup {...props} updateToken={updateToken} />}

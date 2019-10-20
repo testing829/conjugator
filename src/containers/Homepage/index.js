@@ -53,7 +53,6 @@ const Homepage = ({ classes }) => {
   const handleSubmit = async event => {
     event.preventDefault();
     if (submitted) {
-      console.log('TCL: in submitted', submitted);
       setSubmitted(false);
       setCorrect(false);
       setShowNextVerb(true);

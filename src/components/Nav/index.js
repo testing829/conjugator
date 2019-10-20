@@ -58,7 +58,15 @@ export default function Nav() {
             </NavLink>
           </Button>
           <Button className={classes.navItem} color="inherit">
-            Account
+            <NavLink
+              exact
+              // activeClassName="active-link"
+              // className="inactive"
+              to="/login"
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              Account
+            </NavLink>
           </Button>
         </Box>
       </Toolbar>
