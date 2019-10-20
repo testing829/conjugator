@@ -1,0 +1,137 @@
+# import UserOrderByInput, VerbOrderByInput, LogOrderByInput, VerbWhereInput, LogWhereInput from './generated/prisma.graphql'
+
+type Query {
+  users(
+    query: String
+    first: Int
+    skip: Int
+    after: String
+    orderBy: UserOrderByInput
+    where: UserWhereInput
+  ): [User!]!
+  me: User!
+  myLogs(
+    query: String
+    first: Int
+    skip: Int
+    after: String
+    orderBy: LogOrderByInput
+    where: LogWhereInput
+  ): [Log!]!
+  verbs(
+    query: String
+    first: Int
+    skip: Int
+    after: String
+    orderBy: VerbOrderByInput
+    where: VerbWhereInput
+  ): [Verb]
+  logs(
+    query: String
+    first: Int
+    skip: Int
+    after: String
+    orderBy: LogOrderByInput
+    where: LogWhereInput
+  ): [Log!]!
+}
+
+type Mutation {
+  createUser(data: CreateUserInput!): AuthPayload!
+  login(data: LoginUserInput!): AuthPayload!
+  deleteUser: User!
+  updateUser(data: UpdateUserInput!): User!
+  createLog(data: CreateLogInput!): Log!
+}
+
+# type Subscription {
+
+# }
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  password: String
+}
+
+input CreateLogInput {
+  verbInfinitive: String!
+  tense: String!
+  correctAnswer: String!
+  userAnswer: String!
+  verbPerson: String!
+  correct: Boolean!
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String
+  password: String!
+  logs: [Log]
+  updatedAt: String!
+  createdAt: String!
+}
+
+type Log {
+  id: ID!
+  verbInfinitive: String!
+  tense: String!
+  correctAnswer: String!
+  userAnswer: String!
+  verbPerson: String!
+  correct: Boolean!
+  student: User
+  updatedAt: String!
+  createdAt: String!
+}
+
+type Verb {
+  form1p: String
+  form1s: String
+  form2p: String
+  form2s: String
+  form3p: String
+  form3s: String
+  gerund: String
+  gerundEnglish: String
+  index: ID
+  infinitive: String
+  infinitiveEnglish: String
+  mood: String
+  moodEnglish: String
+  pastparticiple: String
+  pastparticipleEnglish: String
+  tense: String
+  tenseEnglish: String
+  verbEnglish: String
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  id: String
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}

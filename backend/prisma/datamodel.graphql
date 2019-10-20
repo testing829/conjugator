@@ -1,0 +1,45 @@
+type User {
+  id: ID! @unique
+  email: String! @unique
+  name: String!
+  password: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  logs: [Log] @relation(name: "LogToUser")
+}
+
+type Log {
+  id: ID! @unique
+  verbInfinitive: String!
+  tense: String!
+  correctAnswer: String!
+  userAnswer: String!
+  verbPerson: String!
+  correct: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  student: [User] @relation(name: "LogToUser")
+}
+
+type Verb {
+  id: ID! @unique
+  form1p: String
+  form1s: String
+  form2p: String
+  form2s: String
+  form3p: String
+  form3s: String
+  gerund: String
+  gerundEnglish: String
+  infinitive: String
+  infinitiveEnglish: String
+  mood: String
+  moodEnglish: String
+  pastparticiple: String
+  pastparticipleEnglish: String
+  tense: String
+  tenseEnglish: String
+  verbEnglish: String
+  updatedAt: DateTime!
+  createdAt: DateTime!
+}
