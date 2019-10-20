@@ -47,7 +47,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = ({ history }) => {
-  console.log('TCL: Login -> history', history);
   const [email, setEmail] = useState('');
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);

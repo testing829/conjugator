@@ -48,7 +48,7 @@ const Homepage = ({ classes }) => {
     variables: { latam, subjArr, tenseArr }
   });
 
-  const createLog = useMutation(CREATE_LOG);
+  const [createLog, { data: logData }] = useMutation(CREATE_LOG);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -59,9 +59,9 @@ const Homepage = ({ classes }) => {
       setUserAnswer('');
     } else {
       setSubmitted(true);
+      logAnswer(userAnswer, verb);
       setShowNextVerb(false);
       handleStreak();
-      logAnswer(userAnswer, verb);
     }
   };
 
@@ -80,23 +80,20 @@ const Homepage = ({ classes }) => {
   };
 
   const logAnswer = async (userAnswer, verb) => {
-    if (submitted) {
-      const answer = userAnswer.toLowerCase();
-      try {
-        const logData = await createLog({
-          variables: {
-            verbInfinitive: verb.infinitive,
-            tense: verb.tenseEnglish,
-            correctAnswer: verb.answer,
-            userAnswer: answer,
-            verbPerson: verb.person,
-            correct: userAnswer === verb.answer ? true : false
-          }
-        });
-        console.log('logData -->', logData);
-      } catch (err) {
-        console.log('Error logging:', err);
-      }
+    const answer = userAnswer.toLowerCase();
+    try {
+      await createLog({
+        variables: {
+          correct: userAnswer === verb.answer ? true : false,
+          correctAnswer: verb.answer,
+          tense: verb.tenseEnglish,
+          userAnswer: answer,
+          verbInfinitive: verb.infinitive,
+          verbPerson: verb.person
+        }
+      });
+    } catch (err) {
+      console.log('Error logging:', err, logData);
     }
   };
 

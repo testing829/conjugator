@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo-hooks';
@@ -13,13 +13,24 @@ import Settings from './containers/Settings/index';
 import SignUp from './containers/Account/SignUp';
 
 function App() {
-  const [level, setLevel] = useState(0);
-  const [latam, setLatam] = useState(true);
-  const [token, setToken] = useState('');
+  const token = window.localStorage.getItem('jwt');
+  console.log('TCL: App -> token', token);
 
-  const client = new ApolloClient({
-    uri: process.env.REACT_APP_HEROKU_URL
-  });
+  const client = token
+    ? new ApolloClient({
+        uri: process.env.REACT_APP_HEROKU_URL,
+        request: async operation => {
+          operation.setContext({
+            headers: {
+              authorization: token
+            }
+          });
+        }
+      })
+    : new ApolloClient({
+        uri: process.env.REACT_APP_HEROKU_URL
+      });
+
   return (
     <>
       <ApolloProvider client={client}>
@@ -27,7 +38,6 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/" render={() => <Homepage />} />
-
           <Route
             exact
             path="/settings"

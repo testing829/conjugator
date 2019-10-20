@@ -3,7 +3,10 @@ const styles = theme => ({
     color: theme.palette.primary.dark
   },
   divider: {
-    margin: theme.spacing(5)
+    margin: theme.spacing(5),
+    [theme.breakpoints.down('md')]: {
+      margin: theme.spacing(3)
+    }
   }
 });
 
