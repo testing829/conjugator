@@ -61,17 +61,21 @@ const Homepage = ({ classes }) => {
     } else {
       setSubmitted(true);
       setShowNextVerb(false);
-      if (verb.answer === userAnswer) {
-        setCorrectCount(correctCount + 1);
-        setTotalAnswers(totalAnswers + 1);
-        setCorrect(true);
-        if (correctCount >= bestStreak) {
-          setBestStreak(bestStreak + 1);
-        }
-      } else if (verb.answer !== userAnswer) {
-        setCorrectCount(correctCount + 1);
-        setTotalAnswers(totalAnswers + 1);
+      handleStreak();
+    }
+  };
+
+  const handleStreak = () => {
+    if (verb.answer === userAnswer) {
+      setCorrectCount(correctCount + 1);
+      setTotalAnswers(totalAnswers + 1);
+      setCorrect(true);
+      if (correctCount >= bestStreak) {
+        setBestStreak(bestStreak + 1);
       }
+    } else if (verb.answer !== userAnswer) {
+      setCorrectCount(0);
+      setTotalAnswers(totalAnswers + 1);
     }
   };
 
@@ -114,12 +118,16 @@ const Homepage = ({ classes }) => {
                     </Grid>
                     <Grid item xs={4}>
                       <Typography className={classes.streakText}>
-                        Best Streak: 10
+                        Best Streak: {bestStreak}
                       </Typography>
                     </Grid>
                     <Grid item xs={4}>
                       <Typography className={classes.streakText}>
-                        Percentage: 75%
+                        {`Percentage: ${
+                          correctCount
+                            ? Math.round((correctCount / totalAnswers) * 100)
+                            : 0
+                        }%`}
                       </Typography>
                     </Grid>
                   </Grid>
