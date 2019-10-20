@@ -11,7 +11,7 @@ const styles = theme => ({
     width: '100%'
   },
   grid: {
-    marginTop: theme.spacing(8)
+    marginTop: theme.spacing(2)
   },
   input: {
     textAlign: 'center',

@@ -10,12 +10,9 @@ import Homepage from './containers/Homepage/index';
 import Login from './containers/Account/Login';
 import Nav from './components/Nav/index';
 import Settings from './containers/Settings/index';
+import SignUp from './containers/Account/SignUp';
 
 function App() {
-  const [level, setLevel] = useState(0);
-  const [latam, setLatam] = useState(true);
-  const [token, setToken] = useState('');
-
   const client = new ApolloClient({
     uri: process.env.REACT_APP_HEROKU_URL
   });
@@ -33,21 +30,11 @@ function App() {
             render={props => <Settings {...props} />}
           />
           <Route exact path="/login" render={props => <Login {...props} />} />
-          {/* <Route
-        path="/signup"
-        render={props => <Signup {...props} updateToken={updateToken} />}
-      />
-      <Route
-        path="/login"
-        render={props => (
-          <Login {...props} token={token} updateToken={updateToken} />
-        )}
-      />
-      <Route
-        path="/dashboard"
-        render={props => <Dashboard {...props} token={token} />}
-      />
-      <Route exact path="/settings" render={props => <Settings {...props} />} /> */}
+          <Route
+            exact
+            path="/sign-up"
+            render={props => <SignUp {...props} />}
+          />
           <Route render={() => <h1>URL not found!</h1>} />
         </Switch>
       </ApolloProvider>
