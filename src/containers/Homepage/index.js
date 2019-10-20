@@ -179,6 +179,12 @@ const Homepage = ({ classes }) => {
               </CardContent>
               <CardActions className={classes.inputContainer} disableSpacing>
                 <form className={classes.form} onSubmit={handleSubmit}>
+                  {submitted && !correct ? (
+                    <Typography className={classes.wrongAnswer} variant="body1">
+                      {`${verb.answer.charAt(0).toUpperCase() +
+                        verb.answer.slice(1)}`}
+                    </Typography>
+                  ) : null}
                   <TextField
                     autoFocus
                     className={classes.input}

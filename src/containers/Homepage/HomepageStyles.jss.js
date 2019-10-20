@@ -32,6 +32,10 @@ const styles = theme => ({
   verbText: {
     color: theme.palette.primary.dark,
     width: '100%'
+  },
+  wrongAnswer: {
+    color: '#f44336',
+    marginBottom: theme.spacing(1)
   }
 });
 
