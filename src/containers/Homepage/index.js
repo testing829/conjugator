@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Collapse from '@material-ui/core/Collapse';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -13,7 +14,6 @@ import Typography from '@material-ui/core/Typography';
 
 import { CREATE_LOG } from '../../gql/logs.gql';
 import { VERB_QUERY } from '../../gql/verbs.gql';
-import Header from '../../components/Header/index';
 import { SettingsContext } from '../../contexts/index';
 import Snackbar from '../../components/Snackbar/index';
 
@@ -121,7 +121,13 @@ const Homepage = ({ classes }) => {
   }, [data, loading, showNextVerb]);
 
   if (loading) {
-    return null;
+    return (
+      <Grid container align="center" direction="row" justify="center">
+        <Grid item className={classes.loading} sm={6}>
+          <CircularProgress />
+        </Grid>
+      </Grid>
+    );
   } else {
     return (
       <>
