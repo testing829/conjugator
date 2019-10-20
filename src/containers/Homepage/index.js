@@ -22,6 +22,7 @@ const Homepage = ({ classes }) => {
   const [bestStreak, setBestStreak] = useState(0);
   const [correct, setCorrect] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
+  const [showNextVerb, setShowNextVerb] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [totalAnswers, setTotalAnswers] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
@@ -33,7 +34,7 @@ const Homepage = ({ classes }) => {
     person: '',
     tenseEnglish: ''
   });
-  // console.log('TCL: Homepage -> verb', verb);
+  console.log('TCL: Homepage -> verb', verb);
   const { difficulty, latam, subjArr, tenseArr } = useContext(SettingsContext);
   const personObj = {
     form1s: 'Yo',
@@ -44,7 +45,7 @@ const Homepage = ({ classes }) => {
     form3p: 'Ellos/Ellas'
   };
 
-  const { data, loading, refetch } = useQuery(VERB_QUERY[difficulty], {
+  const { data, loading } = useQuery(VERB_QUERY[difficulty], {
     variables: { latam, subjArr, tenseArr }
   });
 
@@ -52,27 +53,37 @@ const Homepage = ({ classes }) => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    setSubmitted(true);
-    if (verb.answer === userAnswer) {
-      setCorrectCount(correctCount + 1);
-      setTotalAnswers(totalAnswers + 1);
-      setCorrect(true);
-      if (correctCount >= bestStreak) {
-        setBestStreak(bestStreak + 1);
+    if (submitted) {
+      console.log('TCL: in submitted', submitted);
+      setSubmitted(false);
+      setCorrect(false);
+      setShowNextVerb(true);
+      setUserAnswer('');
+    } else {
+      setSubmitted(true);
+      setShowNextVerb(false);
+      if (verb.answer === userAnswer) {
+        setCorrectCount(correctCount + 1);
+        setTotalAnswers(totalAnswers + 1);
+        setCorrect(true);
+        if (correctCount >= bestStreak) {
+          setBestStreak(bestStreak + 1);
+        }
+      } else if (verb.answer !== userAnswer) {
+        setCorrectCount(correctCount + 1);
+        setTotalAnswers(totalAnswers + 1);
       }
-    } else if (verb.answer !== userAnswer) {
-      setCorrectCount(correctCount + 1);
-      setTotalAnswers(totalAnswers + 1);
     }
   };
 
   useEffect(() => {
-    if (!loading) {
+    const getRandomVerb = () => {
+      console.log('TCL: getRandomVerb ->', data.verbs);
+
       const verbLength = Object.keys(data.verbs).length;
       const randomNum = Math.floor(Math.random() * verbLength);
       const randomPerson = Math.floor(Math.random() * 5); // this grabs the 6 yo, tu, ellos etc that we want to use
       const randomVerb = data.verbs[randomNum];
-
       setVerb({
         answer: Object.values(randomVerb)[randomPerson],
         infinitive: randomVerb.infinitive,
@@ -81,8 +92,11 @@ const Homepage = ({ classes }) => {
         person: Object.keys(randomVerb)[randomPerson],
         tenseEnglish: randomVerb.tenseEnglish
       });
+    };
+    if (!loading || showNextVerb) {
+      getRandomVerb();
     }
-  }, [data, loading]);
+  }, [data, loading, showNextVerb]);
 
   if (loading) {
     return null;
@@ -90,7 +104,7 @@ const Homepage = ({ classes }) => {
     return (
       <>
         <Header />
-        <Grid contanier align="center" direction="row" justify="center">
+        <Grid container align="center" direction="row" justify="center">
           <Grid item className={classes.grid} sm={6}>
             <Card className={classes.card}>
               <CardContent>

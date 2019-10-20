@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import { SettingsContext } from '../../contexts/index';
+
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   section: {
@@ -90,9 +91,5 @@ function Difficulty(props) {
     </List>
   );
 }
-
-Difficulty.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 export default withStyles(styles)(Difficulty);
