@@ -67,7 +67,7 @@ const Homepage = ({ classes }) => {
   };
 
   const handleStreak = () => {
-    if (verb.answer === userAnswer) {
+    if (verb.answer === userAnswer.toLowerCase()) {
       setCorrect(true);
       setCorrectCount(correctCount + 1);
       setTotalCorrect(totalCorrect + 1);
@@ -85,7 +85,7 @@ const Homepage = ({ classes }) => {
     try {
       await createLog({
         variables: {
-          correct: userAnswer === verb.answer ? true : false,
+          correct: answer === verb.answer ? true : false,
           correctAnswer: verb.answer,
           tense: verb.tenseEnglish,
           userAnswer: answer,
@@ -183,6 +183,7 @@ const Homepage = ({ classes }) => {
                     autoFocus
                     className={classes.input}
                     error={submitted && !correct}
+                    label={submitted && !correct ? 'Incorrect' : null}
                     onChange={
                       submitted
                         ? null
