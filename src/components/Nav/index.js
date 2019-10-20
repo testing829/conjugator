@@ -46,28 +46,28 @@ export default function Nav() {
           </NavLink>
         </Typography>
         <Box className={classes.navItemContainer}>
-          <Button className={classes.navItem} color="inherit">
-            <NavLink
-              exact
-              // activeClassName="active-link"
-              // className="inactive"
-              to="/settings"
-              style={{ textDecoration: 'none', color: 'white' }}
-            >
+          <NavLink
+            exact
+            // activeClassName="active-link"
+            // className="inactive"
+            to="/settings"
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            <Button className={classes.navItem} color="inherit">
               Settings
-            </NavLink>
-          </Button>
-          <Button className={classes.navItem} color="inherit">
-            <NavLink
-              exact
-              // activeClassName="active-link"
-              // className="inactive"
-              to="/login"
-              style={{ textDecoration: 'none', color: 'white' }}
-            >
+            </Button>
+          </NavLink>
+          <NavLink
+            exact
+            // activeClassName="active-link"
+            // className="inactive"
+            to="/login"
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            <Button className={classes.navItem} color="inherit">
               Account
-            </NavLink>
-          </Button>
+            </Button>
+          </NavLink>
         </Box>
       </Toolbar>
     </AppBar>
