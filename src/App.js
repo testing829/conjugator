@@ -13,6 +13,10 @@ import Settings from './containers/Settings/index';
 import SignUp from './containers/Account/SignUp';
 
 function App() {
+  const [level, setLevel] = useState(0);
+  const [latam, setLatam] = useState(true);
+  const [token, setToken] = useState('');
+
   const client = new ApolloClient({
     uri: process.env.REACT_APP_HEROKU_URL
   });

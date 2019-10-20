@@ -61,20 +61,42 @@ const Homepage = ({ classes }) => {
       setSubmitted(true);
       setShowNextVerb(false);
       handleStreak();
+      logAnswer(userAnswer, verb);
     }
   };
 
   const handleStreak = () => {
     if (verb.answer === userAnswer) {
+      setCorrect(true);
       setCorrectCount(correctCount + 1);
       setTotalAnswers(totalAnswers + 1);
-      setCorrect(true);
       if (correctCount >= bestStreak) {
         setBestStreak(bestStreak + 1);
       }
     } else if (verb.answer !== userAnswer) {
       setCorrectCount(0);
       setTotalAnswers(totalAnswers + 1);
+    }
+  };
+
+  const logAnswer = async (userAnswer, verb) => {
+    if (submitted) {
+      const answer = userAnswer.toLowerCase();
+      try {
+        const logData = await createLog({
+          variables: {
+            verbInfinitive: verb.infinitive,
+            tense: verb.tenseEnglish,
+            correctAnswer: verb.answer,
+            userAnswer: answer,
+            verbPerson: verb.person,
+            correct: userAnswer === verb.answer ? true : false
+          }
+        });
+        console.log('logData -->', logData);
+      } catch (err) {
+        console.log('Error logging:', err);
+      }
     }
   };
 
