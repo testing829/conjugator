@@ -2,6 +2,7 @@ import React, { createContext, useState } from 'react';
 
 import useArrUpdate from '../hooks/useArrUpdate';
 import useSubjUpdate from '../hooks/useSubjUpdate';
+import useToggleState from '../hooks/useToggle';
 
 export const SettingsContext = createContext();
 
@@ -10,13 +11,12 @@ export function SettingsProvider(props) {
   const [beginner, setBeginner] = useState(true);
   const [difficulty, setDifficulty] = useState(0);
   const [intermediate, setIntermediate] = useState(false);
+  const [latam, toggleLatam] = useToggleState(true);
   const [present, setPresent] = useState(true);
   const [pret, setPret] = useState(true);
 
   const [subjArr, changeSubj] = useSubjUpdate();
-  console.log('TCL: SettingsProvider -> subjArr', subjArr);
   const [tenseArr, updateTense] = useArrUpdate();
-  console.log('TCL: SettingsProvider -> tenseArr', tenseArr);
 
   return (
     <SettingsContext.Provider
@@ -26,6 +26,7 @@ export function SettingsProvider(props) {
         changeSubj,
         difficulty,
         intermediate,
+        latam,
         present,
         pret,
         setAdvanced,
@@ -36,6 +37,7 @@ export function SettingsProvider(props) {
         setPret,
         subjArr,
         tenseArr,
+        toggleLatam,
         updateTense
       }}
     >

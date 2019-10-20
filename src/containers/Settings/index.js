@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Latam from './Latam';
 import Difficulty from './Difficulty';
@@ -36,10 +36,9 @@ const styles = theme => ({
 });
 
 function Settings({ classes }) {
-  const [latam, setLatam] = useState(false);
   return (
     <Paper className={classes.main} elevation={10}>
-      <Latam latam={latam} setLatam={setLatam} />
+      <Latam />
       <Difficulty />
       <Tenses />
     </Paper>
