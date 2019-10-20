@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { NavLink } from 'react-router-dom';
+
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -35,36 +37,29 @@ export default function ButtonAppBar() {
     <AppBar className={classes.nav} position="static">
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
-          Conjugator
+          <NavLink
+            exact
+            to="/"
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            Conjugator
+          </NavLink>
         </Typography>
         <Box className={classes.navItemContainer}>
-          {/* <Link
-            activeStyle={{ textDecoration: 'underline' }}
-            to={'/'}
-            style={{ color: 'inherit', textDecoration: 'inherit' }}
-          > */}
-          {/* <Button className={classes.navItem} color="inherit">
-            Buy / Sell
-          </Button> */}
-          {/* </Link> */}
-          {/* <Link
-            activeStyle={{ textDecoration: 'underline' }}
-            to={'/learn'}
-            style={{ color: 'inherit', textDecoration: 'inherit' }}
-          > */}
           <Button className={classes.navItem} color="inherit">
-            Settings
+            <NavLink
+              exact
+              // activeClassName="active-link"
+              // className="inactive"
+              to="/settings"
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              Settings
+            </NavLink>
           </Button>
-          {/* </Link> */}
-          {/* <Link
-            activeStyle={{ textDecoration: 'underline' }}
-            to={'/login'}
-            style={{ color: 'inherit', textDecoration: 'inherit' }}
-          > */}
           <Button className={classes.navItem} color="inherit">
             Account
           </Button>
-          {/* </Link> */}
         </Box>
       </Toolbar>
     </AppBar>

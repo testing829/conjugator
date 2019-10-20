@@ -22,9 +22,7 @@ function Latam({ classes, latam, setLatam }) {
       <ListSubheader>Latam Spanish or Spain Spanish</ListSubheader>
       <ListItem style={{ height: '64px' }}>
         <Checkbox onClick={() => setLatam(!latam)} />
-        <ListItemText>
-          <span>Include "Vosotros"</span>
-        </ListItemText>
+        <ListItemText>Include "Vosotros"</ListItemText>
       </ListItem>
     </List>
   );

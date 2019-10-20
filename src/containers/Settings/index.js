@@ -11,10 +11,10 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = theme => ({
   main: {
     width: '100%',
-    margin: '10px auto',
+    margin: '60px auto',
     backgroundColor: '#fafafa',
     [theme.breakpoints.up('sm')]: {
-      width: '580px'
+      width: theme.spacing(75)
     }
   },
   button: {
