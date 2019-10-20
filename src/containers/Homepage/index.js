@@ -124,7 +124,7 @@ const Homepage = ({ classes }) => {
                     <Grid item xs={4}>
                       <Typography className={classes.streakText}>
                         {`Percentage: ${
-                          correctCount
+                          correctCount / totalAnswers
                             ? Math.round((correctCount / totalAnswers) * 100)
                             : 0
                         }%`}
@@ -164,7 +164,11 @@ const Homepage = ({ classes }) => {
                     autoFocus
                     className={classes.input}
                     error={submitted && !correct}
-                    onChange={event => setUserAnswer(event.target.value)}
+                    onChange={
+                      submitted
+                        ? null
+                        : event => setUserAnswer(event.target.value)
+                    }
                     placeholder="Enter conjugated verb..."
                     value={userAnswer}
                     variant="outlined"
