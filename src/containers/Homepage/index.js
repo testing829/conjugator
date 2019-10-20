@@ -22,7 +22,7 @@ const Homepage = ({ classes }) => {
   const [bestStreak, setBestStreak] = useState(0);
   const [correct, setCorrect] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
-  const [showNextVerb, setShowNextVerb] = useState(false);
+  const [showNextVerb, setShowNextVerb] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [totalAnswers, setTotalAnswers] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
@@ -34,7 +34,6 @@ const Homepage = ({ classes }) => {
     person: '',
     tenseEnglish: ''
   });
-  console.log('TCL: Homepage -> verb', verb);
   const { difficulty, latam, subjArr, tenseArr } = useContext(SettingsContext);
   const personObj = {
     form1s: 'Yo',
@@ -78,8 +77,6 @@ const Homepage = ({ classes }) => {
 
   useEffect(() => {
     const getRandomVerb = () => {
-      console.log('TCL: getRandomVerb ->', data.verbs);
-
       const verbLength = Object.keys(data.verbs).length;
       const randomNum = Math.floor(Math.random() * verbLength);
       const randomPerson = Math.floor(Math.random() * 5); // this grabs the 6 yo, tu, ellos etc that we want to use
@@ -93,7 +90,7 @@ const Homepage = ({ classes }) => {
         tenseEnglish: randomVerb.tenseEnglish
       });
     };
-    if (!loading || showNextVerb) {
+    if (!loading && showNextVerb) {
       getRandomVerb();
     }
   }, [data, loading, showNextVerb]);
