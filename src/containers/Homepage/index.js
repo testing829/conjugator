@@ -25,6 +25,7 @@ const Homepage = ({ classes }) => {
   const [showNextVerb, setShowNextVerb] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [totalAnswers, setTotalAnswers] = useState(0);
+  const [totalCorrect, setTotalCorrect] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
   const [verb, setVerb] = useState({
     answer: '',
@@ -69,14 +70,14 @@ const Homepage = ({ classes }) => {
     if (verb.answer === userAnswer) {
       setCorrect(true);
       setCorrectCount(correctCount + 1);
-      setTotalAnswers(totalAnswers + 1);
+      setTotalCorrect(totalCorrect + 1);
       if (correctCount >= bestStreak) {
         setBestStreak(bestStreak + 1);
       }
     } else if (verb.answer !== userAnswer) {
       setCorrectCount(0);
-      setTotalAnswers(totalAnswers + 1);
     }
+    setTotalAnswers(totalAnswers + 1);
   };
 
   const logAnswer = async (userAnswer, verb) => {
@@ -142,8 +143,8 @@ const Homepage = ({ classes }) => {
                     <Grid item xs={4}>
                       <Typography className={classes.streakText}>
                         {`Percentage: ${
-                          correctCount / totalAnswers
-                            ? Math.round((correctCount / totalAnswers) * 100)
+                          totalCorrect / totalAnswers
+                            ? Math.round((totalCorrect / totalAnswers) * 100)
                             : 0
                         }%`}
                       </Typography>
