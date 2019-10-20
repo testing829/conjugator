@@ -8,6 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Homepage from './containers/Homepage/index';
 import Nav from './components/Nav/index';
+import Settings from './containers/Settings/index';
 
 function App() {
   const [level, setLevel] = useState(0);
@@ -24,6 +25,12 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/" render={() => <Homepage />} />
+
+          <Route
+            exact
+            path="/settings"
+            render={props => <Settings {...props} />}
+          />
           {/* <Route
         path="/signup"
         render={props => <Signup {...props} updateToken={updateToken} />}

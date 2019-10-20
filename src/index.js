@@ -2,7 +2,7 @@ import React from 'react';
 
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-// import { SettingsProvider } from './components/Contexts/SettingsContext';
+import { SettingsProvider } from './contexts/index';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 
 import App from './App';
@@ -25,9 +25,11 @@ const theme = createMuiTheme({
 
 ReactDOM.render(
   <BrowserRouter>
-    <MuiThemeProvider theme={theme}>
-      <App />
-    </MuiThemeProvider>
+    <SettingsProvider>
+      <MuiThemeProvider theme={theme}>
+        <App />
+      </MuiThemeProvider>
+    </SettingsProvider>
   </BrowserRouter>,
   document.getElementById('root')
 );
