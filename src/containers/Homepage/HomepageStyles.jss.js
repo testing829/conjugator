@@ -7,10 +7,14 @@ const styles = theme => ({
     justifyContent: 'space-between',
     paddingBottom: theme.spacing(2)
   },
+  form: {
+    width: '100%'
+  },
   grid: {
     marginTop: theme.spacing(8)
   },
   input: {
+    textAlign: 'center',
     width: '40%'
   },
   inputContainer: {

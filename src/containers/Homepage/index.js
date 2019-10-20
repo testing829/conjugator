@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { useMutation, useQuery } from 'react-apollo-hooks';
 
@@ -13,11 +13,18 @@ import { CREATE_LOG } from '../../gql/logs.gql';
 import { VERB_QUERY } from '../../gql/verbs.gql';
 import Header from '../../components/Header/index';
 import { SettingsContext } from '../../contexts/index';
+import Snackbar from '../../components/Snackbar/index';
 
 import styles from './HomepageStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
 
 const Homepage = ({ classes }) => {
+  const [bestStreak, setBestStreak] = useState(0);
+  const [correct, setCorrect] = useState(false);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [submitted, setSubmitted] = useState(false);
+  const [totalAnswers, setTotalAnswers] = useState(0);
+  const [userAnswer, setUserAnswer] = useState('');
   const [verb, setVerb] = useState({
     answer: '',
     infinitive: '',
@@ -26,7 +33,7 @@ const Homepage = ({ classes }) => {
     person: '',
     tenseEnglish: ''
   });
-  console.log('TCL: Homepage -> verb', verb);
+  // console.log('TCL: Homepage -> verb', verb);
   const { difficulty, latam, subjArr, tenseArr } = useContext(SettingsContext);
   const personObj = {
     form1s: 'Yo',
@@ -37,33 +44,41 @@ const Homepage = ({ classes }) => {
     form3p: 'Ellos/Ellas'
   };
 
-  console.log(
-    'TCL: Homepage -> latam, difficulty, tenseArr, subjArr',
-    latam,
-    difficulty,
-    tenseArr,
-    subjArr
-  );
-
-  const { loading, data } = useQuery(VERB_QUERY[difficulty], {
+  const { data, loading, refetch } = useQuery(VERB_QUERY[difficulty], {
     variables: { latam, subjArr, tenseArr }
   });
 
   const createLog = useMutation(CREATE_LOG);
 
+  const handleSubmit = async event => {
+    event.preventDefault();
+    setSubmitted(true);
+    if (verb.answer === userAnswer) {
+      setCorrectCount(correctCount + 1);
+      setTotalAnswers(totalAnswers + 1);
+      setCorrect(true);
+      if (correctCount >= bestStreak) {
+        setBestStreak(bestStreak + 1);
+      }
+    } else if (verb.answer !== userAnswer) {
+      setCorrectCount(correctCount + 1);
+      setTotalAnswers(totalAnswers + 1);
+    }
+  };
+
   useEffect(() => {
     if (!loading) {
-      const dataLength = Object.keys(data.verbs).length;
-      const randomNum = Math.floor(Math.random() * dataLength);
-      const randomVerbNum = Math.floor(Math.random() * 5); // this grabs the 6 yo, tu, ellos etc that we want to use
+      const verbLength = Object.keys(data.verbs).length;
+      const randomNum = Math.floor(Math.random() * verbLength);
+      const randomPerson = Math.floor(Math.random() * 5); // this grabs the 6 yo, tu, ellos etc that we want to use
       const randomVerb = data.verbs[randomNum];
 
       setVerb({
-        answer: Object.values(randomVerb)[randomVerbNum],
+        answer: Object.values(randomVerb)[randomPerson],
         infinitive: randomVerb.infinitive,
         infinitiveEnglish: randomVerb.infinitiveEnglish,
         moodEnglish: randomVerb.moodEnglish,
-        person: Object.keys(randomVerb)[randomVerbNum],
+        person: Object.keys(randomVerb)[randomPerson],
         tenseEnglish: randomVerb.tenseEnglish
       });
     }
@@ -83,7 +98,7 @@ const Homepage = ({ classes }) => {
                   <Grid container justify="space-between">
                     <Grid item xs={4}>
                       <Typography className={classes.streakText}>
-                        Current Streak: 10
+                        Current Streak: {correctCount}
                       </Typography>
                     </Grid>
                     <Grid item xs={4}>
@@ -108,7 +123,8 @@ const Homepage = ({ classes }) => {
                 >
                   <Grid item={12}>
                     <Typography className={classes.verbText} variant="h5">
-                      {`${verb.infinitive} (${verb.infinitiveEnglish})`}
+                      {`${verb.infinitive.charAt(0).toUpperCase() +
+                        verb.infinitive.slice(1)} (${verb.infinitiveEnglish})`}
                     </Typography>
                   </Grid>
                   <Grid item={12}>
@@ -124,15 +140,22 @@ const Homepage = ({ classes }) => {
                 </Grid>
               </CardContent>
               <CardActions className={classes.inputContainer} disableSpacing>
-                <TextField
-                  autoFocus
-                  className={classes.input}
-                  placeholder="Enter conjugated verb..."
-                />
+                <form className={classes.form} onSubmit={handleSubmit}>
+                  <TextField
+                    autoFocus
+                    className={classes.input}
+                    error={submitted && !correct}
+                    onChange={event => setUserAnswer(event.target.value)}
+                    placeholder="Enter conjugated verb..."
+                    value={userAnswer}
+                    variant="outlined"
+                  />
+                </form>
               </CardActions>
             </Card>
           </Grid>
         </Grid>
+        <Snackbar open={correct} setOpen={setCorrect} text="Correct!" />
       </>
     );
   }
