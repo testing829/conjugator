@@ -2,9 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { useMutation, useQuery } from 'react-apollo-hooks';
 
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import Collapse from '@material-ui/core/Collapse';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -123,7 +125,6 @@ const Homepage = ({ classes }) => {
   } else {
     return (
       <>
-        <Header />
         <Grid container align="center" direction="row" justify="center">
           <Grid item className={classes.grid} sm={6}>
             <Card className={classes.card}>
@@ -151,27 +152,29 @@ const Homepage = ({ classes }) => {
                     </Grid>
                   </Grid>
                 </CardActions>
+              </CardContent>
+              <CardContent className={classes.verbContent}>
                 <Grid
                   container
                   alignItems="center"
                   className={classes.verbGrid}
                   direction="column"
-                  justify="space-evenly"
+                  justify="space-around"
                   wrap="nowrap"
                 >
-                  <Grid item={12}>
-                    <Typography className={classes.verbText} variant="h5">
+                  <Grid item={4}>
+                    <Typography className={classes.verbText} variant="h4">
                       {`${verb.infinitive.charAt(0).toUpperCase() +
                         verb.infinitive.slice(1)} (${verb.infinitiveEnglish})`}
                     </Typography>
                   </Grid>
-                  <Grid item={12}>
-                    <Typography className={classes.verbText} variant="h5">
+                  <Grid item={4}>
+                    <Typography className={classes.verbText} variant="h4">
                       {personObj[verb.person]}
                     </Typography>
                   </Grid>
-                  <Grid item={12}>
-                    <Typography className={classes.verbText} variant="h5">
+                  <Grid item={4}>
+                    <Typography className={classes.verbText} variant="h4">
                       {verb.tenseEnglish}
                     </Typography>
                   </Grid>
@@ -179,26 +182,39 @@ const Homepage = ({ classes }) => {
               </CardContent>
               <CardActions className={classes.inputContainer} disableSpacing>
                 <form className={classes.form} onSubmit={handleSubmit}>
-                  {submitted && !correct ? (
-                    <Typography className={classes.wrongAnswer} variant="body1">
-                      {`${verb.answer.charAt(0).toUpperCase() +
-                        verb.answer.slice(1)}`}
-                    </Typography>
-                  ) : null}
-                  <TextField
-                    autoFocus
-                    className={classes.input}
-                    error={submitted && !correct}
-                    label={submitted && !correct ? 'Incorrect' : null}
-                    onChange={
-                      submitted
-                        ? null
-                        : event => setUserAnswer(event.target.value)
-                    }
-                    placeholder="Enter conjugated verb..."
-                    value={userAnswer}
-                    variant="outlined"
-                  />
+                  <Grid container>
+                    <Grid item xs={12}>
+                      <Collapse in={submitted && !correct}>
+                        <Typography
+                          className={classes.wrongAnswer}
+                          variant="body1"
+                        >
+                          {`${verb.answer.charAt(0).toUpperCase() +
+                            verb.answer.slice(1)}`}
+                        </Typography>
+                      </Collapse>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        autoFocus
+                        className={classes.input}
+                        error={submitted && !correct}
+                        onChange={
+                          submitted
+                            ? null
+                            : event => setUserAnswer(event.target.value)
+                        }
+                        placeholder="Enter conjugated verb..."
+                        value={userAnswer}
+                        variant="outlined"
+                      />
+                      <Grid xs={2}>
+                        <Button onClick={handleSubmit}>
+                          {submitted ? 'Next' : 'Submit'}
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </Grid>
                 </form>
               </CardActions>
             </Card>

@@ -2,20 +2,17 @@ const styles = theme => ({
   card: {
     backgroundColor: '#fafafa',
     display: 'flex',
-    height: theme.spacing(45),
+    height: theme.spacing(75),
     flexDirection: 'column',
     justifyContent: 'space-between',
+    marginTop: theme.spacing(8),
     paddingBottom: theme.spacing(2)
   },
   form: {
     width: '100%'
   },
-  grid: {
-    marginTop: theme.spacing(2)
-  },
   input: {
-    textAlign: 'center',
-    width: '40%'
+    width: '50%'
   },
   inputContainer: {
     display: 'flex',
@@ -24,13 +21,18 @@ const styles = theme => ({
   streakText: {
     color: theme.palette.primary.main
   },
+  verbContent: {
+    display: 'flex',
+    alignContent: 'center'
+  },
   verbGrid: {
-    height: '100%',
+    height: theme.spacing(25),
     marginTop: theme.spacing(2),
     padding: theme.spacing(2)
   },
   verbText: {
     color: theme.palette.primary.dark,
+    padding: theme.spacing(2),
     width: '100%'
   },
   wrongAnswer: {
