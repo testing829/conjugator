@@ -199,13 +199,15 @@ const Homepage = ({ classes }) => {
                   <Grid container>
                     <Grid item xs={12}>
                       <Collapse in={submitted && !correct}>
-                        <Typography
-                          className={classes.wrongAnswer}
-                          variant="body1"
-                        >
-                          {`${verb.answer.charAt(0).toUpperCase() +
-                            verb.answer.slice(1)}`}
-                        </Typography>
+                        {submitted && !correct ? (
+                          <Typography
+                            className={classes.wrongAnswer}
+                            variant="body1"
+                          >
+                            {`${verb.answer.charAt(0).toUpperCase() +
+                              verb.answer.slice(1)}`}
+                          </Typography>
+                        ) : null}
                       </Collapse>
                     </Grid>
                     <Grid item xs={12}>
