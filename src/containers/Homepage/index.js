@@ -181,7 +181,10 @@ const Homepage = ({ classes }) => {
                   </Grid>
                   <Grid item={4}>
                     <Typography className={classes.verbText} variant="h4">
-                      {verb.tenseEnglish}
+                      {verb.tenseEnglish}{' '}
+                      {verb.moodEnglish === 'Subjunctive'
+                        ? `(${verb.moodEnglish})`
+                        : null}
                     </Typography>
                   </Grid>
                 </Grid>
