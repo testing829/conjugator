@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
+import AccentButtons from './AccentButtons';
 import { CREATE_LOG } from '../../gql/logs.gql';
 import { VERB_QUERY } from '../../gql/verbs.gql';
 import { SettingsContext } from '../../contexts/index';
@@ -98,6 +99,10 @@ const Homepage = ({ classes }) => {
     } catch (err) {
       console.log('Error logging:', err, logData);
     }
+  };
+
+  const addAccent = accent => {
+    setUserAnswer(userAnswer + accent);
   };
 
   useEffect(() => {
@@ -204,6 +209,7 @@ const Homepage = ({ classes }) => {
                       </Collapse>
                     </Grid>
                     <Grid item xs={12}>
+                      <AccentButtons addAccent={addAccent} />
                       <TextField
                         autoFocus
                         className={classes.input}

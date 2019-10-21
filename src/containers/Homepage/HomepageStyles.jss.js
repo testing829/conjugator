@@ -1,16 +1,15 @@
 const styles = theme => ({
+  accentButton: {
+    width: theme.spacing(1)
+  },
   card: {
     backgroundColor: '#fafafa',
     display: 'flex',
-    // height: theme.spacing(75),
     height: '100%',
     flexDirection: 'column',
     justifyContent: 'space-between',
     marginTop: theme.spacing(8),
     paddingBottom: theme.spacing(2)
-    // [theme.breakpoints.down('sm')]: {
-    //   height: theme.spacing(45)
-    // }
   },
   form: {
     width: '100%'
