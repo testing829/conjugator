@@ -1,17 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import Checkbox from '@material-ui/core/Checkbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import withWidth from '@material-ui/core/withWidth';
 
 import { SettingsContext } from '../../contexts/index';
 
 import styles from './SettingsStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
 
-function Tenses({ classes }) {
+function Tenses({ classes, width }) {
   const {
     changeSubj,
     present,
@@ -20,6 +21,14 @@ function Tenses({ classes }) {
     setPret,
     updateTense
   } = useContext(SettingsContext);
+
+  const [smallScreen, setSmallScreen] = useState(false);
+
+  useEffect(() => {
+    if (width === 'sm' || width === 'xs') {
+      setSmallScreen(true);
+    }
+  }, [width]);
 
   return (
     <List>
@@ -93,4 +102,4 @@ function Tenses({ classes }) {
   );
 }
 
-export default withStyles(styles)(Tenses);
+export default withWidth()(withStyles(styles)(Tenses));
