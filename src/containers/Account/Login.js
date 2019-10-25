@@ -136,6 +136,7 @@ const Login = ({ history }) => {
                   name="password"
                   onChange={event => setPassword(event.target.value)}
                   required
+                  type="password"
                   variant="outlined"
                 />
               </Grid>
