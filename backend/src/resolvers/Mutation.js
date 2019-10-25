@@ -24,17 +24,13 @@ const Mutation = {
         email: args.data.email
       }
     });
-
     if (!user) {
       throw new Error('Unable to login');
     }
-
     const isMatch = await bcrypt.compare(args.data.password, user.password);
-
     if (!isMatch) {
       throw new Error('Unable to login');
     }
-
     return {
       user,
       token: generateToken(user.id)

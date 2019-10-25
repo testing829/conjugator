@@ -14,7 +14,7 @@ const SimpleSnackbar = ({ open, setOpen, text }) => {
           vertical: 'bottom',
           horizontal: 'left'
         }}
-        autoHideDuration={3000}
+        autoHideDuration={2500}
         onClose={() => {
           setOpen(false);
         }}

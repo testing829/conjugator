@@ -8,22 +8,15 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 
 import { SettingsContext } from '../../contexts/index';
 
+import styles from './SettingsStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
-
-const styles = {
-  section: {
-    padding: 0,
-    marginTop: 10,
-    backgroundColor: '#fafafa'
-  }
-};
 
 function Latam({ classes }) {
   const { latam, toggleLatam } = useContext(SettingsContext);
   return (
-    <List className={classes.section}>
+    <List>
       <ListSubheader>Latam Spanish or Spain Spanish</ListSubheader>
-      <ListItem style={{ height: '64px' }}>
+      <ListItem>
         <Checkbox onClick={() => toggleLatam(!latam)} />
         <ListItemText>Include "Vosotros"</ListItemText>
       </ListItem>

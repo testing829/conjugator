@@ -14,7 +14,6 @@ import SignUp from './containers/Account/SignUp';
 
 function App() {
   const token = window.localStorage.getItem('jwt');
-  console.log('TCL: App -> token', token);
 
   const client = token
     ? new ApolloClient({
