@@ -42,6 +42,7 @@ type Mutation {
   deleteUser: User!
   updateUser(data: UpdateUserInput!): User!
   createLog(data: CreateLogInput!): Log!
+  updateVerb(data: VerbUpdateInput!): Verb!
 }
 
 # type Subscription {
@@ -77,6 +78,26 @@ input CreateLogInput {
   userAnswer: String!
   verbPerson: String!
   correct: Boolean!
+}
+
+input VerbUpdateInput {
+  form1p: String
+  form1s: String
+  form2p: String
+  form2s: String
+  form3p: String
+  form3s: String
+  gerund: String
+  gerundEnglish: String
+  infinitive: String
+  infinitiveEnglish: String
+  mood: String
+  moodEnglish: String
+  pastparticiple: String
+  pastparticipleEnglish: String
+  tense: String
+  tenseEnglish: String
+  verbEnglish: String
 }
 
 type User {
