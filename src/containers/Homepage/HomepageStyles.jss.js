@@ -9,13 +9,20 @@ const styles = theme => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     marginTop: theme.spacing(8),
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
+    [theme.breakpoints.down('md')]: {
+      height: '92vh',
+      margin: 0
+    }
   },
   form: {
     width: '100%'
   },
   input: {
-    width: '50%'
+    width: '50%',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%'
+    }
   },
   inputContainer: {
     display: 'flex',
@@ -32,14 +39,17 @@ const styles = theme => ({
     alignContent: 'center'
   },
   verbGrid: {
-    // height: theme.spacing(25),
     marginTop: theme.spacing(2),
     padding: theme.spacing(2)
   },
   verbText: {
     color: theme.palette.primary.dark,
+    fontSize: '40px',
     padding: theme.spacing(2),
-    width: '100%'
+    width: '100%',
+    [theme.breakpoints.down('md')]: {
+      fontSize: '32px'
+    }
   },
   wrongAnswer: {
     color: '#f44336',

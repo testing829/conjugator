@@ -11,8 +11,8 @@ const SimpleSnackbar = ({ open, setOpen, text }) => {
     <>
       <Snackbar
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left'
+          vertical: 'top',
+          horizontal: 'center'
         }}
         autoHideDuration={2500}
         onClose={() => {

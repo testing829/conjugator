@@ -29,7 +29,6 @@ const Homepage = ({ classes }) => {
   const [submitted, setSubmitted] = useState(false);
   const [totalAnswers, setTotalAnswers] = useState(0);
   const [totalCorrect, setTotalCorrect] = useState(0);
-  const [usedVerbs, setUsedVerbs] = useState([]);
   const [userAnswer, setUserAnswer] = useState('');
   const [verb, setVerb] = useState({
     answer: '',
@@ -109,13 +108,10 @@ const Homepage = ({ classes }) => {
   useEffect(() => {
     const getRandomVerb = () => {
       const verbsLength = Object.keys(data.verbs).length;
-      console.log('TCL: getRandomVerb -> data verbs', data.verbs);
       const randomNum = Math.floor(Math.random() * verbsLength);
       const randomPerson = Math.floor(Math.random() * 5); // this grabs the 6 yo, tu, ellos etc that we want to use
       const randomVerb = data.verbs[randomNum];
-      if (usedVerbs.includes(randomVerb.infinitive)) {
-        // getRandomVerb();
-      }
+
       setVerb({
         answer: Object.values(randomVerb)[randomPerson],
         infinitive: randomVerb.infinitive,
@@ -128,9 +124,7 @@ const Homepage = ({ classes }) => {
     if (!loading && showNextVerb) {
       getRandomVerb();
     }
-  }, [data, loading, showNextVerb, usedVerbs]);
-
-  console.log('VERB INF', verb.infinitive ? verb.infinitive : null);
+  }, [data, loading, showNextVerb]);
 
   if (loading) {
     return (
@@ -144,7 +138,7 @@ const Homepage = ({ classes }) => {
     return (
       <>
         <Grid container align="center" direction="row" justify="center">
-          <Grid item className={classes.grid} sm={6}>
+          <Grid item sm={6}>
             <Card className={classes.card}>
               <CardContent>
                 <CardActions disableSpacing>
@@ -181,18 +175,18 @@ const Homepage = ({ classes }) => {
                   wrap="nowrap"
                 >
                   <Grid item={4}>
-                    <Typography className={classes.verbText} variant="h4">
+                    <Typography className={classes.verbText}>
                       {`${verb.infinitive.charAt(0).toUpperCase() +
                         verb.infinitive.slice(1)} (${verb.infinitiveEnglish})`}
                     </Typography>
                   </Grid>
                   <Grid item={4}>
-                    <Typography className={classes.verbText} variant="h4">
+                    <Typography className={classes.verbText}>
                       {personObj[verb.person]}
                     </Typography>
                   </Grid>
                   <Grid item={4}>
-                    <Typography className={classes.verbText} variant="h4">
+                    <Typography className={classes.verbText}>
                       {verb.tenseEnglish}{' '}
                       {verb.moodEnglish === 'Subjunctive'
                         ? `(${verb.moodEnglish})`

@@ -34,7 +34,7 @@ export default function Nav() {
   const classes = useStyles();
 
   return (
-    <AppBar className={classes.nav} position="static">
+    <AppBar position="static" style={{ height: '8vh' }}>
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
           <NavLink
@@ -48,8 +48,6 @@ export default function Nav() {
         <Box className={classes.navItemContainer}>
           <NavLink
             exact
-            // activeClassName="active-link"
-            // className="inactive"
             to="/settings"
             style={{ textDecoration: 'none', color: 'white' }}
           >
@@ -59,8 +57,6 @@ export default function Nav() {
           </NavLink>
           <NavLink
             exact
-            // activeClassName="active-link"
-            // className="inactive"
             to="/login"
             style={{ textDecoration: 'none', color: 'white' }}
           >
