@@ -6,12 +6,12 @@ import { Route, Switch } from 'react-router-dom';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import Account from './containers/Account';
+import Dashboard from './containers/Dashboard';
 import Homepage from './containers/Homepage/index';
-import Login from './containers/Account/Login';
+import Login from './containers/Auth/Login';
 import Nav from './components/Nav/index';
 import Settings from './containers/Settings/index';
-import SignUp from './containers/Account/SignUp';
+import SignUp from './containers/Auth/SignUp';
 
 function App() {
   const token = window.localStorage.getItem('jwt');
@@ -52,7 +52,7 @@ function App() {
           <Route
             exact
             path="/account"
-            render={props => <Account {...props} />}
+            render={props => <Dashboard {...props} />}
           />
           <Route render={() => <h1>URL not found!</h1>} />
         </Switch>
