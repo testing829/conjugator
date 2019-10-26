@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 
+import Account from './containers/Account';
 import Homepage from './containers/Homepage/index';
 import Login from './containers/Account/Login';
 import Nav from './components/Nav/index';
@@ -47,6 +48,11 @@ function App() {
             exact
             path="/sign-up"
             render={props => <SignUp {...props} />}
+          />
+          <Route
+            exact
+            path="/account"
+            render={props => <Account {...props} />}
           />
           <Route render={() => <h1>URL not found!</h1>} />
         </Switch>
