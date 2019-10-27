@@ -8,6 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { Context } from './contexts/index';
 import Dashboard from './containers/Dashboard';
+import Feedback from './containers/Feedback';
 import Homepage from './containers/Homepage/index';
 import Login from './containers/Auth/Login';
 import Nav from './components/Nav/index';
@@ -52,6 +53,11 @@ function App() {
             exact
             path="/settings"
             render={props => <Settings {...props} />}
+          />
+          <Route
+            exact
+            path="/feedback"
+            render={props => <Feedback {...props} />}
           />
           <Route exact path="/login" render={props => <Login {...props} />} />
           <Route
