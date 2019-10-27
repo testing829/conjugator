@@ -1,11 +1,6 @@
 const styles = theme => ({
   button: {
-    backgroundColor: '#0091EA',
-    color: '#FFFF',
     width: '90%'
-  },
-  card: {
-    // padding: theme.spacing(1)
   },
   emailInput: {
     backgroundColor: '#F5F9FB',
@@ -16,12 +11,14 @@ const styles = theme => ({
     height: theme.spacing(72)
   },
   header: {
-    backgroundColor: '#0091EA',
-    color: '#FFFF'
+    padding: theme.spacing(2)
   },
   input: {
     backgroundColor: '#F5F9FB',
     width: '100%'
+  },
+  subtitle: {
+    marginTop: theme.spacing(1)
   }
 });
 

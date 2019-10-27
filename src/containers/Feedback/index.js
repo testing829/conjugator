@@ -27,7 +27,7 @@ const Feedback = ({ classes }) => {
             className={classes.header}
             title={<Typography variant="h4">Send us your feedback!</Typography>}
             subheader={
-              <Typography variant="subtitle1">
+              <Typography className={classes.subtitle} variant="subtitle1">
                 Do you have any suggestions or have found a bug? Let us know if
                 the field below.
               </Typography>
@@ -58,6 +58,7 @@ const Feedback = ({ classes }) => {
               <Grid item xs={12}>
                 <Button
                   className={classes.button}
+                  color="primary"
                   size="medium"
                   variant="contained"
                 >
