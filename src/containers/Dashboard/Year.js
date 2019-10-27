@@ -43,9 +43,7 @@ function YearlyChart() {
         moment()
           .subtract(months, 'M')
           .format('M')
-      ),
-      correct: 0,
-      answers: 0
+      )
     });
     months--;
   }

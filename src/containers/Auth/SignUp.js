@@ -70,7 +70,7 @@ const SignUp = ({ history }) => {
       createUser({
         variables: {
           name: fullName,
-          email,
+          email: email.toLowerCase(),
           password
         }
       });

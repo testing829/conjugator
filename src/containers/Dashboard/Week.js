@@ -24,11 +24,16 @@ function WeekChart() {
     .subtract(7, 'd')
     .format('YYYY-MM-DD');
 
-  const { data, loading } = useQuery(MY_LOGS_BY_DATE, {
+  const { data, loading, refetch } = useQuery(MY_LOGS_BY_DATE, {
     variables: {
       date: oneWeekAgo
     }
   });
+
+  useEffect(() => {
+    console.log('TCL: refetch', data);
+    refetch();
+  }, [data, refetch]);
 
   // getDay() returns 0-6; Sun-Sat
   // we update the temp arrays based on the count of answers
@@ -52,13 +57,13 @@ function WeekChart() {
   }, [data]);
 
   const weekData = [
-    { name: 'Sun', correct: weekCorrect[0], answers: weekTotal[0] },
     { name: 'Mon', correct: weekCorrect[1], answers: weekTotal[1] },
     { name: 'Tue', correct: weekCorrect[2], answers: weekTotal[2] },
     { name: 'Wed', correct: weekCorrect[3], answers: weekTotal[3] },
     { name: 'Thu', correct: weekCorrect[4], answers: weekTotal[4] },
     { name: 'Fri', correct: weekCorrect[5], answers: weekTotal[5] },
-    { name: 'Sat', correct: weekCorrect[6], answers: weekTotal[6] }
+    { name: 'Sat', correct: weekCorrect[6], answers: weekTotal[6] },
+    { name: 'Sun', correct: weekCorrect[0], answers: weekTotal[0] }
   ];
 
   const reducer = (accumulator, currentValue) => accumulator + currentValue;

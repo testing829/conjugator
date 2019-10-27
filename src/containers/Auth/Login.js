@@ -70,7 +70,7 @@ const Login = ({ history }) => {
     try {
       login({
         variables: {
-          email,
+          email: email.toLowerCase(),
           password
         }
       });

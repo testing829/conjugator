@@ -23,11 +23,15 @@ function MonthlyChart() {
     .subtract(31, 'd')
     .format('YYYY-MM-DD');
 
-  const { data, loading } = useQuery(MY_LOGS_BY_DATE, {
+  const { data, loading, refetch } = useQuery(MY_LOGS_BY_DATE, {
     variables: {
       date: oneMonthAgo
     }
   });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   // we create an array of objects with the date and
   // the count of correct and total answers on that date
@@ -44,9 +48,7 @@ function MonthlyChart() {
       answers: 0,
       dateForUseEffect: moment()
         .subtract(days, 'd')
-        .format('D'),
-      correct: 0,
-      answers: 0
+        .format('D')
     });
     days--;
   }
