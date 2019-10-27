@@ -6,6 +6,7 @@ type User {
   createdAt: DateTime!
   updatedAt: DateTime!
   logs: [Log] @relation(name: "LogToUser")
+  feedbacks: [Feedback] @relation(name: "FeedbackToUser")
 }
 
 type Log {
@@ -19,6 +20,15 @@ type Log {
   createdAt: DateTime!
   updatedAt: DateTime!
   student: [User] @relation(name: "LogToUser")
+}
+
+type Feedback {
+  id: ID! @unique
+  email: String
+  student: [User] @relation(name: "FeedbackToUser")
+  text: String
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 type Verb {
