@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { NavLink } from 'react-router-dom';
 import { useMutation } from 'react-apollo-hooks';
@@ -12,7 +12,8 @@ import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 
-import { LOGIN } from '../../gql/users.gql';
+import { Context } from '../../contexts/index';
+import { CREATE_USER } from '../../gql/users.gql';
 import Snackbar from '../../components/Snackbar/index';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -46,18 +47,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = ({ history }) => {
+const SignUp = ({ history }) => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState(false);
+  const [fullName, setFullName] = useState('');
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState('');
   const [shortPassword, setShortPassword] = useState(false);
 
-  const [login, { data }] = useMutation(LOGIN);
-  console.log('TCL: Login -> data', data);
+  const { setLoggedIn } = useContext(Context);
+  const [createUser, { data }] = useMutation(CREATE_USER);
 
   const delay = 1000;
-
   const classes = useStyles();
 
   const handleSubmit = async event => {
@@ -66,9 +67,10 @@ const Login = ({ history }) => {
       setShortPassword(true);
     }
     try {
-      login({
+      createUser({
         variables: {
-          email,
+          name: fullName,
+          email: email.toLowerCase(),
           password
         }
       });
@@ -89,7 +91,8 @@ const Login = ({ history }) => {
 
   useEffect(() => {
     const redirect = () => {
-      localStorage.setItem('jwt', data.login.token);
+      localStorage.setItem('jwt', data.createUser.token);
+      setLoggedIn(true);
       setOpen(true);
       setTimeout(() => {
         history.push('/');
@@ -99,7 +102,7 @@ const Login = ({ history }) => {
     if (!error && data) {
       redirect();
     }
-  }, [data, error, history]);
+  }, [data, error, history, setLoggedIn]);
 
   return (
     <>
@@ -110,14 +113,26 @@ const Login = ({ history }) => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Login
+            Sign up
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  autoComplete="email"
+                  autoComplete="fname"
                   autoFocus
+                  fullWidth
+                  id="fullname"
+                  label="Full Name"
+                  name="fullname"
+                  onChange={event => setFullName(event.target.value)}
+                  required
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  autoComplete="email"
                   fullWidth
                   id="email"
                   label="Email Address"
@@ -141,9 +156,14 @@ const Login = ({ history }) => {
                 />
               </Grid>
             </Grid>
+            {shortPassword ? (
+              <Typography className={classes.errorMessage}>
+                Password must be at least 8 characters.
+              </Typography>
+            ) : null}
             {error ? (
               <Typography className={classes.errorMessage}>
-                Unable to login
+                Unable to sign-up. Your email address may already be registered.
               </Typography>
             ) : null}
             <Button
@@ -153,21 +173,19 @@ const Login = ({ history }) => {
               type="submit"
               variant="contained"
             >
-              Login
+              Sign Up
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <NavLink to={'/sign-up'}>
-                  Don't have an account? Sign-up
-                </NavLink>
+                <NavLink to={'/login'}>Already have an account? Login</NavLink>
               </Grid>
             </Grid>
           </form>
         </div>
-        <Snackbar open={open} setOpen={setOpen} text={'Successful Login'} />
+        <Snackbar open={open} setOpen={setOpen} text={'Signed Up!'} />
       </Container>
     </>
   );
 };
 
-export default Login;
+export default SignUp;

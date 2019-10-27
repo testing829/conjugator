@@ -4,14 +4,15 @@ import useArrUpdate from '../hooks/useArrUpdate';
 import useSubjUpdate from '../hooks/useSubjUpdate';
 import useToggleState from '../hooks/useToggle';
 
-export const SettingsContext = createContext();
+export const Context = createContext();
 
-export function SettingsProvider(props) {
+export function Provider(props) {
   const [advanced, setAdvanced] = useState(false);
   const [beginner, setBeginner] = useState(true);
   const [difficulty, setDifficulty] = useState(0);
   const [intermediate, setIntermediate] = useState(false);
   const [latam, toggleLatam] = useToggleState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [present, setPresent] = useState(true);
   const [pret, setPret] = useState(true);
 
@@ -19,7 +20,7 @@ export function SettingsProvider(props) {
   const [tenseArr, updateTense] = useArrUpdate();
 
   return (
-    <SettingsContext.Provider
+    <Context.Provider
       value={{
         advanced,
         beginner,
@@ -27,12 +28,14 @@ export function SettingsProvider(props) {
         difficulty,
         intermediate,
         latam,
+        loggedIn,
         present,
         pret,
         setAdvanced,
         setBeginner,
         setDifficulty,
         setIntermediate,
+        setLoggedIn,
         setPresent,
         setPret,
         subjArr,
@@ -42,6 +45,6 @@ export function SettingsProvider(props) {
       }}
     >
       {props.children}
-    </SettingsContext.Provider>
+    </Context.Provider>
   );
 }

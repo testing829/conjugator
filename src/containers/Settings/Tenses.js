@@ -7,7 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import withWidth from '@material-ui/core/withWidth';
 
-import { SettingsContext } from '../../contexts/index';
+import { Context } from '../../contexts/index';
 
 import styles from './SettingsStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
@@ -20,7 +20,7 @@ function Tenses({ classes, width }) {
     pret,
     setPret,
     updateTense
-  } = useContext(SettingsContext);
+  } = useContext(Context);
 
   const [smallScreen, setSmallScreen] = useState(false);
 
