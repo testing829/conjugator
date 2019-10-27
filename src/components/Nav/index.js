@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { NavLink } from 'react-router-dom';
 
@@ -7,6 +7,8 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+
+import { Context } from '../../contexts/index';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -32,6 +34,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Nav() {
   const classes = useStyles();
+  const { loggedIn } = useContext(Context);
 
   return (
     <AppBar position="static" style={{ height: '8vh' }}>
@@ -55,15 +58,27 @@ export default function Nav() {
               Settings
             </Button>
           </NavLink>
-          <NavLink
-            exact
-            to="/login"
-            style={{ textDecoration: 'none', color: 'white' }}
-          >
-            <Button className={classes.navItem} color="inherit">
-              Account
-            </Button>
-          </NavLink>
+          {loggedIn ? (
+            <NavLink
+              exact
+              to="/account"
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              <Button className={classes.navItem} color="inherit">
+                Account
+              </Button>
+            </NavLink>
+          ) : (
+            <NavLink
+              exact
+              to="/login"
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              <Button className={classes.navItem} color="inherit">
+                Login
+              </Button>
+            </NavLink>
+          )}
         </Box>
       </Toolbar>
     </AppBar>

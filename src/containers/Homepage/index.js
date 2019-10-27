@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import AccentButtons from './AccentButtons';
 import { CREATE_LOG } from '../../gql/logs.gql';
 import { VERB_QUERY } from '../../gql/verbs.gql';
-import { SettingsContext } from '../../contexts/index';
+import { Context } from '../../contexts/index';
 import Snackbar from '../../components/Snackbar/index';
 
 import styles from './HomepageStyles.jss';
@@ -38,7 +38,7 @@ const Homepage = ({ classes }) => {
     person: '',
     tenseEnglish: ''
   });
-  const { difficulty, latam, subjArr, tenseArr } = useContext(SettingsContext);
+  const { difficulty, latam, subjArr, tenseArr } = useContext(Context);
   const personObj = {
     form1s: 'Yo',
     form2s: 'Tú',

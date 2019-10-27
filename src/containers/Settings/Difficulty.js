@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 
-import { SettingsContext } from '../../contexts/index';
+import { Context } from '../../contexts/index';
 
 import styles from './SettingsStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
@@ -20,7 +20,7 @@ const Difficulty = ({ classes }) => {
     advanced,
     setAdvanced,
     setDifficulty
-  } = useContext(SettingsContext);
+  } = useContext(Context);
 
   return (
     <List className={classes.list}>
