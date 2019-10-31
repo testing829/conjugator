@@ -17,6 +17,7 @@ export function Provider(props) {
   const [pret, setPret] = useState(true);
 
   const [subjArr, changeSubj] = useSubjUpdate();
+  console.log('TCL: Provider -> subjArr', subjArr);
   const [tenseArr, updateTense] = useArrUpdate();
 
   return (

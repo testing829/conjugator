@@ -41,7 +41,7 @@ type Query {
     after: String
     orderBy: FeedbackOrderByInput
     where: FeedbackWhereInput
-  ): [Feedback]
+  ): [Feedback!]!
 }
 
 type Mutation {
@@ -51,7 +51,7 @@ type Mutation {
   updateUser(data: UpdateUserInput!): User!
   createLog(data: CreateLogInput!): Log!
   updateVerb(data: VerbUpdateInput!): Verb!
-  createFeedback(data: CreateFeedbackInput!): Feedback
+  createFeedback(data: CreateFeedbackInput!): Feedback!
 }
 
 # type Subscription {
@@ -70,7 +70,7 @@ input CreateUserInput {
 }
 
 input CreateFeedbackInput {
-  email: String
+  email: String!
   text: String!
 }
 
@@ -93,6 +93,7 @@ input CreateLogInput {
   verbPerson: String!
   correct: Boolean!
 }
+#
 
 input VerbUpdateInput {
   form1p: String
@@ -120,14 +121,16 @@ type User {
   email: String
   password: String!
   logs: [Log]
+  feedbacks: [Feedback]
   updatedAt: String!
   createdAt: String!
 }
 
 type Feedback {
   id: ID!
-  email: String
-  text: String
+  email: String!
+  text: String!
+  student: User
   updatedAt: String!
   createdAt: String!
 }

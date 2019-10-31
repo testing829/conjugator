@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sun Oct 27 2019 16:30:48 GMT+0000 (Greenwich Mean Time)
+# timestamp: Sun Oct 27 2019 19:07:33 GMT+0000 (Greenwich Mean Time)
 
 type AggregateFeedback {
   count: Int!
@@ -26,9 +26,9 @@ scalar DateTime
 
 type Feedback implements Node {
   id: ID!
-  email: String
+  email: String!
   student(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-  text: String
+  text: String!
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -44,8 +44,8 @@ type FeedbackConnection {
 }
 
 input FeedbackCreateInput {
-  email: String
-  text: String
+  email: String!
+  text: String!
   student: UserCreateManyWithoutFeedbacksInput
 }
 
@@ -55,8 +55,8 @@ input FeedbackCreateManyWithoutStudentInput {
 }
 
 input FeedbackCreateWithoutStudentInput {
-  email: String
-  text: String
+  email: String!
+  text: String!
 }
 
 """An edge in a connection."""
@@ -83,8 +83,8 @@ enum FeedbackOrderByInput {
 
 type FeedbackPreviousValues {
   id: ID!
-  email: String
-  text: String
+  email: String!
+  text: String!
   updatedAt: DateTime!
   createdAt: DateTime!
 }

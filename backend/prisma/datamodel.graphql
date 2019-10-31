@@ -24,9 +24,9 @@ type Log {
 
 type Feedback {
   id: ID! @unique
-  email: String
+  email: String!
   student: [User] @relation(name: "FeedbackToUser")
-  text: String
+  text: String!
   updatedAt: DateTime!
   createdAt: DateTime!
 }

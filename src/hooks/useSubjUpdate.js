@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 export default function useSubjUpdate(val) {
   const [subjArr, setSubjArr] = useState([]);
+  console.log('TCL: useSubjUpdate -> subjArr', subjArr);
 
   const changeSubj = val => {
     if (subjArr.includes(val)) {
