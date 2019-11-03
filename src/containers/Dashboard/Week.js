@@ -31,7 +31,6 @@ function WeekChart() {
   });
 
   useEffect(() => {
-    console.log('TCL: refetch', data);
     refetch();
   }, [data, refetch]);
 

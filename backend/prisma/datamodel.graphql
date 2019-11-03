@@ -1,38 +1,38 @@
 type User {
-  id: ID! @unique
+  id: ID! @id
   email: String! @unique
   name: String!
   password: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   logs: [Log] @relation(name: "LogToUser")
   feedbacks: [Feedback] @relation(name: "FeedbackToUser")
 }
 
 type Log {
-  id: ID! @unique
+  id: ID! @id
   verbInfinitive: String!
   tense: String!
   correctAnswer: String!
   userAnswer: String!
   verbPerson: String!
   correct: Boolean!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   student: [User] @relation(name: "LogToUser")
 }
 
 type Feedback {
-  id: ID! @unique
+  id: ID! @id
   email: String!
   student: [User] @relation(name: "FeedbackToUser")
   text: String!
-  updatedAt: DateTime!
-  createdAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Verb {
-  id: ID! @unique
+  id: ID! @id
   form1p: String
   form1s: String
   form2p: String
@@ -50,6 +50,6 @@ type Verb {
   tense: String
   tenseEnglish: String
   verbEnglish: String
-  updatedAt: DateTime!
-  createdAt: DateTime!
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
 }

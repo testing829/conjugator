@@ -71,6 +71,16 @@ const Query = {
       where: args.where
     };
     return prisma.query.logs(opArgs, info);
+  },
+  feedbacks(parent, args, { prisma }, info) {
+    const opArgs = {
+      first: args.first,
+      skip: args.skip,
+      after: args.after,
+      orderBy: args.orderBy,
+      where: args.where
+    };
+    return prisma.query.feedbacks(opArgs, info);
   }
 };
 

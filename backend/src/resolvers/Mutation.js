@@ -89,6 +89,31 @@ const Mutation = {
         }
       });
     }
+  },
+
+  async createFeedback(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request, false);
+    if (userId) {
+      return await prisma.mutation.createFeedback(
+        {
+          data: {
+            ...args.data,
+            student: {
+              connect: {
+                id: userId
+              }
+            }
+          }
+        },
+        info
+      );
+    } else {
+      return await prisma.mutation.createFeedback({
+        data: {
+          ...args.data
+        }
+      });
+    }
   }
 };
 

@@ -69,11 +69,6 @@ input CreateUserInput {
   password: String!
 }
 
-input CreateFeedbackInput {
-  email: String!
-  text: String!
-}
-
 input LoginUserInput {
   email: String!
   password: String!
@@ -93,7 +88,11 @@ input CreateLogInput {
   verbPerson: String!
   correct: Boolean!
 }
-#
+
+input CreateFeedbackInput {
+  email: String!
+  text: String!
+}
 
 input VerbUpdateInput {
   form1p: String

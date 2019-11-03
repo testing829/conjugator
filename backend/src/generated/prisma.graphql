@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sun Oct 27 2019 19:07:33 GMT+0000 (Greenwich Mean Time)
+# timestamp: Sat Nov 02 2019 13:29:16 GMT+0000 (Greenwich Mean Time)
 
 type AggregateFeedback {
   count: Int!
@@ -29,8 +29,8 @@ type Feedback implements Node {
   email: String!
   student(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   text: String!
-  updatedAt: DateTime!
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -75,18 +75,18 @@ enum FeedbackOrderByInput {
   email_DESC
   text_ASC
   text_DESC
-  updatedAt_ASC
-  updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 type FeedbackPreviousValues {
   id: ID!
   email: String!
   text: String!
-  updatedAt: DateTime!
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input FeedbackScalarWhereInput {
@@ -218,28 +218,6 @@ input FeedbackScalarWhereInput {
 
   """All values not ending with the given string."""
   text_not_ends_with: String
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -262,6 +240,28 @@ input FeedbackScalarWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
 }
 
 type FeedbackSubscriptionPayload {
@@ -479,28 +479,6 @@ input FeedbackWhereInput {
 
   """All values not ending with the given string."""
   text_not_ends_with: String
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -523,6 +501,28 @@ input FeedbackWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
   student_every: UserWhereInput
   student_some: UserWhereInput
   student_none: UserWhereInput
