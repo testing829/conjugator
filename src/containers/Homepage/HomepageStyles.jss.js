@@ -8,16 +8,10 @@ const styles = theme => ({
     height: '100%',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    marginTop: theme.spacing(8),
-    paddingBottom: theme.spacing(2),
-    [theme.breakpoints.down('md')]: {
-      height: '92vh',
-      margin: 0
-    },
-    [theme.breakpoints.down('sm')]: {
-      height: '72vh',
-      margin: 0
-    }
+    paddingBottom: theme.spacing(2)
+  },
+  container: {
+    padding: '5%'
   },
   form: {
     width: '100%'
@@ -41,14 +35,6 @@ const styles = theme => ({
   verbContent: {
     display: 'flex',
     alignContent: 'center'
-  },
-  verbGrid: {
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(2),
-    [theme.breakpoints.down('sm')]: {
-      marginTop: 0,
-      padding: 0
-    }
   },
   verbText: {
     color: theme.palette.primary.dark,

@@ -37,7 +37,7 @@ export default function Nav() {
   const { loggedIn } = useContext(Context);
 
   return (
-    <AppBar position="static" style={{ height: '8vh' }}>
+    <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
           <NavLink
