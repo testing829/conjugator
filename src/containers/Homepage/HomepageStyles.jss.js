@@ -13,6 +13,10 @@ const styles = theme => ({
     [theme.breakpoints.down('md')]: {
       height: '92vh',
       margin: 0
+    },
+    [theme.breakpoints.down('sm')]: {
+      height: '72vh',
+      margin: 0
     }
   },
   form: {
@@ -40,7 +44,11 @@ const styles = theme => ({
   },
   verbGrid: {
     marginTop: theme.spacing(2),
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      marginTop: 0,
+      padding: 0
+    }
   },
   verbText: {
     color: theme.palette.primary.dark,
@@ -49,6 +57,9 @@ const styles = theme => ({
     width: '100%',
     [theme.breakpoints.down('md')]: {
       fontSize: '32px'
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '20px'
     }
   },
   wrongAnswer: {

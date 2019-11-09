@@ -39,6 +39,7 @@ const Homepage = ({ classes }) => {
     tenseEnglish: ''
   });
   const { difficulty, latam, subjArr, tenseArr } = useContext(Context);
+
   const personObj = {
     form1s: 'Yo',
     form2s: 'Tú',
@@ -49,7 +50,7 @@ const Homepage = ({ classes }) => {
   };
 
   const { data, loading } = useQuery(VERB_QUERY[difficulty], {
-    variables: { latam, subjArr, tenseArr }
+    variables: { latam, tenseArr, subjArr }
   });
 
   const [createLog, { data: logData }] = useMutation(CREATE_LOG);

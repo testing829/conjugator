@@ -1,5 +1,9 @@
-# source: http://localhost:4466
-# timestamp: Sun Oct 20 2019 16:19:32 GMT+0100 (British Summer Time)
+# source: https://conj-prod-257165bf35.herokuapp.com/conj-prod/prod
+# timestamp: Sat Nov 09 2019 12:44:57 GMT+0000 (Greenwich Mean Time)
+
+type AggregateFeedback {
+  count: Int!
+}
 
 type AggregateLog {
   count: Int!
@@ -20,8 +24,515 @@ type BatchPayload {
 
 scalar DateTime
 
-"""Raw JSON value"""
-scalar Json
+type Feedback implements Node {
+  id: ID!
+  email: String!
+  student(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  text: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type FeedbackConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [FeedbackEdge]!
+  aggregate: AggregateFeedback!
+}
+
+input FeedbackCreateInput {
+  id: ID
+  email: String!
+  text: String!
+  student: UserCreateManyWithoutFeedbacksInput
+}
+
+input FeedbackCreateManyWithoutStudentInput {
+  create: [FeedbackCreateWithoutStudentInput!]
+  connect: [FeedbackWhereUniqueInput!]
+}
+
+input FeedbackCreateWithoutStudentInput {
+  id: ID
+  email: String!
+  text: String!
+}
+
+"""An edge in a connection."""
+type FeedbackEdge {
+  """The item at the end of the edge."""
+  node: Feedback!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum FeedbackOrderByInput {
+  id_ASC
+  id_DESC
+  email_ASC
+  email_DESC
+  text_ASC
+  text_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type FeedbackPreviousValues {
+  id: ID!
+  email: String!
+  text: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input FeedbackScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FeedbackScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FeedbackScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FeedbackScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+  text: String
+
+  """All values that are not equal to given value."""
+  text_not: String
+
+  """All values that are contained in given list."""
+  text_in: [String!]
+
+  """All values that are not contained in given list."""
+  text_not_in: [String!]
+
+  """All values less than the given value."""
+  text_lt: String
+
+  """All values less than or equal the given value."""
+  text_lte: String
+
+  """All values greater than the given value."""
+  text_gt: String
+
+  """All values greater than or equal the given value."""
+  text_gte: String
+
+  """All values containing the given string."""
+  text_contains: String
+
+  """All values not containing the given string."""
+  text_not_contains: String
+
+  """All values starting with the given string."""
+  text_starts_with: String
+
+  """All values not starting with the given string."""
+  text_not_starts_with: String
+
+  """All values ending with the given string."""
+  text_ends_with: String
+
+  """All values not ending with the given string."""
+  text_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+}
+
+type FeedbackSubscriptionPayload {
+  mutation: MutationType!
+  node: Feedback
+  updatedFields: [String!]
+  previousValues: FeedbackPreviousValues
+}
+
+input FeedbackSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FeedbackSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FeedbackSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FeedbackSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: FeedbackWhereInput
+}
+
+input FeedbackUpdateInput {
+  email: String
+  text: String
+  student: UserUpdateManyWithoutFeedbacksInput
+}
+
+input FeedbackUpdateManyDataInput {
+  email: String
+  text: String
+}
+
+input FeedbackUpdateManyMutationInput {
+  email: String
+  text: String
+}
+
+input FeedbackUpdateManyWithoutStudentInput {
+  create: [FeedbackCreateWithoutStudentInput!]
+  connect: [FeedbackWhereUniqueInput!]
+  set: [FeedbackWhereUniqueInput!]
+  disconnect: [FeedbackWhereUniqueInput!]
+  delete: [FeedbackWhereUniqueInput!]
+  update: [FeedbackUpdateWithWhereUniqueWithoutStudentInput!]
+  updateMany: [FeedbackUpdateManyWithWhereNestedInput!]
+  deleteMany: [FeedbackScalarWhereInput!]
+  upsert: [FeedbackUpsertWithWhereUniqueWithoutStudentInput!]
+}
+
+input FeedbackUpdateManyWithWhereNestedInput {
+  where: FeedbackScalarWhereInput!
+  data: FeedbackUpdateManyDataInput!
+}
+
+input FeedbackUpdateWithoutStudentDataInput {
+  email: String
+  text: String
+}
+
+input FeedbackUpdateWithWhereUniqueWithoutStudentInput {
+  where: FeedbackWhereUniqueInput!
+  data: FeedbackUpdateWithoutStudentDataInput!
+}
+
+input FeedbackUpsertWithWhereUniqueWithoutStudentInput {
+  where: FeedbackWhereUniqueInput!
+  update: FeedbackUpdateWithoutStudentDataInput!
+  create: FeedbackCreateWithoutStudentInput!
+}
+
+input FeedbackWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FeedbackWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FeedbackWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FeedbackWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+  text: String
+
+  """All values that are not equal to given value."""
+  text_not: String
+
+  """All values that are contained in given list."""
+  text_in: [String!]
+
+  """All values that are not contained in given list."""
+  text_not_in: [String!]
+
+  """All values less than the given value."""
+  text_lt: String
+
+  """All values less than or equal the given value."""
+  text_lte: String
+
+  """All values greater than the given value."""
+  text_gt: String
+
+  """All values greater than or equal the given value."""
+  text_gte: String
+
+  """All values containing the given string."""
+  text_contains: String
+
+  """All values not containing the given string."""
+  text_not_contains: String
+
+  """All values starting with the given string."""
+  text_starts_with: String
+
+  """All values not starting with the given string."""
+  text_not_starts_with: String
+
+  """All values ending with the given string."""
+  text_ends_with: String
+
+  """All values not ending with the given string."""
+  text_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  student_every: UserWhereInput
+  student_some: UserWhereInput
+  student_none: UserWhereInput
+}
+
+input FeedbackWhereUniqueInput {
+  id: ID
+}
 
 type Log implements Node {
   id: ID!
@@ -33,7 +544,7 @@ type Log implements Node {
   correct: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
-  User(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  student(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
 """A connection to a list of items."""
@@ -47,21 +558,23 @@ type LogConnection {
 }
 
 input LogCreateInput {
+  id: ID
   verbInfinitive: String!
   tense: String!
   correctAnswer: String!
   userAnswer: String!
   verbPerson: String!
   correct: Boolean!
-  User: UserCreateManyWithoutLogInput
+  student: UserCreateManyWithoutLogsInput
 }
 
-input LogCreateManyWithoutUserInput {
-  create: [LogCreateWithoutUserInput!]
+input LogCreateManyWithoutStudentInput {
+  create: [LogCreateWithoutStudentInput!]
   connect: [LogWhereUniqueInput!]
 }
 
-input LogCreateWithoutUserInput {
+input LogCreateWithoutStudentInput {
+  id: ID
   verbInfinitive: String!
   tense: String!
   correctAnswer: String!
@@ -455,7 +968,7 @@ input LogUpdateInput {
   userAnswer: String
   verbPerson: String
   correct: Boolean
-  User: UserUpdateManyWithoutLogInput
+  student: UserUpdateManyWithoutLogsInput
 }
 
 input LogUpdateManyDataInput {
@@ -476,16 +989,16 @@ input LogUpdateManyMutationInput {
   correct: Boolean
 }
 
-input LogUpdateManyWithoutUserInput {
-  create: [LogCreateWithoutUserInput!]
+input LogUpdateManyWithoutStudentInput {
+  create: [LogCreateWithoutStudentInput!]
   connect: [LogWhereUniqueInput!]
   set: [LogWhereUniqueInput!]
   disconnect: [LogWhereUniqueInput!]
   delete: [LogWhereUniqueInput!]
-  update: [LogUpdateWithWhereUniqueWithoutUserInput!]
+  update: [LogUpdateWithWhereUniqueWithoutStudentInput!]
   updateMany: [LogUpdateManyWithWhereNestedInput!]
   deleteMany: [LogScalarWhereInput!]
-  upsert: [LogUpsertWithWhereUniqueWithoutUserInput!]
+  upsert: [LogUpsertWithWhereUniqueWithoutStudentInput!]
 }
 
 input LogUpdateManyWithWhereNestedInput {
@@ -493,7 +1006,7 @@ input LogUpdateManyWithWhereNestedInput {
   data: LogUpdateManyDataInput!
 }
 
-input LogUpdateWithoutUserDataInput {
+input LogUpdateWithoutStudentDataInput {
   verbInfinitive: String
   tense: String
   correctAnswer: String
@@ -502,15 +1015,15 @@ input LogUpdateWithoutUserDataInput {
   correct: Boolean
 }
 
-input LogUpdateWithWhereUniqueWithoutUserInput {
+input LogUpdateWithWhereUniqueWithoutStudentInput {
   where: LogWhereUniqueInput!
-  data: LogUpdateWithoutUserDataInput!
+  data: LogUpdateWithoutStudentDataInput!
 }
 
-input LogUpsertWithWhereUniqueWithoutUserInput {
+input LogUpsertWithWhereUniqueWithoutStudentInput {
   where: LogWhereUniqueInput!
-  update: LogUpdateWithoutUserDataInput!
-  create: LogCreateWithoutUserInput!
+  update: LogUpdateWithoutStudentDataInput!
+  create: LogCreateWithoutStudentInput!
 }
 
 input LogWhereInput {
@@ -810,9 +1323,9 @@ input LogWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  User_every: UserWhereInput
-  User_some: UserWhereInput
-  User_none: UserWhereInput
+  student_every: UserWhereInput
+  student_some: UserWhereInput
+  student_none: UserWhereInput
 }
 
 input LogWhereUniqueInput {
@@ -828,23 +1341,28 @@ scalar Long
 type Mutation {
   createUser(data: UserCreateInput!): User!
   createLog(data: LogCreateInput!): Log!
+  createFeedback(data: FeedbackCreateInput!): Feedback!
   createVerb(data: VerbCreateInput!): Verb!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateLog(data: LogUpdateInput!, where: LogWhereUniqueInput!): Log
+  updateFeedback(data: FeedbackUpdateInput!, where: FeedbackWhereUniqueInput!): Feedback
   updateVerb(data: VerbUpdateInput!, where: VerbWhereUniqueInput!): Verb
   deleteUser(where: UserWhereUniqueInput!): User
   deleteLog(where: LogWhereUniqueInput!): Log
+  deleteFeedback(where: FeedbackWhereUniqueInput!): Feedback
   deleteVerb(where: VerbWhereUniqueInput!): Verb
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertLog(where: LogWhereUniqueInput!, create: LogCreateInput!, update: LogUpdateInput!): Log!
+  upsertFeedback(where: FeedbackWhereUniqueInput!, create: FeedbackCreateInput!, update: FeedbackUpdateInput!): Feedback!
   upsertVerb(where: VerbWhereUniqueInput!, create: VerbCreateInput!, update: VerbUpdateInput!): Verb!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyLogs(data: LogUpdateManyMutationInput!, where: LogWhereInput): BatchPayload!
+  updateManyFeedbacks(data: FeedbackUpdateManyMutationInput!, where: FeedbackWhereInput): BatchPayload!
   updateManyVerbs(data: VerbUpdateManyMutationInput!, where: VerbWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyLogs(where: LogWhereInput): BatchPayload!
+  deleteManyFeedbacks(where: FeedbackWhereInput): BatchPayload!
   deleteManyVerbs(where: VerbWhereInput): BatchPayload!
-  executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
 enum MutationType {
@@ -874,19 +1392,18 @@ type PageInfo {
   endCursor: String
 }
 
-enum PrismaDatabase {
-  default
-}
-
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   logs(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Log]!
+  feedbacks(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Feedback]!
   verbs(where: VerbWhereInput, orderBy: VerbOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Verb]!
   user(where: UserWhereUniqueInput!): User
   log(where: LogWhereUniqueInput!): Log
+  feedback(where: FeedbackWhereUniqueInput!): Feedback
   verb(where: VerbWhereUniqueInput!): Verb
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   logsConnection(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LogConnection!
+  feedbacksConnection(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FeedbackConnection!
   verbsConnection(where: VerbWhereInput, orderBy: VerbOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): VerbConnection!
 
   """Fetches an object given its ID"""
@@ -899,6 +1416,7 @@ type Query {
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   log(where: LogSubscriptionWhereInput): LogSubscriptionPayload
+  feedback(where: FeedbackSubscriptionWhereInput): FeedbackSubscriptionPayload
   verb(where: VerbSubscriptionWhereInput): VerbSubscriptionPayload
 }
 
@@ -909,7 +1427,8 @@ type User implements Node {
   password: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-  Log(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Log!]
+  logs(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Log!]
+  feedbacks(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Feedback!]
 }
 
 """A connection to a list of items."""
@@ -923,21 +1442,38 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   email: String!
   name: String!
   password: String!
-  Log: LogCreateManyWithoutUserInput
+  logs: LogCreateManyWithoutStudentInput
+  feedbacks: FeedbackCreateManyWithoutStudentInput
 }
 
-input UserCreateManyWithoutLogInput {
-  create: [UserCreateWithoutLogInput!]
+input UserCreateManyWithoutFeedbacksInput {
+  create: [UserCreateWithoutFeedbacksInput!]
   connect: [UserWhereUniqueInput!]
 }
 
-input UserCreateWithoutLogInput {
+input UserCreateManyWithoutLogsInput {
+  create: [UserCreateWithoutLogsInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateWithoutFeedbacksInput {
+  id: ID
   email: String!
   name: String!
   password: String!
+  logs: LogCreateManyWithoutStudentInput
+}
+
+input UserCreateWithoutLogsInput {
+  id: ID
+  email: String!
+  name: String!
+  password: String!
+  feedbacks: FeedbackCreateManyWithoutStudentInput
 }
 
 """An edge in a connection."""
@@ -1229,7 +1765,8 @@ input UserUpdateInput {
   email: String
   name: String
   password: String
-  Log: LogUpdateManyWithoutUserInput
+  logs: LogUpdateManyWithoutStudentInput
+  feedbacks: FeedbackUpdateManyWithoutStudentInput
 }
 
 input UserUpdateManyDataInput {
@@ -1244,16 +1781,28 @@ input UserUpdateManyMutationInput {
   password: String
 }
 
-input UserUpdateManyWithoutLogInput {
-  create: [UserCreateWithoutLogInput!]
+input UserUpdateManyWithoutFeedbacksInput {
+  create: [UserCreateWithoutFeedbacksInput!]
   connect: [UserWhereUniqueInput!]
   set: [UserWhereUniqueInput!]
   disconnect: [UserWhereUniqueInput!]
   delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueWithoutLogInput!]
+  update: [UserUpdateWithWhereUniqueWithoutFeedbacksInput!]
   updateMany: [UserUpdateManyWithWhereNestedInput!]
   deleteMany: [UserScalarWhereInput!]
-  upsert: [UserUpsertWithWhereUniqueWithoutLogInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutFeedbacksInput!]
+}
+
+input UserUpdateManyWithoutLogsInput {
+  create: [UserCreateWithoutLogsInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  delete: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutLogsInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  deleteMany: [UserScalarWhereInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutLogsInput!]
 }
 
 input UserUpdateManyWithWhereNestedInput {
@@ -1261,21 +1810,40 @@ input UserUpdateManyWithWhereNestedInput {
   data: UserUpdateManyDataInput!
 }
 
-input UserUpdateWithoutLogDataInput {
+input UserUpdateWithoutFeedbacksDataInput {
   email: String
   name: String
   password: String
+  logs: LogUpdateManyWithoutStudentInput
 }
 
-input UserUpdateWithWhereUniqueWithoutLogInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutLogDataInput!
+input UserUpdateWithoutLogsDataInput {
+  email: String
+  name: String
+  password: String
+  feedbacks: FeedbackUpdateManyWithoutStudentInput
 }
 
-input UserUpsertWithWhereUniqueWithoutLogInput {
+input UserUpdateWithWhereUniqueWithoutFeedbacksInput {
   where: UserWhereUniqueInput!
-  update: UserUpdateWithoutLogDataInput!
-  create: UserCreateWithoutLogInput!
+  data: UserUpdateWithoutFeedbacksDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutLogsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutLogsDataInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutFeedbacksInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutFeedbacksDataInput!
+  create: UserCreateWithoutFeedbacksInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutLogsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutLogsDataInput!
+  create: UserCreateWithoutLogsInput!
 }
 
 input UserWhereInput {
@@ -1491,9 +2059,12 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  Log_every: LogWhereInput
-  Log_some: LogWhereInput
-  Log_none: LogWhereInput
+  logs_every: LogWhereInput
+  logs_some: LogWhereInput
+  logs_none: LogWhereInput
+  feedbacks_every: FeedbackWhereInput
+  feedbacks_some: FeedbackWhereInput
+  feedbacks_none: FeedbackWhereInput
 }
 
 input UserWhereUniqueInput {
@@ -1520,8 +2091,6 @@ type Verb implements Node {
   tense: String
   tenseEnglish: String
   verbEnglish: String
-  updatedAt: DateTime!
-  createdAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -1535,6 +2104,7 @@ type VerbConnection {
 }
 
 input VerbCreateInput {
+  id: ID
   form1p: String
   form1s: String
   form2p: String
@@ -1600,10 +2170,6 @@ enum VerbOrderByInput {
   tenseEnglish_DESC
   verbEnglish_ASC
   verbEnglish_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
 }
 
 type VerbPreviousValues {
@@ -1625,8 +2191,6 @@ type VerbPreviousValues {
   tense: String
   tenseEnglish: String
   verbEnglish: String
-  updatedAt: DateTime!
-  createdAt: DateTime!
 }
 
 type VerbSubscriptionPayload {
@@ -2435,50 +2999,6 @@ input VerbWhereInput {
 
   """All values not ending with the given string."""
   verbEnglish_not_ends_with: String
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
 }
 
 input VerbWhereUniqueInput {

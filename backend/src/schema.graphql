@@ -1,4 +1,4 @@
-# import UserOrderByInput, VerbOrderByInput, LogOrderByInput, VerbWhereInput, LogWhereInput from './generated/prisma.graphql'
+# import FeedbackOrderByInput, FeedbackWhereInput, UserOrderByInput, VerbOrderByInput, LogOrderByInput, VerbWhereInput, LogWhereInput from './generated/prisma.graphql'
 
 type Query {
   users(
@@ -34,6 +34,14 @@ type Query {
     orderBy: LogOrderByInput
     where: LogWhereInput
   ): [Log!]!
+  feedbacks(
+    query: String
+    first: Int
+    skip: Int
+    after: String
+    orderBy: FeedbackOrderByInput
+    where: FeedbackWhereInput
+  ): [Feedback!]!
 }
 
 type Mutation {
@@ -43,6 +51,8 @@ type Mutation {
   updateUser(data: UpdateUserInput!): User!
   createLog(data: CreateLogInput!): Log!
   updateVerb(data: VerbUpdateInput!): Verb!
+  createFeedback(data: CreateFeedbackInput!): Feedback!
+  createVerb(data: VerbCreateInput!): Verb!
 }
 
 # type Subscription {
@@ -80,6 +90,16 @@ input CreateLogInput {
   correct: Boolean!
 }
 
+input CreateFeedbackInput {
+  email: String!
+  text: String!
+}
+
+input VerbCreateInput {
+  start: Int
+  end: Int
+}
+
 input VerbUpdateInput {
   form1p: String
   form1s: String
@@ -106,6 +126,16 @@ type User {
   email: String
   password: String!
   logs: [Log]
+  feedbacks: [Feedback]
+  updatedAt: String!
+  createdAt: String!
+}
+
+type Feedback {
+  id: ID!
+  email: String!
+  text: String!
+  student: User
   updatedAt: String!
   createdAt: String!
 }

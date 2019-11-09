@@ -83,17 +83,17 @@ function Tenses({ classes, width }) {
           Conditional Perfect
         </ListItemText>
 
-        <Checkbox onClick={() => changeSubj('Subjunctive Present')} />
+        <Checkbox onClick={() => changeSubj('Present')} />
         <ListItemText className={classes.tensesItem}>
           Subjunctive Present
         </ListItemText>
 
-        <Checkbox onClick={() => changeSubj('Subjunctive Imperfect')} />
+        <Checkbox onClick={() => changeSubj('Imperfect')} />
         <ListItemText className={classes.tensesItem}>
           Subjunctive Imperfect
         </ListItemText>
 
-        <Checkbox onClick={() => changeSubj('Subjunctive Present Perfect')} />
+        <Checkbox onClick={() => changeSubj('Present Perfect')} />
         <ListItemText className={classes.tensesItem}>
           Subjunctive Present Perfect
         </ListItemText>
