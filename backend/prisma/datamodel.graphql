@@ -50,6 +50,4 @@ type Verb {
   tense: String
   tenseEnglish: String
   verbEnglish: String
-  updatedAt: DateTime! @updatedAt
-  createdAt: DateTime! @createdAt
 }

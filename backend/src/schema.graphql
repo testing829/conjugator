@@ -52,6 +52,7 @@ type Mutation {
   createLog(data: CreateLogInput!): Log!
   updateVerb(data: VerbUpdateInput!): Verb!
   createFeedback(data: CreateFeedbackInput!): Feedback!
+  createVerb(data: VerbCreateInput!): Verb!
 }
 
 # type Subscription {
@@ -92,6 +93,11 @@ input CreateLogInput {
 input CreateFeedbackInput {
   email: String!
   text: String!
+}
+
+input VerbCreateInput {
+  start: Int
+  end: Int
 }
 
 input VerbUpdateInput {

@@ -1,5 +1,5 @@
-# source: http://localhost:4466
-# timestamp: Sat Nov 02 2019 13:29:16 GMT+0000 (Greenwich Mean Time)
+# source: https://conj-prod-257165bf35.herokuapp.com/conj-prod/prod
+# timestamp: Sat Nov 09 2019 12:44:57 GMT+0000 (Greenwich Mean Time)
 
 type AggregateFeedback {
   count: Int!
@@ -44,6 +44,7 @@ type FeedbackConnection {
 }
 
 input FeedbackCreateInput {
+  id: ID
   email: String!
   text: String!
   student: UserCreateManyWithoutFeedbacksInput
@@ -55,6 +56,7 @@ input FeedbackCreateManyWithoutStudentInput {
 }
 
 input FeedbackCreateWithoutStudentInput {
+  id: ID
   email: String!
   text: String!
 }
@@ -532,9 +534,6 @@ input FeedbackWhereUniqueInput {
   id: ID
 }
 
-"""Raw JSON value"""
-scalar Json
-
 type Log implements Node {
   id: ID!
   verbInfinitive: String!
@@ -559,6 +558,7 @@ type LogConnection {
 }
 
 input LogCreateInput {
+  id: ID
   verbInfinitive: String!
   tense: String!
   correctAnswer: String!
@@ -574,6 +574,7 @@ input LogCreateManyWithoutStudentInput {
 }
 
 input LogCreateWithoutStudentInput {
+  id: ID
   verbInfinitive: String!
   tense: String!
   correctAnswer: String!
@@ -1362,7 +1363,6 @@ type Mutation {
   deleteManyLogs(where: LogWhereInput): BatchPayload!
   deleteManyFeedbacks(where: FeedbackWhereInput): BatchPayload!
   deleteManyVerbs(where: VerbWhereInput): BatchPayload!
-  executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
 enum MutationType {
@@ -1390,10 +1390,6 @@ type PageInfo {
 
   """When paginating forwards, the cursor to continue."""
   endCursor: String
-}
-
-enum PrismaDatabase {
-  default
 }
 
 type Query {
@@ -1446,6 +1442,7 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   email: String!
   name: String!
   password: String!
@@ -1464,6 +1461,7 @@ input UserCreateManyWithoutLogsInput {
 }
 
 input UserCreateWithoutFeedbacksInput {
+  id: ID
   email: String!
   name: String!
   password: String!
@@ -1471,6 +1469,7 @@ input UserCreateWithoutFeedbacksInput {
 }
 
 input UserCreateWithoutLogsInput {
+  id: ID
   email: String!
   name: String!
   password: String!
@@ -2092,8 +2091,6 @@ type Verb implements Node {
   tense: String
   tenseEnglish: String
   verbEnglish: String
-  updatedAt: DateTime!
-  createdAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -2107,6 +2104,7 @@ type VerbConnection {
 }
 
 input VerbCreateInput {
+  id: ID
   form1p: String
   form1s: String
   form2p: String
@@ -2172,10 +2170,6 @@ enum VerbOrderByInput {
   tenseEnglish_DESC
   verbEnglish_ASC
   verbEnglish_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
 }
 
 type VerbPreviousValues {
@@ -2197,8 +2191,6 @@ type VerbPreviousValues {
   tense: String
   tenseEnglish: String
   verbEnglish: String
-  updatedAt: DateTime!
-  createdAt: DateTime!
 }
 
 type VerbSubscriptionPayload {
@@ -3007,50 +2999,6 @@ input VerbWhereInput {
 
   """All values not ending with the given string."""
   verbEnglish_not_ends_with: String
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
 }
 
 input VerbWhereUniqueInput {
