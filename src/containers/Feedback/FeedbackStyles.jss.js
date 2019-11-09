@@ -1,6 +1,6 @@
 const styles = theme => ({
   button: {
-    width: '90%'
+    width: '35%'
   },
   emailInput: {
     backgroundColor: '#F5F9FB',
