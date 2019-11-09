@@ -49,44 +49,25 @@ const useStyles = makeStyles(theme => ({
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState('');
-  const [error, setError] = useState(false);
+
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState('');
-  const [shortPassword, setShortPassword] = useState(false);
 
   const { setLoggedIn } = useContext(Context);
-
-  const [login, { data }] = useMutation(LOGIN);
+  const [login, { data, error }] = useMutation(LOGIN);
 
   const delay = 1000;
-
   const classes = useStyles();
 
   const handleSubmit = async event => {
     event.preventDefault();
-    if (password.length < 8) {
-      setShortPassword(true);
-    }
-    try {
-      login({
-        variables: {
-          email: email.toLowerCase(),
-          password
-        }
-      });
-    } catch (err) {
-      // onError(({ graphQLErrors, networkError }) => {
-      //   if (graphQLErrors)
-      //     graphQLErrors.map(({ message, locations, path }) =>
-      //       console.log(
-      //         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      //       )
-      //     );
 
-      //   if (networkError) console.log(`[Network error]: ${networkError}`);
-      // });
-      setError(true);
-    }
+    login({
+      variables: {
+        email: email.toLowerCase(),
+        password
+      }
+    });
   };
 
   useEffect(() => {
