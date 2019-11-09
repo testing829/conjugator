@@ -17,7 +17,7 @@ function Latam({ classes }) {
     <List>
       <ListSubheader>Latam Spanish or Spain Spanish</ListSubheader>
       <ListItem>
-        <Checkbox checked={latam} onClick={() => toggleLatam(!latam)} />
+        <Checkbox checked={!latam} onClick={() => toggleLatam(!latam)} />
         <ListItemText>Include "Vosotros"</ListItemText>
       </ListItem>
     </List>

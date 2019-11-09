@@ -29,6 +29,7 @@ function WeekChart() {
       date: oneWeekAgo
     }
   });
+  console.log('TCL: WeekChart -> data', data);
 
   useEffect(() => {
     refetch();
@@ -38,7 +39,7 @@ function WeekChart() {
   // we update the temp arrays based on the count of answers
   // Sun-Sat and then setState with the updated array
   useEffect(() => {
-    if (data) {
+    if (data && data.length) {
       let tempWeekTotal = [0, 0, 0, 0, 0, 0, 0];
       let tempWeekCor = [0, 0, 0, 0, 0, 0, 0];
 
