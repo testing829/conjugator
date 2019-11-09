@@ -37,7 +37,7 @@ export default function Nav() {
   const { loggedIn } = useContext(Context);
 
   return (
-    <AppBar position="static" style={{ height: '8vh' }}>
+    <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
           <NavLink
@@ -56,6 +56,15 @@ export default function Nav() {
           >
             <Button className={classes.navItem} color="inherit">
               Settings
+            </Button>
+          </NavLink>
+          <NavLink
+            exact
+            to="/feedback"
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            <Button className={classes.navItem} color="inherit">
+              Feedback
             </Button>
           </NavLink>
           {loggedIn ? (
@@ -79,15 +88,6 @@ export default function Nav() {
               </Button>
             </NavLink>
           )}
-          <NavLink
-            exact
-            to="/feedback"
-            style={{ textDecoration: 'none', color: 'white' }}
-          >
-            <Button className={classes.navItem} color="inherit">
-              Feedback
-            </Button>
-          </NavLink>
         </Box>
       </Toolbar>
     </AppBar>

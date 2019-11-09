@@ -138,7 +138,13 @@ const Homepage = ({ classes }) => {
   } else {
     return (
       <>
-        <Grid container align="center" direction="row" justify="center">
+        <Grid
+          className={classes.container}
+          container
+          align="center"
+          direction="row"
+          justify="center"
+        >
           <Grid item sm={6}>
             <Card className={classes.card}>
               <CardContent>
@@ -170,7 +176,6 @@ const Homepage = ({ classes }) => {
                 <Grid
                   container
                   alignItems="center"
-                  className={classes.verbGrid}
                   direction="column"
                   justify="space-around"
                   wrap="nowrap"
