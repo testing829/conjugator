@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useQuery } from 'react-apollo-hooks';
 
-import { MY_LOGS_BY_DATE } from '../../gql/logs.gql';
+// import { MY_LOGS_BY_DATE } from '../../gql/logs.gql';
+import { MY_LOGS } from '../../gql/logs.gql';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {
@@ -24,12 +25,14 @@ function WeekChart() {
     .subtract(7, 'd')
     .format('YYYY-MM-DD');
 
-  const { data, loading, refetch } = useQuery(MY_LOGS_BY_DATE, {
-    variables: {
-      date: oneWeekAgo
-    }
-  });
+  // const { data, loading, refetch } = useQuery(MY_LOGS_BY_DATE, {
+  //   variables: {
+  //     date: oneWeekAgo
+  //   }
+  // });
+  const { data, error, loading, refetch } = useQuery(MY_LOGS);
   console.log('TCL: WeekChart -> data', data);
+  console.log('TCL: error', error);
 
   useEffect(() => {
     refetch();

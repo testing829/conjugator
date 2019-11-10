@@ -9,7 +9,7 @@ const LOGS = gql`
       answer
       correct
       createdAt
-      student {
+      user {
         id
         name
         email
@@ -45,7 +45,7 @@ const CREATE_LOG = gql`
       verbPerson
       correct
       createdAt
-      student {
+      user {
         id
         name
         email
@@ -65,7 +65,7 @@ const MY_LOGS = gql`
       verbPerson
       correct
       createdAt
-      student {
+      user {
         id
         name
         email
@@ -85,7 +85,7 @@ const MY_LOGS_BY_DATE = gql`
       verbPerson
       correct
       createdAt
-      student {
+      user {
         id
         name
         email

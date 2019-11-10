@@ -67,7 +67,7 @@ export default function Nav() {
               Feedback
             </Button>
           </NavLink>
-          {loggedIn ? (
+          {/* {loggedIn ? (
             <NavLink
               exact
               to="/account"
@@ -87,7 +87,7 @@ export default function Nav() {
                 Login
               </Button>
             </NavLink>
-          )}
+          )} */}
         </Box>
       </Toolbar>
     </AppBar>

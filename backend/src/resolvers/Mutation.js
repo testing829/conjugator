@@ -3,7 +3,7 @@ import getUserId from '../utils/getUserId';
 import generateToken from '../utils/generateToken';
 import hashPassword from '../utils/hashPassword';
 
-import verbsFile from '../../csvjson'
+import verbsFile from '../../csvjson';
 
 const Mutation = {
   async createUser(parent, args, { prisma }, info) {
@@ -75,7 +75,7 @@ const Mutation = {
         {
           data: {
             ...args.data,
-            student: {
+            user: {
               connect: {
                 id: userId
               }
@@ -100,7 +100,7 @@ const Mutation = {
         {
           data: {
             ...args.data,
-            student: {
+            user: {
               connect: {
                 id: userId
               }
@@ -119,7 +119,9 @@ const Mutation = {
   },
 
   async createVerb(parent, args, { prisma, request }, info) {
-    return await Object.values(verbsFile.slice(args.data.start, args.data.end)).map(file => {
+    return await Object.values(
+      verbsFile.slice(args.data.start, args.data.end)
+    ).map(file => {
       prisma.mutation.createVerb({
         data: {
           form1p: file.form_1p,
@@ -139,7 +141,8 @@ const Mutation = {
           tense: file.tense,
           tenseEnglish: file.tense_english,
           verbEnglish: file.verb_english
-        }, info
+        },
+        info
       });
     });
   }

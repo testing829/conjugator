@@ -1,5 +1,5 @@
-# source: https://conj-prod-257165bf35.herokuapp.com/conj-prod/prod
-# timestamp: Sat Nov 09 2019 12:44:57 GMT+0000 (Greenwich Mean Time)
+# source: http://localhost:4466
+# timestamp: Sun Nov 10 2019 10:17:00 GMT+0000 (Greenwich Mean Time)
 
 type AggregateFeedback {
   count: Int!
@@ -27,7 +27,7 @@ scalar DateTime
 type Feedback implements Node {
   id: ID!
   email: String!
-  student(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  user(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   text: String!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -47,15 +47,15 @@ input FeedbackCreateInput {
   id: ID
   email: String!
   text: String!
-  student: UserCreateManyWithoutFeedbacksInput
+  user: UserCreateManyWithoutFeedbacksInput
 }
 
-input FeedbackCreateManyWithoutStudentInput {
-  create: [FeedbackCreateWithoutStudentInput!]
+input FeedbackCreateManyWithoutUserInput {
+  create: [FeedbackCreateWithoutUserInput!]
   connect: [FeedbackWhereUniqueInput!]
 }
 
-input FeedbackCreateWithoutStudentInput {
+input FeedbackCreateWithoutUserInput {
   id: ID
   email: String!
   text: String!
@@ -306,7 +306,7 @@ input FeedbackSubscriptionWhereInput {
 input FeedbackUpdateInput {
   email: String
   text: String
-  student: UserUpdateManyWithoutFeedbacksInput
+  user: UserUpdateManyWithoutFeedbacksInput
 }
 
 input FeedbackUpdateManyDataInput {
@@ -319,16 +319,16 @@ input FeedbackUpdateManyMutationInput {
   text: String
 }
 
-input FeedbackUpdateManyWithoutStudentInput {
-  create: [FeedbackCreateWithoutStudentInput!]
+input FeedbackUpdateManyWithoutUserInput {
+  create: [FeedbackCreateWithoutUserInput!]
   connect: [FeedbackWhereUniqueInput!]
   set: [FeedbackWhereUniqueInput!]
   disconnect: [FeedbackWhereUniqueInput!]
   delete: [FeedbackWhereUniqueInput!]
-  update: [FeedbackUpdateWithWhereUniqueWithoutStudentInput!]
+  update: [FeedbackUpdateWithWhereUniqueWithoutUserInput!]
   updateMany: [FeedbackUpdateManyWithWhereNestedInput!]
   deleteMany: [FeedbackScalarWhereInput!]
-  upsert: [FeedbackUpsertWithWhereUniqueWithoutStudentInput!]
+  upsert: [FeedbackUpsertWithWhereUniqueWithoutUserInput!]
 }
 
 input FeedbackUpdateManyWithWhereNestedInput {
@@ -336,20 +336,20 @@ input FeedbackUpdateManyWithWhereNestedInput {
   data: FeedbackUpdateManyDataInput!
 }
 
-input FeedbackUpdateWithoutStudentDataInput {
+input FeedbackUpdateWithoutUserDataInput {
   email: String
   text: String
 }
 
-input FeedbackUpdateWithWhereUniqueWithoutStudentInput {
+input FeedbackUpdateWithWhereUniqueWithoutUserInput {
   where: FeedbackWhereUniqueInput!
-  data: FeedbackUpdateWithoutStudentDataInput!
+  data: FeedbackUpdateWithoutUserDataInput!
 }
 
-input FeedbackUpsertWithWhereUniqueWithoutStudentInput {
+input FeedbackUpsertWithWhereUniqueWithoutUserInput {
   where: FeedbackWhereUniqueInput!
-  update: FeedbackUpdateWithoutStudentDataInput!
-  create: FeedbackCreateWithoutStudentInput!
+  update: FeedbackUpdateWithoutUserDataInput!
+  create: FeedbackCreateWithoutUserInput!
 }
 
 input FeedbackWhereInput {
@@ -525,14 +525,17 @@ input FeedbackWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  student_every: UserWhereInput
-  student_some: UserWhereInput
-  student_none: UserWhereInput
+  user_every: UserWhereInput
+  user_some: UserWhereInput
+  user_none: UserWhereInput
 }
 
 input FeedbackWhereUniqueInput {
   id: ID
 }
+
+"""Raw JSON value"""
+scalar Json
 
 type Log implements Node {
   id: ID!
@@ -544,7 +547,7 @@ type Log implements Node {
   correct: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
-  student(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  user(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
 """A connection to a list of items."""
@@ -565,15 +568,15 @@ input LogCreateInput {
   userAnswer: String!
   verbPerson: String!
   correct: Boolean!
-  student: UserCreateManyWithoutLogsInput
+  user: UserCreateManyWithoutLogsInput
 }
 
-input LogCreateManyWithoutStudentInput {
-  create: [LogCreateWithoutStudentInput!]
+input LogCreateManyWithoutUserInput {
+  create: [LogCreateWithoutUserInput!]
   connect: [LogWhereUniqueInput!]
 }
 
-input LogCreateWithoutStudentInput {
+input LogCreateWithoutUserInput {
   id: ID
   verbInfinitive: String!
   tense: String!
@@ -968,7 +971,7 @@ input LogUpdateInput {
   userAnswer: String
   verbPerson: String
   correct: Boolean
-  student: UserUpdateManyWithoutLogsInput
+  user: UserUpdateManyWithoutLogsInput
 }
 
 input LogUpdateManyDataInput {
@@ -989,16 +992,16 @@ input LogUpdateManyMutationInput {
   correct: Boolean
 }
 
-input LogUpdateManyWithoutStudentInput {
-  create: [LogCreateWithoutStudentInput!]
+input LogUpdateManyWithoutUserInput {
+  create: [LogCreateWithoutUserInput!]
   connect: [LogWhereUniqueInput!]
   set: [LogWhereUniqueInput!]
   disconnect: [LogWhereUniqueInput!]
   delete: [LogWhereUniqueInput!]
-  update: [LogUpdateWithWhereUniqueWithoutStudentInput!]
+  update: [LogUpdateWithWhereUniqueWithoutUserInput!]
   updateMany: [LogUpdateManyWithWhereNestedInput!]
   deleteMany: [LogScalarWhereInput!]
-  upsert: [LogUpsertWithWhereUniqueWithoutStudentInput!]
+  upsert: [LogUpsertWithWhereUniqueWithoutUserInput!]
 }
 
 input LogUpdateManyWithWhereNestedInput {
@@ -1006,7 +1009,7 @@ input LogUpdateManyWithWhereNestedInput {
   data: LogUpdateManyDataInput!
 }
 
-input LogUpdateWithoutStudentDataInput {
+input LogUpdateWithoutUserDataInput {
   verbInfinitive: String
   tense: String
   correctAnswer: String
@@ -1015,15 +1018,15 @@ input LogUpdateWithoutStudentDataInput {
   correct: Boolean
 }
 
-input LogUpdateWithWhereUniqueWithoutStudentInput {
+input LogUpdateWithWhereUniqueWithoutUserInput {
   where: LogWhereUniqueInput!
-  data: LogUpdateWithoutStudentDataInput!
+  data: LogUpdateWithoutUserDataInput!
 }
 
-input LogUpsertWithWhereUniqueWithoutStudentInput {
+input LogUpsertWithWhereUniqueWithoutUserInput {
   where: LogWhereUniqueInput!
-  update: LogUpdateWithoutStudentDataInput!
-  create: LogCreateWithoutStudentInput!
+  update: LogUpdateWithoutUserDataInput!
+  create: LogCreateWithoutUserInput!
 }
 
 input LogWhereInput {
@@ -1323,9 +1326,9 @@ input LogWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  student_every: UserWhereInput
-  student_some: UserWhereInput
-  student_none: UserWhereInput
+  user_every: UserWhereInput
+  user_some: UserWhereInput
+  user_none: UserWhereInput
 }
 
 input LogWhereUniqueInput {
@@ -1363,6 +1366,7 @@ type Mutation {
   deleteManyLogs(where: LogWhereInput): BatchPayload!
   deleteManyFeedbacks(where: FeedbackWhereInput): BatchPayload!
   deleteManyVerbs(where: VerbWhereInput): BatchPayload!
+  executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
 enum MutationType {
@@ -1390,6 +1394,10 @@ type PageInfo {
 
   """When paginating forwards, the cursor to continue."""
   endCursor: String
+}
+
+enum PrismaDatabase {
+  default
 }
 
 type Query {
@@ -1446,8 +1454,8 @@ input UserCreateInput {
   email: String!
   name: String!
   password: String!
-  logs: LogCreateManyWithoutStudentInput
-  feedbacks: FeedbackCreateManyWithoutStudentInput
+  logs: LogCreateManyWithoutUserInput
+  feedbacks: FeedbackCreateManyWithoutUserInput
 }
 
 input UserCreateManyWithoutFeedbacksInput {
@@ -1465,7 +1473,7 @@ input UserCreateWithoutFeedbacksInput {
   email: String!
   name: String!
   password: String!
-  logs: LogCreateManyWithoutStudentInput
+  logs: LogCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutLogsInput {
@@ -1473,7 +1481,7 @@ input UserCreateWithoutLogsInput {
   email: String!
   name: String!
   password: String!
-  feedbacks: FeedbackCreateManyWithoutStudentInput
+  feedbacks: FeedbackCreateManyWithoutUserInput
 }
 
 """An edge in a connection."""
@@ -1765,8 +1773,8 @@ input UserUpdateInput {
   email: String
   name: String
   password: String
-  logs: LogUpdateManyWithoutStudentInput
-  feedbacks: FeedbackUpdateManyWithoutStudentInput
+  logs: LogUpdateManyWithoutUserInput
+  feedbacks: FeedbackUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyDataInput {
@@ -1814,14 +1822,14 @@ input UserUpdateWithoutFeedbacksDataInput {
   email: String
   name: String
   password: String
-  logs: LogUpdateManyWithoutStudentInput
+  logs: LogUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithoutLogsDataInput {
   email: String
   name: String
   password: String
-  feedbacks: FeedbackUpdateManyWithoutStudentInput
+  feedbacks: FeedbackUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithWhereUniqueWithoutFeedbacksInput {

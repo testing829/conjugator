@@ -36,6 +36,7 @@ const Query = {
   },
   myLogs(parent, args, { prisma, request }, info) {
     const userId = getUserId(request);
+    console.log('TCL: myLogs -> userId', userId);
     const opArgs = {
       first: args.first,
       skip: args.skip,
@@ -43,7 +44,7 @@ const Query = {
       orderBy: args.orderBy,
       where: {
         ...args.where,
-        student: {
+        user_some: {
           id: userId
         }
       }

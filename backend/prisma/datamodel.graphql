@@ -19,13 +19,13 @@ type Log {
   correct: Boolean!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  student: [User] @relation(name: "LogToUser")
+  user: [User] @relation(name: "LogToUser")
 }
 
 type Feedback {
   id: ID! @id
   email: String!
-  student: [User] @relation(name: "FeedbackToUser")
+  user: [User] @relation(name: "FeedbackToUser")
   text: String!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
