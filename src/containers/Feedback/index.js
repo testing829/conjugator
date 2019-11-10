@@ -25,7 +25,6 @@ const Feedback = ({ classes }) => {
   const [createFeedback] = useMutation(CREATE_FEEDBACK);
 
   const sendFeedback = async () => {
-    console.log('TCL: sendFeedback -> sendFeedback', sendFeedback);
     try {
       await createFeedback({
         variables: {

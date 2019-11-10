@@ -58,7 +58,7 @@ export default function Nav() {
               Settings
             </Button>
           </NavLink>
-          {/* <NavLink
+          <NavLink
             exact
             to="/feedback"
             style={{ textDecoration: 'none', color: 'white' }}
@@ -66,7 +66,7 @@ export default function Nav() {
             <Button className={classes.navItem} color="inherit">
               Feedback
             </Button>
-          </NavLink> */}
+          </NavLink>
           {/* {loggedIn ? (
             <NavLink
               exact
