@@ -13,7 +13,6 @@ const styles = theme => ({
   container: {
     padding: '2%',
     height: '92vh',
-    border: '2px solid red',
     backgroundColor: '#FAFAFA'
   },
   form: {
