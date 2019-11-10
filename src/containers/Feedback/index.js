@@ -45,7 +45,7 @@ const Feedback = ({ classes }) => {
       className={classes.gridContainer}
       justify="center"
     >
-      <Grid item className={classes.gridContainer}>
+      <Grid item>
         <Card className={classes.card}>
           <form onSubmit={sendFeedback}>
             <CardHeader
