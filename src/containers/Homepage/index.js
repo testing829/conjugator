@@ -232,9 +232,18 @@ const Homepage = ({ classes }) => {
                         value={userAnswer}
                         variant="outlined"
                       />
+
                       <Grid xs={2}>
-                        <Button onClick={handleSubmit}>
-                          {submitted ? 'Next' : 'Submit'}
+                        <Button
+                          className={
+                            submitted
+                              ? classes.submittedButton
+                              : classes.submitButton
+                          }
+                          onClick={handleSubmit}
+                          variant="contained"
+                        >
+                          {submitted ? 'Next' : 'Answer'}
                         </Button>
                       </Grid>
                     </Grid>
