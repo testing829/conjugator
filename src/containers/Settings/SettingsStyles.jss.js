@@ -16,7 +16,7 @@ const styles = theme => ({
     }
   },
   paper: {
-    backgroundColor: '#fafafa',
+    backgroundColor: '#FFFF',
     margin: '60px auto',
     padding: theme.spacing(2),
     width: theme.spacing(140),

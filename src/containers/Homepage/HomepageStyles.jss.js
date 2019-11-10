@@ -3,7 +3,7 @@ const styles = theme => ({
     width: theme.spacing(1)
   },
   card: {
-    backgroundColor: '#fafafa',
+    backgroundColor: '#FFFF',
     display: 'flex',
     height: '100%',
     flexDirection: 'column',
@@ -11,13 +11,15 @@ const styles = theme => ({
     paddingBottom: theme.spacing(2)
   },
   container: {
-    padding: '5%'
+    padding: '2%',
+    height: '92vh',
+    backgroundColor: '#FAFAFA'
   },
   form: {
     width: '100%'
   },
   input: {
-    width: '50%',
+    width: '80%',
     [theme.breakpoints.down('sm')]: {
       width: '100%'
     }
@@ -31,6 +33,18 @@ const styles = theme => ({
   },
   streakText: {
     color: theme.palette.primary.main
+  },
+  submitButton: {
+    backgroundColor: '#43A047',
+    color: '#FFFF',
+    marginTop: theme.spacing(1)
+  },
+  submittedButton: {
+    backgroundColor: '#E0E0E0',
+    marginTop: theme.spacing(1)
+  },
+  submitButtonIcon: {
+    marginLeft: theme.spacing(1)
   },
   verbContent: {
     display: 'flex',

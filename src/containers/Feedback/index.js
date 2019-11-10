@@ -22,8 +22,7 @@ const Feedback = ({ classes }) => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [text, setText] = useState();
 
-  const [createFeedback, { data }] = useMutation(CREATE_FEEDBACK);
-  console.log('TCL: Feedback -> data', data);
+  const [createFeedback] = useMutation(CREATE_FEEDBACK);
 
   const sendFeedback = async () => {
     try {
