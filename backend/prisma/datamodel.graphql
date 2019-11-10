@@ -1,8 +1,8 @@
 type User {
   id: ID! @id
-  email: String! @unique
-  name: String!
-  password: String!
+  email: String @unique
+  name: String
+  password: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   logs: [Log] @relation(name: "LogToUser")

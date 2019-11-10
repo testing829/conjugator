@@ -12,47 +12,37 @@ import styles from './SettingsStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
 
 const Difficulty = ({ classes }) => {
-  const {
-    beginner,
-    setBeginner,
-    intermediate,
-    setIntermediate,
-    advanced,
-    setAdvanced,
-    setDifficulty
-  } = useContext(Context);
+  const { difficulty, setDifficulty } = useContext(Context);
 
   return (
     <List className={classes.list}>
       <ListSubheader>Difficulty</ListSubheader>
       <ListItem>
         <Checkbox
-          checked={beginner}
+          checked={difficulty === 0}
           onClick={() => {
-            setBeginner(true);
-            setIntermediate(false);
-            setAdvanced(false);
             setDifficulty(0);
           }}
         />
         <ListItemText>Frequently used regular verbs</ListItemText>
         <Checkbox
-          checked={intermediate}
+          checked={difficulty === 1}
           onClick={() => {
-            setBeginner(false);
-            setIntermediate(true);
-            setAdvanced(false);
             setDifficulty(1);
+          }}
+        />
+        <ListItemText>Frequently used irregular verbs</ListItemText>
+        <Checkbox
+          checked={difficulty === 2}
+          onClick={() => {
+            setDifficulty(2);
           }}
         />
         <ListItemText>Frequently used regular and irregular verbs</ListItemText>
         <Checkbox
-          checked={advanced}
+          checked={difficulty === 3}
           onClick={() => {
-            setBeginner(false);
-            setIntermediate(false);
-            setAdvanced(true);
-            setDifficulty(2);
+            setDifficulty(3);
           }}
         />
         <ListItemText>All verbs</ListItemText>

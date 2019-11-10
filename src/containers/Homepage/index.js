@@ -71,14 +71,14 @@ const Homepage = ({ classes }) => {
   };
 
   const handleStreak = () => {
-    if (verb.answer === userAnswer.toLowerCase()) {
+    if (verb.answer.trim() === userAnswer.toLowerCase().trim()) {
       setCorrect(true);
       setCorrectCount(correctCount + 1);
       setTotalCorrect(totalCorrect + 1);
       if (correctCount >= bestStreak) {
         setBestStreak(bestStreak + 1);
       }
-    } else if (verb.answer !== userAnswer) {
+    } else {
       setCorrectCount(0);
     }
     setTotalAnswers(totalAnswers + 1);
@@ -232,7 +232,6 @@ const Homepage = ({ classes }) => {
                         value={userAnswer}
                         variant="outlined"
                       />
-
                       <Grid xs={2}>
                         <Button
                           className={
