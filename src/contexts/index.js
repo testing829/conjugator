@@ -10,8 +10,6 @@ export function Provider(props) {
   const [difficulty, setDifficulty] = useState(0);
   const [latam, toggleLatam] = useToggleState(true);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [present, setPresent] = useState(true);
-  const [pret, setPret] = useState(true);
 
   const [subjArr, changeSubj] = useSubjUpdate();
   const [tenseArr, updateTense] = useArrUpdate();
@@ -23,12 +21,8 @@ export function Provider(props) {
         difficulty,
         latam,
         loggedIn,
-        present,
-        pret,
         setDifficulty,
         setLoggedIn,
-        setPresent,
-        setPret,
         subjArr,
         tenseArr,
         toggleLatam,

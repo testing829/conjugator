@@ -43,9 +43,6 @@ const styles = theme => ({
     backgroundColor: '#E0E0E0',
     marginTop: theme.spacing(1)
   },
-  submitButtonIcon: {
-    marginLeft: theme.spacing(1)
-  },
   verbContent: {
     display: 'flex',
     alignContent: 'center'
