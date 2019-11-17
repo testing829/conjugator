@@ -1,4 +1,4 @@
-# import FeedbackOrderByInput, FeedbackWhereInput, UserOrderByInput, VerbOrderByInput, LogOrderByInput, VerbWhereInput, LogWhereInput from './generated/prisma.graphql'
+# import BestStreakWhereInput, BestStreakOrderByInput, DailyTargetWhereInput, DailyTargetOrderByInput, SettingWhereInput, SettingOrderByInput, FeedbackOrderByInput, FeedbackWhereInput, UserOrderByInput, VerbOrderByInput, LogOrderByInput, VerbWhereInput, LogWhereInput from './generated/prisma.graphql'
 
 type Query {
   users(
@@ -42,17 +42,45 @@ type Query {
     orderBy: FeedbackOrderByInput
     where: FeedbackWhereInput
   ): [Feedback!]!
+  settings(
+    query: String
+    first: Int
+    skip: Int
+    after: String
+    orderBy: SettingOrderByInput
+    where: SettingWhereInput
+  ): [Setting!]!
+  dailyTargets(
+    query: String
+    first: Int
+    skip: Int
+    after: String
+    orderBy: DailyTargetOrderByInput
+    where: DailyTargetWhereInput
+  ): [DailyTarget!]!
+  bestStreaks(
+    query: String
+    first: Int
+    skip: Int
+    after: String
+    orderBy: BestStreakOrderByInput
+    where: BestStreakWhereInput
+  ): [BestStreak!]!
 }
 
 type Mutation {
-  createUser(data: CreateUserInput!): AuthPayload!
-  login(data: LoginUserInput!): AuthPayload!
-  deleteUser: User!
-  updateUser(data: UpdateUserInput!): User!
-  createLog(data: CreateLogInput!): Log!
-  updateVerb(data: VerbUpdateInput!): Verb!
+  createBestStreak(data: CreateBestStreakInput!): BestStreak!
+  createDailyTarget(data: CreateDailyTargetInput!): DailyTarget!
   createFeedback(data: CreateFeedbackInput!): Feedback!
+  createLog(data: CreateLogInput!): Log!
+  createSetting(data: CreateSettingInput!): Setting!
+  createUser(data: CreateUserInput!): AuthPayload!
   createVerb(data: VerbCreateInput!): Verb!
+  deleteUser: User!
+  login(data: LoginUserInput!): AuthPayload!
+  updateDailyTarget(data: UpdateDailyTarget!): DailyTarget!
+  updateUser(data: UpdateUserInput!): User!
+  updateVerb(data: VerbUpdateInput!): Verb!
 }
 
 # type Subscription {
@@ -65,20 +93,34 @@ type AuthPayload {
 }
 
 input CreateUserInput {
-  name: String!
   email: String!
+  name: String!
   password: String!
+  premium: Boolean!
+}
+
+input UpdateUserInput {
+  email: String
+  name: String
+  password: String
+  premium: Boolean
+}
+
+input CreateBestStreakInput {
+  streak: Int!
+}
+
+input CreateDailyTargetInput {
+  target: Int!
+}
+
+input UpdateDailyTarget {
+  target: Int!
 }
 
 input LoginUserInput {
   email: String!
   password: String!
-}
-
-input UpdateUserInput {
-  name: String
-  email: String
-  password: String
 }
 
 input CreateLogInput {
@@ -93,6 +135,23 @@ input CreateLogInput {
 input CreateFeedbackInput {
   email: String!
   text: String!
+}
+
+input CreateSettingInput {
+  difficulty: Int!
+  latam: Boolean!
+  present: Boolean!
+  preterite: Boolean!
+  imperfect: Boolean!
+  future: Boolean!
+  conditional: Boolean!
+  presentPerfect: Boolean!
+  futurePerfect: Boolean!
+  pastPerfect: Boolean!
+  conditionalPerfect: Boolean!
+  subjPresent: Boolean!
+  subjImperfect: Boolean!
+  subjPresentPerfect: Boolean!
 }
 
 input VerbCreateInput {
@@ -122,11 +181,31 @@ input VerbUpdateInput {
 
 type User {
   id: ID!
-  name: String!
   email: String
-  password: String!
-  logs: [Log]
   feedbacks: [Feedback]
+  setting: Setting
+  logs: [Log]
+  name: String!
+  bestStreak: BestStreak
+  dailyTarget: DailyTarget
+  password: String!
+  premium: Boolean!
+  updatedAt: String!
+  createdAt: String!
+}
+
+type DailyTarget {
+  id: ID!
+  target: Int!
+  user: User
+  updatedAt: String!
+  createdAt: String!
+}
+
+type BestStreak {
+  id: ID!
+  streak: Int!
+  user: User
   updatedAt: String!
   createdAt: String!
 }
@@ -149,6 +228,27 @@ type Log {
   verbPerson: String!
   correct: Boolean!
   user: User
+  updatedAt: String!
+  createdAt: String!
+}
+
+type Setting {
+  id: ID!
+  difficulty: Int!
+  latam: Boolean!
+  present: Boolean!
+  preterite: Boolean!
+  imperfect: Boolean!
+  future: Boolean!
+  conditional: Boolean!
+  presentPerfect: Boolean!
+  futurePerfect: Boolean!
+  pastPerfect: Boolean!
+  conditionalPerfect: Boolean!
+  subjPresent: Boolean!
+  subjImperfect: Boolean!
+  subjPresentPerfect: Boolean!
+  user: User!
   updatedAt: String!
   createdAt: String!
 }

@@ -1,11 +1,23 @@
 # source: http://localhost:4466
-# timestamp: Sun Nov 10 2019 13:13:00 GMT+0000 (Greenwich Mean Time)
+# timestamp: Sun Nov 17 2019 08:19:38 GMT+0000 (Greenwich Mean Time)
+
+type AggregateBestStreak {
+  count: Int!
+}
+
+type AggregateDailyTarget {
+  count: Int!
+}
 
 type AggregateFeedback {
   count: Int!
 }
 
 type AggregateLog {
+  count: Int!
+}
+
+type AggregateSetting {
   count: Int!
 }
 
@@ -22,12 +34,506 @@ type BatchPayload {
   count: Long!
 }
 
+type BestStreak implements Node {
+  id: ID!
+  streak: Int!
+  user: User
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type BestStreakConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [BestStreakEdge]!
+  aggregate: AggregateBestStreak!
+}
+
+input BestStreakCreateInput {
+  id: ID
+  streak: Int!
+  user: UserCreateOneWithoutBestStreakInput
+}
+
+input BestStreakCreateOneWithoutUserInput {
+  create: BestStreakCreateWithoutUserInput
+  connect: BestStreakWhereUniqueInput
+}
+
+input BestStreakCreateWithoutUserInput {
+  id: ID
+  streak: Int!
+}
+
+"""An edge in a connection."""
+type BestStreakEdge {
+  """The item at the end of the edge."""
+  node: BestStreak!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum BestStreakOrderByInput {
+  id_ASC
+  id_DESC
+  streak_ASC
+  streak_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type BestStreakPreviousValues {
+  id: ID!
+  streak: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type BestStreakSubscriptionPayload {
+  mutation: MutationType!
+  node: BestStreak
+  updatedFields: [String!]
+  previousValues: BestStreakPreviousValues
+}
+
+input BestStreakSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BestStreakSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BestStreakSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BestStreakSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: BestStreakWhereInput
+}
+
+input BestStreakUpdateInput {
+  streak: Int
+  user: UserUpdateOneWithoutBestStreakInput
+}
+
+input BestStreakUpdateManyMutationInput {
+  streak: Int
+}
+
+input BestStreakUpdateOneWithoutUserInput {
+  create: BestStreakCreateWithoutUserInput
+  connect: BestStreakWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: BestStreakUpdateWithoutUserDataInput
+  upsert: BestStreakUpsertWithoutUserInput
+}
+
+input BestStreakUpdateWithoutUserDataInput {
+  streak: Int
+}
+
+input BestStreakUpsertWithoutUserInput {
+  update: BestStreakUpdateWithoutUserDataInput!
+  create: BestStreakCreateWithoutUserInput!
+}
+
+input BestStreakWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BestStreakWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BestStreakWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BestStreakWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  streak: Int
+
+  """All values that are not equal to given value."""
+  streak_not: Int
+
+  """All values that are contained in given list."""
+  streak_in: [Int!]
+
+  """All values that are not contained in given list."""
+  streak_not_in: [Int!]
+
+  """All values less than the given value."""
+  streak_lt: Int
+
+  """All values less than or equal the given value."""
+  streak_lte: Int
+
+  """All values greater than the given value."""
+  streak_gt: Int
+
+  """All values greater than or equal the given value."""
+  streak_gte: Int
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  user: UserWhereInput
+}
+
+input BestStreakWhereUniqueInput {
+  id: ID
+}
+
+type DailyTarget implements Node {
+  id: ID!
+  target: Int!
+  user: User
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type DailyTargetConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [DailyTargetEdge]!
+  aggregate: AggregateDailyTarget!
+}
+
+input DailyTargetCreateInput {
+  id: ID
+  target: Int!
+  user: UserCreateOneWithoutDailyTargetInput
+}
+
+input DailyTargetCreateOneWithoutUserInput {
+  create: DailyTargetCreateWithoutUserInput
+  connect: DailyTargetWhereUniqueInput
+}
+
+input DailyTargetCreateWithoutUserInput {
+  id: ID
+  target: Int!
+}
+
+"""An edge in a connection."""
+type DailyTargetEdge {
+  """The item at the end of the edge."""
+  node: DailyTarget!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum DailyTargetOrderByInput {
+  id_ASC
+  id_DESC
+  target_ASC
+  target_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type DailyTargetPreviousValues {
+  id: ID!
+  target: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type DailyTargetSubscriptionPayload {
+  mutation: MutationType!
+  node: DailyTarget
+  updatedFields: [String!]
+  previousValues: DailyTargetPreviousValues
+}
+
+input DailyTargetSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DailyTargetSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DailyTargetSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DailyTargetSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: DailyTargetWhereInput
+}
+
+input DailyTargetUpdateInput {
+  target: Int
+  user: UserUpdateOneWithoutDailyTargetInput
+}
+
+input DailyTargetUpdateManyMutationInput {
+  target: Int
+}
+
+input DailyTargetUpdateOneWithoutUserInput {
+  create: DailyTargetCreateWithoutUserInput
+  connect: DailyTargetWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: DailyTargetUpdateWithoutUserDataInput
+  upsert: DailyTargetUpsertWithoutUserInput
+}
+
+input DailyTargetUpdateWithoutUserDataInput {
+  target: Int
+}
+
+input DailyTargetUpsertWithoutUserInput {
+  update: DailyTargetUpdateWithoutUserDataInput!
+  create: DailyTargetCreateWithoutUserInput!
+}
+
+input DailyTargetWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DailyTargetWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DailyTargetWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DailyTargetWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  target: Int
+
+  """All values that are not equal to given value."""
+  target_not: Int
+
+  """All values that are contained in given list."""
+  target_in: [Int!]
+
+  """All values that are not contained in given list."""
+  target_not_in: [Int!]
+
+  """All values less than the given value."""
+  target_lt: Int
+
+  """All values less than or equal the given value."""
+  target_lte: Int
+
+  """All values greater than the given value."""
+  target_gt: Int
+
+  """All values greater than or equal the given value."""
+  target_gte: Int
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  user: UserWhereInput
+}
+
+input DailyTargetWhereUniqueInput {
+  id: ID
+}
+
 scalar DateTime
 
 type Feedback implements Node {
   id: ID!
   email: String!
-  user(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  user: User
   text: String!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -47,7 +553,7 @@ input FeedbackCreateInput {
   id: ID
   email: String!
   text: String!
-  user: UserCreateManyWithoutFeedbacksInput
+  user: UserCreateOneWithoutFeedbacksInput
 }
 
 input FeedbackCreateManyWithoutUserInput {
@@ -306,7 +812,7 @@ input FeedbackSubscriptionWhereInput {
 input FeedbackUpdateInput {
   email: String
   text: String
-  user: UserUpdateManyWithoutFeedbacksInput
+  user: UserUpdateOneWithoutFeedbacksInput
 }
 
 input FeedbackUpdateManyDataInput {
@@ -525,9 +1031,7 @@ input FeedbackWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  user_every: UserWhereInput
-  user_some: UserWhereInput
-  user_none: UserWhereInput
+  user: UserWhereInput
 }
 
 input FeedbackWhereUniqueInput {
@@ -539,15 +1043,15 @@ scalar Json
 
 type Log implements Node {
   id: ID!
-  verbInfinitive: String!
-  tense: String!
-  correctAnswer: String!
-  userAnswer: String!
-  verbPerson: String!
   correct: Boolean!
+  correctAnswer: String!
+  tense: String!
+  userAnswer: String!
+  verbInfinitive: String!
+  verbPerson: String!
+  user: User
   createdAt: DateTime!
   updatedAt: DateTime!
-  user(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
 """A connection to a list of items."""
@@ -562,13 +1066,13 @@ type LogConnection {
 
 input LogCreateInput {
   id: ID
-  verbInfinitive: String!
-  tense: String!
-  correctAnswer: String!
-  userAnswer: String!
-  verbPerson: String!
   correct: Boolean!
-  user: UserCreateManyWithoutLogsInput
+  correctAnswer: String!
+  tense: String!
+  userAnswer: String!
+  verbInfinitive: String!
+  verbPerson: String!
+  user: UserCreateOneWithoutLogsInput
 }
 
 input LogCreateManyWithoutUserInput {
@@ -578,12 +1082,12 @@ input LogCreateManyWithoutUserInput {
 
 input LogCreateWithoutUserInput {
   id: ID
-  verbInfinitive: String!
-  tense: String!
-  correctAnswer: String!
-  userAnswer: String!
-  verbPerson: String!
   correct: Boolean!
+  correctAnswer: String!
+  tense: String!
+  userAnswer: String!
+  verbInfinitive: String!
+  verbPerson: String!
 }
 
 """An edge in a connection."""
@@ -598,18 +1102,18 @@ type LogEdge {
 enum LogOrderByInput {
   id_ASC
   id_DESC
-  verbInfinitive_ASC
-  verbInfinitive_DESC
-  tense_ASC
-  tense_DESC
-  correctAnswer_ASC
-  correctAnswer_DESC
-  userAnswer_ASC
-  userAnswer_DESC
-  verbPerson_ASC
-  verbPerson_DESC
   correct_ASC
   correct_DESC
+  correctAnswer_ASC
+  correctAnswer_DESC
+  tense_ASC
+  tense_DESC
+  userAnswer_ASC
+  userAnswer_DESC
+  verbInfinitive_ASC
+  verbInfinitive_DESC
+  verbPerson_ASC
+  verbPerson_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -618,12 +1122,12 @@ enum LogOrderByInput {
 
 type LogPreviousValues {
   id: ID!
-  verbInfinitive: String!
-  tense: String!
-  correctAnswer: String!
-  userAnswer: String!
-  verbPerson: String!
   correct: Boolean!
+  correctAnswer: String!
+  tense: String!
+  userAnswer: String!
+  verbInfinitive: String!
+  verbPerson: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -677,86 +1181,10 @@ input LogScalarWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  verbInfinitive: String
+  correct: Boolean
 
   """All values that are not equal to given value."""
-  verbInfinitive_not: String
-
-  """All values that are contained in given list."""
-  verbInfinitive_in: [String!]
-
-  """All values that are not contained in given list."""
-  verbInfinitive_not_in: [String!]
-
-  """All values less than the given value."""
-  verbInfinitive_lt: String
-
-  """All values less than or equal the given value."""
-  verbInfinitive_lte: String
-
-  """All values greater than the given value."""
-  verbInfinitive_gt: String
-
-  """All values greater than or equal the given value."""
-  verbInfinitive_gte: String
-
-  """All values containing the given string."""
-  verbInfinitive_contains: String
-
-  """All values not containing the given string."""
-  verbInfinitive_not_contains: String
-
-  """All values starting with the given string."""
-  verbInfinitive_starts_with: String
-
-  """All values not starting with the given string."""
-  verbInfinitive_not_starts_with: String
-
-  """All values ending with the given string."""
-  verbInfinitive_ends_with: String
-
-  """All values not ending with the given string."""
-  verbInfinitive_not_ends_with: String
-  tense: String
-
-  """All values that are not equal to given value."""
-  tense_not: String
-
-  """All values that are contained in given list."""
-  tense_in: [String!]
-
-  """All values that are not contained in given list."""
-  tense_not_in: [String!]
-
-  """All values less than the given value."""
-  tense_lt: String
-
-  """All values less than or equal the given value."""
-  tense_lte: String
-
-  """All values greater than the given value."""
-  tense_gt: String
-
-  """All values greater than or equal the given value."""
-  tense_gte: String
-
-  """All values containing the given string."""
-  tense_contains: String
-
-  """All values not containing the given string."""
-  tense_not_contains: String
-
-  """All values starting with the given string."""
-  tense_starts_with: String
-
-  """All values not starting with the given string."""
-  tense_not_starts_with: String
-
-  """All values ending with the given string."""
-  tense_ends_with: String
-
-  """All values not ending with the given string."""
-  tense_not_ends_with: String
+  correct_not: Boolean
   correctAnswer: String
 
   """All values that are not equal to given value."""
@@ -797,6 +1225,46 @@ input LogScalarWhereInput {
 
   """All values not ending with the given string."""
   correctAnswer_not_ends_with: String
+  tense: String
+
+  """All values that are not equal to given value."""
+  tense_not: String
+
+  """All values that are contained in given list."""
+  tense_in: [String!]
+
+  """All values that are not contained in given list."""
+  tense_not_in: [String!]
+
+  """All values less than the given value."""
+  tense_lt: String
+
+  """All values less than or equal the given value."""
+  tense_lte: String
+
+  """All values greater than the given value."""
+  tense_gt: String
+
+  """All values greater than or equal the given value."""
+  tense_gte: String
+
+  """All values containing the given string."""
+  tense_contains: String
+
+  """All values not containing the given string."""
+  tense_not_contains: String
+
+  """All values starting with the given string."""
+  tense_starts_with: String
+
+  """All values not starting with the given string."""
+  tense_not_starts_with: String
+
+  """All values ending with the given string."""
+  tense_ends_with: String
+
+  """All values not ending with the given string."""
+  tense_not_ends_with: String
   userAnswer: String
 
   """All values that are not equal to given value."""
@@ -837,6 +1305,46 @@ input LogScalarWhereInput {
 
   """All values not ending with the given string."""
   userAnswer_not_ends_with: String
+  verbInfinitive: String
+
+  """All values that are not equal to given value."""
+  verbInfinitive_not: String
+
+  """All values that are contained in given list."""
+  verbInfinitive_in: [String!]
+
+  """All values that are not contained in given list."""
+  verbInfinitive_not_in: [String!]
+
+  """All values less than the given value."""
+  verbInfinitive_lt: String
+
+  """All values less than or equal the given value."""
+  verbInfinitive_lte: String
+
+  """All values greater than the given value."""
+  verbInfinitive_gt: String
+
+  """All values greater than or equal the given value."""
+  verbInfinitive_gte: String
+
+  """All values containing the given string."""
+  verbInfinitive_contains: String
+
+  """All values not containing the given string."""
+  verbInfinitive_not_contains: String
+
+  """All values starting with the given string."""
+  verbInfinitive_starts_with: String
+
+  """All values not starting with the given string."""
+  verbInfinitive_not_starts_with: String
+
+  """All values ending with the given string."""
+  verbInfinitive_ends_with: String
+
+  """All values not ending with the given string."""
+  verbInfinitive_not_ends_with: String
   verbPerson: String
 
   """All values that are not equal to given value."""
@@ -877,10 +1385,6 @@ input LogScalarWhereInput {
 
   """All values not ending with the given string."""
   verbPerson_not_ends_with: String
-  correct: Boolean
-
-  """All values that are not equal to given value."""
-  correct_not: Boolean
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -965,31 +1469,31 @@ input LogSubscriptionWhereInput {
 }
 
 input LogUpdateInput {
-  verbInfinitive: String
-  tense: String
-  correctAnswer: String
-  userAnswer: String
-  verbPerson: String
   correct: Boolean
-  user: UserUpdateManyWithoutLogsInput
+  correctAnswer: String
+  tense: String
+  userAnswer: String
+  verbInfinitive: String
+  verbPerson: String
+  user: UserUpdateOneWithoutLogsInput
 }
 
 input LogUpdateManyDataInput {
-  verbInfinitive: String
-  tense: String
-  correctAnswer: String
-  userAnswer: String
-  verbPerson: String
   correct: Boolean
+  correctAnswer: String
+  tense: String
+  userAnswer: String
+  verbInfinitive: String
+  verbPerson: String
 }
 
 input LogUpdateManyMutationInput {
-  verbInfinitive: String
-  tense: String
-  correctAnswer: String
-  userAnswer: String
-  verbPerson: String
   correct: Boolean
+  correctAnswer: String
+  tense: String
+  userAnswer: String
+  verbInfinitive: String
+  verbPerson: String
 }
 
 input LogUpdateManyWithoutUserInput {
@@ -1010,12 +1514,12 @@ input LogUpdateManyWithWhereNestedInput {
 }
 
 input LogUpdateWithoutUserDataInput {
-  verbInfinitive: String
-  tense: String
-  correctAnswer: String
-  userAnswer: String
-  verbPerson: String
   correct: Boolean
+  correctAnswer: String
+  tense: String
+  userAnswer: String
+  verbInfinitive: String
+  verbPerson: String
 }
 
 input LogUpdateWithWhereUniqueWithoutUserInput {
@@ -1078,86 +1582,10 @@ input LogWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  verbInfinitive: String
+  correct: Boolean
 
   """All values that are not equal to given value."""
-  verbInfinitive_not: String
-
-  """All values that are contained in given list."""
-  verbInfinitive_in: [String!]
-
-  """All values that are not contained in given list."""
-  verbInfinitive_not_in: [String!]
-
-  """All values less than the given value."""
-  verbInfinitive_lt: String
-
-  """All values less than or equal the given value."""
-  verbInfinitive_lte: String
-
-  """All values greater than the given value."""
-  verbInfinitive_gt: String
-
-  """All values greater than or equal the given value."""
-  verbInfinitive_gte: String
-
-  """All values containing the given string."""
-  verbInfinitive_contains: String
-
-  """All values not containing the given string."""
-  verbInfinitive_not_contains: String
-
-  """All values starting with the given string."""
-  verbInfinitive_starts_with: String
-
-  """All values not starting with the given string."""
-  verbInfinitive_not_starts_with: String
-
-  """All values ending with the given string."""
-  verbInfinitive_ends_with: String
-
-  """All values not ending with the given string."""
-  verbInfinitive_not_ends_with: String
-  tense: String
-
-  """All values that are not equal to given value."""
-  tense_not: String
-
-  """All values that are contained in given list."""
-  tense_in: [String!]
-
-  """All values that are not contained in given list."""
-  tense_not_in: [String!]
-
-  """All values less than the given value."""
-  tense_lt: String
-
-  """All values less than or equal the given value."""
-  tense_lte: String
-
-  """All values greater than the given value."""
-  tense_gt: String
-
-  """All values greater than or equal the given value."""
-  tense_gte: String
-
-  """All values containing the given string."""
-  tense_contains: String
-
-  """All values not containing the given string."""
-  tense_not_contains: String
-
-  """All values starting with the given string."""
-  tense_starts_with: String
-
-  """All values not starting with the given string."""
-  tense_not_starts_with: String
-
-  """All values ending with the given string."""
-  tense_ends_with: String
-
-  """All values not ending with the given string."""
-  tense_not_ends_with: String
+  correct_not: Boolean
   correctAnswer: String
 
   """All values that are not equal to given value."""
@@ -1198,6 +1626,46 @@ input LogWhereInput {
 
   """All values not ending with the given string."""
   correctAnswer_not_ends_with: String
+  tense: String
+
+  """All values that are not equal to given value."""
+  tense_not: String
+
+  """All values that are contained in given list."""
+  tense_in: [String!]
+
+  """All values that are not contained in given list."""
+  tense_not_in: [String!]
+
+  """All values less than the given value."""
+  tense_lt: String
+
+  """All values less than or equal the given value."""
+  tense_lte: String
+
+  """All values greater than the given value."""
+  tense_gt: String
+
+  """All values greater than or equal the given value."""
+  tense_gte: String
+
+  """All values containing the given string."""
+  tense_contains: String
+
+  """All values not containing the given string."""
+  tense_not_contains: String
+
+  """All values starting with the given string."""
+  tense_starts_with: String
+
+  """All values not starting with the given string."""
+  tense_not_starts_with: String
+
+  """All values ending with the given string."""
+  tense_ends_with: String
+
+  """All values not ending with the given string."""
+  tense_not_ends_with: String
   userAnswer: String
 
   """All values that are not equal to given value."""
@@ -1238,6 +1706,46 @@ input LogWhereInput {
 
   """All values not ending with the given string."""
   userAnswer_not_ends_with: String
+  verbInfinitive: String
+
+  """All values that are not equal to given value."""
+  verbInfinitive_not: String
+
+  """All values that are contained in given list."""
+  verbInfinitive_in: [String!]
+
+  """All values that are not contained in given list."""
+  verbInfinitive_not_in: [String!]
+
+  """All values less than the given value."""
+  verbInfinitive_lt: String
+
+  """All values less than or equal the given value."""
+  verbInfinitive_lte: String
+
+  """All values greater than the given value."""
+  verbInfinitive_gt: String
+
+  """All values greater than or equal the given value."""
+  verbInfinitive_gte: String
+
+  """All values containing the given string."""
+  verbInfinitive_contains: String
+
+  """All values not containing the given string."""
+  verbInfinitive_not_contains: String
+
+  """All values starting with the given string."""
+  verbInfinitive_starts_with: String
+
+  """All values not starting with the given string."""
+  verbInfinitive_not_starts_with: String
+
+  """All values ending with the given string."""
+  verbInfinitive_ends_with: String
+
+  """All values not ending with the given string."""
+  verbInfinitive_not_ends_with: String
   verbPerson: String
 
   """All values that are not equal to given value."""
@@ -1278,10 +1786,6 @@ input LogWhereInput {
 
   """All values not ending with the given string."""
   verbPerson_not_ends_with: String
-  correct: Boolean
-
-  """All values that are not equal to given value."""
-  correct_not: Boolean
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -1326,9 +1830,7 @@ input LogWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  user_every: UserWhereInput
-  user_some: UserWhereInput
-  user_none: UserWhereInput
+  user: UserWhereInput
 }
 
 input LogWhereUniqueInput {
@@ -1343,28 +1845,46 @@ scalar Long
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
+  createDailyTarget(data: DailyTargetCreateInput!): DailyTarget!
+  createBestStreak(data: BestStreakCreateInput!): BestStreak!
   createLog(data: LogCreateInput!): Log!
   createFeedback(data: FeedbackCreateInput!): Feedback!
+  createSetting(data: SettingCreateInput!): Setting!
   createVerb(data: VerbCreateInput!): Verb!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateDailyTarget(data: DailyTargetUpdateInput!, where: DailyTargetWhereUniqueInput!): DailyTarget
+  updateBestStreak(data: BestStreakUpdateInput!, where: BestStreakWhereUniqueInput!): BestStreak
   updateLog(data: LogUpdateInput!, where: LogWhereUniqueInput!): Log
   updateFeedback(data: FeedbackUpdateInput!, where: FeedbackWhereUniqueInput!): Feedback
+  updateSetting(data: SettingUpdateInput!, where: SettingWhereUniqueInput!): Setting
   updateVerb(data: VerbUpdateInput!, where: VerbWhereUniqueInput!): Verb
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteDailyTarget(where: DailyTargetWhereUniqueInput!): DailyTarget
+  deleteBestStreak(where: BestStreakWhereUniqueInput!): BestStreak
   deleteLog(where: LogWhereUniqueInput!): Log
   deleteFeedback(where: FeedbackWhereUniqueInput!): Feedback
+  deleteSetting(where: SettingWhereUniqueInput!): Setting
   deleteVerb(where: VerbWhereUniqueInput!): Verb
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertDailyTarget(where: DailyTargetWhereUniqueInput!, create: DailyTargetCreateInput!, update: DailyTargetUpdateInput!): DailyTarget!
+  upsertBestStreak(where: BestStreakWhereUniqueInput!, create: BestStreakCreateInput!, update: BestStreakUpdateInput!): BestStreak!
   upsertLog(where: LogWhereUniqueInput!, create: LogCreateInput!, update: LogUpdateInput!): Log!
   upsertFeedback(where: FeedbackWhereUniqueInput!, create: FeedbackCreateInput!, update: FeedbackUpdateInput!): Feedback!
+  upsertSetting(where: SettingWhereUniqueInput!, create: SettingCreateInput!, update: SettingUpdateInput!): Setting!
   upsertVerb(where: VerbWhereUniqueInput!, create: VerbCreateInput!, update: VerbUpdateInput!): Verb!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyDailyTargets(data: DailyTargetUpdateManyMutationInput!, where: DailyTargetWhereInput): BatchPayload!
+  updateManyBestStreaks(data: BestStreakUpdateManyMutationInput!, where: BestStreakWhereInput): BatchPayload!
   updateManyLogs(data: LogUpdateManyMutationInput!, where: LogWhereInput): BatchPayload!
   updateManyFeedbacks(data: FeedbackUpdateManyMutationInput!, where: FeedbackWhereInput): BatchPayload!
+  updateManySettings(data: SettingUpdateManyMutationInput!, where: SettingWhereInput): BatchPayload!
   updateManyVerbs(data: VerbUpdateManyMutationInput!, where: VerbWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyDailyTargets(where: DailyTargetWhereInput): BatchPayload!
+  deleteManyBestStreaks(where: BestStreakWhereInput): BatchPayload!
   deleteManyLogs(where: LogWhereInput): BatchPayload!
   deleteManyFeedbacks(where: FeedbackWhereInput): BatchPayload!
+  deleteManySettings(where: SettingWhereInput): BatchPayload!
   deleteManyVerbs(where: VerbWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
@@ -1402,16 +1922,25 @@ enum PrismaDatabase {
 
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  dailyTargets(where: DailyTargetWhereInput, orderBy: DailyTargetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DailyTarget]!
+  bestStreaks(where: BestStreakWhereInput, orderBy: BestStreakOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BestStreak]!
   logs(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Log]!
   feedbacks(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Feedback]!
+  settings(where: SettingWhereInput, orderBy: SettingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Setting]!
   verbs(where: VerbWhereInput, orderBy: VerbOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Verb]!
   user(where: UserWhereUniqueInput!): User
+  dailyTarget(where: DailyTargetWhereUniqueInput!): DailyTarget
+  bestStreak(where: BestStreakWhereUniqueInput!): BestStreak
   log(where: LogWhereUniqueInput!): Log
   feedback(where: FeedbackWhereUniqueInput!): Feedback
+  setting(where: SettingWhereUniqueInput!): Setting
   verb(where: VerbWhereUniqueInput!): Verb
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  dailyTargetsConnection(where: DailyTargetWhereInput, orderBy: DailyTargetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DailyTargetConnection!
+  bestStreaksConnection(where: BestStreakWhereInput, orderBy: BestStreakOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BestStreakConnection!
   logsConnection(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LogConnection!
   feedbacksConnection(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FeedbackConnection!
+  settingsConnection(where: SettingWhereInput, orderBy: SettingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SettingConnection!
   verbsConnection(where: VerbWhereInput, orderBy: VerbOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): VerbConnection!
 
   """Fetches an object given its ID"""
@@ -1421,111 +1950,257 @@ type Query {
   ): Node
 }
 
-type Subscription {
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-  log(where: LogSubscriptionWhereInput): LogSubscriptionPayload
-  feedback(where: FeedbackSubscriptionWhereInput): FeedbackSubscriptionPayload
-  verb(where: VerbSubscriptionWhereInput): VerbSubscriptionPayload
-}
-
-type User implements Node {
+type Setting implements Node {
   id: ID!
-  email: String!
-  name: String!
-  password: String!
+  difficulty: Int!
+  latam: Boolean!
+  present: Boolean!
+  preterite: Boolean!
+  imperfect: Boolean!
+  future: Boolean!
+  conditional: Boolean!
+  presentPerfect: Boolean!
+  futurePerfect: Boolean!
+  pastPerfect: Boolean!
+  conditionalPerfect: Boolean!
+  subjPresent: Boolean!
+  subjImperfect: Boolean!
+  subjPresentPerfect: Boolean!
+  user: User!
   createdAt: DateTime!
   updatedAt: DateTime!
-  logs(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Log!]
-  feedbacks(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Feedback!]
 }
 
 """A connection to a list of items."""
-type UserConnection {
+type SettingConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [UserEdge]!
-  aggregate: AggregateUser!
+  edges: [SettingEdge]!
+  aggregate: AggregateSetting!
 }
 
-input UserCreateInput {
+input SettingCreateInput {
   id: ID
-  email: String!
-  name: String!
-  password: String!
-  logs: LogCreateManyWithoutUserInput
-  feedbacks: FeedbackCreateManyWithoutUserInput
+  difficulty: Int!
+  latam: Boolean!
+  present: Boolean!
+  preterite: Boolean!
+  imperfect: Boolean!
+  future: Boolean!
+  conditional: Boolean!
+  presentPerfect: Boolean!
+  futurePerfect: Boolean!
+  pastPerfect: Boolean!
+  conditionalPerfect: Boolean!
+  subjPresent: Boolean!
+  subjImperfect: Boolean!
+  subjPresentPerfect: Boolean!
+  user: UserCreateOneWithoutSettingInput!
 }
 
-input UserCreateManyWithoutFeedbacksInput {
-  create: [UserCreateWithoutFeedbacksInput!]
-  connect: [UserWhereUniqueInput!]
+input SettingCreateOneWithoutUserInput {
+  create: SettingCreateWithoutUserInput
+  connect: SettingWhereUniqueInput
 }
 
-input UserCreateManyWithoutLogsInput {
-  create: [UserCreateWithoutLogsInput!]
-  connect: [UserWhereUniqueInput!]
-}
-
-input UserCreateWithoutFeedbacksInput {
+input SettingCreateWithoutUserInput {
   id: ID
-  email: String!
-  name: String!
-  password: String!
-  logs: LogCreateManyWithoutUserInput
-}
-
-input UserCreateWithoutLogsInput {
-  id: ID
-  email: String!
-  name: String!
-  password: String!
-  feedbacks: FeedbackCreateManyWithoutUserInput
+  difficulty: Int!
+  latam: Boolean!
+  present: Boolean!
+  preterite: Boolean!
+  imperfect: Boolean!
+  future: Boolean!
+  conditional: Boolean!
+  presentPerfect: Boolean!
+  futurePerfect: Boolean!
+  pastPerfect: Boolean!
+  conditionalPerfect: Boolean!
+  subjPresent: Boolean!
+  subjImperfect: Boolean!
+  subjPresentPerfect: Boolean!
 }
 
 """An edge in a connection."""
-type UserEdge {
+type SettingEdge {
   """The item at the end of the edge."""
-  node: User!
+  node: Setting!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum UserOrderByInput {
+enum SettingOrderByInput {
   id_ASC
   id_DESC
-  email_ASC
-  email_DESC
-  name_ASC
-  name_DESC
-  password_ASC
-  password_DESC
+  difficulty_ASC
+  difficulty_DESC
+  latam_ASC
+  latam_DESC
+  present_ASC
+  present_DESC
+  preterite_ASC
+  preterite_DESC
+  imperfect_ASC
+  imperfect_DESC
+  future_ASC
+  future_DESC
+  conditional_ASC
+  conditional_DESC
+  presentPerfect_ASC
+  presentPerfect_DESC
+  futurePerfect_ASC
+  futurePerfect_DESC
+  pastPerfect_ASC
+  pastPerfect_DESC
+  conditionalPerfect_ASC
+  conditionalPerfect_DESC
+  subjPresent_ASC
+  subjPresent_DESC
+  subjImperfect_ASC
+  subjImperfect_DESC
+  subjPresentPerfect_ASC
+  subjPresentPerfect_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
 }
 
-type UserPreviousValues {
+type SettingPreviousValues {
   id: ID!
-  email: String!
-  name: String!
-  password: String!
+  difficulty: Int!
+  latam: Boolean!
+  present: Boolean!
+  preterite: Boolean!
+  imperfect: Boolean!
+  future: Boolean!
+  conditional: Boolean!
+  presentPerfect: Boolean!
+  futurePerfect: Boolean!
+  pastPerfect: Boolean!
+  conditionalPerfect: Boolean!
+  subjPresent: Boolean!
+  subjImperfect: Boolean!
+  subjPresentPerfect: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
 
-input UserScalarWhereInput {
+type SettingSubscriptionPayload {
+  mutation: MutationType!
+  node: Setting
+  updatedFields: [String!]
+  previousValues: SettingPreviousValues
+}
+
+input SettingSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [UserScalarWhereInput!]
+  AND: [SettingSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [UserScalarWhereInput!]
+  OR: [SettingSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [UserScalarWhereInput!]
+  NOT: [SettingSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SettingWhereInput
+}
+
+input SettingUpdateInput {
+  difficulty: Int
+  latam: Boolean
+  present: Boolean
+  preterite: Boolean
+  imperfect: Boolean
+  future: Boolean
+  conditional: Boolean
+  presentPerfect: Boolean
+  futurePerfect: Boolean
+  pastPerfect: Boolean
+  conditionalPerfect: Boolean
+  subjPresent: Boolean
+  subjImperfect: Boolean
+  subjPresentPerfect: Boolean
+  user: UserUpdateOneRequiredWithoutSettingInput
+}
+
+input SettingUpdateManyMutationInput {
+  difficulty: Int
+  latam: Boolean
+  present: Boolean
+  preterite: Boolean
+  imperfect: Boolean
+  future: Boolean
+  conditional: Boolean
+  presentPerfect: Boolean
+  futurePerfect: Boolean
+  pastPerfect: Boolean
+  conditionalPerfect: Boolean
+  subjPresent: Boolean
+  subjImperfect: Boolean
+  subjPresentPerfect: Boolean
+}
+
+input SettingUpdateOneWithoutUserInput {
+  create: SettingCreateWithoutUserInput
+  connect: SettingWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: SettingUpdateWithoutUserDataInput
+  upsert: SettingUpsertWithoutUserInput
+}
+
+input SettingUpdateWithoutUserDataInput {
+  difficulty: Int
+  latam: Boolean
+  present: Boolean
+  preterite: Boolean
+  imperfect: Boolean
+  future: Boolean
+  conditional: Boolean
+  presentPerfect: Boolean
+  futurePerfect: Boolean
+  pastPerfect: Boolean
+  conditionalPerfect: Boolean
+  subjPresent: Boolean
+  subjImperfect: Boolean
+  subjPresentPerfect: Boolean
+}
+
+input SettingUpsertWithoutUserInput {
+  update: SettingUpdateWithoutUserDataInput!
+  create: SettingCreateWithoutUserInput!
+}
+
+input SettingWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SettingWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SettingWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SettingWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -1566,126 +2241,80 @@ input UserScalarWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  email: String
+  difficulty: Int
 
   """All values that are not equal to given value."""
-  email_not: String
+  difficulty_not: Int
 
   """All values that are contained in given list."""
-  email_in: [String!]
+  difficulty_in: [Int!]
 
   """All values that are not contained in given list."""
-  email_not_in: [String!]
+  difficulty_not_in: [Int!]
 
   """All values less than the given value."""
-  email_lt: String
+  difficulty_lt: Int
 
   """All values less than or equal the given value."""
-  email_lte: String
+  difficulty_lte: Int
 
   """All values greater than the given value."""
-  email_gt: String
+  difficulty_gt: Int
 
   """All values greater than or equal the given value."""
-  email_gte: String
-
-  """All values containing the given string."""
-  email_contains: String
-
-  """All values not containing the given string."""
-  email_not_contains: String
-
-  """All values starting with the given string."""
-  email_starts_with: String
-
-  """All values not starting with the given string."""
-  email_not_starts_with: String
-
-  """All values ending with the given string."""
-  email_ends_with: String
-
-  """All values not ending with the given string."""
-  email_not_ends_with: String
-  name: String
+  difficulty_gte: Int
+  latam: Boolean
 
   """All values that are not equal to given value."""
-  name_not: String
-
-  """All values that are contained in given list."""
-  name_in: [String!]
-
-  """All values that are not contained in given list."""
-  name_not_in: [String!]
-
-  """All values less than the given value."""
-  name_lt: String
-
-  """All values less than or equal the given value."""
-  name_lte: String
-
-  """All values greater than the given value."""
-  name_gt: String
-
-  """All values greater than or equal the given value."""
-  name_gte: String
-
-  """All values containing the given string."""
-  name_contains: String
-
-  """All values not containing the given string."""
-  name_not_contains: String
-
-  """All values starting with the given string."""
-  name_starts_with: String
-
-  """All values not starting with the given string."""
-  name_not_starts_with: String
-
-  """All values ending with the given string."""
-  name_ends_with: String
-
-  """All values not ending with the given string."""
-  name_not_ends_with: String
-  password: String
+  latam_not: Boolean
+  present: Boolean
 
   """All values that are not equal to given value."""
-  password_not: String
+  present_not: Boolean
+  preterite: Boolean
 
-  """All values that are contained in given list."""
-  password_in: [String!]
+  """All values that are not equal to given value."""
+  preterite_not: Boolean
+  imperfect: Boolean
 
-  """All values that are not contained in given list."""
-  password_not_in: [String!]
+  """All values that are not equal to given value."""
+  imperfect_not: Boolean
+  future: Boolean
 
-  """All values less than the given value."""
-  password_lt: String
+  """All values that are not equal to given value."""
+  future_not: Boolean
+  conditional: Boolean
 
-  """All values less than or equal the given value."""
-  password_lte: String
+  """All values that are not equal to given value."""
+  conditional_not: Boolean
+  presentPerfect: Boolean
 
-  """All values greater than the given value."""
-  password_gt: String
+  """All values that are not equal to given value."""
+  presentPerfect_not: Boolean
+  futurePerfect: Boolean
 
-  """All values greater than or equal the given value."""
-  password_gte: String
+  """All values that are not equal to given value."""
+  futurePerfect_not: Boolean
+  pastPerfect: Boolean
 
-  """All values containing the given string."""
-  password_contains: String
+  """All values that are not equal to given value."""
+  pastPerfect_not: Boolean
+  conditionalPerfect: Boolean
 
-  """All values not containing the given string."""
-  password_not_contains: String
+  """All values that are not equal to given value."""
+  conditionalPerfect_not: Boolean
+  subjPresent: Boolean
 
-  """All values starting with the given string."""
-  password_starts_with: String
+  """All values that are not equal to given value."""
+  subjPresent_not: Boolean
+  subjImperfect: Boolean
 
-  """All values not starting with the given string."""
-  password_not_starts_with: String
+  """All values that are not equal to given value."""
+  subjImperfect_not: Boolean
+  subjPresentPerfect: Boolean
 
-  """All values ending with the given string."""
-  password_ends_with: String
-
-  """All values not ending with the given string."""
-  password_not_ends_with: String
+  """All values that are not equal to given value."""
+  subjPresentPerfect_not: Boolean
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -1730,6 +2359,180 @@ input UserScalarWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  user: UserWhereInput
+}
+
+input SettingWhereUniqueInput {
+  id: ID
+}
+
+type Subscription {
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  dailyTarget(where: DailyTargetSubscriptionWhereInput): DailyTargetSubscriptionPayload
+  bestStreak(where: BestStreakSubscriptionWhereInput): BestStreakSubscriptionPayload
+  log(where: LogSubscriptionWhereInput): LogSubscriptionPayload
+  feedback(where: FeedbackSubscriptionWhereInput): FeedbackSubscriptionPayload
+  setting(where: SettingSubscriptionWhereInput): SettingSubscriptionPayload
+  verb(where: VerbSubscriptionWhereInput): VerbSubscriptionPayload
+}
+
+type User implements Node {
+  id: ID!
+  email: String
+  name: String
+  password: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  premium: Boolean!
+  bestStreak: BestStreak
+  dailyTarget: DailyTarget
+  logs(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Log!]
+  feedbacks(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Feedback!]
+  setting: Setting
+}
+
+"""A connection to a list of items."""
+type UserConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  id: ID
+  email: String
+  name: String
+  password: String
+  premium: Boolean!
+  bestStreak: BestStreakCreateOneWithoutUserInput
+  dailyTarget: DailyTargetCreateOneWithoutUserInput
+  logs: LogCreateManyWithoutUserInput
+  feedbacks: FeedbackCreateManyWithoutUserInput
+  setting: SettingCreateOneWithoutUserInput
+}
+
+input UserCreateOneWithoutBestStreakInput {
+  create: UserCreateWithoutBestStreakInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutDailyTargetInput {
+  create: UserCreateWithoutDailyTargetInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutFeedbacksInput {
+  create: UserCreateWithoutFeedbacksInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutLogsInput {
+  create: UserCreateWithoutLogsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutSettingInput {
+  create: UserCreateWithoutSettingInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutBestStreakInput {
+  id: ID
+  email: String
+  name: String
+  password: String
+  premium: Boolean!
+  dailyTarget: DailyTargetCreateOneWithoutUserInput
+  logs: LogCreateManyWithoutUserInput
+  feedbacks: FeedbackCreateManyWithoutUserInput
+  setting: SettingCreateOneWithoutUserInput
+}
+
+input UserCreateWithoutDailyTargetInput {
+  id: ID
+  email: String
+  name: String
+  password: String
+  premium: Boolean!
+  bestStreak: BestStreakCreateOneWithoutUserInput
+  logs: LogCreateManyWithoutUserInput
+  feedbacks: FeedbackCreateManyWithoutUserInput
+  setting: SettingCreateOneWithoutUserInput
+}
+
+input UserCreateWithoutFeedbacksInput {
+  id: ID
+  email: String
+  name: String
+  password: String
+  premium: Boolean!
+  bestStreak: BestStreakCreateOneWithoutUserInput
+  dailyTarget: DailyTargetCreateOneWithoutUserInput
+  logs: LogCreateManyWithoutUserInput
+  setting: SettingCreateOneWithoutUserInput
+}
+
+input UserCreateWithoutLogsInput {
+  id: ID
+  email: String
+  name: String
+  password: String
+  premium: Boolean!
+  bestStreak: BestStreakCreateOneWithoutUserInput
+  dailyTarget: DailyTargetCreateOneWithoutUserInput
+  feedbacks: FeedbackCreateManyWithoutUserInput
+  setting: SettingCreateOneWithoutUserInput
+}
+
+input UserCreateWithoutSettingInput {
+  id: ID
+  email: String
+  name: String
+  password: String
+  premium: Boolean!
+  bestStreak: BestStreakCreateOneWithoutUserInput
+  dailyTarget: DailyTargetCreateOneWithoutUserInput
+  logs: LogCreateManyWithoutUserInput
+  feedbacks: FeedbackCreateManyWithoutUserInput
+}
+
+"""An edge in a connection."""
+type UserEdge {
+  """The item at the end of the edge."""
+  node: User!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  email_ASC
+  email_DESC
+  name_ASC
+  name_DESC
+  password_ASC
+  password_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  premium_ASC
+  premium_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  email: String
+  name: String
+  password: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  premium: Boolean!
 }
 
 type UserSubscriptionPayload {
@@ -1773,85 +2576,142 @@ input UserUpdateInput {
   email: String
   name: String
   password: String
+  premium: Boolean
+  bestStreak: BestStreakUpdateOneWithoutUserInput
+  dailyTarget: DailyTargetUpdateOneWithoutUserInput
   logs: LogUpdateManyWithoutUserInput
   feedbacks: FeedbackUpdateManyWithoutUserInput
-}
-
-input UserUpdateManyDataInput {
-  email: String
-  name: String
-  password: String
+  setting: SettingUpdateOneWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
   email: String
   name: String
   password: String
+  premium: Boolean
 }
 
-input UserUpdateManyWithoutFeedbacksInput {
-  create: [UserCreateWithoutFeedbacksInput!]
-  connect: [UserWhereUniqueInput!]
-  set: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueWithoutFeedbacksInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
-  deleteMany: [UserScalarWhereInput!]
-  upsert: [UserUpsertWithWhereUniqueWithoutFeedbacksInput!]
+input UserUpdateOneRequiredWithoutSettingInput {
+  create: UserCreateWithoutSettingInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutSettingDataInput
+  upsert: UserUpsertWithoutSettingInput
 }
 
-input UserUpdateManyWithoutLogsInput {
-  create: [UserCreateWithoutLogsInput!]
-  connect: [UserWhereUniqueInput!]
-  set: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueWithoutLogsInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
-  deleteMany: [UserScalarWhereInput!]
-  upsert: [UserUpsertWithWhereUniqueWithoutLogsInput!]
+input UserUpdateOneWithoutBestStreakInput {
+  create: UserCreateWithoutBestStreakInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserUpdateWithoutBestStreakDataInput
+  upsert: UserUpsertWithoutBestStreakInput
 }
 
-input UserUpdateManyWithWhereNestedInput {
-  where: UserScalarWhereInput!
-  data: UserUpdateManyDataInput!
+input UserUpdateOneWithoutDailyTargetInput {
+  create: UserCreateWithoutDailyTargetInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserUpdateWithoutDailyTargetDataInput
+  upsert: UserUpsertWithoutDailyTargetInput
+}
+
+input UserUpdateOneWithoutFeedbacksInput {
+  create: UserCreateWithoutFeedbacksInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserUpdateWithoutFeedbacksDataInput
+  upsert: UserUpsertWithoutFeedbacksInput
+}
+
+input UserUpdateOneWithoutLogsInput {
+  create: UserCreateWithoutLogsInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserUpdateWithoutLogsDataInput
+  upsert: UserUpsertWithoutLogsInput
+}
+
+input UserUpdateWithoutBestStreakDataInput {
+  email: String
+  name: String
+  password: String
+  premium: Boolean
+  dailyTarget: DailyTargetUpdateOneWithoutUserInput
+  logs: LogUpdateManyWithoutUserInput
+  feedbacks: FeedbackUpdateManyWithoutUserInput
+  setting: SettingUpdateOneWithoutUserInput
+}
+
+input UserUpdateWithoutDailyTargetDataInput {
+  email: String
+  name: String
+  password: String
+  premium: Boolean
+  bestStreak: BestStreakUpdateOneWithoutUserInput
+  logs: LogUpdateManyWithoutUserInput
+  feedbacks: FeedbackUpdateManyWithoutUserInput
+  setting: SettingUpdateOneWithoutUserInput
 }
 
 input UserUpdateWithoutFeedbacksDataInput {
   email: String
   name: String
   password: String
+  premium: Boolean
+  bestStreak: BestStreakUpdateOneWithoutUserInput
+  dailyTarget: DailyTargetUpdateOneWithoutUserInput
   logs: LogUpdateManyWithoutUserInput
+  setting: SettingUpdateOneWithoutUserInput
 }
 
 input UserUpdateWithoutLogsDataInput {
   email: String
   name: String
   password: String
+  premium: Boolean
+  bestStreak: BestStreakUpdateOneWithoutUserInput
+  dailyTarget: DailyTargetUpdateOneWithoutUserInput
+  feedbacks: FeedbackUpdateManyWithoutUserInput
+  setting: SettingUpdateOneWithoutUserInput
+}
+
+input UserUpdateWithoutSettingDataInput {
+  email: String
+  name: String
+  password: String
+  premium: Boolean
+  bestStreak: BestStreakUpdateOneWithoutUserInput
+  dailyTarget: DailyTargetUpdateOneWithoutUserInput
+  logs: LogUpdateManyWithoutUserInput
   feedbacks: FeedbackUpdateManyWithoutUserInput
 }
 
-input UserUpdateWithWhereUniqueWithoutFeedbacksInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutFeedbacksDataInput!
+input UserUpsertWithoutBestStreakInput {
+  update: UserUpdateWithoutBestStreakDataInput!
+  create: UserCreateWithoutBestStreakInput!
 }
 
-input UserUpdateWithWhereUniqueWithoutLogsInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutLogsDataInput!
+input UserUpsertWithoutDailyTargetInput {
+  update: UserUpdateWithoutDailyTargetDataInput!
+  create: UserCreateWithoutDailyTargetInput!
 }
 
-input UserUpsertWithWhereUniqueWithoutFeedbacksInput {
-  where: UserWhereUniqueInput!
+input UserUpsertWithoutFeedbacksInput {
   update: UserUpdateWithoutFeedbacksDataInput!
   create: UserCreateWithoutFeedbacksInput!
 }
 
-input UserUpsertWithWhereUniqueWithoutLogsInput {
-  where: UserWhereUniqueInput!
+input UserUpsertWithoutLogsInput {
   update: UserUpdateWithoutLogsDataInput!
   create: UserCreateWithoutLogsInput!
+}
+
+input UserUpsertWithoutSettingInput {
+  update: UserUpdateWithoutSettingDataInput!
+  create: UserCreateWithoutSettingInput!
 }
 
 input UserWhereInput {
@@ -2067,12 +2927,19 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  premium: Boolean
+
+  """All values that are not equal to given value."""
+  premium_not: Boolean
+  bestStreak: BestStreakWhereInput
+  dailyTarget: DailyTargetWhereInput
   logs_every: LogWhereInput
   logs_some: LogWhereInput
   logs_none: LogWhereInput
   feedbacks_every: FeedbackWhereInput
   feedbacks_some: FeedbackWhereInput
   feedbacks_none: FeedbackWhereInput
+  setting: SettingWhereInput
 }
 
 input UserWhereUniqueInput {
