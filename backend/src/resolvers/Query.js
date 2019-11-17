@@ -36,7 +36,6 @@ const Query = {
   },
   myLogs(parent, args, { prisma, request }, info) {
     const userId = getUserId(request);
-    console.log('TCL: myLogs -> userId', userId);
     const opArgs = {
       first: args.first,
       skip: args.skip,
@@ -44,7 +43,7 @@ const Query = {
       orderBy: args.orderBy,
       where: {
         ...args.where,
-        user_some: {
+        user: {
           id: userId
         }
       }
@@ -82,6 +81,36 @@ const Query = {
       where: args.where
     };
     return prisma.query.feedbacks(opArgs, info);
+  },
+  settings(parent, args, { prisma }, info) {
+    const opArgs = {
+      first: args.first,
+      skip: args.skip,
+      after: args.after,
+      orderBy: args.orderBy,
+      where: args.where
+    };
+    return prisma.query.settings(opArgs, info);
+  },
+  dailyTargets(parent, args, { prisma }, info) {
+    const opArgs = {
+      first: args.first,
+      skip: args.skip,
+      after: args.after,
+      orderBy: args.orderBy,
+      where: args.where
+    };
+    return prisma.query.dailyTargets(opArgs, info);
+  },
+  bestStreaks(parent, args, { prisma }, info) {
+    const opArgs = {
+      first: args.first,
+      skip: args.skip,
+      after: args.after,
+      orderBy: args.orderBy,
+      where: args.where
+    };
+    return prisma.query.bestStreaks(opArgs, info);
   }
 };
 

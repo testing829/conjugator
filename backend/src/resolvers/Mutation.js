@@ -118,6 +118,71 @@ const Mutation = {
     }
   },
 
+  async createSetting(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request, false);
+    return await prisma.mutation.createSetting(
+      {
+        data: {
+          ...args.data,
+          user: {
+            connect: {
+              id: userId
+            }
+          }
+        }
+      },
+      info
+    );
+  },
+
+  async createBestStreak(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request, false);
+    return await prisma.mutation.createBestStreak(
+      {
+        data: {
+          ...args.data,
+          user: {
+            connect: {
+              id: userId
+            }
+          }
+        }
+      },
+      info
+    );
+  },
+
+  async createDailyTarget(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request, false);
+    return await prisma.mutation.createDailyTarget(
+      {
+        data: {
+          ...args.data,
+          user: {
+            connect: {
+              id: userId
+            }
+          }
+        }
+      },
+      info
+    );
+  },
+
+  async updateDailyTarget(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request);
+
+    return await prisma.mutation.updateDailyTarget(
+      {
+        where: {
+          id: userId
+        },
+        data: args.data
+      },
+      info
+    );
+  },
+
   async createVerb(parent, args, { prisma, request }, info) {
     return await Object.values(
       verbsFile.slice(args.data.start, args.data.end)
