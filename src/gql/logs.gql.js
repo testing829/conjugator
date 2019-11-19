@@ -18,6 +18,16 @@ const LOGS = gql`
   }
 `;
 
+const AM_I_LOGGED_IN = gql`
+  query {
+    me {
+      id
+      email
+      name
+    }
+  }
+`;
+
 const CREATE_LOG = gql`
   mutation(
     $correct: Boolean!
@@ -94,4 +104,4 @@ const MY_LOGS_BY_DATE = gql`
   }
 `;
 
-export { LOGS, CREATE_LOG, MY_LOGS_BY_DATE, MY_LOGS };
+export { LOGS, AM_I_LOGGED_IN, CREATE_LOG, MY_LOGS_BY_DATE, MY_LOGS };

@@ -1,11 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 
 import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo-hooks';
+import { ApolloProvider, useQuery } from 'react-apollo-hooks';
 import { Route, Switch } from 'react-router-dom';
+// import { useQuery } from 'react-apollo-hooks';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 
+import { AM_I_LOGGED_IN } from './gql/logs.gql';
 import { Context } from './contexts/index';
 import Dashboard from './containers/Dashboard';
 import Feedback from './containers/Feedback';
@@ -17,6 +19,9 @@ import SignUp from './containers/Auth/SignUp';
 
 function App() {
   const { setLoggedIn } = useContext(Context);
+
+  // const { data } = useQuery(AM_I_LOGGED_IN);
+  // console.log('TCL: App -> data', data);
 
   useEffect(() => {
     const doesTokenExist = window.localStorage.getItem('jwt');
@@ -43,37 +48,31 @@ function App() {
       });
 
   return (
-    <>
-      <ApolloProvider client={client}>
-        <CssBaseline />
-        <Nav />
-        <Switch>
-          <Route exact path="/" render={() => <Homepage />} />
-          <Route
-            exact
-            path="/settings"
-            render={props => <Settings {...props} />}
-          />
-          <Route
-            exact
-            path="/feedback"
-            render={props => <Feedback {...props} />}
-          />
-          <Route exact path="/login" render={props => <Login {...props} />} />
-          <Route
-            exact
-            path="/sign-up"
-            render={props => <SignUp {...props} />}
-          />
-          <Route
-            exact
-            path="/account"
-            render={props => <Dashboard {...props} />}
-          />
-          <Route render={() => <h1>URL not found!</h1>} />
-        </Switch>
-      </ApolloProvider>
-    </>
+    <ApolloProvider client={client}>
+      <CssBaseline />
+      <Nav />
+      <Switch>
+        <Route exact path="/" render={() => <Homepage />} />
+        <Route
+          exact
+          path="/settings"
+          render={props => <Settings {...props} />}
+        />
+        <Route
+          exact
+          path="/feedback"
+          render={props => <Feedback {...props} />}
+        />
+        <Route exact path="/login" render={props => <Login {...props} />} />
+        <Route exact path="/sign-up" render={props => <SignUp {...props} />} />
+        <Route
+          exact
+          path="/account"
+          render={props => <Dashboard {...props} />}
+        />
+        <Route render={() => <h1>URL not found!</h1>} />
+      </Switch>
+    </ApolloProvider>
   );
 }
 
