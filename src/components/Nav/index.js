@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 
 import { NavLink } from 'react-router-dom';
-import { useQuery } from 'react-apollo-hooks';
 
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
@@ -9,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-import { AM_I_LOGGED_IN } from '../../gql/logs.gql';
 import { Context } from '../../contexts/index';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,22 +34,12 @@ const useStyles = makeStyles(theme => ({
 
 export default function Nav() {
   const classes = useStyles();
-  const { setLoggedIn } = useContext(Context);
-
-  const { data, loading, refetch } = useQuery(AM_I_LOGGED_IN);
+  const { loggedIn, setLoggedIn } = useContext(Context);
 
   const logOut = () => {
     localStorage.clear();
-    refetch();
     setLoggedIn(false);
   };
-
-  if (loading)
-    return (
-      <Toolbar position="static">
-        <Toolbar> </Toolbar>
-      </Toolbar>
-    );
 
   return (
     <AppBar position="static">
@@ -84,7 +72,7 @@ export default function Nav() {
               Feedback
             </Button>
           </NavLink>
-          {data && Object.values(data).length ? (
+          {loggedIn ? (
             <NavLink
               exact
               to="/account"
@@ -95,7 +83,7 @@ export default function Nav() {
               </Button>
             </NavLink>
           ) : null}
-          {data && Object.values(data).length ? (
+          {loggedIn ? (
             <NavLink
               exact
               to="/"
