@@ -44,6 +44,10 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  subtitle: {
+    marginTop: theme.spacing(1.5),
+    marginBottom: theme.spacing(1.5)
   }
 }));
 
@@ -114,6 +118,14 @@ const SignUp = ({ history }) => {
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
+          </Typography>
+          <Typography
+            className={classes.subtitle}
+            align="center"
+            variant="subtitle1"
+          >
+            Sign up to get stats on your learning progress and to save your
+            settings.
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
