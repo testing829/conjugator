@@ -14,5 +14,5 @@ export default function useSubjUpdate(val) {
       setSubjArr([...subjArr, val]);
     }
   };
-  return [subjArr, changeSubj];
+  return [subjArr, changeSubj, setSubjArr];
 }

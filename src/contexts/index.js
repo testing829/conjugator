@@ -6,6 +6,7 @@ import useSubjUpdate from '../hooks/useSubjUpdate';
 export const Context = createContext();
 
 export function Provider(props) {
+  console.log('IN CONTEXT');
   const [difficulty, setDifficulty] = useState(0);
   const [latam, setLatam] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);

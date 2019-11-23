@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-const CREATE_SETTING = gql`
+const UPSERT_SETTING = gql`
   mutation(
     $difficulty: Int!
     $latam: Boolean!
@@ -17,7 +17,7 @@ const CREATE_SETTING = gql`
     $subjImperfect: Boolean!
     $subjPresentPerfect: Boolean!
   ) {
-    createSetting(
+    upsertSetting(
       data: {
         difficulty: $difficulty
         latam: $latam
@@ -51,6 +51,8 @@ const MY_SETTING = gql`
       email
       setting {
         id
+        latam
+        difficulty
         present
         preterite
         imperfect
@@ -68,4 +70,4 @@ const MY_SETTING = gql`
   }
 `;
 
-export { CREATE_SETTING, MY_SETTING };
+export { MY_SETTING, UPSERT_SETTING };
