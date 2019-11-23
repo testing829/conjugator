@@ -135,6 +135,28 @@ const Mutation = {
     );
   },
 
+  async updateSetting(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request, false);
+    const userSetting = await prisma.query.settings({
+      where: {
+        user: {
+          id: userId
+        }
+      }
+    });
+    return await prisma.mutation.updateSetting(
+      {
+        where: {
+          id: userSetting[0].id
+        },
+        data: {
+          ...args.data
+        }
+      },
+      info
+    );
+  },
+
   async createBestStreak(parent, args, { prisma, request }, info) {
     const userId = getUserId(request, false);
     return await prisma.mutation.createBestStreak(
@@ -154,6 +176,7 @@ const Mutation = {
 
   async createDailyTarget(parent, args, { prisma, request }, info) {
     const userId = getUserId(request, false);
+
     return await prisma.mutation.createDailyTarget(
       {
         data: {
@@ -171,13 +194,22 @@ const Mutation = {
 
   async updateDailyTarget(parent, args, { prisma, request }, info) {
     const userId = getUserId(request);
+    const userDailyTarget = await prisma.query.dailyTargets({
+      where: {
+        user: {
+          id: userId
+        }
+      }
+    });
 
     return await prisma.mutation.updateDailyTarget(
       {
         where: {
-          id: userId
+          id: userDailyTarget[0].id
         },
-        data: args.data
+        data: {
+          ...args.data
+        }
       },
       info
     );
