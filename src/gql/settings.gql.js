@@ -43,4 +43,29 @@ const CREATE_SETTING = gql`
   }
 `;
 
-export { CREATE_SETTING };
+const MY_SETTING = gql`
+  query {
+    me {
+      id
+      name
+      email
+      setting {
+        id
+        present
+        preterite
+        imperfect
+        future
+        conditional
+        presentPerfect
+        futurePerfect
+        pastPerfect
+        conditionalPerfect
+        subjPresent
+        subjImperfect
+        subjPresentPerfect
+      }
+    }
+  }
+`;
+
+export { CREATE_SETTING, MY_SETTING };

@@ -118,24 +118,7 @@ const Mutation = {
     }
   },
 
-  async createSetting(parent, args, { prisma, request }, info) {
-    const userId = getUserId(request, false);
-    return await prisma.mutation.createSetting(
-      {
-        data: {
-          ...args.data,
-          user: {
-            connect: {
-              id: userId
-            }
-          }
-        }
-      },
-      info
-    );
-  },
-
-  async updateSetting(parent, args, { prisma, request }, info) {
+  async upsertSetting(parent, args, { prisma, request }, info) {
     const userId = getUserId(request, false);
     const userSetting = await prisma.query.settings({
       where: {
@@ -144,17 +127,33 @@ const Mutation = {
         }
       }
     });
-    return await prisma.mutation.updateSetting(
-      {
-        where: {
-          id: userSetting[0].id
+    if (userSetting[0]) {
+      return await prisma.mutation.updateSetting(
+        {
+          where: {
+            id: userSetting[0].id
+          },
+          data: {
+            ...args.data
+          }
         },
-        data: {
-          ...args.data
-        }
-      },
-      info
-    );
+        info
+      );
+    } else {
+      return await prisma.mutation.createSetting(
+        {
+          data: {
+            ...args.data,
+            user: {
+              connect: {
+                id: userId
+              }
+            }
+          }
+        },
+        info
+      );
+    }
   },
 
   async createBestStreak(parent, args, { prisma, request }, info) {

@@ -2,13 +2,12 @@ import React, { createContext, useState } from 'react';
 
 import useArrUpdate from '../hooks/useArrUpdate';
 import useSubjUpdate from '../hooks/useSubjUpdate';
-import useToggleState from '../hooks/useToggle';
 
 export const Context = createContext();
 
 export function Provider(props) {
   const [difficulty, setDifficulty] = useState(0);
-  const [latam, toggleLatam] = useToggleState(true);
+  const [latam, setLatam] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
 
   const [subjArr, changeSubj] = useSubjUpdate();
@@ -22,10 +21,10 @@ export function Provider(props) {
         latam,
         loggedIn,
         setDifficulty,
+        setLatam,
         setLoggedIn,
         subjArr,
         tenseArr,
-        toggleLatam,
         updateTense
       }}
     >

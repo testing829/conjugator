@@ -73,15 +73,14 @@ type Mutation {
   createDailyTarget(data: CreateDailyTargetInput!): DailyTarget!
   createFeedback(data: CreateFeedbackInput!): Feedback!
   createLog(data: CreateLogInput!): Log!
-  createSetting(data: CreateSettingInput!): Setting!
   createUser(data: CreateUserInput!): AuthPayload!
   createVerb(data: VerbCreateInput!): Verb!
   deleteUser: User!
   login(data: LoginUserInput!): AuthPayload!
   updateDailyTarget(data: UpdateDailyTarget!): DailyTarget!
-  updateSetting(data: UpdateSettingInput!): Setting!
   updateUser(data: UpdateUserInput!): User!
   updateVerb(data: VerbUpdateInput!): Verb!
+  upsertSetting(data: UpsertSettingInput!): Setting!
 }
 
 # type Subscription {
@@ -138,24 +137,7 @@ input CreateFeedbackInput {
   text: String!
 }
 
-input CreateSettingInput {
-  difficulty: Int!
-  latam: Boolean!
-  present: Boolean!
-  preterite: Boolean!
-  imperfect: Boolean!
-  future: Boolean!
-  conditional: Boolean!
-  presentPerfect: Boolean!
-  futurePerfect: Boolean!
-  pastPerfect: Boolean!
-  conditionalPerfect: Boolean!
-  subjPresent: Boolean!
-  subjImperfect: Boolean!
-  subjPresentPerfect: Boolean!
-}
-
-input UpdateSettingInput {
+input UpsertSettingInput {
   difficulty: Int!
   latam: Boolean!
   present: Boolean!

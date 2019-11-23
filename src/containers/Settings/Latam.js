@@ -12,12 +12,12 @@ import styles from './SettingsStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
 
 function Latam({ classes }) {
-  const { latam, toggleLatam } = useContext(Context);
+  const { latam, setLatam } = useContext(Context);
   return (
     <List>
       <ListSubheader>Latam Spanish or Spain Spanish</ListSubheader>
       <ListItem>
-        <Checkbox checked={!latam} onClick={() => toggleLatam(!latam)} />
+        <Checkbox checked={!latam} onClick={() => setLatam(!latam)} />
         <ListItemText>Include "Vosotros"</ListItemText>
       </ListItem>
     </List>
