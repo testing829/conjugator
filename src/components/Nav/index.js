@@ -92,11 +92,11 @@ export default function Nav() {
             {loggedIn ? (
               <NavLink
                 exact
-                to="/account"
+                to="/stats"
                 style={{ textDecoration: 'none', color: 'white' }}
               >
                 <Button className={classes.navItem} color="inherit">
-                  Account
+                  Stats
                 </Button>
               </NavLink>
             ) : null}

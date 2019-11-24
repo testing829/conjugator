@@ -21,7 +21,7 @@ function Charts() {
         variant="h4"
         style={{ marginTop: '5%' }}
       >
-        Dashboard
+        Learning progress
       </Typography>
       <div
         style={{

@@ -46,12 +46,12 @@ const Sidebar = ({ open, loggedIn, logOut, setOpen }) => {
         {loggedIn ? (
           <NavLink
             exact
-            to="/account"
+            to="/stats"
             style={{ textDecoration: 'none', color: 'black' }}
           >
             <ListItem>
               <Button color="inherit" onClick={() => setOpen(false)}>
-                Account
+                Stats
               </Button>
             </ListItem>
           </NavLink>
