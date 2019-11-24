@@ -171,11 +171,6 @@ const Homepage = ({ classes }) => {
                   <Grid container justify="space-between">
                     <Grid item xs={4}>
                       <Typography className={classes.streakText}>
-                        Current Streak: {correctCount}
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={4}>
-                      <Typography className={classes.streakText}>
                         Best Streak: {bestStreak}
                       </Typography>
                     </Grid>
