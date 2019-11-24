@@ -5,10 +5,12 @@ const styles = theme => ({
   card: {
     backgroundColor: '#FFFF',
     display: 'flex',
-    height: '100%',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      height: '100%'
+    }
   },
   container: {
     padding: '2%',
