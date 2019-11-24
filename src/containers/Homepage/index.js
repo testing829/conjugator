@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Collapse from '@material-ui/core/Collapse';
 import Grid from '@material-ui/core/Grid';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
@@ -52,7 +53,6 @@ const Homepage = ({ classes }) => {
   const { data, loading } = useQuery(VERB_QUERY[difficulty], {
     variables: { latam, tenseArr, subjArr }
   });
-  console.log('TCL: Homepage -> data', data);
 
   const [createLog, { data: logData }] = useMutation(CREATE_LOG);
 
@@ -147,6 +147,24 @@ const Homepage = ({ classes }) => {
           justify="center"
         >
           <Grid item sm={6}>
+            <Grid container>
+              <Grid item xs={6}>
+                <Typography align="left" color="primary">
+                  Daily Goal
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography align="right" color="primary">
+                  {correctCount} / 10
+                </Typography>
+              </Grid>
+            </Grid>
+
+            <LinearProgress
+              className={correctCount < 10 ? null : classes.progressBar}
+              value={correctCount < 10 ? correctCount * 10 : 0}
+              variant="determinate"
+            />
             <Card className={classes.card}>
               <CardContent>
                 <CardActions disableSpacing>

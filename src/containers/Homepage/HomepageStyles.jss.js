@@ -13,7 +13,7 @@ const styles = theme => ({
     }
   },
   container: {
-    padding: '2%',
+    padding: '2% 0 4% 0',
     height: '92vh',
     backgroundColor: '#FAFAFA'
   },
@@ -32,6 +32,10 @@ const styles = theme => ({
   },
   loading: {
     marginTop: '22%'
+  },
+  progressBar: {
+    backgroundColor: '#43A047',
+    color: '#43A047'
   },
   streakText: {
     color: theme.palette.primary.main
