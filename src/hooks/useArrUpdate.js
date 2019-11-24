@@ -14,5 +14,5 @@ export default function useArrUpdate(val) {
       setArr([...arr, val]);
     }
   };
-  return [arr, changeSubj];
+  return [arr, changeSubj, setArr];
 }

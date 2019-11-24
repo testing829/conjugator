@@ -52,6 +52,7 @@ const Homepage = ({ classes }) => {
   const { data, loading } = useQuery(VERB_QUERY[difficulty], {
     variables: { latam, tenseArr, subjArr }
   });
+  console.log('TCL: Homepage -> data', data);
 
   const [createLog, { data: logData }] = useMutation(CREATE_LOG);
 

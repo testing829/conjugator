@@ -2,17 +2,16 @@ import React, { createContext, useState } from 'react';
 
 import useArrUpdate from '../hooks/useArrUpdate';
 import useSubjUpdate from '../hooks/useSubjUpdate';
-import useToggleState from '../hooks/useToggle';
 
 export const Context = createContext();
 
 export function Provider(props) {
   const [difficulty, setDifficulty] = useState(0);
-  const [latam, toggleLatam] = useToggleState(true);
+  const [latam, setLatam] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const [subjArr, changeSubj] = useSubjUpdate();
-  const [tenseArr, updateTense] = useArrUpdate();
+  const [subjArr, changeSubj, setSubjArr] = useSubjUpdate();
+  const [tenseArr, updateTense, setArr] = useArrUpdate();
 
   return (
     <Context.Provider
@@ -21,11 +20,13 @@ export function Provider(props) {
         difficulty,
         latam,
         loggedIn,
+        setArr,
         setDifficulty,
+        setLatam,
         setLoggedIn,
+        setSubjArr,
         subjArr,
         tenseArr,
-        toggleLatam,
         updateTense
       }}
     >
