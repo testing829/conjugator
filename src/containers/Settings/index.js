@@ -1,11 +1,5 @@
 /*eslint-disable */
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { useMutation, useQuery } from 'react-apollo-hooks';
 
@@ -24,44 +18,6 @@ import Snackbar from '../../components/Snackbar/index';
 import styles from './SettingsStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
 
-// const UpdateContext = data => {
-//   const {
-//     changeSubj,
-//     difficulty,
-//     latam,
-//     loggedIn,
-//     setDifficulty,
-//     subjArr,
-//     tenseArr,
-//     setLatam,
-//     setSubjArr,
-//     updateTense
-//   } = useContext(Context);
-
-//   console.log('TCL: Settings -> data', data);
-//   const mySetting = data.me.setting;
-//   console.log('TCL: Settings -> mySetting', mySetting);
-//   // setLatam(mySetting.latam);
-//   // setDifficulty(mySetting.difficulty);
-//   const dbTenseArr = [];
-//   const dbSubjArr = [];
-//   // if (mySetting.present) updateTense('Present');
-//   // if (mySetting.preterite) updateTense('Preterite');
-//   // if (mySetting.imperfect) updateTense('Imperfect');
-//   // if (mySetting.future) updateTense('Future');
-//   // if (mySetting.conditional) updateTense('Conditional');
-//   // if (mySetting.presentPerfect) updateTense('Present Perfect');
-//   // if (mySetting.futurePerfect) updateTense('Future Perfect');
-//   // if (mySetting.pastPerfect) updateTense('Past Perfect');
-//   // if (mySetting.conditionalPerfect) updateTense('Conditional Perfect');
-//   if (mySetting.subjPresent) dbSubjArr.push('Present');
-//   if (mySetting.subjImperfect) dbSubjArr.push('Imperfect');
-//   if (mySetting.subjPresentPerfect) dbSubjArr.push('Present Perfect');
-//   console.log('TCL: Settings -> dbSubjArr', dbSubjArr);
-//   // setSubjArr(dbSubjArr);
-//   return null;
-// };
-
 const Settings = ({ classes }) => {
   const [open, setOpen] = useState(false);
 
@@ -79,12 +35,8 @@ const Settings = ({ classes }) => {
 
   const [upsertSetting] = useMutation(UPSERT_SETTING);
   const { data, loading } = useQuery(MY_SETTING);
-  console.log('TCL: Settings -> loading', loading);
 
   const [gotData, setGotData] = useState(false);
-
-  // const [tempLatam, setTempLatam] = useState(true);
-  // const [tempDifficulty, setTempDifficulty]
 
   const handleUpdate = async () => {
     if (loggedIn) {
@@ -115,24 +67,14 @@ const Settings = ({ classes }) => {
   };
 
   useEffect(() => {
-    // if (data) {
-    //
-    //   console.log('TCL: Settings -> mySetting', mySetting.latam);
-    //   // setTempLatam(mySetting.latam);
-    //   setLatam(mySetting.latam);
-    // }
-    memoizedCallback();
-  }, [loading]);
-
-  const memoizedCallback = useCallback(() => {
     if (data && !gotData) {
       const mySetting = data.me.setting;
       setLatam(mySetting.latam);
       setGotData(true);
     }
-  }, [data]);
+  }, [loading]);
 
-  if (loading) return <CircularProgress />;
+  if (loading && !gotData) return <CircularProgress />;
 
   return (
     <>
