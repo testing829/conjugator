@@ -10,8 +10,8 @@ export function Provider(props) {
   const [latam, setLatam] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const [subjArr, changeSubj] = useSubjUpdate();
-  const [tenseArr, updateTense] = useArrUpdate();
+  const [subjArr, changeSubj, setSubjArr] = useSubjUpdate();
+  const [tenseArr, updateTense, setArr] = useArrUpdate();
 
   return (
     <Context.Provider
@@ -20,9 +20,11 @@ export function Provider(props) {
         difficulty,
         latam,
         loggedIn,
+        setArr,
         setDifficulty,
         setLatam,
         setLoggedIn,
+        setSubjArr,
         subjArr,
         tenseArr,
         updateTense

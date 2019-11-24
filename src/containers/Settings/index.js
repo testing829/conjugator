@@ -22,15 +22,15 @@ const Settings = ({ classes }) => {
   const [open, setOpen] = useState(false);
 
   const {
-    changeSubj,
     difficulty,
     latam,
     loggedIn,
+    setArr,
     setDifficulty,
+    setSubjArr,
     subjArr,
     tenseArr,
-    setLatam,
-    updateTense
+    setLatam
   } = useContext(Context);
 
   const [upsertSetting] = useMutation(UPSERT_SETTING);
@@ -70,6 +70,24 @@ const Settings = ({ classes }) => {
     if (data && !gotData) {
       const mySetting = data.me.setting;
       setLatam(mySetting.latam);
+      setDifficulty(mySetting.difficulty);
+      const dbTensesArr = [];
+      const dbSubjArr = [];
+      if (mySetting.present) dbTensesArr.push('Present');
+      if (mySetting.preterite) dbTensesArr.push('Preterite');
+      if (mySetting.imperfect) dbTensesArr.push('Imperfect');
+      if (mySetting.future) dbTensesArr.push('Future');
+      if (mySetting.conditional) dbTensesArr.push('Conditional');
+      if (mySetting.presentPerfect) dbTensesArr.push('Present Perfect');
+      if (mySetting.futurePerfect) dbTensesArr.push('Future Perfect');
+      if (mySetting.pastPerfect) dbTensesArr.push('Past Perfect');
+      if (mySetting.conditionalPerfect) dbTensesArr.push('Conditional Perfect');
+      if (mySetting.subjPresent) dbSubjArr.push('Present');
+      if (mySetting.subjImperfect) dbSubjArr.push('Imperfect');
+      if (mySetting.subjPresentPerfect) dbSubjArr.push('Present Perfect');
+      setArr(dbTensesArr);
+      setSubjArr(dbSubjArr);
+
       setGotData(true);
     }
   }, [loading]);
@@ -79,7 +97,7 @@ const Settings = ({ classes }) => {
   return (
     <>
       <Paper className={classes.paper} elevation={10}>
-        <Latam handleUpdate={handleUpdate} />
+        <Latam />
         <Difficulty />
         <Tenses />
         <Grid container justify="flex-end">
