@@ -23,10 +23,12 @@ const Settings = ({ classes }) => {
 
   const {
     difficulty,
+    gotSettingData,
     latam,
     loggedIn,
     setArr,
     setDifficulty,
+    setGotSettingData,
     setSubjArr,
     subjArr,
     tenseArr,
@@ -35,8 +37,6 @@ const Settings = ({ classes }) => {
 
   const [upsertSetting] = useMutation(UPSERT_SETTING);
   const { data, loading } = useQuery(MY_SETTING);
-
-  const [gotData, setGotData] = useState(false);
 
   const handleUpdate = async () => {
     if (loggedIn) {
@@ -67,7 +67,7 @@ const Settings = ({ classes }) => {
   };
 
   useEffect(() => {
-    if (data && data.me && !gotData) {
+    if (data && data.me && !gotSettingData) {
       const mySetting = data.me.setting;
       setLatam(mySetting.latam);
       setDifficulty(mySetting.difficulty);
@@ -88,11 +88,11 @@ const Settings = ({ classes }) => {
       setArr(dbTensesArr);
       setSubjArr(dbSubjArr);
 
-      setGotData(true);
+      setGotSettingData(true);
     }
   }, [loading]);
 
-  if (loading && !gotData) return <CircularProgress />;
+  if (loading && !gotSettingData) return <CircularProgress />;
 
   return (
     <>

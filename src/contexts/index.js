@@ -7,6 +7,7 @@ export const Context = createContext();
 
 export function Provider(props) {
   const [difficulty, setDifficulty] = useState(0);
+  const [gotSettingData, setGotSettingData] = useState(false);
   const [latam, setLatam] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -18,10 +19,12 @@ export function Provider(props) {
       value={{
         changeSubj,
         difficulty,
+        gotSettingData,
         latam,
         loggedIn,
         setArr,
         setDifficulty,
+        setGotSettingData,
         setLatam,
         setLoggedIn,
         setSubjArr,
