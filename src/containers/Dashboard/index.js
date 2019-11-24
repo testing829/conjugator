@@ -4,14 +4,14 @@ import WeekChart from './Week';
 import MonthChart from './Month';
 import YearChart from './Year';
 
+import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
 
 function Charts() {
-  const [value, setValue] = useState('0');
-
-  const handleDropdown = e => {
-    setValue(e.target.value);
-  };
+  const [value, setValue] = useState(0);
 
   return (
     <>
@@ -23,16 +23,20 @@ function Charts() {
       >
         Learning progress
       </Typography>
-      <div
-        style={{
-          margin: '7% 10%'
-        }}
-      >
-        <select value={value} onChange={handleDropdown}>
-          <option value="0">Week</option>
-          <option value="1">Month</option>
-          <option value="2">Year</option>
-        </select>
+
+      <Box style={{ margin: '3% 10%' }}>
+        <Paper style={{ margin: '5% 20%' }}>
+          <Tabs
+            centered
+            indicatorColor="primary"
+            textColor="primary"
+            value={value}
+          >
+            <Tab label="Week" onClick={() => setValue(0)} />
+            <Tab label="Month" onClick={() => setValue(1)} />
+            <Tab label="Year" onClick={() => setValue(2)} />
+          </Tabs>
+        </Paper>
         <div
           style={{
             padding: '0 15px',
@@ -41,11 +45,11 @@ function Charts() {
             backgroundColor: '#fff'
           }}
         >
-          {value === '0' && <WeekChart />}
-          {value === '1' && <MonthChart />}
-          {value === '2' && <YearChart />}{' '}
+          {value === 0 && <WeekChart />}
+          {value === 1 && <MonthChart />}
+          {value === 2 && <YearChart />}
         </div>
-      </div>
+      </Box>
     </>
   );
 }
