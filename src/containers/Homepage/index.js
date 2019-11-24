@@ -233,7 +233,7 @@ const Homepage = ({ classes }) => {
                         value={userAnswer}
                         variant="outlined"
                       />
-                      <Grid xs={2}>
+                      <Grid>
                         <Button
                           className={
                             submitted
