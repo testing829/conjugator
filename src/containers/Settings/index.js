@@ -79,9 +79,9 @@ const Settings = ({ classes }) => {
 
   const [upsertSetting] = useMutation(UPSERT_SETTING);
   const { data, loading } = useQuery(MY_SETTING);
+  console.log('TCL: Settings -> loading', loading);
 
   const [gotData, setGotData] = useState(false);
-  console.log('TCL: Settings -> data', data);
 
   // const [tempLatam, setTempLatam] = useState(true);
   // const [tempDifficulty, setTempDifficulty]
@@ -126,10 +126,7 @@ const Settings = ({ classes }) => {
 
   const memoizedCallback = useCallback(() => {
     if (data && !gotData) {
-      console.log('IN CALLBACK');
-      console.log('TCL: memoizedCallback -> data', data);
       const mySetting = data.me.setting;
-      console.log('TCL: memoizedCallback -> mySetting', mySetting);
       setLatam(mySetting.latam);
       setGotData(true);
     }
