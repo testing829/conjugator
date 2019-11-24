@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { MY_LOGS_BY_DATE } from '../../gql/logs.gql';
 import moment from 'moment';
@@ -20,33 +21,20 @@ function YearlyChart() {
     .subtract(12, 'M')
     .format('YYYY-MM-DD');
 
-  const { data, loading } = useQuery(MY_LOGS_BY_DATE, {
+  const { data, loading, refetch } = useQuery(MY_LOGS_BY_DATE, {
     variables: {
       date: oneYearAgo
     }
   });
 
+  useEffect(() => {
+    refetch();
+  }, []);
+
   // We create an array of objects with the month and
   // the count of correct and total answers in that month.
   // "name" is used for the graph
   // "dateForUseEffect" is used for mapping in useEffect
-  let arr = [];
-  let months = 11;
-  while (months >= 0) {
-    arr.push({
-      name: moment()
-        .subtract(months, 'M')
-        .format('MMM YY'),
-      correct: 0,
-      answers: 0,
-      dateForUseEffect: parseInt(
-        moment()
-          .subtract(months, 'M')
-          .format('M')
-      )
-    });
-    months--;
-  }
 
   // we map through the users logs for the month
   // getMonth() returns 0-11
@@ -60,7 +48,25 @@ function YearlyChart() {
   // if a user answers a question, they won't see the update
   // using fetch in GQL might solve this
   useEffect(() => {
-    if (data) {
+    if (data && data.myLogs) {
+      let arr = [];
+      let months = 11;
+      while (months >= 0) {
+        arr.push({
+          name: moment()
+            .subtract(months, 'M')
+            .format('MMM YY'),
+          correct: 0,
+          answers: 0,
+          dateForUseEffect: parseInt(
+            moment()
+              .subtract(months, 'M')
+              .format('M')
+          )
+        });
+        months--;
+      }
+
       data.myLogs.map(val => {
         const aDate = new Date(val.createdAt);
         const theMonth = aDate.getMonth();
@@ -76,7 +82,7 @@ function YearlyChart() {
         setYearData(arr);
       });
     }
-  }, [arr, data]);
+  }, [data]);
 
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
 

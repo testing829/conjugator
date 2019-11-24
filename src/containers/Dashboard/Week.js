@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, { useState, useEffect } from 'react';
 
 import moment from 'moment';
@@ -32,13 +33,13 @@ function WeekChart() {
 
   useEffect(() => {
     refetch();
-  }, [data, refetch]);
+  }, []);
 
   // getDay() returns 0-6; Sun-Sat
   // we update the temp arrays based on the count of answers
   // Sun-Sat and then setState with the updated array
   useEffect(() => {
-    if (data) {
+    if (data && data.myLogs) {
       let tempWeekTotal = [0, 0, 0, 0, 0, 0, 0];
       let tempWeekCor = [0, 0, 0, 0, 0, 0, 0];
 

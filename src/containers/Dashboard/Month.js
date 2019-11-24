@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, { useState, useEffect } from 'react';
 
 import moment from 'moment';
@@ -31,27 +32,12 @@ function MonthlyChart() {
 
   useEffect(() => {
     refetch();
-  }, [refetch]);
+  }, []);
 
   // we create an array of objects with the date and
   // the count of correct and total answers on that date
   // "name" is used for the graph
   // "dateForUseEffect" is used for mapping in useEffect
-  const arr = [];
-  let days = 30;
-  while (days >= 0) {
-    arr.push({
-      name: moment()
-        .subtract(days, 'd')
-        .format('Do-MMM'),
-      correct: 0,
-      answers: 0,
-      dateForUseEffect: moment()
-        .subtract(days, 'd')
-        .format('D')
-    });
-    days--;
-  }
 
   // we map through the users logs for the month
   // getDate() returns 1-31;
@@ -65,7 +51,23 @@ function MonthlyChart() {
   // if a user answers a question, they won't see the update
   // using fetch in GQL might solve this
   useEffect(() => {
-    if (data) {
+    if (data && data.myLogs) {
+      const arr = [];
+      let days = 30;
+      while (days >= 0) {
+        arr.push({
+          name: moment()
+            .subtract(days, 'd')
+            .format('Do-MMM'),
+          correct: 0,
+          answers: 0,
+          dateForUseEffect: moment()
+            .subtract(days, 'd')
+            .format('D')
+        });
+        days--;
+      }
+
       data.myLogs.map(val => {
         const aDate = new Date(val.createdAt);
         const theDay = aDate.getDate();
@@ -81,7 +83,11 @@ function MonthlyChart() {
         setMonthData(arr);
       });
     }
-  }, [arr, data]);
+  }, [data]);
+
+  if (loading) {
+    return <CircularProgress />;
+  }
 
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
@@ -95,51 +101,49 @@ function MonthlyChart() {
     return answers.reduce(reducer);
   };
 
-  if (loading) {
-    return <CircularProgress />;
+  if (data && data.myLogs) {
+    return (
+      <div
+        style={{
+          textAlign: 'left',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}
+      >
+        <div style={{ width: '100px' }}>
+          <div>
+            <h2>{`${((correct() / answers()) * 100).toFixed(1)} %`}</h2>
+            <p>Percent</p>
+          </div>
+          <div>
+            <h2>{correct()}</h2>
+            <p>Correct answers</p>
+          </div>
+          <div>
+            <h2>{answers()}</h2>
+            <p>Total answers</p>
+          </div>
+        </div>
+        <div style={{ width: '100%', height: '300px' }}>
+          <ResponsiveContainer>
+            <AreaChart width={600} height={200} data={monthData} syncId="anyId">
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="name"
+                padding={{ left: 15, right: 15 }}
+                interval={6}
+              />
+              <YAxis />
+              <Tooltip />
+              <Area type="monotone" dataKey="answers" />
+              <Area type="monotone" dataKey="correct" />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    );
   }
-
-  return (
-    <div
-      style={{
-        textAlign: 'left',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}
-    >
-      <div style={{ width: '100px' }}>
-        <div>
-          <h2>{`${((correct() / answers()) * 100).toFixed(1)} %`}</h2>
-          <p>Percent</p>
-        </div>
-        <div>
-          <h2>{correct()}</h2>
-          <p>Correct answers</p>
-        </div>
-        <div>
-          <h2>{answers()}</h2>
-          <p>Total answers</p>
-        </div>
-      </div>
-      <div style={{ width: '100%', height: '300px' }}>
-        <ResponsiveContainer>
-          <AreaChart width={600} height={200} data={monthData} syncId="anyId">
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              dataKey="name"
-              padding={{ left: 15, right: 15 }}
-              interval={6}
-            />
-            <YAxis />
-            <Tooltip />
-            <Area type="monotone" dataKey="answers" />
-            <Area type="monotone" dataKey="correct" />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
-    </div>
-  );
 }
 
 export default MonthlyChart;
