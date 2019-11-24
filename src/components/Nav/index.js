@@ -12,9 +12,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 import { Context } from '../../contexts/index';
+import Sidebar from '../Sidebar/index';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Sidebar from '../Sidebar';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -129,7 +129,6 @@ export default function Nav() {
         </Box>
       </Toolbar>
       <Sidebar
-        // classes={classes}
         open={open}
         loggedIn={loggedIn}
         logOut={logOut}
