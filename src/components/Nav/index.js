@@ -12,7 +12,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 import { Context } from '../../contexts/index';
-import Sidebar from '../Sidebar/index';
+import Sidebar from './Sidebar';
 
 import { makeStyles } from '@material-ui/core/styles';
 
