@@ -67,7 +67,7 @@ const Settings = ({ classes }) => {
   };
 
   useEffect(() => {
-    if (data && !gotData) {
+    if (data && data.me && !gotData) {
       const mySetting = data.me.setting;
       setLatam(mySetting.latam);
       setDifficulty(mySetting.difficulty);
