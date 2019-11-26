@@ -17,6 +17,16 @@ const styles = theme => ({
     height: '92vh',
     backgroundColor: '#FAFAFA'
   },
+  dailyGoal: {
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: theme.spacing(1)
+    }
+  },
+  dailyProgress: {
+    [theme.breakpoints.down('sm')]: {
+      paddingRight: theme.spacing(1)
+    }
+  },
   form: {
     width: '100%'
   },

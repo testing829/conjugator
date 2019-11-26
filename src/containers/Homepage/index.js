@@ -150,12 +150,20 @@ const Homepage = ({ classes }) => {
           <Grid item sm={6}>
             <Grid container>
               <Grid item xs={6}>
-                <Typography align="left" color="primary">
+                <Typography
+                  align="left"
+                  className={classes.dailyGoal}
+                  color="primary"
+                >
                   Daily Goal
                 </Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography align="right" color="primary">
+                <Typography
+                  align="right"
+                  className={classes.dailyProgress}
+                  color="primary"
+                >
                   {correctCount} / 10
                 </Typography>
               </Grid>
