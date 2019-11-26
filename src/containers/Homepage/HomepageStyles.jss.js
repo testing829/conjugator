@@ -56,13 +56,14 @@ const styles = theme => ({
   verbText: {
     color: theme.palette.primary.dark,
     fontSize: '40px',
-    padding: theme.spacing(2),
+    padding: theme.spacing(4),
     width: '100%',
     [theme.breakpoints.down('md')]: {
       fontSize: '32px'
     },
     [theme.breakpoints.down('sm')]: {
-      fontSize: '20px'
+      fontSize: '20px',
+      padding: theme.spacing(2)
     }
   },
   wrongAnswer: {

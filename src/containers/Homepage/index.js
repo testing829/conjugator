@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Collapse from '@material-ui/core/Collapse';
 import Grid from '@material-ui/core/Grid';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -194,18 +195,13 @@ const Homepage = ({ classes }) => {
                   justify="space-around"
                   wrap="nowrap"
                 >
-                  <Grid item={4}>
+                  <Grid item={6}>
                     <Typography className={classes.verbText}>
                       {`${verb.infinitive.charAt(0).toUpperCase() +
                         verb.infinitive.slice(1)} (${verb.infinitiveEnglish})`}
                     </Typography>
                   </Grid>
-                  <Grid item={4}>
-                    <Typography className={classes.verbText}>
-                      {personObj[verb.person]}
-                    </Typography>
-                  </Grid>
-                  <Grid item={4}>
+                  <Grid item={6}>
                     <Typography className={classes.verbText}>
                       {verb.tenseEnglish}{' '}
                       {verb.moodEnglish === 'Subjunctive'
@@ -233,19 +229,37 @@ const Homepage = ({ classes }) => {
                     </Grid>
                     <Grid item xs={12}>
                       <AccentButtons addAccent={addAccent} />
-                      <TextField
-                        autoFocus
-                        className={classes.input}
-                        error={submitted && !correct}
-                        onChange={
-                          submitted
-                            ? null
-                            : event => setUserAnswer(event.target.value)
-                        }
-                        placeholder="Enter conjugated verb..."
-                        value={userAnswer}
-                        variant="outlined"
-                      />
+                      <Grid container>
+                        <Grid item xs={12}>
+                          <TextField
+                            autoFocus
+                            InputProps={{
+                              startAdornment: (
+                                <InputAdornment
+                                  position="start"
+                                  variant="outlined"
+                                  style={{ fontWeight: 'bold', color: 'red' }}
+                                >
+                                  <Typography color="primary" variant="h6">
+                                    {personObj[verb.person]}
+                                  </Typography>
+                                </InputAdornment>
+                              )
+                            }}
+                            className={classes.input}
+                            error={submitted && !correct}
+                            onChange={
+                              submitted
+                                ? null
+                                : event => setUserAnswer(event.target.value)
+                            }
+                            placeholder="Enter conjugated verb..."
+                            value={userAnswer}
+                            variant="outlined"
+                          />
+                        </Grid>
+                      </Grid>
+
                       <Grid>
                         <Button
                           className={

@@ -12,6 +12,9 @@ import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 
+// import { Elements, StripeProvider } from 'react-stripe-elements';
+import StripeCheckout from 'react-stripe-checkout';
+
 import { Context } from '../../contexts/index';
 import { CREATE_USER } from '../../gql/users.gql';
 import Snackbar from '../../components/Snackbar/index';
@@ -194,6 +197,25 @@ const SignUp = ({ history }) => {
             </Grid>
           </form>
         </div>
+        {/* <StripeProvider apiKey="pk_test_6uEhds8mHz26DG95ZvUwTURp"> */}
+        {/* <Elements> */}
+        {/* <TakeMoney variant={tier.buttonVariant} subType={tiers.value} /> */}
+        <StripeCheckout // This component uses the token created above to make a one time payment
+          // token={onToken}
+          ComponentClass="div"
+          stripeKey="pk_test_Y6iNnz4ImmbwJDcFA982Hahf"
+          name="Conjugator"
+          description="Purchase your subscription"
+          panelLabel="Purchase"
+          // image={Logo} // We should have a second smaller logo image without text
+          amount={590} // Amount passed by buttonVariant in Pricing.js
+          currency="GBP"
+          email={email}
+        >
+          <Button className={classes.button}>Pay with Card</Button>
+        </StripeCheckout>
+        {/* </Elements> */}
+        {/* </StripeProvider> */}
         <Snackbar open={open} setOpen={setOpen} text={'Signed Up!'} />
       </Container>
     </>
