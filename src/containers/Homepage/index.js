@@ -38,7 +38,7 @@ const Homepage = ({ classes }) => {
     englishAnswer: '',
     infinitive: '',
     moodEnglish: '',
-    person: '',
+    pronoun: '',
     tenseEnglish: ''
   });
   const { difficulty, latam, subjArr, tenseArr } = useContext(Context);
@@ -50,15 +50,6 @@ const Homepage = ({ classes }) => {
     form1p: 'Nosotros',
     form2p: 'Vosotros',
     form3p: 'Ellos/Ellas'
-  };
-
-  const engPersonObj = {
-    form1s: 'I',
-    form2s: 'You',
-    form3s: 'He/she',
-    form1p: 'We',
-    form2p: 'You all',
-    form3p: 'They'
   };
 
   const { data, loading } = useQuery(VERB_QUERY[difficulty], {
@@ -106,7 +97,7 @@ const Homepage = ({ classes }) => {
           tense: verb.tenseEnglish,
           userAnswer: answer,
           verbInfinitive: verb.infinitive,
-          verbPerson: verb.person
+          verbPerson: verb.pronoun
         }
       });
     } catch (err) {
@@ -125,31 +116,31 @@ const Homepage = ({ classes }) => {
       const randomPerson = Math.floor(Math.random() * 5); // this grabs the 6 yo, tu, ellos etc that we want to use
       const randomVerb = data.verbs[randomNum];
 
-      console.log('randomVerb English', randomVerb.verbEnglish);
-      // const verbEnglish = randomVerb.verbEnglish.split(' ');
-
-      const test = TransformVerbEng(
-        randomVerb.verbEnglish,
-        Object.keys(randomVerb)[randomPerson],
-        verb.tenseEnglish
+      console.log(
+        'TCL: getRandomVerb -> randomVerb.tenseEnglish',
+        randomVerb.verbEnglish
       );
-      // console.log('TCL: getRandomVerb -> test', test);
 
       setVerb({
         answer: Object.values(randomVerb)[randomPerson],
+        englishAnswer: randomVerb.verbEnglish,
         infinitive: randomVerb.infinitive,
-        // englishAnswer: verbEnglish[1].replace(/,/g, ''),
-        // infinitiveEnglish: randomVerb.infinitiveEnglish,
-        englishAnswer: test,
         moodEnglish: randomVerb.moodEnglish,
-        person: Object.keys(randomVerb)[randomPerson],
+        pronoun: Object.keys(randomVerb)[randomPerson],
         tenseEnglish: randomVerb.tenseEnglish
       });
     };
     if (!loading && showNextVerb) {
       getRandomVerb();
     }
-  }, [data, loading, showNextVerb, verb.tenseEnglish]);
+  }, [
+    data,
+    loading,
+    showNextVerb,
+    verb.moodEnglish,
+    verb.tenseEnglish,
+    verb.verbEnglish
+  ]);
 
   if (loading) {
     return (
@@ -226,8 +217,8 @@ const Homepage = ({ classes }) => {
                   wrap="nowrap"
                 >
                   <Grid item={6}>
-                    <Typography className={classes.verbText}>
-                      {/* {`${verb.infinitive.charAt(0).toUpperCase() +
+                    {/* <Typography className={classes.verbText}> */}
+                    {/* {`${verb.infinitive.charAt(0).toUpperCase() +
                         verb.infinitive.slice(1)} (${
                         engPersonObj[verb.person]
                       } ${verb.englishAnswer}`}
@@ -235,8 +226,14 @@ const Homepage = ({ classes }) => {
                       verb.tenseEnglish === 'Present'
                         ? 's)'
                         : ')'} */}
+                    {/* {`${verb.infinitive.charAt(0).toUpperCase() +
+                        verb.infinitive.slice(1)} (${verb.englishAnswer})`} */}
+                    {/* </Typography> */}
+                    <Typography className={classes.verbText}>
                       {`${verb.infinitive.charAt(0).toUpperCase() +
-                        verb.infinitive.slice(1)} (${verb.englishAnswer})`}
+                        verb.infinitive.slice(1)}`}{' '}
+                      (
+                      <TransformVerbEng classes={classes} verb={verb} />)
                     </Typography>
                   </Grid>
                   <Grid item={6}>
@@ -275,7 +272,7 @@ const Homepage = ({ classes }) => {
                               startAdornment: (
                                 <InputAdornment position="start">
                                   <Typography color="primary" variant="h6">
-                                    {personObj[verb.person]}
+                                    {personObj[verb.pronoun]}
                                   </Typography>
                                 </InputAdornment>
                               )
