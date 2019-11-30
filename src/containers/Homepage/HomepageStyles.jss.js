@@ -15,7 +15,10 @@ const styles = theme => ({
   container: {
     padding: '2% 0 4% 0',
     height: '92vh',
-    backgroundColor: '#FAFAFA'
+    backgroundColor: '#FAFAFA',
+    [theme.breakpoints.down('sm')]: {
+      border: '2px solid green'
+    }
   },
   dailyGoal: {
     [theme.breakpoints.down('sm')]: {
