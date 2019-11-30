@@ -16,7 +16,6 @@ const styles = theme => ({
     backgroundColor: '#FAFAFA',
     [theme.breakpoints.down('sm')]: {
       height: '100%'
-      // paddingTop: theme.spacing(5)
     }
   },
   dailyGoal: {

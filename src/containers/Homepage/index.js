@@ -226,8 +226,11 @@ const Homepage = ({ classes }) => {
               <CardActions className={classes.inputContainer} disableSpacing>
                 <form className={classes.form} onSubmit={handleSubmit}>
                   <Grid container>
-                    <Grid item xs={12}>
-                      <Collapse in={submitted && !correct}>
+                    <Grid item xs={12} >
+                      <Collapse
+                        in={submitted && !correct}
+                        style={{ width: '100px' }}
+                      >
                         {submitted && !correct ? (
                           <Typography
                             className={classes.wrongAnswer}
