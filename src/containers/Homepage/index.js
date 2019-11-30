@@ -211,7 +211,7 @@ const Homepage = ({ classes }) => {
                   </Grid>
                   <Grid item={6}>
                     <Typography className={classes.verbText}>
-                      {verb.tenseEnglish}{' '}
+                      {verb.tenseEnglish}
                       {verb.moodEnglish === 'Subjunctive'
                         ? `(${verb.moodEnglish})`
                         : null}
@@ -243,11 +243,7 @@ const Homepage = ({ classes }) => {
                             autoFocus
                             InputProps={{
                               startAdornment: (
-                                <InputAdornment
-                                  position="start"
-                                  variant="outlined"
-                                  style={{ fontWeight: 'bold', color: 'red' }}
-                                >
+                                <InputAdornment position="start">
                                   <Typography color="primary" variant="h6">
                                     {personObj[verb.person]}
                                   </Typography>

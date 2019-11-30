@@ -23,6 +23,18 @@ const Sidebar = ({ open, loggedIn, logOut, setOpen }) => {
 
         <NavLink
           exact
+          to="/"
+          style={{ textDecoration: 'none', color: 'black' }}
+        >
+          <ListItem>
+            <Button color="inherit" onClick={() => setOpen(false)}>
+              Home
+            </Button>
+          </ListItem>
+        </NavLink>
+
+        <NavLink
+          exact
           to="/settings"
           style={{ textDecoration: 'none', color: 'black' }}
         >
