@@ -6,6 +6,7 @@ const styles = theme => ({
     backgroundColor: '#FFFF',
     display: 'flex',
     flexDirection: 'column',
+    height: '100%',
     justifyContent: 'space-between',
     paddingBottom: theme.spacing(2)
   },
@@ -13,7 +14,7 @@ const styles = theme => ({
     padding: '2% 0 4% 0',
     height: '92vh',
     backgroundColor: '#FAFAFA',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.down('sm')]: {
       height: '100%'
     }
   },

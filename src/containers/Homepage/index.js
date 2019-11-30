@@ -205,7 +205,7 @@ const Homepage = ({ classes }) => {
                   justify="space-around"
                   wrap="nowrap"
                 >
-                  <Grid item={6}>
+                  <Grid item>
                     <Typography className={classes.verbText}>
                       {`${verb.infinitive.charAt(0).toUpperCase() +
                         verb.infinitive.slice(1)}`}{' '}
@@ -213,7 +213,7 @@ const Homepage = ({ classes }) => {
                       <TransformVerbEng verb={verb} />)
                     </Typography>
                   </Grid>
-                  <Grid item={6}>
+                  <Grid item>
                     <Typography className={classes.verbText}>
                       {verb.tenseEnglish}{' '}
                       {verb.moodEnglish === 'Subjunctive'
