@@ -6,7 +6,7 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import styles from './SnackbarStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
 
-const SimpleSnackbar = ({ open, setOpen, text }) => {
+const SimpleSnackbar = ({ duration = 2500, open, setOpen, text }) => {
   return (
     <>
       <Snackbar
@@ -14,7 +14,7 @@ const SimpleSnackbar = ({ open, setOpen, text }) => {
           vertical: 'top',
           horizontal: 'center'
         }}
-        autoHideDuration={2500}
+        autoHideDuration={duration}
         onClose={() => {
           setOpen(false);
         }}
