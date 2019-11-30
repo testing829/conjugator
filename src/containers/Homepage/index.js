@@ -18,6 +18,7 @@ import AccentButtons from './AccentButtons';
 import { CREATE_LOG } from '../../gql/logs.gql';
 import { VERB_QUERY } from '../../gql/verbs.gql';
 import { Context } from '../../contexts/index';
+import TransformVerbEng from './TransformVerbEng';
 import Snackbar from '../../components/Snackbar/index';
 
 import styles from './HomepageStyles.jss';
@@ -34,8 +35,8 @@ const Homepage = ({ classes }) => {
   const [userAnswer, setUserAnswer] = useState('');
   const [verb, setVerb] = useState({
     answer: '',
+    englishAnswer: '',
     infinitive: '',
-    infinitiveEnglish: '',
     moodEnglish: '',
     person: '',
     tenseEnglish: ''
@@ -49,6 +50,15 @@ const Homepage = ({ classes }) => {
     form1p: 'Nosotros',
     form2p: 'Vosotros',
     form3p: 'Ellos/Ellas'
+  };
+
+  const engPersonObj = {
+    form1s: 'I',
+    form2s: 'You',
+    form3s: 'He/she',
+    form1p: 'We',
+    form2p: 'You all',
+    form3p: 'They'
   };
 
   const { data, loading } = useQuery(VERB_QUERY[difficulty], {
@@ -115,10 +125,22 @@ const Homepage = ({ classes }) => {
       const randomPerson = Math.floor(Math.random() * 5); // this grabs the 6 yo, tu, ellos etc that we want to use
       const randomVerb = data.verbs[randomNum];
 
+      console.log('randomVerb English', randomVerb.verbEnglish);
+      // const verbEnglish = randomVerb.verbEnglish.split(' ');
+
+      const test = TransformVerbEng(
+        randomVerb.verbEnglish,
+        Object.keys(randomVerb)[randomPerson],
+        verb.tenseEnglish
+      );
+      // console.log('TCL: getRandomVerb -> test', test);
+
       setVerb({
         answer: Object.values(randomVerb)[randomPerson],
         infinitive: randomVerb.infinitive,
-        infinitiveEnglish: randomVerb.infinitiveEnglish,
+        // englishAnswer: verbEnglish[1].replace(/,/g, ''),
+        // infinitiveEnglish: randomVerb.infinitiveEnglish,
+        englishAnswer: test,
         moodEnglish: randomVerb.moodEnglish,
         person: Object.keys(randomVerb)[randomPerson],
         tenseEnglish: randomVerb.tenseEnglish
@@ -127,7 +149,7 @@ const Homepage = ({ classes }) => {
     if (!loading && showNextVerb) {
       getRandomVerb();
     }
-  }, [data, loading, showNextVerb]);
+  }, [data, loading, showNextVerb, verb.tenseEnglish]);
 
   if (loading) {
     return (
@@ -205,13 +227,21 @@ const Homepage = ({ classes }) => {
                 >
                   <Grid item={6}>
                     <Typography className={classes.verbText}>
+                      {/* {`${verb.infinitive.charAt(0).toUpperCase() +
+                        verb.infinitive.slice(1)} (${
+                        engPersonObj[verb.person]
+                      } ${verb.englishAnswer}`}
+                      {engPersonObj[verb.person] === 'He/she' &&
+                      verb.tenseEnglish === 'Present'
+                        ? 's)'
+                        : ')'} */}
                       {`${verb.infinitive.charAt(0).toUpperCase() +
-                        verb.infinitive.slice(1)} (${verb.infinitiveEnglish})`}
+                        verb.infinitive.slice(1)} (${verb.englishAnswer})`}
                     </Typography>
                   </Grid>
                   <Grid item={6}>
                     <Typography className={classes.verbText}>
-                      {verb.tenseEnglish}
+                      {verb.tenseEnglish}{' '}
                       {verb.moodEnglish === 'Subjunctive'
                         ? `(${verb.moodEnglish})`
                         : null}
