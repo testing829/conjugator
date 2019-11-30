@@ -143,9 +143,9 @@ const Homepage = ({ classes }) => {
     return (
       <>
         <Grid
+          align="center"
           className={classes.container}
           container
-          align="center"
           direction="row"
           justify="center"
         >

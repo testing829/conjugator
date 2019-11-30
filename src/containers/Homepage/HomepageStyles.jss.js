@@ -62,7 +62,10 @@ const styles = theme => ({
   },
   verbContent: {
     display: 'flex',
-    alignContent: 'center'
+    alignContent: 'center',
+    [theme.breakpoints.down('sm')]: {
+      height: '75px'
+    }
   },
   verbText: {
     color: theme.palette.primary.dark,
