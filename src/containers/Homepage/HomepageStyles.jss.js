@@ -15,7 +15,8 @@ const styles = theme => ({
     height: '92vh',
     backgroundColor: '#FAFAFA',
     [theme.breakpoints.down('sm')]: {
-      height: '100%'
+      height: '100%',
+      paddingTop: theme.spacing(4)
     }
   },
   dailyGoal: {
