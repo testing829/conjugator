@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, { useContext, useEffect, useState } from 'react';
 
 import { useMutation, useQuery } from 'react-apollo-hooks';
@@ -33,6 +34,7 @@ const Homepage = ({ classes }) => {
   const [totalAnswers, setTotalAnswers] = useState(0);
   const [totalCorrect, setTotalCorrect] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
+  const [temp, setTemp] = useState(0);
   const [verb, setVerb] = useState({
     answer: '',
     englishAnswer: '',
@@ -116,11 +118,6 @@ const Homepage = ({ classes }) => {
       const randomPerson = Math.floor(Math.random() * 5); // this grabs the 6 yo, tu, ellos etc that we want to use
       const randomVerb = data.verbs[randomNum];
 
-      console.log(
-        'TCL: getRandomVerb -> randomVerb.tenseEnglish',
-        randomVerb.verbEnglish
-      );
-
       setVerb({
         answer: Object.values(randomVerb)[randomPerson],
         englishAnswer: randomVerb.verbEnglish,
@@ -131,16 +128,11 @@ const Homepage = ({ classes }) => {
       });
     };
     if (!loading && showNextVerb) {
+      setTemp(temp + 1);
+      console.log('COUNT', temp);
       getRandomVerb();
     }
-  }, [
-    data,
-    loading,
-    showNextVerb,
-    verb.moodEnglish,
-    verb.tenseEnglish,
-    verb.verbEnglish
-  ]);
+  }, [data, loading, showNextVerb]);
 
   if (loading) {
     return (
@@ -217,18 +209,6 @@ const Homepage = ({ classes }) => {
                   wrap="nowrap"
                 >
                   <Grid item={6}>
-                    {/* <Typography className={classes.verbText}> */}
-                    {/* {`${verb.infinitive.charAt(0).toUpperCase() +
-                        verb.infinitive.slice(1)} (${
-                        engPersonObj[verb.person]
-                      } ${verb.englishAnswer}`}
-                      {engPersonObj[verb.person] === 'He/she' &&
-                      verb.tenseEnglish === 'Present'
-                        ? 's)'
-                        : ')'} */}
-                    {/* {`${verb.infinitive.charAt(0).toUpperCase() +
-                        verb.infinitive.slice(1)} (${verb.englishAnswer})`} */}
-                    {/* </Typography> */}
                     <Typography className={classes.verbText}>
                       {`${verb.infinitive.charAt(0).toUpperCase() +
                         verb.infinitive.slice(1)}`}{' '}

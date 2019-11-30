@@ -10,12 +10,6 @@ const TransformVerbEng = ({ classes, verb }) => {
     pronoun,
     tenseEnglish
   } = verb;
-  // present pefect: I have eaten, he has eaten, w
-  // conditional perfect
-  // future: will need
-  // imperfect: I was eating, you were, he was, we were, you all were, they were
-
-  // imperfect subj: I was translated
 
   const engPersonObj = {
     form1s: 'I',
