@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, { useContext, useEffect, useState } from 'react';
 
 import { useMutation, useQuery } from 'react-apollo-hooks';
@@ -18,6 +19,7 @@ import AccentButtons from './AccentButtons';
 import { CREATE_LOG } from '../../gql/logs.gql';
 import { VERB_QUERY } from '../../gql/verbs.gql';
 import { Context } from '../../contexts/index';
+import TransformVerbEng from './TransformVerbEng';
 import Snackbar from '../../components/Snackbar/index';
 
 import styles from './HomepageStyles.jss';
@@ -34,10 +36,10 @@ const Homepage = ({ classes }) => {
   const [userAnswer, setUserAnswer] = useState('');
   const [verb, setVerb] = useState({
     answer: '',
+    englishAnswer: '',
     infinitive: '',
-    infinitiveEnglish: '',
     moodEnglish: '',
-    person: '',
+    pronoun: '',
     tenseEnglish: ''
   });
   const { difficulty, latam, subjArr, tenseArr } = useContext(Context);
@@ -96,7 +98,7 @@ const Homepage = ({ classes }) => {
           tense: verb.tenseEnglish,
           userAnswer: answer,
           verbInfinitive: verb.infinitive,
-          verbPerson: verb.person
+          verbPerson: verb.pronoun
         }
       });
     } catch (err) {
@@ -117,10 +119,10 @@ const Homepage = ({ classes }) => {
 
       setVerb({
         answer: Object.values(randomVerb)[randomPerson],
+        englishAnswer: randomVerb.verbEnglish,
         infinitive: randomVerb.infinitive,
-        infinitiveEnglish: randomVerb.infinitiveEnglish,
         moodEnglish: randomVerb.moodEnglish,
-        person: Object.keys(randomVerb)[randomPerson],
+        pronoun: Object.keys(randomVerb)[randomPerson],
         tenseEnglish: randomVerb.tenseEnglish
       });
     };
@@ -206,12 +208,14 @@ const Homepage = ({ classes }) => {
                   <Grid item={6}>
                     <Typography className={classes.verbText}>
                       {`${verb.infinitive.charAt(0).toUpperCase() +
-                        verb.infinitive.slice(1)} (${verb.infinitiveEnglish})`}
+                        verb.infinitive.slice(1)}`}{' '}
+                      (
+                      <TransformVerbEng verb={verb} />)
                     </Typography>
                   </Grid>
                   <Grid item={6}>
                     <Typography className={classes.verbText}>
-                      {verb.tenseEnglish}
+                      {verb.tenseEnglish}{' '}
                       {verb.moodEnglish === 'Subjunctive'
                         ? `(${verb.moodEnglish})`
                         : null}
@@ -245,7 +249,7 @@ const Homepage = ({ classes }) => {
                               startAdornment: (
                                 <InputAdornment position="start">
                                   <Typography color="primary" variant="h6">
-                                    {personObj[verb.person]}
+                                    {personObj[verb.pronoun]}
                                   </Typography>
                                 </InputAdornment>
                               )
