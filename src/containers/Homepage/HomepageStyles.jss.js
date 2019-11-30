@@ -7,17 +7,14 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    paddingBottom: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      height: '100%'
-    }
+    paddingBottom: theme.spacing(2)
   },
   container: {
     padding: '2% 0 4% 0',
     height: '92vh',
     backgroundColor: '#FAFAFA',
-    [theme.breakpoints.down('sm')]: {
-      border: '2px solid green'
+    [theme.breakpoints.up('sm')]: {
+      height: '100%'
     }
   },
   dailyGoal: {
