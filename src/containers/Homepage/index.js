@@ -34,7 +34,6 @@ const Homepage = ({ classes }) => {
   const [totalAnswers, setTotalAnswers] = useState(0);
   const [totalCorrect, setTotalCorrect] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
-  const [temp, setTemp] = useState(0);
   const [verb, setVerb] = useState({
     answer: '',
     englishAnswer: '',
@@ -128,8 +127,6 @@ const Homepage = ({ classes }) => {
       });
     };
     if (!loading && showNextVerb) {
-      setTemp(temp + 1);
-      console.log('COUNT', temp);
       getRandomVerb();
     }
   }, [data, loading, showNextVerb]);
@@ -213,7 +210,7 @@ const Homepage = ({ classes }) => {
                       {`${verb.infinitive.charAt(0).toUpperCase() +
                         verb.infinitive.slice(1)}`}{' '}
                       (
-                      <TransformVerbEng classes={classes} verb={verb} />)
+                      <TransformVerbEng verb={verb} />)
                     </Typography>
                   </Grid>
                   <Grid item={6}>

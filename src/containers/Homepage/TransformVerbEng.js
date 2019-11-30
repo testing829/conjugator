@@ -1,8 +1,10 @@
-import React from 'react';
-
-const TransformVerbEng = ({ classes, verb }) => {
+const TransformVerbEng = ({ verb }) => {
   if (!verb.infinitive) return null;
-  console.log('TCL: TransformVerbEng -> verb', verb);
+
+  // reflexive verbs. You washed myself. Should be you washed yourself
+  // could remove reflexive
+  // agredecer = they am grateful for
+
   const {
     englishAnswer,
     infinitive,
@@ -13,23 +15,32 @@ const TransformVerbEng = ({ classes, verb }) => {
 
   const engPersonObj = {
     form1s: 'I',
-    form2s: 'You',
-    form3s: 'He/she',
-    form1p: 'We',
-    form2p: 'You all',
-    form3p: 'They'
+    form2s: 'you',
+    form3s: 'he/she',
+    form1p: 'we',
+    form2p: 'you all',
+    form3p: 'they'
   };
 
   const splitAnswer = englishAnswer.replace(/,/g, '').split(' ');
-
   const answerPreComma = englishAnswer.split(',')[0];
-  console.log('TCL: TransformVerbEng -> answerPreComma', answerPreComma);
   const temp = answerPreComma.split(' ');
   temp.shift();
   const cleanedAnswer = temp.join(' ');
-  console.log('TCL: TransformVerbEng -> CLEANED', cleanedAnswer);
 
-  if (engPersonObj[pronoun] === 'He/she' && tenseEnglish === 'Present') {
+  if (tenseEnglish === 'Present') {
+    if (infinitive === 'ser' || infinitive === 'estar') {
+      if (engPersonObj[pronoun] === 'I') {
+        return 'I am';
+      } else if (engPersonObj[pronoun] === 'he/she') {
+        return 'he/she is';
+      } else {
+        return `${engPersonObj[pronoun]} are`;
+      }
+    }
+  }
+
+  if (engPersonObj[pronoun] === 'he/she' && tenseEnglish === 'Present') {
     return `${engPersonObj[pronoun]} ${cleanedAnswer}s`;
   }
   if (
@@ -40,30 +51,32 @@ const TransformVerbEng = ({ classes, verb }) => {
     return `${engPersonObj[pronoun]} ${cleanedAnswer}`;
   }
 
-  if (tenseEnglish === 'Imperfect') {
-    if (infinitive === 'ser' || infinitive === 'estar') {
-      if (engPersonObj[pronoun] === 'He/she' || engPersonObj[pronoun] === 'I') {
-        return `${engPersonObj[pronoun]} was`;
-      } else {
-        return `${engPersonObj[pronoun]} were`;
-      }
+  if (
+    (tenseEnglish === 'Imperfect' || tenseEnglish === 'Preterite') &&
+    (infinitive === 'ser' || infinitive === 'estar')
+  ) {
+    if (engPersonObj[pronoun] === 'he/she' || engPersonObj[pronoun] === 'I') {
+      return `${engPersonObj[pronoun]} was`;
+    } else {
+      return `${engPersonObj[pronoun]} were`;
     }
+  }
+  if (tenseEnglish === 'Imperfect') {
     if (infinitive === 'saber' || infinitive === 'conocer') {
       return `${engPersonObj[pronoun]} knew`;
     }
     const gerund = splitAnswer.find(word => word.includes('ing'));
     if (moodEnglish === 'Subjunctive') {
-      if (engPersonObj[pronoun] === 'He/she' || engPersonObj[pronoun] === 'I') {
+      if (engPersonObj[pronoun] === 'he/she' || engPersonObj[pronoun] === 'I') {
         return `${engPersonObj[pronoun]} was ${gerund}`;
       } else {
         return `${engPersonObj[pronoun]} were ${gerund}`;
       }
     } else {
       if (splitAnswer[1] === 'used') {
-        // return `${engPersonObj[pronoun]} ${splitAnswer[1]} ${splitAnswer[2]} ${splitAnswer[3]}`;
         return `${engPersonObj[pronoun]} ${cleanedAnswer}`;
       }
-      if (engPersonObj[pronoun] === 'He/she' || engPersonObj[pronoun] === 'I') {
+      if (engPersonObj[pronoun] === 'he/she' || engPersonObj[pronoun] === 'I') {
         return `${engPersonObj[pronoun]} was ${gerund}`;
       } else {
         return `${engPersonObj[pronoun]} were ${gerund}`;
