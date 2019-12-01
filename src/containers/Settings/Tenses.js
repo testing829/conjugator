@@ -29,41 +29,10 @@ function Tenses({ classes }) {
 
   return (
     <>
+      <ListSubheader>Tenses</ListSubheader>
       <Grid container>
         <Grid item xs={3}>
           <List>
-            <ListSubheader>Tenses</ListSubheader>
-            <ListItem>
-              <Checkbox />
-              <ListItemText primary="Present" secondary={'Hablo'} />
-            </ListItem>
-            <ListItem>
-              <Checkbox disabled />
-              <ListItemText primary="Present" secondary={'Hablo'} />
-              <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
-                  {/* <DeleteIcon /> */}
-                  <StarBorder />
-                  <Typography>Pro</Typography>
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <ListItem>
-              <Checkbox disabled />
-              <ListItemText primary="Present" secondary={'Hablo'} />
-              <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
-                  {/* <DeleteIcon /> */}
-                  <StarBorder />
-                  <Typography>Pro</Typography>
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          </List>
-        </Grid>
-        <Grid item xs={3}>
-          <List>
-            <ListSubheader>Tenses</ListSubheader>
             <ListItem>
               <Checkbox />
               <ListItemText primary="Present" secondary={'Hablo'} />
@@ -83,7 +52,6 @@ function Tenses({ classes }) {
               <ListItemText primary="Present" secondary={'Hablo'} />
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="delete">
-                  {/* <DeleteIcon /> */}
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -93,13 +61,15 @@ function Tenses({ classes }) {
         </Grid>
         <Grid item xs={3}>
           <List>
-            <ListSubheader>Tenses</ListSubheader>
+            <ListItem>
+              <Checkbox />
+              <ListItemText primary="Present" secondary={'Hablo'} />
+            </ListItem>
             <ListItem>
               <Checkbox disabled />
               <ListItemText primary="Present" secondary={'Hablo'} />
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="delete">
-                  {/* <DeleteIcon /> */}
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -110,18 +80,6 @@ function Tenses({ classes }) {
               <ListItemText primary="Present" secondary={'Hablo'} />
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="delete">
-                  {/* <DeleteIcon /> */}
-                  <StarBorder />
-                  <Typography>Pro</Typography>
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <ListItem>
-              <Checkbox disabled />
-              <ListItemText primary="Present" secondary={'Hablo'} />
-              <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
-                  {/* <DeleteIcon /> */}
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -131,13 +89,12 @@ function Tenses({ classes }) {
         </Grid>
         <Grid item xs={3}>
           <List>
-            <ListSubheader>Tenses</ListSubheader>
+            {/* <ListSubheader>{'  d </ListSubheader> */}
             <ListItem>
               <Checkbox disabled />
               <ListItemText primary="Present" secondary={'Hablo'} />
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="delete">
-                  {/* <DeleteIcon /> */}
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -148,7 +105,40 @@ function Tenses({ classes }) {
               <ListItemText primary="Present" secondary={'Hablo'} />
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="delete">
-                  {/* <DeleteIcon /> */}
+                  <StarBorder />
+                  <Typography>Pro</Typography>
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+            <ListItem>
+              <Checkbox disabled />
+              <ListItemText primary="Present" secondary={'Hablo'} />
+              <ListItemSecondaryAction>
+                <IconButton edge="end" aria-label="delete">
+                  <StarBorder />
+                  <Typography>Pro</Typography>
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          </List>
+        </Grid>
+        <Grid item xs={3}>
+          <List>
+            <ListItem>
+              <Checkbox disabled />
+              <ListItemText primary="Present" secondary={'Hablo'} />
+              <ListItemSecondaryAction>
+                <IconButton edge="end" aria-label="delete">
+                  <StarBorder />
+                  <Typography>Pro</Typography>
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+            <ListItem>
+              <Checkbox disabled />
+              <ListItemText primary="Present" secondary={'Hablo'} />
+              <ListItemSecondaryAction>
+                <IconButton edge="end" aria-label="delete">
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -174,7 +164,7 @@ function Tenses({ classes }) {
 export default withStyles(styles)(Tenses);
 
 // <List>
-// <ListSubheader>Tenses</ListSubheader>
+// <ListSubheader>Tenses</ListSubheader>;
 // <ListItem>
 //   <ListItemIcon>
 //     <DraftsIcon />
