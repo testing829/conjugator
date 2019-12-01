@@ -67,29 +67,32 @@ const Settings = ({ classes }) => {
   };
 
   useEffect(() => {
-    if (data && data.me.setting && !gotSettingData) {
+    if (data && data.me && !gotSettingData) {
       const mySetting = data.me.setting;
-      console.log('TCL: Settings -> mySetting', mySetting);
-      setLatam(mySetting.latam);
-      setDifficulty(mySetting.difficulty);
-      const dbTensesArr = [];
-      const dbSubjArr = [];
-      if (mySetting.present) dbTensesArr.push('Present');
-      if (mySetting.preterite) dbTensesArr.push('Preterite');
-      if (mySetting.imperfect) dbTensesArr.push('Imperfect');
-      if (mySetting.future) dbTensesArr.push('Future');
-      if (mySetting.conditional) dbTensesArr.push('Conditional');
-      if (mySetting.presentPerfect) dbTensesArr.push('Present Perfect');
-      if (mySetting.futurePerfect) dbTensesArr.push('Future Perfect');
-      if (mySetting.pastPerfect) dbTensesArr.push('Past Perfect');
-      if (mySetting.conditionalPerfect) dbTensesArr.push('Conditional Perfect');
-      if (mySetting.subjPresent) dbSubjArr.push('Present');
-      if (mySetting.subjImperfect) dbSubjArr.push('Imperfect');
-      if (mySetting.subjPresentPerfect) dbSubjArr.push('Present Perfect');
-      setArr(dbTensesArr);
-      setSubjArr(dbSubjArr);
+      if (mySetting) {
+        console.log('TCL: Settings -> mySetting', mySetting);
+        setLatam(mySetting.latam);
+        setDifficulty(mySetting.difficulty);
+        const dbTensesArr = [];
+        const dbSubjArr = [];
+        if (mySetting.present) dbTensesArr.push('Present');
+        if (mySetting.preterite) dbTensesArr.push('Preterite');
+        if (mySetting.imperfect) dbTensesArr.push('Imperfect');
+        if (mySetting.future) dbTensesArr.push('Future');
+        if (mySetting.conditional) dbTensesArr.push('Conditional');
+        if (mySetting.presentPerfect) dbTensesArr.push('Present Perfect');
+        if (mySetting.futurePerfect) dbTensesArr.push('Future Perfect');
+        if (mySetting.pastPerfect) dbTensesArr.push('Past Perfect');
+        if (mySetting.conditionalPerfect)
+          dbTensesArr.push('Conditional Perfect');
+        if (mySetting.subjPresent) dbSubjArr.push('Present');
+        if (mySetting.subjImperfect) dbSubjArr.push('Imperfect');
+        if (mySetting.subjPresentPerfect) dbSubjArr.push('Present Perfect');
+        setArr(dbTensesArr);
+        setSubjArr(dbSubjArr);
 
-      setGotSettingData(true);
+        setGotSettingData(true);
+      }
     }
   }, [loading]);
 
