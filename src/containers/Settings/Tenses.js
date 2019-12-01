@@ -39,9 +39,9 @@ function Tenses({ classes }) {
             </ListItem>
             <ListItem>
               <Checkbox disabled />
-              <ListItemText primary="Conditional" secondary={'Hablaría'} />
+              <ListItemText primary="Future" secondary={'Hablaré'} />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
+                <IconButton edge="end">
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -50,11 +50,11 @@ function Tenses({ classes }) {
             <ListItem>
               <Checkbox disabled />
               <ListItemText
-                primary="Conditional Perfect"
-                secondary={'Habría hablado'}
+                primary="Past Perfect"
+                secondary={'Había hablado'}
               />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
+                <IconButton edge="end">
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -62,12 +62,9 @@ function Tenses({ classes }) {
             </ListItem>
             <ListItem>
               <Checkbox disabled />
-              <ListItemText
-                primary="Conditional Perfect"
-                secondary={'Habría hablado'}
-              />
+              <ListItemText primary="Subjunctive Present" secondary={'Hable'} />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
+                <IconButton edge="end">
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -84,19 +81,9 @@ function Tenses({ classes }) {
             </ListItem>
             <ListItem>
               <Checkbox disabled />
-              <ListItemText primary="Imperfect" secondary={'Hablaba'} />
+              <ListItemText primary="Conditional" secondary={'Hablaría'} />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
-                  <StarBorder />
-                  <Typography>Pro</Typography>
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <ListItem>
-              <Checkbox disabled />
-              <ListItemText primary="Subjunctive Present" secondary={'Hable'} />
-              <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
+                <IconButton edge="end">
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -105,11 +92,24 @@ function Tenses({ classes }) {
             <ListItem>
               <Checkbox disabled />
               <ListItemText
-                primary="Conditional Perfect"
+                primary="Conditional Present"
                 secondary={'Habría hablado'}
               />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
+                <IconButton edge="end">
+                  <StarBorder />
+                  <Typography>Pro</Typography>
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+            <ListItem>
+              <Checkbox disabled />
+              <ListItemText
+                primary="Subjunctive Imperfect"
+                secondary={'Hablara'}
+              />
+              <ListItemSecondaryAction>
+                <IconButton edge="end">
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -121,29 +121,9 @@ function Tenses({ classes }) {
           <List>
             <ListItem>
               <Checkbox disabled />
-              <ListItemText primary="Present" secondary={'Hablo'} />
+              <ListItemText primary="Imperfect" secondary={'Hablaba'} />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
-                  <StarBorder />
-                  <Typography>Pro</Typography>
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <ListItem>
-              <Checkbox disabled />
-              <ListItemText primary="Present" secondary={'Hablo'} />
-              <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
-                  <StarBorder />
-                  <Typography>Pro</Typography>
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <ListItem>
-              <Checkbox disabled />
-              <ListItemText primary="Present" secondary={'Hablo'} />
-              <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
+                <IconButton edge="end">
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -152,11 +132,37 @@ function Tenses({ classes }) {
             <ListItem>
               <Checkbox disabled />
               <ListItemText
-                primary="Conditional Perfect"
-                secondary={'Habría hablado'}
+                primary="Present Perfect"
+                secondary={'He hablado'}
               />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
+                <IconButton edge="end">
+                  <StarBorder />
+                  <Typography>Pro</Typography>
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+            <ListItem>
+              <Checkbox disabled />
+              <ListItemText
+                primary="Future Perfect"
+                secondary={'Habré hablado'}
+              />
+              <ListItemSecondaryAction>
+                <IconButton edge="end">
+                  <StarBorder />
+                  <Typography>Pro</Typography>
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+            <ListItem>
+              <Checkbox disabled />
+              <ListItemText
+                primary="Subjunctive Present Perfect"
+                secondary={'Haya hablado'}
+              />
+              <ListItemSecondaryAction>
+                <IconButton edge="end">
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -170,7 +176,7 @@ function Tenses({ classes }) {
               <Checkbox disabled />
               <ListItemText primary="Present" secondary={'Hablo'} />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
+                <IconButton edge="end" >
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -180,7 +186,7 @@ function Tenses({ classes }) {
               <Checkbox disabled />
               <ListItemText primary="Present" secondary={'Hablo'} />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
+                <IconButton edge="end" >
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -193,7 +199,7 @@ function Tenses({ classes }) {
                 secondary={'Haya hablado'}
               />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
+                <IconButton edge="end" >
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
