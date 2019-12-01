@@ -38,6 +38,8 @@ const Settings = ({ classes }) => {
   const [upsertSetting] = useMutation(UPSERT_SETTING);
   const { data, loading } = useQuery(MY_SETTING);
 
+  console.log('RENDER');
+
   const handleUpdate = async () => {
     if (loggedIn) {
       try {
@@ -70,7 +72,6 @@ const Settings = ({ classes }) => {
     if (data && data.me && !gotSettingData) {
       const mySetting = data.me.setting;
       if (mySetting) {
-        console.log('TCL: Settings -> mySetting', mySetting);
         setLatam(mySetting.latam);
         setDifficulty(mySetting.difficulty);
         const dbTensesArr = [];
