@@ -31,7 +31,7 @@ function Tenses({ classes }) {
     <>
       <ListSubheader>Tenses</ListSubheader>
       <Grid container>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <List>
             <ListItem>
               <Checkbox />
@@ -39,7 +39,7 @@ function Tenses({ classes }) {
             </ListItem>
             <ListItem>
               <Checkbox disabled />
-              <ListItemText primary="Present" secondary={'Hablo'} />
+              <ListItemText primary="Conditional" secondary={'Hablaría'} />
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="delete">
                   <StarBorder />
@@ -49,7 +49,23 @@ function Tenses({ classes }) {
             </ListItem>
             <ListItem>
               <Checkbox disabled />
-              <ListItemText primary="Present" secondary={'Hablo'} />
+              <ListItemText
+                primary="Conditional Perfect"
+                secondary={'Habría hablado'}
+              />
+              <ListItemSecondaryAction>
+                <IconButton edge="end" aria-label="delete">
+                  <StarBorder />
+                  <Typography>Pro</Typography>
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+            <ListItem>
+              <Checkbox disabled />
+              <ListItemText
+                primary="Conditional Perfect"
+                secondary={'Habría hablado'}
+              />
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="delete">
                   <StarBorder />
@@ -59,15 +75,16 @@ function Tenses({ classes }) {
             </ListItem>
           </List>
         </Grid>
-        <Grid item xs={3}>
+
+        <Grid item xs={4}>
           <List>
             <ListItem>
               <Checkbox />
-              <ListItemText primary="Present" secondary={'Hablo'} />
+              <ListItemText primary="Preterite" secondary={'Hablé'} />
             </ListItem>
             <ListItem>
               <Checkbox disabled />
-              <ListItemText primary="Present" secondary={'Hablo'} />
+              <ListItemText primary="Imperfect" secondary={'Hablaba'} />
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="delete">
                   <StarBorder />
@@ -77,22 +94,7 @@ function Tenses({ classes }) {
             </ListItem>
             <ListItem>
               <Checkbox disabled />
-              <ListItemText primary="Present" secondary={'Hablo'} />
-              <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
-                  <StarBorder />
-                  <Typography>Pro</Typography>
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          </List>
-        </Grid>
-        <Grid item xs={3}>
-          <List>
-            {/* <ListSubheader>{'  d </ListSubheader> */}
-            <ListItem>
-              <Checkbox disabled />
-              <ListItemText primary="Present" secondary={'Hablo'} />
+              <ListItemText primary="Subjunctive Present" secondary={'Hable'} />
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="delete">
                   <StarBorder />
@@ -102,17 +104,10 @@ function Tenses({ classes }) {
             </ListItem>
             <ListItem>
               <Checkbox disabled />
-              <ListItemText primary="Present" secondary={'Hablo'} />
-              <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
-                  <StarBorder />
-                  <Typography>Pro</Typography>
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <ListItem>
-              <Checkbox disabled />
-              <ListItemText primary="Present" secondary={'Hablo'} />
+              <ListItemText
+                primary="Conditional Perfect"
+                secondary={'Habría hablado'}
+              />
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="delete">
                   <StarBorder />
@@ -122,7 +117,7 @@ function Tenses({ classes }) {
             </ListItem>
           </List>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <List>
             <ListItem>
               <Checkbox disabled />
@@ -154,8 +149,58 @@ function Tenses({ classes }) {
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
+            <ListItem>
+              <Checkbox disabled />
+              <ListItemText
+                primary="Conditional Perfect"
+                secondary={'Habría hablado'}
+              />
+              <ListItemSecondaryAction>
+                <IconButton edge="end" aria-label="delete">
+                  <StarBorder />
+                  <Typography>Pro</Typography>
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
           </List>
         </Grid>
+        {/* <Grid item xs={4}>
+          <List>
+            <ListItem>
+              <Checkbox disabled />
+              <ListItemText primary="Present" secondary={'Hablo'} />
+              <ListItemSecondaryAction>
+                <IconButton edge="end" aria-label="delete">
+                  <StarBorder />
+                  <Typography>Pro</Typography>
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+            <ListItem>
+              <Checkbox disabled />
+              <ListItemText primary="Present" secondary={'Hablo'} />
+              <ListItemSecondaryAction>
+                <IconButton edge="end" aria-label="delete">
+                  <StarBorder />
+                  <Typography>Pro</Typography>
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+            <ListItem>
+              <Checkbox disabled />
+              <ListItemText
+                primary="Subjunctive Present Perfect"
+                secondary={'Haya hablado'}
+              />
+              <ListItemSecondaryAction>
+                <IconButton edge="end" aria-label="delete">
+                  <StarBorder />
+                  <Typography>Pro</Typography>
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          </List>
+        </Grid> */}
       </Grid>
     </>
   );
