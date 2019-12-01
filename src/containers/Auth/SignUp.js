@@ -68,7 +68,6 @@ const SignUp = ({ history }) => {
 
   const handleSubmit = async token => {
     if (token && token.id) {
-      console.log('HANDLING ID', token.id);
       if (password.length < 8) {
         setShortPassword(true);
       }

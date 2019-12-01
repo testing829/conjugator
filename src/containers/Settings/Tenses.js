@@ -16,9 +16,15 @@ import { Context } from '../../contexts/index';
 import styles from './SettingsStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
 
-function Tenses({ classes, data }) {
+function Tenses({ classes, data, history }) {
+  console.log('TCL: Tenses -> history', history);
   const me = data ? data.me : null;
   const { changeSubj, subjArr, tenseArr, updateTense } = useContext(Context);
+
+  const redirect = () => {
+    console.log('IN REDIRECT');
+    history.push('/');
+  };
 
   return (
     <>
@@ -43,7 +49,7 @@ function Tenses({ classes, data }) {
               />
               <ListItemText primary="Future" secondary={'Hablaré'} />
               <ListItemSecondaryAction>
-                <IconButton edge="end">
+                <IconButton edge="end" onClick={redirect}>
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -60,7 +66,7 @@ function Tenses({ classes, data }) {
                 secondary={'Había hablado'}
               />
               <ListItemSecondaryAction>
-                <IconButton edge="end">
+                <IconButton edge="end" onClick={redirect}>
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -74,7 +80,7 @@ function Tenses({ classes, data }) {
               />
               <ListItemText primary="Subjunctive Present" secondary={'Hable'} />
               <ListItemSecondaryAction>
-                <IconButton edge="end">
+                <IconButton edge="end" onClick={redirect}>
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -102,7 +108,7 @@ function Tenses({ classes, data }) {
               />
               <ListItemText primary="Conditional" secondary={'Hablaría'} />
               <ListItemSecondaryAction>
-                <IconButton edge="end">
+                <IconButton edge="end" onClick={redirect}>
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -119,7 +125,7 @@ function Tenses({ classes, data }) {
                 secondary={'Habría hablado'}
               />
               <ListItemSecondaryAction>
-                <IconButton edge="end">
+                <IconButton edge="end" onClick={redirect}>
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -136,7 +142,7 @@ function Tenses({ classes, data }) {
                 secondary={'Hablara'}
               />
               <ListItemSecondaryAction>
-                <IconButton edge="end">
+                <IconButton edge="end" onClick={redirect}>
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -154,7 +160,7 @@ function Tenses({ classes, data }) {
               />
               <ListItemText primary="Imperfect" secondary={'Hablaba'} />
               <ListItemSecondaryAction>
-                <IconButton edge="end">
+                <IconButton edge="end" onClick={redirect}>
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -171,7 +177,7 @@ function Tenses({ classes, data }) {
                 secondary={'He hablado'}
               />
               <ListItemSecondaryAction>
-                <IconButton edge="end">
+                <IconButton edge="end" onClick={redirect}>
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -188,7 +194,7 @@ function Tenses({ classes, data }) {
                 secondary={'Habré hablado'}
               />
               <ListItemSecondaryAction>
-                <IconButton edge="end">
+                <IconButton edge="end" onClick={redirect}>
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
@@ -205,7 +211,7 @@ function Tenses({ classes, data }) {
                 secondary={'Haya hablado'}
               />
               <ListItemSecondaryAction>
-                <IconButton edge="end">
+                <IconButton edge="end" onClick={redirect}>
                   <StarBorder />
                   <Typography>Pro</Typography>
                 </IconButton>
