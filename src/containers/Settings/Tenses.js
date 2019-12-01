@@ -24,7 +24,8 @@ import styles from './SettingsStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 
-function Tenses({ classes }) {
+function Tenses({ classes, data }) {
+  console.log('TCL: Tenses -> data', data);
   const { changeSubj, subjArr, tenseArr, updateTense } = useContext(Context);
 
   return (
@@ -158,7 +159,7 @@ function Tenses({ classes }) {
             <ListItem>
               <Checkbox disabled />
               <ListItemText
-                primary="Subjunctive Present Perfect"
+                primary="Subjunctive Present"
                 secondary={'Haya hablado'}
               />
               <ListItemSecondaryAction>

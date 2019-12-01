@@ -67,8 +67,9 @@ const Settings = ({ classes }) => {
   };
 
   useEffect(() => {
-    if (data && data.me && !gotSettingData) {
+    if (data && data.me.setting && !gotSettingData) {
       const mySetting = data.me.setting;
+      console.log('TCL: Settings -> mySetting', mySetting);
       setLatam(mySetting.latam);
       setDifficulty(mySetting.difficulty);
       const dbTensesArr = [];
@@ -99,7 +100,7 @@ const Settings = ({ classes }) => {
       <Paper className={classes.paper} elevation={10}>
         <Latam />
         <Difficulty />
-        <Tenses />
+        <Tenses data={data} />
         <Grid container justify="flex-end">
           <Grid item>
             <Button color="primary" size="large" onClick={handleUpdate}>
