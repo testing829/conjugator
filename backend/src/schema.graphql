@@ -97,6 +97,7 @@ input CreateUserInput {
   name: String!
   password: String!
   premium: Boolean!
+  stripeSource: String
 }
 
 input UpdateUserInput {
@@ -190,6 +191,7 @@ type User {
   dailyTarget: DailyTarget
   password: String!
   premium: Boolean!
+  stripeSource: String
   updatedAt: String!
   createdAt: String!
 }

@@ -5,8 +5,27 @@ import hashPassword from '../utils/hashPassword';
 
 import verbsFile from '../../csvjson';
 
+console.log('process.env.SECRET_KEY', process.env.STRIPE_PLAN);
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
+
 const Mutation = {
   async createUser(parent, args, { prisma }, info) {
+    console.log('ARGS', args.data.stripeSource);
+
+    let customer;
+    try {
+      customer = await stripe.customers.create({
+        email: args.data.email,
+        source: args.data.stripeSource,
+        plan: process.env.STRIPE_PLAN
+      });
+    } catch (err) {
+      console.log('ERR', err);
+    }
+
+    console.log('TCL: createUser -> customer', customer);
+    if (!customer) return 'Unable to create customer!';
+
     const password = await hashPassword(args.data.password);
     const user = await prisma.mutation.createUser({
       data: {

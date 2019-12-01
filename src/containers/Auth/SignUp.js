@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 
+import { Elements, StripeProvider } from 'react-stripe-elements';
 import { NavLink } from 'react-router-dom';
 import { useMutation } from 'react-apollo-hooks';
 
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -12,9 +12,7 @@ import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 
-// import { Elements, StripeProvider } from 'react-stripe-elements';
-import StripeCheckout from 'react-stripe-checkout';
-
+import ChargeMoney from './ChargeMoney';
 import { Context } from '../../contexts/index';
 import { CREATE_USER } from '../../gql/users.gql';
 import Snackbar from '../../components/Snackbar/index';
@@ -68,31 +66,24 @@ const SignUp = ({ history }) => {
   const delay = 1000;
   const classes = useStyles();
 
-  const handleSubmit = async event => {
-    event.preventDefault();
-    if (password.length < 8) {
-      setShortPassword(true);
-    }
-    try {
-      createUser({
-        variables: {
-          name: fullName,
-          email: email.toLowerCase(),
-          password
-        }
-      });
-    } catch (err) {
-      // onError(({ graphQLErrors, networkError }) => {
-      //   if (graphQLErrors)
-      //     graphQLErrors.map(({ message, locations, path }) =>
-      //       console.log(
-      //         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      //       )
-      //     );
-
-      //   if (networkError) console.log(`[Network error]: ${networkError}`);
-      // });
-      setError(true);
+  const handleSubmit = async token => {
+    if (token && token.id) {
+      console.log('HANDLING ID', token.id);
+      if (password.length < 8) {
+        setShortPassword(true);
+      }
+      try {
+        await createUser({
+          variables: {
+            name: fullName,
+            email: email.toLowerCase(),
+            password,
+            stripeSource: token.id
+          }
+        });
+      } catch (err) {
+        setError(true);
+      }
     }
   };
 
@@ -181,7 +172,7 @@ const SignUp = ({ history }) => {
                 Unable to sign-up. Your email address may already be registered.
               </Typography>
             ) : null}
-            <Button
+            {/* <Button
               className={classes.submit}
               color="primary"
               fullWidth
@@ -189,7 +180,16 @@ const SignUp = ({ history }) => {
               variant="contained"
             >
               Sign Up
-            </Button>
+            </Button> */}
+            <StripeProvider apiKey="pk_test_unPtQINVSea0kHBCXAokZn3w00giYgCaey">
+              <Elements>
+                <ChargeMoney
+                  classes={classes}
+                  email={email}
+                  handleSubmit={handleSubmit}
+                />
+              </Elements>
+            </StripeProvider>
             <Grid container justify="flex-end">
               <Grid item>
                 <NavLink to={'/login'}>Already have an account? Login</NavLink>
@@ -197,6 +197,7 @@ const SignUp = ({ history }) => {
             </Grid>
           </form>
         </div>
+
         <Snackbar open={open} setOpen={setOpen} text={'Signed Up!'} />
       </Container>
     </>
