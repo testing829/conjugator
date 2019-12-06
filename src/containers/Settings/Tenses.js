@@ -16,14 +16,17 @@ import { Context } from '../../contexts/index';
 import styles from './SettingsStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
 
-function Tenses({ classes, data, history }) {
+import { createHashHistory } from 'history';
+
+const Tenses = ({ classes, data }) => {
+  const history = createHashHistory();
   console.log('TCL: Tenses -> history', history);
   const me = data ? data.me : null;
   const { changeSubj, subjArr, tenseArr, updateTense } = useContext(Context);
 
   const redirect = () => {
     console.log('IN REDIRECT');
-    history.push('/');
+    history.push('/sign-up');
   };
 
   return (
@@ -222,6 +225,6 @@ function Tenses({ classes, data, history }) {
       </Grid>
     </>
   );
-}
+};
 
 export default withStyles(styles)(Tenses);
