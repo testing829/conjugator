@@ -171,16 +171,7 @@ const SignUp = ({ history }) => {
                 Unable to sign-up. Your email address may already be registered.
               </Typography>
             ) : null}
-            {/* <Button
-              className={classes.submit}
-              color="primary"
-              fullWidth
-              type="submit"
-              variant="contained"
-            >
-              Sign Up
-            </Button> */}
-            <StripeProvider apiKey="pk_test_unPtQINVSea0kHBCXAokZn3w00giYgCaey">
+            <StripeProvider apiKey={process.env.REACT_APP_STRIPE_API_KEY}>
               <Elements>
                 <ChargeMoney
                   classes={classes}

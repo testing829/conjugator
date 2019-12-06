@@ -12,20 +12,17 @@ import StarBorder from '@material-ui/icons/StarBorder';
 import Typography from '@material-ui/core/Typography';
 
 import { Context } from '../../contexts/index';
+import { createHashHistory } from 'history';
 
 import styles from './SettingsStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
 
-import { createHashHistory } from 'history';
-
-const Tenses = ({ classes, data }) => {
+const Tenses = ({ data }) => {
   const history = createHashHistory();
-  console.log('TCL: Tenses -> history', history);
   const me = data ? data.me : null;
   const { changeSubj, subjArr, tenseArr, updateTense } = useContext(Context);
 
   const redirect = () => {
-    console.log('IN REDIRECT');
     history.push('/sign-up');
   };
 
@@ -227,4 +224,4 @@ const Tenses = ({ classes, data }) => {
   );
 };
 
-export default withStyles(styles)(Tenses);
+export default Tenses;
