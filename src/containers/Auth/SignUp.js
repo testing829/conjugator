@@ -5,8 +5,6 @@ import { NavLink } from 'react-router-dom';
 import { useMutation } from 'react-apollo-hooks';
 
 import Avatar from '@material-ui/core/Avatar';
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -17,42 +15,10 @@ import { Context } from '../../contexts/index';
 import { CREATE_USER } from '../../gql/users.gql';
 import Snackbar from '../../components/Snackbar/index';
 
-import { makeStyles } from '@material-ui/core/styles';
+import styles from './AuthStyle.jss';
+import { withStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
-  '@global': {
-    body: {
-      backgroundColor: theme.palette.common.white
-    }
-  },
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  errorMessage: {
-    color: '#d32f2f',
-    marginTop: theme.spacing(2)
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(3)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  },
-  subtitle: {
-    marginTop: theme.spacing(1.5),
-    marginBottom: theme.spacing(1.5)
-  }
-}));
-
-const SignUp = ({ history }) => {
+const SignUp = ({ classes, history }) => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState(false);
   const [fullName, setFullName] = useState('');
@@ -64,7 +30,6 @@ const SignUp = ({ history }) => {
   const [createUser, { data }] = useMutation(CREATE_USER);
 
   const delay = 1000;
-  const classes = useStyles();
 
   const handleSubmit = async token => {
     if (token && token.id) {
@@ -103,9 +68,8 @@ const SignUp = ({ history }) => {
 
   return (
     <>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
+      <Grid container justify="center">
+        <Grid item className={classes.userDetails}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
@@ -117,8 +81,9 @@ const SignUp = ({ history }) => {
             align="center"
             variant="subtitle1"
           >
-            Sign up to get stats on your learning progress and to save your
-            settings.
+            Sign up get access to all verb tenses, save your settings and track
+            your learning progress. 30 days free then $5.99 per month. Cancel
+            anytime.
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
@@ -160,6 +125,18 @@ const SignUp = ({ history }) => {
                   variant="outlined"
                 />
               </Grid>
+              {/* <Grid item xs={12}>
+                <TextField
+                  autoComplete="coupon"
+                  fullWidth
+                  id="coupon"
+                  label="Do you have a promo code?"
+                  name="coupon"
+                  onChange={event => setcoupon(event.target.value)}
+                  type="coupon"
+                  variant="outlined"
+                />
+              </Grid> */}
             </Grid>
             {shortPassword ? (
               <Typography className={classes.errorMessage}>
@@ -186,12 +163,11 @@ const SignUp = ({ history }) => {
               </Grid>
             </Grid>
           </form>
-        </div>
-
-        <Snackbar open={open} setOpen={setOpen} text={'Signed Up!'} />
-      </Container>
+        </Grid>
+      </Grid>
+      <Snackbar open={open} setOpen={setOpen} text={'Signed Up!'} />
     </>
   );
 };
 
-export default SignUp;
+export default withStyles(styles)(SignUp);

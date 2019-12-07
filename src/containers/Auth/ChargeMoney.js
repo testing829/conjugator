@@ -18,7 +18,7 @@ const ChargeMoney = ({ classes, email, handleSubmit }) => {
       email={email}
       locale="auto"
       name="Conjugator"
-      stripeKey="pk_test_unPtQINVSea0kHBCXAokZn3w00giYgCaey"
+      stripeKey={process.env.REACT_APP_STRIPE_API_KEY}
       token={onToken}
     >
       <Button
