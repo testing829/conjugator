@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sun Dec 01 2019 15:06:18 GMT+0000 (Greenwich Mean Time)
+# timestamp: Sat Dec 07 2019 13:00:57 GMT+0000 (Greenwich Mean Time)
 
 type AggregateBestStreak {
   count: Int!
@@ -2388,6 +2388,7 @@ type User implements Node {
   dailyTarget: DailyTarget
   logs(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Log!]
   feedbacks(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Feedback!]
+  stripeSubId: String
   stripeSource: String
   setting: Setting
 }
@@ -2408,6 +2409,7 @@ input UserCreateInput {
   name: String
   password: String
   premium: Boolean!
+  stripeSubId: String
   stripeSource: String
   bestStreak: BestStreakCreateOneWithoutUserInput
   dailyTarget: DailyTargetCreateOneWithoutUserInput
@@ -2447,6 +2449,7 @@ input UserCreateWithoutBestStreakInput {
   name: String
   password: String
   premium: Boolean!
+  stripeSubId: String
   stripeSource: String
   dailyTarget: DailyTargetCreateOneWithoutUserInput
   logs: LogCreateManyWithoutUserInput
@@ -2460,6 +2463,7 @@ input UserCreateWithoutDailyTargetInput {
   name: String
   password: String
   premium: Boolean!
+  stripeSubId: String
   stripeSource: String
   bestStreak: BestStreakCreateOneWithoutUserInput
   logs: LogCreateManyWithoutUserInput
@@ -2473,6 +2477,7 @@ input UserCreateWithoutFeedbacksInput {
   name: String
   password: String
   premium: Boolean!
+  stripeSubId: String
   stripeSource: String
   bestStreak: BestStreakCreateOneWithoutUserInput
   dailyTarget: DailyTargetCreateOneWithoutUserInput
@@ -2486,6 +2491,7 @@ input UserCreateWithoutLogsInput {
   name: String
   password: String
   premium: Boolean!
+  stripeSubId: String
   stripeSource: String
   bestStreak: BestStreakCreateOneWithoutUserInput
   dailyTarget: DailyTargetCreateOneWithoutUserInput
@@ -2499,6 +2505,7 @@ input UserCreateWithoutSettingInput {
   name: String
   password: String
   premium: Boolean!
+  stripeSubId: String
   stripeSource: String
   bestStreak: BestStreakCreateOneWithoutUserInput
   dailyTarget: DailyTargetCreateOneWithoutUserInput
@@ -2530,6 +2537,8 @@ enum UserOrderByInput {
   updatedAt_DESC
   premium_ASC
   premium_DESC
+  stripeSubId_ASC
+  stripeSubId_DESC
   stripeSource_ASC
   stripeSource_DESC
 }
@@ -2542,6 +2551,7 @@ type UserPreviousValues {
   createdAt: DateTime!
   updatedAt: DateTime!
   premium: Boolean!
+  stripeSubId: String
   stripeSource: String
 }
 
@@ -2587,6 +2597,7 @@ input UserUpdateInput {
   name: String
   password: String
   premium: Boolean
+  stripeSubId: String
   stripeSource: String
   bestStreak: BestStreakUpdateOneWithoutUserInput
   dailyTarget: DailyTargetUpdateOneWithoutUserInput
@@ -2600,6 +2611,7 @@ input UserUpdateManyMutationInput {
   name: String
   password: String
   premium: Boolean
+  stripeSubId: String
   stripeSource: String
 }
 
@@ -2651,6 +2663,7 @@ input UserUpdateWithoutBestStreakDataInput {
   name: String
   password: String
   premium: Boolean
+  stripeSubId: String
   stripeSource: String
   dailyTarget: DailyTargetUpdateOneWithoutUserInput
   logs: LogUpdateManyWithoutUserInput
@@ -2663,6 +2676,7 @@ input UserUpdateWithoutDailyTargetDataInput {
   name: String
   password: String
   premium: Boolean
+  stripeSubId: String
   stripeSource: String
   bestStreak: BestStreakUpdateOneWithoutUserInput
   logs: LogUpdateManyWithoutUserInput
@@ -2675,6 +2689,7 @@ input UserUpdateWithoutFeedbacksDataInput {
   name: String
   password: String
   premium: Boolean
+  stripeSubId: String
   stripeSource: String
   bestStreak: BestStreakUpdateOneWithoutUserInput
   dailyTarget: DailyTargetUpdateOneWithoutUserInput
@@ -2687,6 +2702,7 @@ input UserUpdateWithoutLogsDataInput {
   name: String
   password: String
   premium: Boolean
+  stripeSubId: String
   stripeSource: String
   bestStreak: BestStreakUpdateOneWithoutUserInput
   dailyTarget: DailyTargetUpdateOneWithoutUserInput
@@ -2699,6 +2715,7 @@ input UserUpdateWithoutSettingDataInput {
   name: String
   password: String
   premium: Boolean
+  stripeSubId: String
   stripeSource: String
   bestStreak: BestStreakUpdateOneWithoutUserInput
   dailyTarget: DailyTargetUpdateOneWithoutUserInput
@@ -2948,6 +2965,46 @@ input UserWhereInput {
 
   """All values that are not equal to given value."""
   premium_not: Boolean
+  stripeSubId: String
+
+  """All values that are not equal to given value."""
+  stripeSubId_not: String
+
+  """All values that are contained in given list."""
+  stripeSubId_in: [String!]
+
+  """All values that are not contained in given list."""
+  stripeSubId_not_in: [String!]
+
+  """All values less than the given value."""
+  stripeSubId_lt: String
+
+  """All values less than or equal the given value."""
+  stripeSubId_lte: String
+
+  """All values greater than the given value."""
+  stripeSubId_gt: String
+
+  """All values greater than or equal the given value."""
+  stripeSubId_gte: String
+
+  """All values containing the given string."""
+  stripeSubId_contains: String
+
+  """All values not containing the given string."""
+  stripeSubId_not_contains: String
+
+  """All values starting with the given string."""
+  stripeSubId_starts_with: String
+
+  """All values not starting with the given string."""
+  stripeSubId_not_starts_with: String
+
+  """All values ending with the given string."""
+  stripeSubId_ends_with: String
+
+  """All values not ending with the given string."""
+  stripeSubId_not_ends_with: String
   stripeSource: String
 
   """All values that are not equal to given value."""

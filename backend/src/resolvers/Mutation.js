@@ -5,7 +5,6 @@ import hashPassword from '../utils/hashPassword';
 
 import verbsFile from '../../csvjson';
 
-console.log('process.env.SECRET_KEY', process.env.STRIPE_PLAN);
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 const Mutation = {
@@ -27,6 +26,7 @@ const Mutation = {
     const user = await prisma.mutation.createUser({
       data: {
         ...args.data,
+        stripeSubId: customer.subscriptions.data[0].id,
         password
       }
     });

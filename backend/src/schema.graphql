@@ -98,6 +98,7 @@ input CreateUserInput {
   password: String!
   premium: Boolean!
   stripeSource: String
+  stripeSubId: String
 }
 
 input UpdateUserInput {
@@ -192,6 +193,7 @@ type User {
   password: String!
   premium: Boolean!
   stripeSource: String
+  stripeSubId: String
   updatedAt: String!
   createdAt: String!
 }
