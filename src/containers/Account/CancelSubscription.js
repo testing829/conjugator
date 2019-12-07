@@ -4,15 +4,49 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
+import { useQuery, useMutation } from 'react-apollo-hooks';
+
+import { CANCEL_SUBSCRIPTION, GET_MY_INFO } from '../../gql/users.gql';
+
 import styles from './AccountStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
 
 const CancelSubscription = ({ classes, history }) => {
-  const handleDelete = () => {};
+  const { data } = useQuery(GET_MY_INFO);
+  const [cancelSubscription, { data: confirmDel }] = useMutation(
+    CANCEL_SUBSCRIPTION
+  );
+
+  const handleDelete = async () => {
+    try {
+      await cancelSubscription({
+        variables: {
+          id: data.me.stripeSubId
+        }
+      });
+    } catch (err) {
+      alert(err);
+    }
+  };
 
   const backHome = () => {
     history.push('/');
   };
+
+  if (confirmDel) {
+    return (
+      <Grid container justify="center">
+        <Grid item xs={5} className={classes.cancelContainer}>
+          <Typography align="center" variant="h4" className={classes.title}>
+            Your account has been deleted
+          </Typography>
+          <Typography align="center" variant="body1" className={classes.body}>
+            We're sorry to see you go!
+          </Typography>
+        </Grid>
+      </Grid>
+    );
+  }
 
   return (
     <Grid container justify="center">

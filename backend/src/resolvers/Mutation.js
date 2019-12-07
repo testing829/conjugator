@@ -36,6 +36,15 @@ const Mutation = {
       token: generateToken(user.id)
     };
   },
+  async cancelSubscription(parent, args, { prisma, request }, info) {
+    let cancel;
+    try {
+      cancel = await stripe.subscriptions.del(args.data);
+    } catch (err) {
+      console.log('ERR', err);
+    }
+    return JSON.stringify(cancel);
+  },
   async login(parent, args, { prisma }, info) {
     const user = await prisma.query.user({
       where: {

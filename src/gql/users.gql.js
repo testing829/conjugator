@@ -1,5 +1,11 @@
 import gql from 'graphql-tag';
 
+const CANCEL_SUBSCRIPTION = gql`
+  mutation($id: String!) {
+    cancelSubscription(data: $id)
+  }
+`;
+
 const CREATE_USER = gql`
   mutation(
     $name: String!
@@ -44,6 +50,7 @@ const GET_MY_INFO = gql`
       id
       name
       email
+      stripeSubId
       logs {
         id
         verbInfinitive
@@ -58,4 +65,4 @@ const GET_MY_INFO = gql`
   }
 `;
 
-export { CREATE_USER, LOGIN, GET_MY_INFO };
+export { CANCEL_SUBSCRIPTION, CREATE_USER, LOGIN, GET_MY_INFO };
