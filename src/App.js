@@ -7,6 +7,7 @@ import { Route, Switch } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { Context } from './contexts/index';
+import Account from './containers/Account/index';
 import Dashboard from './containers/Dashboard';
 import Feedback from './containers/Feedback';
 import Homepage from './containers/Homepage/index';
@@ -60,6 +61,7 @@ function App() {
           path="/feedback"
           render={props => <Feedback {...props} />}
         />
+        <Route exact path="/account" render={props => <Account {...props} />} />
         <Route exact path="/login" render={props => <Login {...props} />} />
         <Route exact path="/sign-up" render={props => <SignUp {...props} />} />
         <Route exact path="/stats" render={props => <Dashboard {...props} />} />

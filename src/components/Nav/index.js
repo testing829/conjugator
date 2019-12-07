@@ -103,15 +103,15 @@ export default function Nav() {
             {loggedIn ? (
               <NavLink
                 exact
-                to="/"
+                to="/account"
                 style={{ textDecoration: 'none', color: 'white' }}
               >
                 <Button
                   className={classes.navItem}
                   color="inherit"
-                  onClick={logOut}
+                  // onClick={logOut}
                 >
-                  Log Out
+                  Account
                 </Button>
               </NavLink>
             ) : (
