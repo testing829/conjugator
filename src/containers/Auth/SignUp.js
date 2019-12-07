@@ -29,8 +29,6 @@ const SignUp = ({ classes, history }) => {
   const { setLoggedIn } = useContext(Context);
   const [createUser, { data }] = useMutation(CREATE_USER);
 
-  const delay = 1000;
-
   const handleSubmit = async token => {
     if (token && token.id) {
       if (password.length < 8) {
@@ -56,9 +54,7 @@ const SignUp = ({ classes, history }) => {
       localStorage.setItem('jwt', data.createUser.token);
       setLoggedIn(true);
       setOpen(true);
-      setTimeout(() => {
-        history.push('/');
-      }, delay);
+      history.push('/');
     };
 
     if (!error && data) {

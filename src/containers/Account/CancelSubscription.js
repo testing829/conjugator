@@ -1,4 +1,5 @@
-import React from 'react';
+/*eslint-disable */
+import React, { useContext, useEffect, useState } from 'react';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -6,16 +7,25 @@ import Typography from '@material-ui/core/Typography';
 
 import { useQuery, useMutation } from 'react-apollo-hooks';
 
-import { CANCEL_SUBSCRIPTION, GET_MY_INFO } from '../../gql/users.gql';
+import { Context } from '../../contexts/index';
+import {
+  CANCEL_SUBSCRIPTION,
+  GET_MY_INFO,
+  UPDATE_USER
+} from '../../gql/users.gql';
 
 import styles from './AccountStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
 
 const CancelSubscription = ({ classes, history }) => {
+  const [cancelled, setCancelled] = useState(false);
+  const { setLoggedIn } = useContext(Context);
+
   const { data } = useQuery(GET_MY_INFO);
   const [cancelSubscription, { data: confirmDel }] = useMutation(
     CANCEL_SUBSCRIPTION
   );
+  const [updateUser, { data: updatedUser }] = useMutation(UPDATE_USER);
 
   const handleDelete = async () => {
     try {
@@ -24,6 +34,7 @@ const CancelSubscription = ({ classes, history }) => {
           id: data.me.stripeSubId
         }
       });
+      setCancelled(true);
     } catch (err) {
       alert(err);
     }
@@ -33,7 +44,35 @@ const CancelSubscription = ({ classes, history }) => {
     history.push('/');
   };
 
-  if (confirmDel) {
+  const handleUpdate = async () => {
+    try {
+      await updateUser({
+        variables: {
+          name: data.me.name,
+          email: `${data.me.email}-cancelled`,
+          password: data.me.password,
+          premium: false
+        }
+      });
+    } catch (err) {
+      alert(err);
+    }
+  };
+
+  useEffect(() => {
+    if (confirmDel) {
+      handleUpdate();
+    }
+  }, [confirmDel]);
+
+  useEffect(() => {
+    if (updatedUser) {
+      localStorage.clear();
+      setLoggedIn(false);
+    }
+  }, [updatedUser]);
+
+  if (cancelled) {
     return (
       <Grid container justify="center">
         <Grid item xs={5} className={classes.cancelContainer}>

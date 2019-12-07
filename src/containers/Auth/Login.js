@@ -76,7 +76,7 @@ const Login = ({ history }) => {
       setLoggedIn(true);
       setOpen(true);
       setTimeout(() => {
-        history.push('/');
+        history.push('/account');
       }, delay);
     };
 

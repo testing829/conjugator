@@ -6,19 +6,18 @@ import Button from '@material-ui/core/Button';
 
 const ChargeMoney = ({ classes, email, handleSubmit }) => {
   const onToken = token => {
-    console.log('TCL: ChargeMoney -> token', token);
     handleSubmit(token);
   };
 
   return (
-    <StripeCheckout // This component uses the token created above to make a one time payment
-      amount={599}
+    <StripeCheckout
       ComponentClass="div"
       currency="USD"
-      description="Purchase your subscription"
+      description="1 month free and then $5.99 p/m"
       email={email}
       locale="auto"
       name="Conjugator"
+      panelLabel="Start trial"
       stripeKey={process.env.REACT_APP_STRIPE_API_KEY}
       token={onToken}
     >
@@ -29,7 +28,7 @@ const ChargeMoney = ({ classes, email, handleSubmit }) => {
         type="submit"
         variant="contained"
       >
-        Subscribe
+        Start Free Trial
       </Button>
     </StripeCheckout>
   );
