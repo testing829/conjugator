@@ -14,9 +14,6 @@ import Typography from '@material-ui/core/Typography';
 import { Context } from '../../contexts/index';
 import { createHashHistory } from 'history';
 
-import styles from './SettingsStyles.jss';
-import { withStyles } from '@material-ui/core/styles';
-
 const Tenses = ({ data }) => {
   const history = createHashHistory();
   const me = data ? data.me : null;

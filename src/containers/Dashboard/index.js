@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
 
+import { AM_I_LOGGED_IN } from '../../gql/logs.gql';
 import WeekChart from './Week';
 import MonthChart from './Month';
 import YearChart from './Year';
 
+import { useQuery } from 'react-apollo-hooks';
+
 import Box from '@material-ui/core/Box';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Paper from '@material-ui/core/Paper';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
 
-function Charts() {
+function Charts({ history }) {
   const [value, setValue] = useState(0);
+
+  const { data, loading } = useQuery(AM_I_LOGGED_IN);
+
+  if (loading) return <CircularProgress />;
+  else if (!data.me) {
+    history.push('/sign-up');
+  }
 
   return (
     <>

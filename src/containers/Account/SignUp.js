@@ -15,7 +15,7 @@ import { Context } from '../../contexts/index';
 import { CREATE_USER } from '../../gql/users.gql';
 import Snackbar from '../../components/Snackbar/index';
 
-import styles from './AuthStyle.jss';
+import styles from './Account.jss';
 import { withStyles } from '@material-ui/core/styles';
 
 const SignUp = ({ classes, history }) => {

@@ -38,8 +38,6 @@ const Settings = ({ classes }) => {
   const [upsertSetting] = useMutation(UPSERT_SETTING);
   const { data, loading } = useQuery(MY_SETTING);
 
-  console.log('RENDER');
-
   const handleUpdate = async () => {
     if (loggedIn) {
       try {
