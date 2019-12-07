@@ -10,8 +10,6 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 const Mutation = {
   async createUser(parent, args, { prisma }, info) {
-    console.log('ARGS', args.data.stripeSource);
-
     let customer;
     try {
       customer = await stripe.customers.create({
@@ -23,7 +21,6 @@ const Mutation = {
       console.log('ERR', err);
     }
 
-    console.log('TCL: createUser -> customer', customer);
     if (!customer) return 'Unable to create customer!';
 
     const password = await hashPassword(args.data.password);

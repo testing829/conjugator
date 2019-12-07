@@ -38,13 +38,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function Nav() {
   const classes = useStyles();
-  const { loggedIn, setLoggedIn } = useContext(Context);
+  const { loggedIn } = useContext(Context);
   const [open, setOpen] = useState(false);
-
-  const logOut = () => {
-    localStorage.clear();
-    setLoggedIn(false);
-  };
 
   return (
     <AppBar position="static">
@@ -92,25 +87,10 @@ export default function Nav() {
             {loggedIn ? (
               <NavLink
                 exact
-                to="/stats"
-                style={{ textDecoration: 'none', color: 'white' }}
-              >
-                <Button className={classes.navItem} color="inherit">
-                  Stats
-                </Button>
-              </NavLink>
-            ) : null}
-            {loggedIn ? (
-              <NavLink
-                exact
                 to="/account"
                 style={{ textDecoration: 'none', color: 'white' }}
               >
-                <Button
-                  className={classes.navItem}
-                  color="inherit"
-                  // onClick={logOut}
-                >
+                <Button className={classes.navItem} color="inherit">
                   Account
                 </Button>
               </NavLink>
@@ -128,12 +108,7 @@ export default function Nav() {
           </Hidden>
         </Box>
       </Toolbar>
-      <Sidebar
-        open={open}
-        loggedIn={loggedIn}
-        logOut={logOut}
-        setOpen={setOpen}
-      />
+      <Sidebar open={open} loggedIn={loggedIn} setOpen={setOpen} />
     </AppBar>
   );
 }

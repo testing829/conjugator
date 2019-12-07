@@ -15,7 +15,7 @@ import { Context } from '../../contexts/index';
 import { CREATE_USER } from '../../gql/users.gql';
 import Snackbar from '../../components/Snackbar/index';
 
-import styles from './Account.jss';
+import styles from './Auth.jss';
 import { withStyles } from '@material-ui/core/styles';
 
 const SignUp = ({ classes, history }) => {
@@ -69,7 +69,7 @@ const SignUp = ({ classes, history }) => {
   return (
     <>
       <Grid container justify="center">
-        <Grid item className={classes.userDetails}>
+        <Grid item className={classes.userDetails} xs={9} sm={7} md={3}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>

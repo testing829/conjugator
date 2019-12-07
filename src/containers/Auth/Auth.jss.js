@@ -28,8 +28,7 @@ const styles = theme => ({
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-    marginTop: theme.spacing(8),
-    width: '30%'
+    marginTop: theme.spacing(8)
   }
 });
 
