@@ -10,7 +10,16 @@ const ChargeMoney = ({ classes, email, handleSubmit, fullName, password }) => {
   };
 
   return (
+    // <Button
+    //   className={classes.submit}
+    //   color="primary"
+    //   disabled={!email || !fullName || !password}
+    //   fullWidth
+    //   type="submit"
+    //   variant="contained"
+    // >
     <StripeCheckout
+      amount={599}
       ComponentClass="div"
       currency="USD"
       description="$5.99 p/m"
@@ -21,17 +30,9 @@ const ChargeMoney = ({ classes, email, handleSubmit, fullName, password }) => {
       stripeKey={process.env.REACT_APP_STRIPE_API_KEY}
       token={onToken}
     >
-      <Button
-        className={classes.submit}
-        color="primary"
-        disabled={!email || !fullName || !password}
-        fullWidth
-        type="submit"
-        variant="contained"
-      >
-        Subscribe
-      </Button>
+      Subscribe
     </StripeCheckout>
+    // </Button>
   );
 };
 

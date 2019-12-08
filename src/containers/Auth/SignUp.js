@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, { useContext, useEffect, useState } from 'react';
 
 import { Elements, StripeProvider } from 'react-stripe-elements';
@@ -60,7 +61,7 @@ const SignUp = ({ classes, history }) => {
     if (!error && data) {
       redirect();
     }
-  }, [data, error, history, setLoggedIn]);
+  }, [data]);
 
   return (
     <>
@@ -80,7 +81,7 @@ const SignUp = ({ classes, history }) => {
             Sign up get access to all verb tenses, save your settings and track
             your learning progress. $5.99 per month. Cancel anytime.
           </Typography>
-          <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          <form className={classes.form}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
