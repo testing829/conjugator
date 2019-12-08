@@ -17,6 +17,9 @@ const styles = theme => ({
     width: '100%',
     marginTop: theme.spacing(3)
   },
+  navLink: {
+    textDecoration: 'none'
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
     width: '100%'
@@ -24,6 +27,9 @@ const styles = theme => ({
   subtitle: {
     marginTop: theme.spacing(1.5),
     marginBottom: theme.spacing(1.5)
+  },
+  switch: {
+    paddingRight: theme.spacing(1)
   },
   userDetails: {
     alignItems: 'center',

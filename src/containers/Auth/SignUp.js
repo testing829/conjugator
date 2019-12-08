@@ -122,8 +122,10 @@ const SignUp = ({ classes }) => {
           </Grid>
 
           <Grid container justify="flex-end">
-            <Grid item>
-              <NavLink to={'/login'}>Already have an account? Login</NavLink>
+            <Grid item className={classes.switch}>
+              <NavLink to={'/login'} className={classes.navLink}>
+                <Typography>Already have an account? Login</Typography>
+              </NavLink>
             </Grid>
           </Grid>
         </Grid>
