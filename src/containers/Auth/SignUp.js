@@ -82,41 +82,45 @@ const SignUp = ({ classes }) => {
                 variant="outlined"
               />
             </Grid>
+            {shortPassword ? (
+              <Typography className={classes.errorMessage}>
+                Password must be at least 8 characters.
+              </Typography>
+            ) : null}
+            {error ? (
+              <Typography className={classes.errorMessage}>
+                Unable to sign-up. Your email address may already be registered.
+              </Typography>
+            ) : null}
+
+            <Grid item xs={12}>
+              <StripeProvider apiKey={process.env.REACT_APP_STRIPE_API_KEY}>
+                <Elements>
+                  <ChargeMoney
+                    classes={classes}
+                    email={email}
+                    error={error}
+                    fullName={fullName}
+                    password={password}
+                    setError={setError}
+                    setShortPassword={setShortPassword}
+                  >
+                    <Button
+                      className={classes.submit}
+                      color="primary"
+                      disabled={!email || !fullName || !password}
+                      fullWidth
+                      type="submit"
+                      variant="contained"
+                    >
+                      Subscribe
+                    </Button>
+                  </ChargeMoney>
+                </Elements>
+              </StripeProvider>
+            </Grid>
           </Grid>
-          {shortPassword ? (
-            <Typography className={classes.errorMessage}>
-              Password must be at least 8 characters.
-            </Typography>
-          ) : null}
-          {error ? (
-            <Typography className={classes.errorMessage}>
-              Unable to sign-up. Your email address may already be registered.
-            </Typography>
-          ) : null}
-          <StripeProvider apiKey={process.env.REACT_APP_STRIPE_API_KEY}>
-            <Elements>
-              <ChargeMoney
-                classes={classes}
-                email={email}
-                error={error}
-                fullName={fullName}
-                password={password}
-                setError={setError}
-                setShortPassword={setShortPassword}
-              >
-                <Button
-                  className={classes.submit}
-                  color="primary"
-                  disabled={!email || !fullName || !password}
-                  fullWidth
-                  type="submit"
-                  variant="contained"
-                >
-                  Subscribe
-                </Button>
-              </ChargeMoney>
-            </Elements>
-          </StripeProvider>
+
           <Grid container justify="flex-end">
             <Grid item>
               <NavLink to={'/login'}>Already have an account? Login</NavLink>
