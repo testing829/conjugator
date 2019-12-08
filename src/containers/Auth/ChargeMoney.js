@@ -4,7 +4,7 @@ import StripeCheckout from 'react-stripe-checkout';
 
 import Button from '@material-ui/core/Button';
 
-const ChargeMoney = ({ classes, email, handleSubmit }) => {
+const ChargeMoney = ({ classes, email, handleSubmit, fullName, password }) => {
   const onToken = token => {
     handleSubmit(token);
   };
@@ -24,6 +24,7 @@ const ChargeMoney = ({ classes, email, handleSubmit }) => {
       <Button
         className={classes.submit}
         color="primary"
+        disabled={!email || !fullName || !password}
         fullWidth
         type="submit"
         variant="contained"

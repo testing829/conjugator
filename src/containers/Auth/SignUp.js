@@ -121,18 +121,6 @@ const SignUp = ({ classes, history }) => {
                   variant="outlined"
                 />
               </Grid>
-              {/* <Grid item xs={12}>
-                <TextField
-                  autoComplete="coupon"
-                  fullWidth
-                  id="coupon"
-                  label="Do you have a promo code?"
-                  name="coupon"
-                  onChange={event => setcoupon(event.target.value)}
-                  type="coupon"
-                  variant="outlined"
-                />
-              </Grid> */}
             </Grid>
             {shortPassword ? (
               <Typography className={classes.errorMessage}>
@@ -150,6 +138,8 @@ const SignUp = ({ classes, history }) => {
                   classes={classes}
                   email={email}
                   handleSubmit={handleSubmit}
+                  fullName={fullName}
+                  password={password}
                 />
               </Elements>
             </StripeProvider>
