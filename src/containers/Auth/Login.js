@@ -56,7 +56,7 @@ const Login = ({ history }) => {
   const { setLoggedIn } = useContext(Context);
   const [login, { data, error }] = useMutation(LOGIN);
 
-  const delay = 1000;
+  const delay = 500;
   const classes = useStyles();
 
   const handleSubmit = async event => {
@@ -76,7 +76,7 @@ const Login = ({ history }) => {
       setLoggedIn(true);
       setOpen(true);
       setTimeout(() => {
-        history.push('/account');
+        history.push('/');
       }, delay);
     };
 

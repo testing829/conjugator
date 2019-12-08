@@ -55,17 +55,8 @@ const ChargeMoney = ({
   }, [data]);
 
   return (
-    // <Button
-    //   className={classes.submit}
-    //   color="primary"
-    //   disabled={!email || !fullName || !password}
-    //   fullWidth
-    //   type="submit"
-    //   variant="contained"
-    // >
     <StripeCheckout
       amount={599}
-      // ComponentClass="button"
       className={classes.submit}
       currency="USD"
       description="$5.99 p/m"
@@ -78,7 +69,6 @@ const ChargeMoney = ({
     >
       {children}
     </StripeCheckout>
-    // </Button>
   );
 };
 
