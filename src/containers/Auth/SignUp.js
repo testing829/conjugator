@@ -78,8 +78,7 @@ const SignUp = ({ classes, history }) => {
             variant="subtitle1"
           >
             Sign up get access to all verb tenses, save your settings and track
-            your learning progress. 30 days free then $5.99 per month. Cancel
-            anytime.
+            your learning progress. Cancel anytime.
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>

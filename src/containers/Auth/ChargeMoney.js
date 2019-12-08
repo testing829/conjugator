@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button';
 
 const ChargeMoney = ({ classes, email, handleSubmit, fullName, password }) => {
   const onToken = token => {
-    console.log('TCL: ChargeMoney -> token', token);
     handleSubmit(token);
   };
 
@@ -14,11 +13,11 @@ const ChargeMoney = ({ classes, email, handleSubmit, fullName, password }) => {
     <StripeCheckout
       ComponentClass="div"
       currency="USD"
-      description="1 month free and then $5.99 p/m"
+      description="$5.99 p/m"
       email={email}
       locale="auto"
       name="Conjugator"
-      panelLabel="Start trial"
+      panelLabel="Subscribe"
       stripeKey={process.env.REACT_APP_STRIPE_API_KEY}
       token={onToken}
     >
@@ -30,7 +29,7 @@ const ChargeMoney = ({ classes, email, handleSubmit, fullName, password }) => {
         type="submit"
         variant="contained"
       >
-        Start Free Trial
+        Subscribe
       </Button>
     </StripeCheckout>
   );
