@@ -75,7 +75,7 @@ const CancelSubscription = ({ classes, history }) => {
   if (cancelled) {
     return (
       <Grid container justify="center">
-        <Grid item xs={5} className={classes.cancelContainer}>
+        <Grid item xs={9} md={5} className={classes.cancelContainer}>
           <Typography align="center" variant="h4" className={classes.title}>
             Your account has been deleted
           </Typography>
@@ -89,7 +89,7 @@ const CancelSubscription = ({ classes, history }) => {
 
   return (
     <Grid container justify="center">
-      <Grid item xs={5} className={classes.cancelContainer}>
+      <Grid item xs={9} md={5} className={classes.cancelContainer}>
         <Typography align="center" variant="h4" className={classes.title}>
           Are you sure you want to cancel your account?
         </Typography>

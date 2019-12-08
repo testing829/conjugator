@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 
 const ChargeMoney = ({ classes, email, handleSubmit, fullName, password }) => {
   const onToken = token => {
+    console.log('TCL: ChargeMoney -> token', token);
     handleSubmit(token);
   };
 
