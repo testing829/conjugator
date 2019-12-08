@@ -5,12 +5,28 @@ import hashPassword from '../utils/hashPassword';
 
 import verbsFile from '../../csvjson';
 
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
+
 const Mutation = {
   async createUser(parent, args, { prisma }, info) {
+    let customer;
+    try {
+      customer = await stripe.customers.create({
+        email: args.data.email,
+        source: args.data.stripeSource,
+        plan: process.env.STRIPE_PLAN
+      });
+    } catch (err) {
+      console.log('ERR', err);
+    }
+
+    if (!customer) return 'Unable to create customer!';
+
     const password = await hashPassword(args.data.password);
     const user = await prisma.mutation.createUser({
       data: {
         ...args.data,
+        stripeSubId: customer.subscriptions.data[0].id,
         password
       }
     });
@@ -19,6 +35,15 @@ const Mutation = {
       user,
       token: generateToken(user.id)
     };
+  },
+  async cancelSubscription(parent, args, { prisma, request }, info) {
+    let cancel;
+    try {
+      cancel = await stripe.subscriptions.del(args.data);
+    } catch (err) {
+      console.log('ERR', err);
+    }
+    return JSON.stringify(cancel);
   },
   async login(parent, args, { prisma }, info) {
     const user = await prisma.query.user({

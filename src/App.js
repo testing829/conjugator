@@ -7,7 +7,9 @@ import { Route, Switch } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { Context } from './contexts/index';
-import Dashboard from './containers/Dashboard';
+
+import Account from './containers/Account';
+import CancelSubscription from './containers/Account/CancelSubscription';
 import Feedback from './containers/Feedback';
 import Homepage from './containers/Homepage/index';
 import Login from './containers/Auth/Login';
@@ -30,6 +32,7 @@ function App() {
   const client = token
     ? new ApolloClient({
         uri: process.env.REACT_APP_HEROKU_URL,
+        // uri: 'http://localhost:4000/',
         request: async operation => {
           operation.setContext({
             headers: {
@@ -40,6 +43,7 @@ function App() {
       })
     : new ApolloClient({
         uri: process.env.REACT_APP_HEROKU_URL
+        // uri: 'http://localhost:4000/'
       });
 
   return (
@@ -60,7 +64,12 @@ function App() {
         />
         <Route exact path="/login" render={props => <Login {...props} />} />
         <Route exact path="/sign-up" render={props => <SignUp {...props} />} />
-        <Route exact path="/stats" render={props => <Dashboard {...props} />} />
+        <Route exact path="/account" render={props => <Account {...props} />} />
+        <Route
+          exact
+          path="/cancel-account"
+          render={props => <CancelSubscription {...props} />}
+        />
         <Route render={() => <h1>URL not found!</h1>} />
       </Switch>
     </ApolloProvider>

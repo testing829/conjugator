@@ -1,60 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react';
 
+import { Elements, StripeProvider } from 'react-stripe-elements';
 import { NavLink } from 'react-router-dom';
 import { useMutation } from 'react-apollo-hooks';
 
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 
-// import { Elements, StripeProvider } from 'react-stripe-elements';
-import StripeCheckout from 'react-stripe-checkout';
-
+import ChargeMoney from './ChargeMoney';
 import { Context } from '../../contexts/index';
 import { CREATE_USER } from '../../gql/users.gql';
 import Snackbar from '../../components/Snackbar/index';
 
-import { makeStyles } from '@material-ui/core/styles';
+import styles from './Auth.jss';
+import { withStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
-  '@global': {
-    body: {
-      backgroundColor: theme.palette.common.white
-    }
-  },
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  errorMessage: {
-    color: '#d32f2f',
-    marginTop: theme.spacing(2)
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(3)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  },
-  subtitle: {
-    marginTop: theme.spacing(1.5),
-    marginBottom: theme.spacing(1.5)
-  }
-}));
-
-const SignUp = ({ history }) => {
+const SignUp = ({ classes, history }) => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState(false);
   const [fullName, setFullName] = useState('');
@@ -65,34 +29,23 @@ const SignUp = ({ history }) => {
   const { setLoggedIn } = useContext(Context);
   const [createUser, { data }] = useMutation(CREATE_USER);
 
-  const delay = 1000;
-  const classes = useStyles();
-
-  const handleSubmit = async event => {
-    event.preventDefault();
-    if (password.length < 8) {
-      setShortPassword(true);
-    }
-    try {
-      createUser({
-        variables: {
-          name: fullName,
-          email: email.toLowerCase(),
-          password
-        }
-      });
-    } catch (err) {
-      // onError(({ graphQLErrors, networkError }) => {
-      //   if (graphQLErrors)
-      //     graphQLErrors.map(({ message, locations, path }) =>
-      //       console.log(
-      //         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      //       )
-      //     );
-
-      //   if (networkError) console.log(`[Network error]: ${networkError}`);
-      // });
-      setError(true);
+  const handleSubmit = async token => {
+    if (token && token.id) {
+      if (password.length < 8) {
+        setShortPassword(true);
+      }
+      try {
+        await createUser({
+          variables: {
+            name: fullName,
+            email: email.toLowerCase(),
+            password,
+            stripeSource: token.id
+          }
+        });
+      } catch (err) {
+        setError(true);
+      }
     }
   };
 
@@ -101,9 +54,7 @@ const SignUp = ({ history }) => {
       localStorage.setItem('jwt', data.createUser.token);
       setLoggedIn(true);
       setOpen(true);
-      setTimeout(() => {
-        history.push('/');
-      }, delay);
+      history.push('/');
     };
 
     if (!error && data) {
@@ -113,9 +64,8 @@ const SignUp = ({ history }) => {
 
   return (
     <>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
+      <Grid container justify="center">
+        <Grid item className={classes.userDetails} xs={9} sm={7} md={3}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
@@ -127,8 +77,8 @@ const SignUp = ({ history }) => {
             align="center"
             variant="subtitle1"
           >
-            Sign up to get stats on your learning progress and to save your
-            settings.
+            Sign up get access to all verb tenses, save your settings and track
+            your learning progress. Cancel anytime.
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
@@ -181,26 +131,28 @@ const SignUp = ({ history }) => {
                 Unable to sign-up. Your email address may already be registered.
               </Typography>
             ) : null}
-            <Button
-              className={classes.submit}
-              color="primary"
-              fullWidth
-              type="submit"
-              variant="contained"
-            >
-              Sign Up
-            </Button>
+            <StripeProvider apiKey={process.env.REACT_APP_STRIPE_API_KEY}>
+              <Elements>
+                <ChargeMoney
+                  classes={classes}
+                  email={email}
+                  handleSubmit={handleSubmit}
+                  fullName={fullName}
+                  password={password}
+                />
+              </Elements>
+            </StripeProvider>
             <Grid container justify="flex-end">
               <Grid item>
                 <NavLink to={'/login'}>Already have an account? Login</NavLink>
               </Grid>
             </Grid>
           </form>
-        </div>
-        <Snackbar open={open} setOpen={setOpen} text={'Signed Up!'} />
-      </Container>
+        </Grid>
+      </Grid>
+      <Snackbar open={open} setOpen={setOpen} text={'Signed Up!'} />
     </>
   );
 };
 
-export default SignUp;
+export default withStyles(styles)(SignUp);

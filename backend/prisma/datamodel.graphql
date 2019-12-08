@@ -12,6 +12,8 @@ type User {
     @relation(link: TABLE, name: "DailyTargetToUser", onDelete: CASCADE)
   logs: [Log] @relation(name: "LogToUser", onDelete: CASCADE)
   feedbacks: [Feedback] @relation(name: "FeedbackToUser", onDelete: CASCADE)
+  stripeSubId: String
+  stripeSource: String
   setting: Setting
     @relation(link: TABLE, name: "SettingToUser", onDelete: CASCADE)
 }

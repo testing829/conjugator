@@ -69,6 +69,7 @@ type Query {
 }
 
 type Mutation {
+  cancelSubscription(data: String!): String
   createBestStreak(data: CreateBestStreakInput!): BestStreak!
   createDailyTarget(data: CreateDailyTargetInput!): DailyTarget!
   createFeedback(data: CreateFeedbackInput!): Feedback!
@@ -97,6 +98,8 @@ input CreateUserInput {
   name: String!
   password: String!
   premium: Boolean!
+  stripeSource: String
+  stripeSubId: String
 }
 
 input UpdateUserInput {
@@ -190,6 +193,8 @@ type User {
   dailyTarget: DailyTarget
   password: String!
   premium: Boolean!
+  stripeSource: String
+  stripeSubId: String
   updatedAt: String!
   createdAt: String!
 }

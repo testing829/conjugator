@@ -17,9 +17,9 @@ const styles = theme => ({
   },
   paper: {
     backgroundColor: '#FFFF',
-    margin: '60px auto',
+    margin: '1.7% auto',
     padding: theme.spacing(2),
-    width: theme.spacing(140),
+    width: '80%',
     [theme.breakpoints.down('sm')]: {
       width: theme.spacing(75)
     }
