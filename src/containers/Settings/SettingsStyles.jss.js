@@ -21,7 +21,7 @@ const styles = theme => ({
     padding: theme.spacing(2),
     width: '80%',
     [theme.breakpoints.down('sm')]: {
-      width: theme.spacing(75)
+      width: '100%'
     }
   },
   tensesItem: {

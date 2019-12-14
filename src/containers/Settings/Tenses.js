@@ -27,7 +27,7 @@ const Tenses = ({ data }) => {
     <>
       <ListSubheader>Tenses</ListSubheader>
       <Grid container>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <List>
             <ListItem>
               <Checkbox
@@ -86,7 +86,7 @@ const Tenses = ({ data }) => {
           </List>
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <List>
             <ListItem>
               <Checkbox
@@ -147,7 +147,8 @@ const Tenses = ({ data }) => {
             </ListItem>
           </List>
         </Grid>
-        <Grid item xs={4}>
+
+        <Grid item xs={12} md={4}>
           <List>
             <ListItem>
               <Checkbox
