@@ -50,7 +50,7 @@ function Account({ history }) {
       </Typography>
 
       <Box style={{ margin: '3% 10%' }}>
-        <Paper style={{ margin: '5% 20%' }}>
+        <Paper>
           <Tabs
             centered
             indicatorColor="primary"
@@ -76,12 +76,12 @@ function Account({ history }) {
         </div>
       </Box>
       <Grid container justify="flex-end">
-        <Grid item xs={2}>
+        <Grid item xs={5} md={2} style={{ marginRight: '5px' }}>
           <Button color="primary" variant="outlined" onClick={cancelAccount}>
             Cancel Account
           </Button>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={5} md={2} style={{ marginLeft: '5px' }}>
           <Button color="primary" variant="outlined" onClick={logOut}>
             Log out
           </Button>
