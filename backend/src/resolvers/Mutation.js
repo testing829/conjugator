@@ -5,36 +5,62 @@ import hashPassword from '../utils/hashPassword';
 
 import verbsFile from '../../csvjson';
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET);
+// const stripe = require('stripe')(process.env.STRIPE_SECRET);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
 
 const Mutation = {
   async createUser(parent, args, { prisma }, info) {
+    console.log('TCL: createUser -> args.data', args.data);
     let customer;
     try {
+      // customer = await stripe.customers.create({
+      //   email: args.data.email,
+      //   source: args.data.stripeSource,
+      //   plan: process.env.STRIPE_PLAN_TEST,
+      //   coupon: 'FInYElST'
+      // });
       customer = await stripe.customers.create({
+        name: args.data.name,
         email: args.data.email,
-        source: args.data.stripeSource,
-        plan: process.env.STRIPE_PLAN
+        source: args.data.stripeSource
       });
+      // plan: process.env.STRIPE_PLAN,
     } catch (err) {
       console.log('ERR', err);
     }
 
+    console.log('TCL: createUser -> customer', customer.id);
     if (!customer) return 'Unable to create customer!';
 
-    const password = await hashPassword(args.data.password);
-    const user = await prisma.mutation.createUser({
-      data: {
-        ...args.data,
-        stripeSubId: customer.subscriptions.data[0].id,
-        password
-      }
-    });
+    let subscription;
+    try {
+      subscription = await stripe.subscriptions.create({
+        coupon: 'FInYElST',
+        customer: customer.id,
+        items: [
+          {
+            plan: process.env.STRIPE_PLAN_TEST
+          }
+        ]
+      });
+    } catch (err) {
+      console.log('Error creating subscription', err);
+    }
+    console.log('TCL: createUser -> subscription', subscription);
 
-    return {
-      user,
-      token: generateToken(user.id)
-    };
+    // const password = await hashPassword(args.data.password);
+    // const user = await prisma.mutation.createUser({
+    //   data: {
+    //     ...args.data,
+    //     stripeSubId: customer.subscriptions.data[0].id,
+    //     password
+    //   }
+    // });
+
+    // return {
+    //   user,
+    //   token: generateToken(user.id)
+    // };
   },
   async cancelSubscription(parent, args, { prisma, request }, info) {
     let cancel;
