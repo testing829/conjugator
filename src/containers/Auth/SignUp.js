@@ -153,7 +153,7 @@ const SignUp = ({ classes }) => {
             />
 
             <Grid item xs={12}>
-              <StripeProvider apiKey="pk_live_jf88Kh2e578IhEmXd3ibWe1200CGLTSsIn">
+              <StripeProvider apiKey={process.env.REACT_APP_STRIPE_API_KEY}>
                 <Elements>
                   <ChargeMoney
                     classes={classes}
@@ -162,7 +162,7 @@ const SignUp = ({ classes }) => {
                     fullName={fullName}
                     password={password}
                     setError={setError}
-                    // setShortPassword={setShortPassword}
+                    setOpen={setOpen}
                     successfulPromo={successfulPromo}
                   >
                     <Button

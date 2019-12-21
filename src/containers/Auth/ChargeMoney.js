@@ -16,6 +16,7 @@ const ChargeMoney = ({
   fullName,
   password,
   setError,
+  setOpen,
   successfulPromo
 }) => {
   const { setLoggedIn } = useContext(Context);
@@ -64,7 +65,7 @@ const ChargeMoney = ({
       locale="auto"
       name="Conjugator"
       panelLabel={successfulPromo ? 'Start free trial' : 'Subscribe'}
-      stripeKey="pk_live_jf88Kh2e578IhEmXd3ibWe1200CGLTSsIn"
+      stripeKey={process.env.REACT_APP_STRIPE_API_KEY}
       // stripeKey={process.env.REACT_APP_STRIPE_TEST}
       token={onToken}
     >
