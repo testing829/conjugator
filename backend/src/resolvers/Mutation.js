@@ -66,6 +66,7 @@ const Mutation = {
         email: args.data.email
       }
     });
+
     if (!user) {
       throw new Error('Unable to login');
     }

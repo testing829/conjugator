@@ -1,18 +1,21 @@
 /*eslint-disable */
 import React, { useContext, useEffect } from 'react';
 
+import { createHashHistory } from 'history';
+
 import StripeCheckout from 'react-stripe-checkout';
 import { useMutation } from 'react-apollo-hooks';
 
 import { Context } from '../../contexts/index';
 import { CREATE_USER } from '../../gql/users.gql';
 
+export const history = createHashHistory();
+
 const ChargeMoney = ({
   classes,
   children,
   email,
   error,
-  history,
   fullName,
   password,
   setError,
