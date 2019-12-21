@@ -33,7 +33,7 @@ const SignUp = ({ classes }) => {
   return (
     <>
       <Grid container justify="center">
-        <Grid item className={classes.userDetails} xs={9} sm={7} md={3}>
+        <Grid item className={classes.userDetailsSignUp} xs={9} sm={7} md={3}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
@@ -45,9 +45,10 @@ const SignUp = ({ classes }) => {
             align="center"
             variant="subtitle1"
           >
-            Sign up get access to all verb tenses, save your settings and track
-            your learning progress. $5.99 per month. Cancel anytime.
+            Sign up to get access to all verb tenses, save your settings and
+            track your learning progress!
           </Typography>
+          <Typography>$5.99 per month. Cancel anytime.</Typography>
           <Grid container spacing={2} className={classes.form}>
             <Grid item xs={12}>
               <TextField
@@ -162,6 +163,7 @@ const SignUp = ({ classes }) => {
                     password={password}
                     setError={setError}
                     setShortPassword={setShortPassword}
+                    successfulPromo={successfulPromo}
                   >
                     <Button
                       className={classes.submit}

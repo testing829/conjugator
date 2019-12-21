@@ -16,7 +16,8 @@ const ChargeMoney = ({
   fullName,
   password,
   setError,
-  setShortPassword
+  setShortPassword,
+  successfulPromo
 }) => {
   const { setLoggedIn } = useContext(Context);
   const [createUser, { data }] = useMutation(CREATE_USER);
@@ -56,14 +57,16 @@ const ChargeMoney = ({
 
   return (
     <StripeCheckout
-      amount={599}
+      amount={successfulPromo ? 0 : 599}
       className={classes.submit}
       currency="USD"
-      description="$5.99 p/m"
+      description={
+        successfulPromo ? '3 months free then $5.99 p/m' : '$5.99 p/m'
+      }
       email={email}
       locale="auto"
       name="Conjugator"
-      panelLabel="Subscribe"
+      panelLabel={successfulPromo ? 'Start free trial' : 'Subscribe'}
       // stripeKey={process.env.REACT_APP_STRIPE_API_KEY}
       stripeKey={process.env.REACT_APP_STRIPE_TEST}
       token={onToken}

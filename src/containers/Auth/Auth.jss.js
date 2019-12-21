@@ -41,6 +41,12 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     marginTop: theme.spacing(8)
+  },
+  userDetailsSignUp: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: theme.spacing(4)
   }
 });
 
