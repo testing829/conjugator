@@ -31,7 +31,6 @@ const theme = createMuiTheme({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"'
     ].join(',')
-    // fontFamily: ['-apple-system', '"Helvetica Neue"'].join(',')
   }
 });
 

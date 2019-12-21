@@ -16,23 +16,21 @@ const ChargeMoney = ({
   fullName,
   password,
   setError,
-  setShortPassword
+  successfulPromo
 }) => {
   const { setLoggedIn } = useContext(Context);
   const [createUser, { data }] = useMutation(CREATE_USER);
 
   const onToken = async token => {
     if (token && token.id) {
-      if (password.length < 8) {
-        setShortPassword(true);
-      }
       try {
         await createUser({
           variables: {
             name: fullName,
             email: email.toLowerCase(),
             password,
-            stripeSource: token.id
+            stripeSource: token.id,
+            successfulPromo
           }
         });
       } catch (err) {
@@ -56,15 +54,18 @@ const ChargeMoney = ({
 
   return (
     <StripeCheckout
-      amount={599}
+      amount={successfulPromo ? 0 : 599}
       className={classes.submit}
       currency="USD"
-      description="$5.99 p/m"
+      description={
+        successfulPromo ? '3 months free then $5.99 p/m' : '$5.99 p/m'
+      }
       email={email}
       locale="auto"
       name="Conjugator"
-      panelLabel="Subscribe"
+      panelLabel={successfulPromo ? 'Start free trial' : 'Subscribe'}
       stripeKey={process.env.REACT_APP_STRIPE_API_KEY}
+      // stripeKey={process.env.REACT_APP_STRIPE_TEST}
       token={onToken}
     >
       {children}

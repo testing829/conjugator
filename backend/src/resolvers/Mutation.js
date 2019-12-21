@@ -2,19 +2,19 @@ import bcrypt from 'bcryptjs';
 import getUserId from '../utils/getUserId';
 import generateToken from '../utils/generateToken';
 import hashPassword from '../utils/hashPassword';
-
 import verbsFile from '../../csvjson';
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
+// const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
 
 const Mutation = {
   async createUser(parent, args, { prisma }, info) {
     let customer;
     try {
       customer = await stripe.customers.create({
+        name: args.data.name,
         email: args.data.email,
-        source: args.data.stripeSource,
-        plan: process.env.STRIPE_PLAN
+        source: args.data.stripeSource
       });
     } catch (err) {
       console.log('ERR', err);
@@ -22,11 +22,26 @@ const Mutation = {
 
     if (!customer) return 'Unable to create customer!';
 
+    let subscription;
+    try {
+      subscription = await stripe.subscriptions.create({
+        coupon: args.data.successfulPromo ? process.env.STRIPE_COUPON : null,
+        customer: customer.id,
+        items: [
+          {
+            plan: process.env.STRIPE_PLAN
+          }
+        ]
+      });
+    } catch (err) {
+      console.log('Error creating subscription', err);
+    }
+
     const password = await hashPassword(args.data.password);
     const user = await prisma.mutation.createUser({
       data: {
         ...args.data,
-        stripeSubId: customer.subscriptions.data[0].id,
+        stripeSubId: subscription.id,
         password
       }
     });

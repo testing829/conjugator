@@ -6,29 +6,34 @@ import { NavLink } from 'react-router-dom';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 import ChargeMoney from './ChargeMoney';
+import PromoDialog from './PromoDialog';
 import Snackbar from '../../components/Snackbar/index';
 
 import styles from './Auth.jss';
 import { withStyles } from '@material-ui/core/styles';
 
 const SignUp = ({ classes }) => {
+  const [activatePromo, setActivatePromo] = useState(false);
   const [email, setEmail] = useState('');
   const [error, setError] = useState(false);
   const [fullName, setFullName] = useState('');
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState('');
-  const [shortPassword, setShortPassword] = useState(false);
+  // const [shortPassword, setShortPassword] = useState(false);
+  const [successfulPromo, setSuccessfulPromo] = useState(false);
 
   return (
     <>
       <Grid container justify="center">
-        <Grid item className={classes.userDetails} xs={9} sm={7} md={3}>
+        <Grid item className={classes.userDetailsSignUp} xs={9} sm={7} md={3}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
@@ -40,9 +45,10 @@ const SignUp = ({ classes }) => {
             align="center"
             variant="subtitle1"
           >
-            Sign up get access to all verb tenses, save your settings and track
-            your learning progress. $5.99 per month. Cancel anytime.
+            Sign up to get access to all verb tenses, save your settings and
+            track your learning progress!
           </Typography>
+          <Typography>$5.99 per month. Cancel anytime.</Typography>
           <Grid container spacing={2} className={classes.form}>
             <Grid item xs={12}>
               <TextField
@@ -82,16 +88,69 @@ const SignUp = ({ classes }) => {
                 variant="outlined"
               />
             </Grid>
-            {shortPassword ? (
+            {/* {shortPassword ? (
               <Typography className={classes.errorMessage}>
                 Password must be at least 8 characters.
               </Typography>
-            ) : null}
+            ) : null} */}
             {error ? (
               <Typography className={classes.errorMessage}>
                 Unable to sign-up. Your email address may already be registered.
               </Typography>
             ) : null}
+
+            <Grid
+              container
+              justify="space-between"
+              className={classes.priceContainer}
+            >
+              <Grid item xs={12}>
+                <Divider className={classes.divider} />
+              </Grid>
+              {successfulPromo && !activatePromo && (
+                <>
+                  <Grid item xs={6}>
+                    <Typography align="left" color="secondary">
+                      Promotion
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography align="right" color="secondary">
+                      - $5.99
+                    </Typography>
+                  </Grid>
+                </>
+              )}
+              <Grid item xs={6}>
+                <Typography align="left">Total</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography align="right">
+                  {successfulPromo && !activatePromo ? '$0' : '$5.99'}
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Divider className={classes.divider} />
+              </Grid>
+              <Typography>
+                Have a promo code?{' '}
+                <Link
+                  onClick={() => {
+                    setActivatePromo(!activatePromo);
+                    setSuccessfulPromo(false);
+                  }}
+                >
+                  Click here
+                </Link>
+              </Typography>
+            </Grid>
+
+            <PromoDialog
+              activatePromo={activatePromo}
+              setActivatePromo={setActivatePromo}
+              setSuccessfulPromo={setSuccessfulPromo}
+              successfulPromo={successfulPromo}
+            />
 
             <Grid item xs={12}>
               <StripeProvider apiKey={process.env.REACT_APP_STRIPE_API_KEY}>
@@ -103,7 +162,8 @@ const SignUp = ({ classes }) => {
                     fullName={fullName}
                     password={password}
                     setError={setError}
-                    setShortPassword={setShortPassword}
+                    // setShortPassword={setShortPassword}
+                    successfulPromo={successfulPromo}
                   >
                     <Button
                       className={classes.submit}
