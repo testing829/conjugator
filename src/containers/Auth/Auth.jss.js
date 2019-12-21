@@ -13,7 +13,8 @@ const styles = theme => ({
   },
   errorMessage: {
     color: '#d32f2f',
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
+    padding: theme.spacing(0, 1)
   },
   form: {
     width: '100%',

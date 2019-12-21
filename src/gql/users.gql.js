@@ -12,6 +12,7 @@ const CREATE_USER = gql`
     $email: String!
     $password: String!
     $stripeSource: String!
+    $successfulPromo: Boolean!
   ) {
     createUser(
       data: {
@@ -20,6 +21,7 @@ const CREATE_USER = gql`
         password: $password
         premium: true
         stripeSource: $stripeSource
+        successfulPromo: $successfulPromo
       }
     ) {
       user {

@@ -52,7 +52,9 @@ const PromoDialog = ({
       <DialogActions>
         {!successfulPromo && (
           <>
-            <Button color="primary">Cancel</Button>
+            <Button color="primary" onClick={handleClose}>
+              Cancel
+            </Button>
             <Button color="primary" onClick={handleSubmit}>
               Submit
             </Button>

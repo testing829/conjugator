@@ -27,7 +27,7 @@ const SignUp = ({ classes }) => {
   const [fullName, setFullName] = useState('');
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState('');
-  const [shortPassword, setShortPassword] = useState(false);
+  // const [shortPassword, setShortPassword] = useState(false);
   const [successfulPromo, setSuccessfulPromo] = useState(false);
 
   return (
@@ -88,11 +88,11 @@ const SignUp = ({ classes }) => {
                 variant="outlined"
               />
             </Grid>
-            {shortPassword ? (
+            {/* {shortPassword ? (
               <Typography className={classes.errorMessage}>
                 Password must be at least 8 characters.
               </Typography>
-            ) : null}
+            ) : null} */}
             {error ? (
               <Typography className={classes.errorMessage}>
                 Unable to sign-up. Your email address may already be registered.
@@ -140,7 +140,7 @@ const SignUp = ({ classes }) => {
                     setSuccessfulPromo(false);
                   }}
                 >
-                  Enter here
+                  Click here
                 </Link>
               </Typography>
             </Grid>
@@ -162,7 +162,7 @@ const SignUp = ({ classes }) => {
                     fullName={fullName}
                     password={password}
                     setError={setError}
-                    setShortPassword={setShortPassword}
+                    // setShortPassword={setShortPassword}
                     successfulPromo={successfulPromo}
                   >
                     <Button

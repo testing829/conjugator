@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sat Dec 07 2019 13:00:57 GMT+0000 (Greenwich Mean Time)
+# timestamp: Sat Dec 21 2019 12:01:53 GMT+0000 (Greenwich Mean Time)
 
 type AggregateBestStreak {
   count: Int!
@@ -2391,6 +2391,7 @@ type User implements Node {
   stripeSubId: String
   stripeSource: String
   setting: Setting
+  successfulPromo: Boolean
 }
 
 """A connection to a list of items."""
@@ -2411,6 +2412,7 @@ input UserCreateInput {
   premium: Boolean!
   stripeSubId: String
   stripeSource: String
+  successfulPromo: Boolean
   bestStreak: BestStreakCreateOneWithoutUserInput
   dailyTarget: DailyTargetCreateOneWithoutUserInput
   logs: LogCreateManyWithoutUserInput
@@ -2451,6 +2453,7 @@ input UserCreateWithoutBestStreakInput {
   premium: Boolean!
   stripeSubId: String
   stripeSource: String
+  successfulPromo: Boolean
   dailyTarget: DailyTargetCreateOneWithoutUserInput
   logs: LogCreateManyWithoutUserInput
   feedbacks: FeedbackCreateManyWithoutUserInput
@@ -2465,6 +2468,7 @@ input UserCreateWithoutDailyTargetInput {
   premium: Boolean!
   stripeSubId: String
   stripeSource: String
+  successfulPromo: Boolean
   bestStreak: BestStreakCreateOneWithoutUserInput
   logs: LogCreateManyWithoutUserInput
   feedbacks: FeedbackCreateManyWithoutUserInput
@@ -2479,6 +2483,7 @@ input UserCreateWithoutFeedbacksInput {
   premium: Boolean!
   stripeSubId: String
   stripeSource: String
+  successfulPromo: Boolean
   bestStreak: BestStreakCreateOneWithoutUserInput
   dailyTarget: DailyTargetCreateOneWithoutUserInput
   logs: LogCreateManyWithoutUserInput
@@ -2493,6 +2498,7 @@ input UserCreateWithoutLogsInput {
   premium: Boolean!
   stripeSubId: String
   stripeSource: String
+  successfulPromo: Boolean
   bestStreak: BestStreakCreateOneWithoutUserInput
   dailyTarget: DailyTargetCreateOneWithoutUserInput
   feedbacks: FeedbackCreateManyWithoutUserInput
@@ -2507,6 +2513,7 @@ input UserCreateWithoutSettingInput {
   premium: Boolean!
   stripeSubId: String
   stripeSource: String
+  successfulPromo: Boolean
   bestStreak: BestStreakCreateOneWithoutUserInput
   dailyTarget: DailyTargetCreateOneWithoutUserInput
   logs: LogCreateManyWithoutUserInput
@@ -2541,6 +2548,8 @@ enum UserOrderByInput {
   stripeSubId_DESC
   stripeSource_ASC
   stripeSource_DESC
+  successfulPromo_ASC
+  successfulPromo_DESC
 }
 
 type UserPreviousValues {
@@ -2553,6 +2562,7 @@ type UserPreviousValues {
   premium: Boolean!
   stripeSubId: String
   stripeSource: String
+  successfulPromo: Boolean
 }
 
 type UserSubscriptionPayload {
@@ -2599,6 +2609,7 @@ input UserUpdateInput {
   premium: Boolean
   stripeSubId: String
   stripeSource: String
+  successfulPromo: Boolean
   bestStreak: BestStreakUpdateOneWithoutUserInput
   dailyTarget: DailyTargetUpdateOneWithoutUserInput
   logs: LogUpdateManyWithoutUserInput
@@ -2613,6 +2624,7 @@ input UserUpdateManyMutationInput {
   premium: Boolean
   stripeSubId: String
   stripeSource: String
+  successfulPromo: Boolean
 }
 
 input UserUpdateOneRequiredWithoutSettingInput {
@@ -2665,6 +2677,7 @@ input UserUpdateWithoutBestStreakDataInput {
   premium: Boolean
   stripeSubId: String
   stripeSource: String
+  successfulPromo: Boolean
   dailyTarget: DailyTargetUpdateOneWithoutUserInput
   logs: LogUpdateManyWithoutUserInput
   feedbacks: FeedbackUpdateManyWithoutUserInput
@@ -2678,6 +2691,7 @@ input UserUpdateWithoutDailyTargetDataInput {
   premium: Boolean
   stripeSubId: String
   stripeSource: String
+  successfulPromo: Boolean
   bestStreak: BestStreakUpdateOneWithoutUserInput
   logs: LogUpdateManyWithoutUserInput
   feedbacks: FeedbackUpdateManyWithoutUserInput
@@ -2691,6 +2705,7 @@ input UserUpdateWithoutFeedbacksDataInput {
   premium: Boolean
   stripeSubId: String
   stripeSource: String
+  successfulPromo: Boolean
   bestStreak: BestStreakUpdateOneWithoutUserInput
   dailyTarget: DailyTargetUpdateOneWithoutUserInput
   logs: LogUpdateManyWithoutUserInput
@@ -2704,6 +2719,7 @@ input UserUpdateWithoutLogsDataInput {
   premium: Boolean
   stripeSubId: String
   stripeSource: String
+  successfulPromo: Boolean
   bestStreak: BestStreakUpdateOneWithoutUserInput
   dailyTarget: DailyTargetUpdateOneWithoutUserInput
   feedbacks: FeedbackUpdateManyWithoutUserInput
@@ -2717,6 +2733,7 @@ input UserUpdateWithoutSettingDataInput {
   premium: Boolean
   stripeSubId: String
   stripeSource: String
+  successfulPromo: Boolean
   bestStreak: BestStreakUpdateOneWithoutUserInput
   dailyTarget: DailyTargetUpdateOneWithoutUserInput
   logs: LogUpdateManyWithoutUserInput
@@ -3045,6 +3062,10 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   stripeSource_not_ends_with: String
+  successfulPromo: Boolean
+
+  """All values that are not equal to given value."""
+  successfulPromo_not: Boolean
   bestStreak: BestStreakWhereInput
   dailyTarget: DailyTargetWhereInput
   logs_every: LogWhereInput

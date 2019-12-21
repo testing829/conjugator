@@ -16,6 +16,7 @@ type User {
   stripeSource: String
   setting: Setting
     @relation(link: TABLE, name: "SettingToUser", onDelete: CASCADE)
+  successfulPromo: Boolean
 }
 
 type DailyTarget {

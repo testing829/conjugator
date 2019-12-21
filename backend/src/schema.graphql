@@ -84,10 +84,6 @@ type Mutation {
   upsertSetting(data: UpsertSettingInput!): Setting!
 }
 
-# type Subscription {
-
-# }
-
 type AuthPayload {
   token: String!
   user: User!
@@ -100,6 +96,7 @@ input CreateUserInput {
   premium: Boolean!
   stripeSource: String
   stripeSubId: String
+  successfulPromo: Boolean!
 }
 
 input UpdateUserInput {
@@ -195,6 +192,7 @@ type User {
   premium: Boolean!
   stripeSource: String
   stripeSubId: String
+  successfulPromo: Boolean
   updatedAt: String!
   createdAt: String!
 }

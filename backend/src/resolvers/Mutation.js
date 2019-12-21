@@ -2,65 +2,54 @@ import bcrypt from 'bcryptjs';
 import getUserId from '../utils/getUserId';
 import generateToken from '../utils/generateToken';
 import hashPassword from '../utils/hashPassword';
-
 import verbsFile from '../../csvjson';
 
-// const stripe = require('stripe')(process.env.STRIPE_SECRET);
-const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
+// const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
 
 const Mutation = {
   async createUser(parent, args, { prisma }, info) {
-    console.log('TCL: createUser -> args.data', args.data);
     let customer;
     try {
-      // customer = await stripe.customers.create({
-      //   email: args.data.email,
-      //   source: args.data.stripeSource,
-      //   plan: process.env.STRIPE_PLAN_TEST,
-      //   coupon: 'FInYElST'
-      // });
       customer = await stripe.customers.create({
         name: args.data.name,
         email: args.data.email,
         source: args.data.stripeSource
       });
-      // plan: process.env.STRIPE_PLAN,
     } catch (err) {
       console.log('ERR', err);
     }
 
-    console.log('TCL: createUser -> customer', customer.id);
     if (!customer) return 'Unable to create customer!';
 
     let subscription;
     try {
       subscription = await stripe.subscriptions.create({
-        coupon: 'FInYElST',
+        coupon: args.data.successfulPromo ? process.env.STRIPE_COUPON : null,
         customer: customer.id,
         items: [
           {
-            plan: process.env.STRIPE_PLAN_TEST
+            plan: process.env.STRIPE_PLAN
           }
         ]
       });
     } catch (err) {
       console.log('Error creating subscription', err);
     }
-    console.log('TCL: createUser -> subscription', subscription);
 
-    // const password = await hashPassword(args.data.password);
-    // const user = await prisma.mutation.createUser({
-    //   data: {
-    //     ...args.data,
-    //     stripeSubId: customer.subscriptions.data[0].id,
-    //     password
-    //   }
-    // });
+    const password = await hashPassword(args.data.password);
+    const user = await prisma.mutation.createUser({
+      data: {
+        ...args.data,
+        stripeSubId: subscription.id,
+        password
+      }
+    });
 
-    // return {
-    //   user,
-    //   token: generateToken(user.id)
-    // };
+    return {
+      user,
+      token: generateToken(user.id)
+    };
   },
   async cancelSubscription(parent, args, { prisma, request }, info) {
     let cancel;
