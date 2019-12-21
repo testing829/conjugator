@@ -6,24 +6,29 @@ import { NavLink } from 'react-router-dom';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 import ChargeMoney from './ChargeMoney';
+import PromoDialog from './PromoDialog';
 import Snackbar from '../../components/Snackbar/index';
 
 import styles from './Auth.jss';
 import { withStyles } from '@material-ui/core/styles';
 
 const SignUp = ({ classes }) => {
+  const [activatePromo, setActivatePromo] = useState(false);
   const [email, setEmail] = useState('');
   const [error, setError] = useState(false);
   const [fullName, setFullName] = useState('');
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState('');
   const [shortPassword, setShortPassword] = useState(false);
+  const [successfulPromo, setSuccessfulPromo] = useState(false);
 
   return (
     <>
@@ -92,6 +97,59 @@ const SignUp = ({ classes }) => {
                 Unable to sign-up. Your email address may already be registered.
               </Typography>
             ) : null}
+
+            <Grid
+              container
+              justify="space-between"
+              className={classes.priceContainer}
+            >
+              <Grid item xs={12}>
+                <Divider className={classes.divider} />
+              </Grid>
+              {successfulPromo && !activatePromo && (
+                <>
+                  <Grid item xs={6}>
+                    <Typography align="left" color="secondary">
+                      Promotion
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography align="right" color="secondary">
+                      - $5.99
+                    </Typography>
+                  </Grid>
+                </>
+              )}
+              <Grid item xs={6}>
+                <Typography align="left">Total</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography align="right">
+                  {successfulPromo && !activatePromo ? '$0' : '$5.99'}
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Divider className={classes.divider} />
+              </Grid>
+              <Typography>
+                Have a promo code?{' '}
+                <Link
+                  onClick={() => {
+                    setActivatePromo(!activatePromo);
+                    setSuccessfulPromo(false);
+                  }}
+                >
+                  Enter here
+                </Link>
+              </Typography>
+            </Grid>
+
+            <PromoDialog
+              activatePromo={activatePromo}
+              setActivatePromo={setActivatePromo}
+              setSuccessfulPromo={setSuccessfulPromo}
+              successfulPromo={successfulPromo}
+            />
 
             <Grid item xs={12}>
               <StripeProvider apiKey={process.env.REACT_APP_STRIPE_API_KEY}>

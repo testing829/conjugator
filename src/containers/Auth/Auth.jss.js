@@ -8,7 +8,9 @@ const styles = theme => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main
   },
-
+  divider: {
+    margin: theme.spacing(1, 0)
+  },
   errorMessage: {
     color: '#d32f2f',
     marginTop: theme.spacing(2)
@@ -19,6 +21,9 @@ const styles = theme => ({
   },
   navLink: {
     textDecoration: 'none'
+  },
+  priceContainer: {
+    padding: theme.spacing(0, 1)
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
