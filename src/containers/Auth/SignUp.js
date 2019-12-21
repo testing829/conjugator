@@ -153,7 +153,7 @@ const SignUp = ({ classes }) => {
             />
 
             <Grid item xs={12}>
-              <StripeProvider apiKey={process.env.REACT_APP_STRIPE_API_KEY}>
+              <StripeProvider apiKey="pk_live_jf88Kh2e578IhEmXd3ibWe1200CGLTSsIn">
                 <Elements>
                   <ChargeMoney
                     classes={classes}
