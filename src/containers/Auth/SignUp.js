@@ -42,7 +42,9 @@ const SignUp = ({ classes }) => {
       <Grid container justify="center" className={classes.container}>
         <Grid item xs={12} md={5} className={classes.infoSection}>
           <List>
-            <ListSubheader>With an account you can:</ListSubheader>
+            <ListSubheader disableSticky>
+              With an account you can:
+            </ListSubheader>
             <ListItem>
               <ListItemIcon>
                 <StarIcon />
@@ -63,7 +65,9 @@ const SignUp = ({ classes }) => {
             </ListItem>
           </List>
           <List>
-            <ListSubheader>And you'll be rewarded as you learn!</ListSubheader>
+            <ListSubheader disableSticky>
+              And you'll be rewarded as you learn!
+            </ListSubheader>
             <ListItem>
               <ListItemIcon>
                 <MoneyIcon />

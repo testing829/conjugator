@@ -34,7 +34,9 @@ const Points = ({
       <Grid container justify="center" style={{ paddingTop: '26px' }}>
         <Grid item xs={12} md={6}>
           <List>
-            <ListSubheader>Get rewarded for learning</ListSubheader>
+            <ListSubheader disableSticky>
+              Get rewarded for learning
+            </ListSubheader>
             <ListItem>
               <ListItemIcon>
                 <StarIcon />
@@ -73,7 +75,9 @@ const Points = ({
       <Grid container justify="center" style={{ paddingTop: '26px' }}>
         <Grid item xs={12} md={6}>
           <List>
-            <ListSubheader>Get rewarded for learning</ListSubheader>
+            <ListSubheader disableSticky>
+              Get rewarded for learning
+            </ListSubheader>
             <ListItem>
               <ListItemIcon>
                 <StarIcon />
