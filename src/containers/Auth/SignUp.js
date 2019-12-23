@@ -40,7 +40,7 @@ const SignUp = ({ classes }) => {
   return (
     <>
       <Grid container justify="center">
-        <Grid item xs={5} className={classes.infoSection}>
+        <Grid item xs={12} md={5} className={classes.infoSection}>
           <List>
             <ListSubheader>With an account you can:</ListSubheader>
             <ListItem>

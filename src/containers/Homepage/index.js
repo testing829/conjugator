@@ -91,6 +91,22 @@ const Homepage = ({ classes }) => {
       setCorrect(false);
       setShowNextVerb(true);
       setUserAnswer('');
+      if (myInfo.me && monthlyProgress === 500) {
+        fiftyOff({
+          variables: {
+            id: myInfo.me.stripeSubId
+          }
+        });
+        setPromoAchieved(true);
+      }
+      if (myInfo.me && monthlyProgress === 1000) {
+        monthFree({
+          variables: {
+            id: myInfo.me.stripeSubId
+          }
+        });
+        setPromoAchieved(true);
+      }
     } else {
       setSubmitted(true);
       logAnswer(userAnswer, verb);
@@ -108,22 +124,6 @@ const Homepage = ({ classes }) => {
       if (correctCount >= bestStreak) {
         setBestStreak(bestStreak + 1);
       }
-    }
-    if (monthlyProgress < 499) {
-      fiftyOff({
-        variables: {
-          id: myInfo.me.stripeSubId
-        }
-      });
-      setPromoAchieved(true);
-    }
-    if (monthlyProgress === 999) {
-      monthFree({
-        variables: {
-          id: myInfo.me.stripeSubId
-        }
-      });
-      setPromoAchieved(true);
     }
     setTotalAnswers(totalAnswers + 1);
   };
@@ -171,7 +171,7 @@ const Homepage = ({ classes }) => {
   }, [data, loading, showNextVerb]);
 
   const getBillingDate = () => {
-    if (myLogs && myLogs.myLogs.length) {
+    if (myLogs && myLogs.myLogs) {
       const accountCreatedDay = moment(myLogs.myLogs[0].user.createdAt).date();
       const todaysDay = moment(new Date()).date();
       const difference = todaysDay - accountCreatedDay;
