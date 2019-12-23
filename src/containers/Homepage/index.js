@@ -172,20 +172,24 @@ const Homepage = ({ classes }) => {
 
   const getBillingDate = () => {
     if (myLogs && myLogs.myLogs) {
-      const accountCreatedDay = moment(myLogs.myLogs[0].user.createdAt).date();
-      const todaysDay = moment(new Date()).date();
-      const difference = todaysDay - accountCreatedDay;
-      if (difference > 0) {
-        const billingDateTemp = moment()
-          .subtract(difference, 'day')
-          .format('YYYY-MM-DD');
-        setBillingDate(billingDateTemp);
-      } else {
-        const billingDateTemp = moment()
-          .subtract(1, 'month')
-          .subtract(difference, 'day')
-          .format('YYYY-MM-DD');
-        setBillingDate(billingDateTemp);
+      if (myLogs.myLogs[0]) {
+        const accountCreatedDay = moment(
+          myLogs.myLogs[0].user.createdAt
+        ).date();
+        const todaysDay = moment(new Date()).date();
+        const difference = todaysDay - accountCreatedDay;
+        if (difference > 0) {
+          const billingDateTemp = moment()
+            .subtract(difference, 'day')
+            .format('YYYY-MM-DD');
+          setBillingDate(billingDateTemp);
+        } else {
+          const billingDateTemp = moment()
+            .subtract(1, 'month')
+            .subtract(difference, 'day')
+            .format('YYYY-MM-DD');
+          setBillingDate(billingDateTemp);
+        }
       }
     }
   };
