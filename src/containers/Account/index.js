@@ -25,7 +25,10 @@ function Account({ history }) {
   const [billingDate, setBillingDate] = useState();
   const [nextBillingDate, setNextBillingDate] = useState();
   const [monthlyProgress, setMonthlyProgress] = useState();
-  const [chartData, setChartData] = useState(null);
+  const [chartData, setChartData] = useState([
+    { x: 1, y: 1 },
+    { x: 2, y: 1 }
+  ]);
   const [percent, setPercent] = useState(0);
   const [value, setValue] = useState(0);
 
@@ -114,7 +117,8 @@ function Account({ history }) {
     refetchMyLogs();
   }, []);
 
-  if (loading | loadingMyLogs | loadingMyLogsByDate | (chartData === null))
+  console.log('TCL: Account -> chartData', chartData);
+  if (loading | loadingMyLogs | loadingMyLogsByDate | (chartData === 0))
     return <CircularProgress />;
   else if (!userData.me) {
     history.push('/sign-up');
