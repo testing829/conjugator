@@ -14,8 +14,15 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 import ChargeMoney from './ChargeMoney';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import MoneyIcon from '@material-ui/icons/AttachMoney';
 import PromoDialog from './PromoDialog';
 import Snackbar from '../../components/Snackbar/index';
+import StarIcon from '@material-ui/icons/Star';
 
 import styles from './Auth.jss';
 import { withStyles } from '@material-ui/core/styles';
@@ -33,6 +40,50 @@ const SignUp = ({ classes }) => {
   return (
     <>
       <Grid container justify="center">
+        <Grid item xs={5} className={classes.infoSection}>
+          <List>
+            <ListSubheader>With an account you can:</ListSubheader>
+            <ListItem>
+              <ListItemIcon>
+                <StarIcon />
+              </ListItemIcon>
+              <ListItemText primary={`Access all verb tenses`} />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <StarIcon />
+              </ListItemIcon>
+              <ListItemText primary={`Save your settings`} />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <StarIcon />
+              </ListItemIcon>
+              <ListItemText primary={`Track your learning progress`} />
+            </ListItem>
+          </List>
+          <List>
+            <ListSubheader>And you'll be rewarded as you learn!</ListSubheader>
+            <ListItem>
+              <ListItemIcon>
+                <MoneyIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary={`Get 500 correct conjugations and we'll give you 50% off`}
+                secondary="Pay $2.99 this month"
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <MoneyIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary={`Get 1000 correct conjugations and we'll give you 100% off`}
+                secondary="Pay $0 this month"
+              />
+            </ListItem>
+          </List>
+        </Grid>
         <Grid item className={classes.userDetailsSignUp} xs={9} sm={7} md={3}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -40,15 +91,21 @@ const SignUp = ({ classes }) => {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Typography
+          {/* <Typography
             className={classes.subtitle}
             align="center"
             variant="subtitle1"
           >
             Sign up to get access to all verb tenses, save your settings and
             track your learning progress!
+          </Typography> */}
+          <Typography
+            align="center"
+            className={classes.subtitle}
+            variant="subtitle1"
+          >
+            $5.99 per month. Cancel anytime.
           </Typography>
-          <Typography>$5.99 per month. Cancel anytime.</Typography>
           <Grid container spacing={2} className={classes.form}>
             <Grid item xs={12}>
               <TextField

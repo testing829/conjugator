@@ -20,6 +20,9 @@ const styles = theme => ({
     width: '100%',
     marginTop: theme.spacing(3)
   },
+  infoSection: {
+    marginTop: '10%'
+  },
   navLink: {
     textDecoration: 'none'
   },
