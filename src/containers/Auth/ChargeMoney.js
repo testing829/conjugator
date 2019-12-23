@@ -62,7 +62,7 @@ const ChargeMoney = ({
       className={classes.submit}
       currency="USD"
       description={
-        successfulPromo ? '3 months free then $5.99 p/m' : '$5.99 p/m'
+        successfulPromo ? '1 month free then $5.99 p/m' : '$5.99 p/m'
       }
       email={email}
       locale="auto"
