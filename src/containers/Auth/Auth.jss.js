@@ -8,6 +8,11 @@ const styles = theme => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main
   },
+  container: {
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: theme.spacing(3)
+    }
+  },
   divider: {
     margin: theme.spacing(1, 0)
   },
@@ -21,7 +26,10 @@ const styles = theme => ({
     marginTop: theme.spacing(3)
   },
   infoSection: {
-    marginTop: '10%'
+    marginTop: '10%',
+    [theme.breakpoints.down('sm')]: {
+      marginTop: '1%'
+    }
   },
   navLink: {
     textDecoration: 'none'

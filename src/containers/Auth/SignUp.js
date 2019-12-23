@@ -39,7 +39,7 @@ const SignUp = ({ classes }) => {
 
   return (
     <>
-      <Grid container justify="center">
+      <Grid container justify="center" className={classes.container}>
         <Grid item xs={12} md={5} className={classes.infoSection}>
           <List>
             <ListSubheader>With an account you can:</ListSubheader>
@@ -240,7 +240,7 @@ const SignUp = ({ classes }) => {
 
           <Grid container justify="flex-end">
             <Grid item className={classes.switch}>
-              <NavLink to={'/login'} className={classes.navLink}>
+              <NavLink to={'/login'}>
                 <Typography>Already have an account? Login</Typography>
               </NavLink>
             </Grid>
