@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import moment from 'moment';
 import { useMutation, useQuery } from 'react-apollo-hooks';
 
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -380,6 +381,9 @@ const Homepage = ({ classes }) => {
                           variant="contained"
                         >
                           {submitted ? 'Next' : 'Answer'}
+                          {submitted ? (
+                            <ArrowForwardIcon style={{ paddingLeft: '5px' }} />
+                          ) : null}
                         </Button>
                       </Grid>
                     </Grid>
