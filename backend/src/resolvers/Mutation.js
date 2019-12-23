@@ -25,7 +25,9 @@ const Mutation = {
     let subscription;
     try {
       subscription = await stripe.subscriptions.create({
-        coupon: args.data.successfulPromo ? process.env.STRIPE_COUPON : null,
+        coupon: args.data.successfulPromo
+          ? process.env.STRIPE_MONTH_FREE_COUPON
+          : null,
         customer: customer.id,
         items: [
           {

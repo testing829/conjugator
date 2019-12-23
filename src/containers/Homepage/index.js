@@ -171,7 +171,7 @@ const Homepage = ({ classes }) => {
   }, [data, loading, showNextVerb]);
 
   const getBillingDate = () => {
-    if (myLogs && myLogs.myLogs) {
+    if (myLogs && Object.values(myLogs.myLogs).length) {
       const accountCreatedDay = moment(myLogs.myLogs[0].user.createdAt).date();
       const todaysDay = moment(new Date()).date();
       const difference = todaysDay - accountCreatedDay;
