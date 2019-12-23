@@ -77,7 +77,9 @@ type Mutation {
   createUser(data: CreateUserInput!): AuthPayload!
   createVerb(data: VerbCreateInput!): Verb!
   deleteUser: User!
+  fiftyPercentDiscount(data: String!): String
   login(data: LoginUserInput!): AuthPayload!
+  monthFreeDiscount(data: String!): String
   updateDailyTarget(data: UpdateDailyTarget!): DailyTarget!
   updateUser(data: UpdateUserInput!): User!
   updateVerb(data: VerbUpdateInput!): Verb!

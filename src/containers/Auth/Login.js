@@ -54,6 +54,10 @@ const Login = ({ classes, history }) => {
     }
   }, [data, error, history, setLoggedIn]);
 
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+
   return (
     <>
       <Grid container justify="center">
