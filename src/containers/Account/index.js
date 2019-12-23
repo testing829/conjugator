@@ -25,7 +25,7 @@ function Account({ history }) {
   const [billingDate, setBillingDate] = useState();
   const [nextBillingDate, setNextBillingDate] = useState();
   const [monthlyProgress, setMonthlyProgress] = useState();
-  const [chartData, setChartData] = useState();
+  const [chartData, setChartData] = useState(null);
   const [percent, setPercent] = useState(0);
   const [value, setValue] = useState(0);
 
@@ -64,7 +64,7 @@ function Account({ history }) {
       const todaysDay = moment(new Date()).date();
       const difference = todaysDay - accountCreatedDay;
       let billingDateTemp;
-      if (difference > 0) {
+      if (difference >= 0) {
         billingDateTemp = moment()
           .subtract(difference, 'day')
           .format('YYYY-MM-DD');
@@ -114,7 +114,7 @@ function Account({ history }) {
     refetchMyLogs();
   }, []);
 
-  if (loading | loadingMyLogs | loadingMyLogsByDate | !chartData)
+  if (loading | loadingMyLogs | loadingMyLogsByDate | (chartData === null))
     return <CircularProgress />;
   else if (!userData.me) {
     history.push('/sign-up');

@@ -49,7 +49,7 @@ const Points = ({
               <StarIcon />
             </ListItemIcon>
             <ListItemText
-              primary={`Get 1000 correct conjugations before ${nextBillingDate} and get this month free`}
+              primary={`Get 1000 correct conjugations before ${nextBillingDate} and we'll give you 100% off`}
               secondary="Pay $0 this month"
               style={
                 monthlyProgress >= 1000
