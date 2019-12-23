@@ -25,7 +25,9 @@ const Mutation = {
     let subscription;
     try {
       subscription = await stripe.subscriptions.create({
-        coupon: args.data.successfulPromo ? process.env.STRIPE_COUPON : null,
+        coupon: args.data.successfulPromo
+          ? process.env.STRIPE_MONTH_FREE_COUPON
+          : null,
         customer: customer.id,
         items: [
           {
@@ -59,6 +61,28 @@ const Mutation = {
       console.log('ERR', err);
     }
     return JSON.stringify(cancel);
+  },
+  async fiftyPercentDiscount(parent, args, { prisma, request }, info) {
+    let subscription;
+    try {
+      subscription = await stripe.subscriptions.update(args.data, {
+        coupon: process.env.STRIPE_50_OFF_COUPON
+      });
+    } catch (err) {
+      console.log('ERR', err);
+    }
+    return JSON.stringify(subscription);
+  },
+  async monthFreeDiscount(parent, args, { prisma, request }, info) {
+    let subscription;
+    try {
+      subscription = await stripe.subscriptions.update(args.data, {
+        coupon: process.env.STRIPE_MONTH_FREE_COUPON
+      });
+    } catch (err) {
+      console.log('ERR', err);
+    }
+    return JSON.stringify(subscription);
   },
   async login(parent, args, { prisma }, info) {
     const user = await prisma.query.user({

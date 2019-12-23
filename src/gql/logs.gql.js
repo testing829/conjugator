@@ -79,6 +79,8 @@ const MY_LOGS = gql`
         id
         name
         email
+        createdAt
+        stripeSubId
       }
     }
   }
@@ -99,6 +101,7 @@ const MY_LOGS_BY_DATE = gql`
         id
         name
         email
+        createdAt
       }
     }
   }

@@ -1,6 +1,7 @@
 /*eslint-disable */
 import React, { useContext, useEffect, useState } from 'react';
 
+import moment from 'moment';
 import { useMutation, useQuery } from 'react-apollo-hooks';
 
 import Button from '@material-ui/core/Button';
@@ -15,10 +16,14 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
-import AccentButtons from './AccentButtons';
-import { CREATE_LOG } from '../../gql/logs.gql';
-import { VERB_QUERY } from '../../gql/verbs.gql';
 import { Context } from '../../contexts/index';
+import { CREATE_LOG, MY_LOGS, MY_LOGS_BY_DATE } from '../../gql/logs.gql';
+import { FIFTY_PERCENT_OFF, MONTH_FREE } from '../../gql/coupons.gql';
+import { GET_MY_INFO } from '../../gql/users.gql';
+import { VERB_QUERY } from '../../gql/verbs.gql';
+
+import AccentButtons from './AccentButtons';
+import PromoAchievedDialog from './PromoAchievedDialog';
 import TransformVerbEng from './TransformVerbEng';
 import Snackbar from '../../components/Snackbar/index';
 
@@ -27,8 +32,11 @@ import { withStyles } from '@material-ui/core/styles';
 
 const Homepage = ({ classes }) => {
   const [bestStreak, setBestStreak] = useState(0);
+  const [billingDate, setBillingDate] = useState();
   const [correct, setCorrect] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
+  const [monthlyProgress, setMonthlyProgress] = useState(0);
+  const [promoAchieved, setPromoAchieved] = useState(false);
   const [showNextVerb, setShowNextVerb] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [totalAnswers, setTotalAnswers] = useState(0);
@@ -56,8 +64,25 @@ const Homepage = ({ classes }) => {
   const { data, loading } = useQuery(VERB_QUERY[difficulty], {
     variables: { latam, tenseArr, subjArr }
   });
-
+  const {
+    data: myLogs,
+    refetch: refetchMyLogs,
+    loading: loadingMyLogs
+  } = useQuery(MY_LOGS);
+  const {
+    data: myLogsSinceBill,
+    refetch: refetchMyLogsByDate,
+    loading: loadingMyLogsByDate
+  } = useQuery(MY_LOGS_BY_DATE, {
+    skip: !billingDate,
+    variables: {
+      date: billingDate
+    }
+  });
+  const { data: myInfo } = useQuery(GET_MY_INFO);
   const [createLog, { data: logData }] = useMutation(CREATE_LOG);
+  const [fiftyOff] = useMutation(FIFTY_PERCENT_OFF);
+  const [monthFree] = useMutation(MONTH_FREE);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -66,6 +91,22 @@ const Homepage = ({ classes }) => {
       setCorrect(false);
       setShowNextVerb(true);
       setUserAnswer('');
+      if (myInfo.me && monthlyProgress === 500) {
+        fiftyOff({
+          variables: {
+            id: myInfo.me.stripeSubId
+          }
+        });
+        setPromoAchieved(true);
+      }
+      if (myInfo.me && monthlyProgress === 1000) {
+        monthFree({
+          variables: {
+            id: myInfo.me.stripeSubId
+          }
+        });
+        setPromoAchieved(true);
+      }
     } else {
       setSubmitted(true);
       logAnswer(userAnswer, verb);
@@ -78,12 +119,11 @@ const Homepage = ({ classes }) => {
     if (verb.answer.trim() === userAnswer.toLowerCase().trim()) {
       setCorrect(true);
       setCorrectCount(correctCount + 1);
+      setMonthlyProgress(monthlyProgress + 1);
       setTotalCorrect(totalCorrect + 1);
       if (correctCount >= bestStreak) {
         setBestStreak(bestStreak + 1);
       }
-    } else {
-      setCorrectCount(0);
     }
     setTotalAnswers(totalAnswers + 1);
   };
@@ -116,7 +156,6 @@ const Homepage = ({ classes }) => {
       const randomNum = Math.floor(Math.random() * verbsLength);
       const randomPerson = Math.floor(Math.random() * 5); // this grabs the 6 yo, tu, ellos etc that we want to use
       const randomVerb = data.verbs[randomNum];
-
       setVerb({
         answer: Object.values(randomVerb)[randomPerson],
         englishAnswer: randomVerb.verbEnglish,
@@ -130,6 +169,51 @@ const Homepage = ({ classes }) => {
       getRandomVerb();
     }
   }, [data, loading, showNextVerb]);
+
+  const getBillingDate = () => {
+    if (myLogs && Object.values(myLogs.myLogs).length) {
+      const accountCreatedDay = moment(myLogs.myLogs[0].user.createdAt).date();
+      const todaysDay = moment(new Date()).date();
+      const difference = todaysDay - accountCreatedDay;
+      if (difference > 0) {
+        const billingDateTemp = moment()
+          .subtract(difference, 'day')
+          .format('YYYY-MM-DD');
+        setBillingDate(billingDateTemp);
+      } else {
+        const billingDateTemp = moment()
+          .subtract(1, 'month')
+          .subtract(difference, 'day')
+          .format('YYYY-MM-DD');
+        setBillingDate(billingDateTemp);
+      }
+    }
+  };
+
+  const getMonthlyProgress = () => {
+    if (myLogsSinceBill) {
+      let correctCountSinceBill = 0;
+      for (let i = 0; i < myLogsSinceBill.myLogs.length; i++) {
+        if (myLogsSinceBill.myLogs[i].correct === true) {
+          correctCountSinceBill += 1;
+        }
+      }
+      setMonthlyProgress(correctCountSinceBill);
+    }
+  };
+
+  useEffect(() => {
+    getBillingDate();
+    refetchMyLogsByDate();
+  }, [myLogs]);
+
+  useEffect(() => {
+    getMonthlyProgress();
+  }, [myLogsSinceBill]);
+
+  useEffect(() => {
+    refetchMyLogs();
+  }, []);
 
   if (loading) {
     return (
@@ -166,28 +250,38 @@ const Homepage = ({ classes }) => {
                   className={classes.dailyProgress}
                   color="primary"
                 >
-                  {correctCount} / 10
+                  {correctCount} / 35
                 </Typography>
               </Grid>
             </Grid>
 
             <LinearProgress
-              className={correctCount < 10 ? null : classes.progressBar}
-              value={correctCount < 10 ? correctCount * 10 : 0}
+              className={correctCount < 35 ? null : classes.progressBar}
+              value={correctCount < 35 ? correctCount * 2.86 : 0}
               variant="determinate"
             />
             <Card className={classes.card}>
               <CardContent>
                 <CardActions disableSpacing>
                   <Grid container justify="space-between">
-                    <Grid item xs={4}>
+                    {/* <Grid item xs={4}>
                       <Typography className={classes.streakText}>
                         Best Streak: {bestStreak}
+                      </Typography>
+                    </Grid> */}
+                    <Grid item xs={4}>
+                      <Typography className={classes.streakText}>
+                        Monthly Progress:{' '}
+                        {loadingMyLogs || loadingMyLogsByDate ? (
+                          <CircularProgress size={15} />
+                        ) : (
+                          monthlyProgress
+                        )}
                       </Typography>
                     </Grid>
                     <Grid item xs={4}>
                       <Typography className={classes.streakText}>
-                        {`Percentage: ${
+                        {`Session score: ${
                           totalCorrect / totalAnswers
                             ? Math.round((totalCorrect / totalAnswers) * 100)
                             : 0
@@ -291,8 +385,13 @@ const Homepage = ({ classes }) => {
             </Card>
           </Grid>
         </Grid>
+        <PromoAchievedDialog
+          monthlyProgress={monthlyProgress}
+          promoAchieved={promoAchieved}
+          setPromoAchieved={setPromoAchieved}
+        />
         <Snackbar
-          duration={100000}
+          duration={10000000}
           open={correct}
           setOpen={setCorrect}
           text="Correct!"
