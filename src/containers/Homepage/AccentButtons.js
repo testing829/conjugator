@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 const AccentButtons = ({ addAccent, classes, width }) => {
   let accents;
   if (width === 'sm' || width === 'xs') {
-    accents = ['á', 'é', 'í', 'ñ', 'ú'];
+    accents = ['á', 'é', 'í', 'ñ', 'ó'];
   } else {
     accents = ['á', 'é', 'í', 'ñ', 'ó', 'ú'];
   }
