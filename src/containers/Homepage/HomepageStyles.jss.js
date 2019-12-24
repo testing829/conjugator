@@ -61,6 +61,11 @@ const styles = theme => ({
     backgroundColor: '#E0E0E0',
     marginTop: theme.spacing(1)
   },
+  submittedButtonWrong: {
+    backgroundColor: '#f44336',
+    color: '#FFFF',
+    marginTop: theme.spacing(1)
+  },
   verbContent: {
     display: 'flex',
     alignContent: 'center',

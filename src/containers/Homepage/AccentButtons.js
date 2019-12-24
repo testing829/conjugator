@@ -3,9 +3,9 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
-import withWidth from '@material-ui/core/withWidth';
 import styles from './HomepageStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
+import withWidth from '@material-ui/core/withWidth';
 
 const AccentButtons = ({ addAccent, classes, width }) => {
   let accents;
@@ -16,7 +16,7 @@ const AccentButtons = ({ addAccent, classes, width }) => {
   }
 
   return (
-    <Grid container justify="flex-start">
+    <Grid container>
       <Grid item xs={12}>
         {accents.map((accent, index) => {
           return (
@@ -25,7 +25,6 @@ const AccentButtons = ({ addAccent, classes, width }) => {
               className={classes.accentButton}
               onClick={() => addAccent(accent)}
               size="small"
-              style={{ padding: 0 }}
             >
               {accent}
             </Button>

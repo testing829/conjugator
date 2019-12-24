@@ -87,7 +87,7 @@ const Homepage = ({ classes }) => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    if (submitted) {
+    if (submitted && verb.answer.trim() === userAnswer.toLowerCase().trim()) {
       setSubmitted(false);
       setCorrect(false);
       setShowNextVerb(true);
@@ -108,7 +108,7 @@ const Homepage = ({ classes }) => {
         });
         setPromoAchieved(true);
       }
-    } else {
+    } else if (!submitted) {
       setSubmitted(true);
       logAnswer(userAnswer, verb);
       setShowNextVerb(false);
@@ -117,7 +117,7 @@ const Homepage = ({ classes }) => {
   };
 
   const handleStreak = () => {
-    if (verb.answer.trim() === userAnswer.toLowerCase().trim()) {
+    if (verb.answer === userAnswer.toLowerCase().trim()) {
       setCorrect(true);
       setCorrectCount(correctCount + 1);
       setMonthlyProgress(monthlyProgress + 1);
@@ -130,14 +130,13 @@ const Homepage = ({ classes }) => {
   };
 
   const logAnswer = async (userAnswer, verb) => {
-    const answer = userAnswer.toLowerCase();
     try {
       await createLog({
         variables: {
           correct: answer === verb.answer ? true : false,
           correctAnswer: verb.answer,
           tense: verb.tenseEnglish,
-          userAnswer: answer,
+          userAnswer,
           verbInfinitive: verb.infinitive,
           verbPerson: verb.pronoun
         }
@@ -340,8 +339,8 @@ const Homepage = ({ classes }) => {
                         ) : null}
                       </Collapse>
                     </Grid>
+                    <AccentButtons addAccent={addAccent} />
                     <Grid item xs={12}>
-                      <AccentButtons addAccent={addAccent} />
                       <Grid container>
                         <Grid item xs={12}>
                           <TextField
@@ -357,30 +356,45 @@ const Homepage = ({ classes }) => {
                             }}
                             className={classes.input}
                             error={submitted && !correct}
-                            onChange={
-                              submitted
-                                ? null
-                                : event => setUserAnswer(event.target.value)
+                            onChange={event =>
+                              setUserAnswer(event.target.value)
                             }
-                            placeholder="Enter conjugated verb..."
+                            placeholder={
+                              submitted && !correct
+                                ? 'Enter correct answer'
+                                : 'Enter conjugated verb...'
+                            }
                             value={userAnswer}
                             variant="outlined"
                           />
                         </Grid>
                       </Grid>
-
+                      {console.log(
+                        'verb.correctAnswer...',
+                        submitted,
+                        userAnswer !== verb.answer,
+                        userAnswer,
+                        verb.answer
+                      )}
                       <Grid>
                         <Button
                           className={
-                            submitted
+                            !submitted
+                              ? classes.submitButton
+                              : userAnswer.toLowerCase().trim() === verb.answer
                               ? classes.submittedButton
-                              : classes.submitButton
+                              : classes.submittedButtonWrong
                           }
                           onClick={handleSubmit}
                           variant="contained"
                         >
-                          {submitted ? 'Next' : 'Answer'}
-                          {submitted ? (
+                          {!submitted
+                            ? 'Answer'
+                            : userAnswer.toLowerCase().trim() === verb.answer
+                            ? 'Next'
+                            : 'Enter correct answer'}
+                          {submitted &&
+                          userAnswer.toLowerCase().trim() === verb.answer ? (
                             <ArrowForwardIcon style={{ paddingLeft: '5px' }} />
                           ) : null}
                         </Button>
