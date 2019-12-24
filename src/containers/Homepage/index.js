@@ -308,8 +308,7 @@ const Homepage = ({ classes }) => {
                     <Typography className={classes.verbText}>
                       {`${verb.infinitive.charAt(0).toUpperCase() +
                         verb.infinitive.slice(1)}`}{' '}
-                      (
-                      <TransformVerbEng verb={verb} />)
+                      - <TransformVerbEng verb={verb} />
                     </Typography>
                   </Grid>
                   <Grid item>

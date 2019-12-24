@@ -1,10 +1,6 @@
 const TransformVerbEng = ({ verb }) => {
   if (!verb.infinitive) return null;
 
-  // reflexive verbs. You washed myself. Should be you washed yourself
-  // could remove reflexive
-  // agredecer = they am grateful for
-
   const {
     englishAnswer,
     infinitive,
@@ -15,7 +11,7 @@ const TransformVerbEng = ({ verb }) => {
 
   const engPersonObj = {
     form1s: 'I',
-    form2s: 'you',
+    form2s: 'you (informal)',
     form3s: 'he/she',
     form1p: 'we',
     form2p: 'you all',
