@@ -25,10 +25,6 @@ const Points = ({
   percent,
   nextBillingDate
 }) => {
-  console.log('TCL: nextBillingDate', nextBillingDate, percent);
-
-  console.log('TCL: monthlyProgress', monthlyProgress);
-
   if (nextBillingDate === undefined || monthlyProgress === undefined) {
     return (
       <Grid container justify="center" style={{ paddingTop: '26px' }}>

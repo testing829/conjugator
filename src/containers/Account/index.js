@@ -117,7 +117,6 @@ function Account({ history }) {
     refetchMyLogs();
   }, []);
 
-  console.log('TCL: Account -> chartData', chartData);
   if (loading | loadingMyLogs | loadingMyLogsByDate | (chartData === 0))
     return <CircularProgress />;
   else if (!userData.me) {
