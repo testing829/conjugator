@@ -131,6 +131,7 @@ const Homepage = ({ classes }) => {
 
   const logAnswer = async (userAnswer, verb) => {
     try {
+      const answer = userAnswer.toLowerCase().trim();
       await createLog({
         variables: {
           correct: answer === verb.answer ? true : false,
@@ -369,13 +370,6 @@ const Homepage = ({ classes }) => {
                           />
                         </Grid>
                       </Grid>
-                      {console.log(
-                        'verb.correctAnswer...',
-                        submitted,
-                        userAnswer !== verb.answer,
-                        userAnswer,
-                        verb.answer
-                      )}
                       <Grid>
                         <Button
                           className={
