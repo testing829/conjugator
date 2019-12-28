@@ -8,10 +8,12 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 
 import { Context } from '../../contexts/index';
-import { LOGIN } from '../../gql/users.gql';
+import ForgotDialog from './ForgotDialog';
+import { FORGOT_PASSWORD, LOGIN } from '../../gql/users.gql';
 import Snackbar from '../../components/Snackbar/index';
 
 import styles from './Auth.jss';
@@ -21,6 +23,7 @@ const Login = ({ classes, history }) => {
   const [email, setEmail] = useState('');
 
   const [open, setOpen] = useState(false);
+  const [forgotPassword, setForgotPassword] = useState(false);
   const [password, setPassword] = useState('');
 
   const { setLoggedIn } = useContext(Context);
@@ -30,7 +33,6 @@ const Login = ({ classes, history }) => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-
     login({
       variables: {
         email: email.toLowerCase(),
@@ -96,6 +98,13 @@ const Login = ({ classes, history }) => {
               />
             </Grid>
             <Grid item xs={12}>
+              <Typography>
+                <Link onClick={() => setForgotPassword(!forgotPassword)}>
+                  Forgot password?
+                </Link>
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
               {error ? (
                 <Typography className={classes.errorMessage}>
                   Unable to login
@@ -123,6 +132,15 @@ const Login = ({ classes, history }) => {
           </Grid>
         </Grid>
       </Grid>
+      <ForgotDialog
+        open={forgotPassword}
+        placeholder={'Enter your email address..'}
+        setOpen={setForgotPassword}
+        subtitle={
+          "It happens to the best of us. Just enter your email address below and we'll send you a link to reset your password."
+        }
+        title={'Forgot your password?'}
+      />
       <Snackbar open={open} setOpen={setOpen} text={'Successful Login'} />
     </>
   );

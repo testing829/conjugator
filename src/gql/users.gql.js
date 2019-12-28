@@ -33,16 +33,9 @@ const CREATE_USER = gql`
   }
 `;
 
-const LOGIN = gql`
-  mutation($email: String!, $password: String!) {
-    login(data: { email: $email, password: $password }) {
-      user {
-        id
-        name
-        email
-      }
-      token
-    }
+const FORGOT_PASSWORD = gql`
+  mutation($email: String!) {
+    forgotPassword(data: $email)
   }
 `;
 
@@ -64,6 +57,19 @@ const GET_MY_INFO = gql`
         correct
         createdAt
       }
+    }
+  }
+`;
+
+const LOGIN = gql`
+  mutation($email: String!, $password: String!) {
+    login(data: { email: $email, password: $password }) {
+      user {
+        id
+        name
+        email
+      }
+      token
     }
   }
 `;
@@ -93,4 +99,11 @@ const UPDATE_USER = gql`
   }
 `;
 
-export { CANCEL_SUBSCRIPTION, CREATE_USER, LOGIN, GET_MY_INFO, UPDATE_USER };
+export {
+  CANCEL_SUBSCRIPTION,
+  CREATE_USER,
+  FORGOT_PASSWORD,
+  GET_MY_INFO,
+  LOGIN,
+  UPDATE_USER
+};

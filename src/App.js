@@ -11,6 +11,7 @@ import { Context } from './contexts/index';
 import Account from './containers/Account';
 import CancelSubscription from './containers/Account/CancelSubscription';
 import Feedback from './containers/Feedback';
+import ForgotPassword from './containers/Auth/ForgotPassword';
 import Homepage from './containers/Homepage/index';
 import Login from './containers/Auth/Login';
 import Nav from './components/Nav/index';
@@ -31,8 +32,8 @@ function App() {
 
   const client = token
     ? new ApolloClient({
-        uri: process.env.REACT_APP_HEROKU_URL,
-        // uri: 'http://localhost:4000/',
+        // uri: process.env.REACT_APP_HEROKU_URL,
+        uri: 'http://localhost:4000/',
         request: async operation => {
           operation.setContext({
             headers: {
@@ -42,8 +43,8 @@ function App() {
         }
       })
     : new ApolloClient({
-        uri: process.env.REACT_APP_HEROKU_URL
-        // uri: 'http://localhost:4000/'
+        // uri: process.env.REACT_APP_HEROKU_URL
+        uri: 'http://localhost:4000/'
       });
 
   return (
@@ -69,6 +70,10 @@ function App() {
           exact
           path="/cancel-account"
           render={props => <CancelSubscription {...props} />}
+        />
+        <Route
+          path="/forgot-password"
+          render={props => <ForgotPassword {...props} />}
         />
         <Route render={() => <h1>URL not found!</h1>} />
       </Switch>
