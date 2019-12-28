@@ -1,5 +1,11 @@
 import getUserId from '../utils/getUserId';
 
+const express = require('express');
+const bodyParser = require('body-parser');
+const exphbs = require('express-handlebars');
+const nodemailer = require('nodemailer');
+const smtpTransport = require('nodemailer-smtp-transport');
+
 const Query = {
   users(parent, args, { prisma }, info) {
     const opArgs = {
@@ -112,6 +118,44 @@ const Query = {
     };
     return prisma.query.bestStreaks(opArgs, info);
   }
+  // async forgotPassword(parent, args, { prisma, request }, info) {
+  //   console.log('TCL: forgotPassword -> args.data', args.data);
+  //   const userId = getUserId(request);
+  //   console.log('TCL: forgotPassword -> userId', userId);
+
+  //   const user = await prisma.query.user(
+  //     {
+  //       where: {
+  //         id: userId
+  //       }
+  //     },
+  //     info
+  //   );
+  //   console.log('TCL: forgotPassword -> user', user);
+  //   const transporter = nodemailer.createTransport(
+  //     smtpTransport({
+  //       service: 'gmail',
+  //       host: 'smtp.gmail.com',
+  //       auth: {
+  //         user: 'conjugator.app@gmail.com',
+  //         pass: 'UjvqU3Emk7iepGiXVEU-'
+  //       }
+  //     })
+  //   );
+  //   try {
+  //     await transporter.sendMail({
+  //       from: '"Conjugator" <conjugator.app@gmail.com>', // sender address
+  //       to: `${args.data}`,
+  //       subject: 'Hello ✔', // Subject line
+  //       text: 'Hello world!', // plain text body
+  //       html: '<b>Hello world?</b>' // html body
+  //     });
+  //   } catch (err) {
+  //     console.log('Error sending mail:', err);
+  //   }
+
+  //   return 'hello';
+  // }
 };
 
 export { Query as default };

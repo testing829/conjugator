@@ -10,6 +10,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const nodemailer = require('nodemailer');
+const smtpTransport = require('nodemailer-smtp-transport');
 
 const Mutation = {
   async createUser(parent, args, { prisma }, info) {
@@ -312,30 +313,34 @@ const Mutation = {
     });
   },
 
-  async sendEmail(parent, args, { prisma, request }, info) {
-    let testAccount = await nodemailer.createTestAccount();
-
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.ethereal.email',
-      port: 587,
-      auth: {
-        user: 'linnie.mann@ethereal.email',
-        pass: 'T45C4hnqbnFfZ5wMqV'
+  async forgotPassword(parent, args, { prisma, request }, info) {
+    const user = await prisma.query.user({
+      where: {
+        email: args.data
       }
     });
-    let infoRes = await transporter.sendMail({
-      from: '"Fred Foo 👻" <nickoferrall@gmail.com>', // sender address
-      to: '"Nick O" <nickoferrall@gmail.com>', // list of receivers
-      subject: 'Hello ✔', // Subject line
-      text: 'Hello world?', // plain text body
-      html: '<b>Hello world?</b>' // html body
-    });
 
-    console.log('Message sent: %s', infoRes.messageId);
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+    const transporter = nodemailer.createTransport(
+      smtpTransport({
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS
+        }
+      })
+    );
+    try {
+      await transporter.sendMail({
+        from: '"Conjugator" <conjugator.app@gmail.com>',
+        to: `nickoferrall@gmail.com`,
+        subject: 'Reset password',
+        html: `<div>Hey ${user.name}, \n <p>Here’s the password reset link you requested. Please click the link to reset your password and regain access to your account: <a href="https://conjugator.io/#/forgot-password/${user.id}">https://conjugator.io/#/forgot-password/${user.id}</a></p>\n <p>If you have any problems resetting your password, just respond to this email and we'll be happy to help.</p></div>`
+      });
+    } catch (err) {
+      console.log('Error sending mail:', err);
+    }
 
-    // Preview only available when sending through an Ethereal account
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(infoRes));
     return 'hello';
   }
 };

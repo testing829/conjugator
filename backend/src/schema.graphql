@@ -66,6 +66,7 @@ type Query {
     orderBy: BestStreakOrderByInput
     where: BestStreakWhereInput
   ): [BestStreak!]!
+  # forgotPassword(data: String!): String
 }
 
 type Mutation {
@@ -78,9 +79,9 @@ type Mutation {
   createVerb(data: VerbCreateInput!): Verb!
   deleteUser: User!
   fiftyPercentDiscount(data: String!): String
+  forgotPassword(data: String!): String
   login(data: LoginUserInput!): AuthPayload!
   monthFreeDiscount(data: String!): String
-  sendEmail: String
   updateDailyTarget(data: UpdateDailyTarget!): DailyTarget!
   updateUser(data: UpdateUserInput!): User!
   updateVerb(data: VerbUpdateInput!): Verb!
