@@ -58,6 +58,7 @@ const ChargeMoney = ({
 
   return (
     <StripeCheckout
+      allowRememberMe={false}
       amount={successfulPromo ? 0 : 599}
       className={classes.submit}
       currency="USD"

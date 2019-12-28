@@ -111,7 +111,7 @@ function MonthlyChart() {
           alignItems: 'center'
         }}
       >
-        <div style={{ width: '100px' }}>
+        {/* <div style={{ width: '100px' }}>
           <div>
             <h2>{`${((correct() / answers()) * 100).toFixed(1)} %`}</h2>
             <p>Percent</p>
@@ -124,7 +124,7 @@ function MonthlyChart() {
             <h2>{answers()}</h2>
             <p>Total answers</p>
           </div>
-        </div>
+        </div> */}
         <div style={{ width: '100%', height: '300px' }}>
           <ResponsiveContainer>
             <AreaChart width={600} height={200} data={monthData} syncId="anyId">
