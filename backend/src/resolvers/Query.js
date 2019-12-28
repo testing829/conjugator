@@ -1,8 +1,5 @@
 import getUserId from '../utils/getUserId';
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const exphbs = require('express-handlebars');
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 
@@ -117,45 +114,39 @@ const Query = {
       where: args.where
     };
     return prisma.query.bestStreaks(opArgs, info);
+  },
+  async forgotPassword(parent, args, { prisma, request }, info) {
+    const user = await prisma.query.user({
+      where: {
+        email: args.data
+      }
+    });
+
+    const transporter = nodemailer.createTransport(
+      smtpTransport({
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS
+        }
+      })
+    );
+    let mail;
+    console.log('TCL: forgotPassword -> mail', mail);
+    try {
+      mail = await transporter.sendMail({
+        from: '"Conjugator" <conjugator.app@gmail.com>',
+        to: `nickoferrall@gmail.com`,
+        subject: 'Reset password',
+        html: `<div>Hey ${user.name}, \n <p>Here’s the password reset link you requested. Please click the link to reset your password and regain access to your account: <a href="https://conjugator.io/#/forgot-password/${user.id}">https://conjugator.io/#/forgot-password/${user.id}</a></p>\n <p>If you have any problems resetting your password, just respond to this email and we'll be happy to help.</p></div>`
+      });
+    } catch (err) {
+      console.log('Error sending mail:', err);
+    }
+
+    return 'hello';
   }
-  // async forgotPassword(parent, args, { prisma, request }, info) {
-  //   console.log('TCL: forgotPassword -> args.data', args.data);
-  //   const userId = getUserId(request);
-  //   console.log('TCL: forgotPassword -> userId', userId);
-
-  //   const user = await prisma.query.user(
-  //     {
-  //       where: {
-  //         id: userId
-  //       }
-  //     },
-  //     info
-  //   );
-  //   console.log('TCL: forgotPassword -> user', user);
-  //   const transporter = nodemailer.createTransport(
-  //     smtpTransport({
-  //       service: 'gmail',
-  //       host: 'smtp.gmail.com',
-  //       auth: {
-  //         user: 'conjugator.app@gmail.com',
-  //         pass: 'UjvqU3Emk7iepGiXVEU-'
-  //       }
-  //     })
-  //   );
-  //   try {
-  //     await transporter.sendMail({
-  //       from: '"Conjugator" <conjugator.app@gmail.com>', // sender address
-  //       to: `${args.data}`,
-  //       subject: 'Hello ✔', // Subject line
-  //       text: 'Hello world!', // plain text body
-  //       html: '<b>Hello world?</b>' // html body
-  //     });
-  //   } catch (err) {
-  //     console.log('Error sending mail:', err);
-  //   }
-
-  //   return 'hello';
-  // }
 };
 
 export { Query as default };
