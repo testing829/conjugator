@@ -6,6 +6,10 @@ import verbsFile from '../../csvjson';
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
 // const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
+const express = require('express');
+const bodyParser = require('body-parser');
+const exphbs = require('express-handlebars');
+const nodemailer = require('nodemailer');
 
 const Mutation = {
   async createUser(parent, args, { prisma }, info) {
@@ -306,6 +310,33 @@ const Mutation = {
         info
       });
     });
+  },
+
+  async sendEmail(parent, args, { prisma, request }, info) {
+    let testAccount = await nodemailer.createTestAccount();
+
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.ethereal.email',
+      port: 587,
+      auth: {
+        user: 'linnie.mann@ethereal.email',
+        pass: 'T45C4hnqbnFfZ5wMqV'
+      }
+    });
+    let infoRes = await transporter.sendMail({
+      from: '"Fred Foo 👻" <nickoferrall@gmail.com>', // sender address
+      to: '"Nick O" <nickoferrall@gmail.com>', // list of receivers
+      subject: 'Hello ✔', // Subject line
+      text: 'Hello world?', // plain text body
+      html: '<b>Hello world?</b>' // html body
+    });
+
+    console.log('Message sent: %s', infoRes.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+    // Preview only available when sending through an Ethereal account
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(infoRes));
+    return 'hello';
   }
 };
 

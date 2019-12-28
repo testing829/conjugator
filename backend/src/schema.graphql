@@ -80,6 +80,7 @@ type Mutation {
   fiftyPercentDiscount(data: String!): String
   login(data: LoginUserInput!): AuthPayload!
   monthFreeDiscount(data: String!): String
+  sendEmail: String
   updateDailyTarget(data: UpdateDailyTarget!): DailyTarget!
   updateUser(data: UpdateUserInput!): User!
   updateVerb(data: VerbUpdateInput!): Verb!
