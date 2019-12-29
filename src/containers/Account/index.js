@@ -15,7 +15,11 @@ import Typography from '@material-ui/core/Typography';
 
 import { Context } from '../../contexts/index';
 import { AM_I_LOGGED_IN } from '../../gql/logs.gql';
-import { MY_LOGS, MY_LOGS_BY_DATE } from '../../gql/logs.gql';
+import {
+  MONTH_CORRECT_COUNT,
+  MY_LOGS,
+  MY_LOGS_BY_DATE
+} from '../../gql/logs.gql';
 import MonthChart from './Month';
 import Points from './Points';
 import WeekChart from './Week';
@@ -34,17 +38,12 @@ function Account({ history }) {
 
   const { setLoggedIn } = useContext(Context);
   const { data: userData, loading } = useQuery(AM_I_LOGGED_IN);
-
-  const cancelAccount = () => {
-    history.push('/cancel-account');
-  };
-
-  const logOut = () => {
-    localStorage.clear();
-    setLoggedIn(false);
-    history.push('/login');
-  };
-
+  const { data: correctCount, loading: loadingCount } = useQuery(
+    MONTH_CORRECT_COUNT
+  );
+  const monthCorrectCount = correctCount
+    ? correctCount.monthCorrectCount
+    : null;
   const {
     data: myLogs,
     refetch: refetchMyLogs,
@@ -60,6 +59,16 @@ function Account({ history }) {
       date: billingDate
     }
   });
+
+  const cancelAccount = () => {
+    history.push('/cancel-account');
+  };
+
+  const logOut = () => {
+    localStorage.clear();
+    setLoggedIn(false);
+    history.push('/login');
+  };
 
   const getBillingDate = () => {
     if (myLogs && myLogs.myLogs.length) {
@@ -87,19 +96,22 @@ function Account({ history }) {
   };
 
   const getMonthlyProgress = () => {
-    if (myLogsSinceBill) {
-      let correctCountSinceBill = 0;
-      for (let i = 0; i < myLogsSinceBill.myLogs.length; i++) {
-        if (myLogsSinceBill.myLogs[i].correct === true) {
-          correctCountSinceBill += 1;
-        }
-      }
-      setMonthlyProgress(correctCountSinceBill);
-      const percentTemp = (correctCountSinceBill / 1000) * 100;
+    if (!loadingCount) {
+      setMonthlyProgress(monthCorrectCount);
+      const percentTemp =
+        monthCorrectCount > 500
+          ? (monthCorrectCount / 1000) * 100
+          : (monthCorrectCount / 500) * 100;
       setPercent(percentTemp);
       setChartData([
-        { x: 1, y: correctCountSinceBill },
-        { x: 2, y: 1000 - correctCountSinceBill }
+        { x: 1, y: monthCorrectCount },
+        {
+          x: 2,
+          y:
+            monthCorrectCount > 500
+              ? 1000 - monthCorrectCount
+              : 500 - monthCorrectCount
+        }
       ]);
     }
   };

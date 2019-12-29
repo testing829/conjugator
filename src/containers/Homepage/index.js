@@ -1,7 +1,6 @@
 /*eslint-disable */
 import React, { useContext, useEffect, useState } from 'react';
 
-import moment from 'moment';
 import { useMutation, useQuery } from 'react-apollo-hooks';
 
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -18,7 +17,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 import { Context } from '../../contexts/index';
-import { CREATE_LOG, MY_LOGS, MY_LOGS_BY_DATE } from '../../gql/logs.gql';
+import { CREATE_LOG, MONTH_CORRECT_COUNT } from '../../gql/logs.gql';
 import { FIFTY_PERCENT_OFF, MONTH_FREE } from '../../gql/coupons.gql';
 import { GET_MY_INFO } from '../../gql/users.gql';
 import { VERB_QUERY } from '../../gql/verbs.gql';
@@ -33,7 +32,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 const Homepage = ({ classes }) => {
   const [bestStreak, setBestStreak] = useState(0);
-  const [billingDate, setBillingDate] = useState();
   const [correct, setCorrect] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
   const [monthlyProgress, setMonthlyProgress] = useState(0);
@@ -65,21 +63,9 @@ const Homepage = ({ classes }) => {
   const { data, loading } = useQuery(VERB_QUERY[difficulty], {
     variables: { latam, tenseArr, subjArr }
   });
-  const {
-    data: myLogs,
-    refetch: refetchMyLogs,
-    loading: loadingMyLogs
-  } = useQuery(MY_LOGS);
-  const {
-    data: myLogsSinceBill,
-    refetch: refetchMyLogsByDate,
-    loading: loadingMyLogsByDate
-  } = useQuery(MY_LOGS_BY_DATE, {
-    skip: !billingDate,
-    variables: {
-      date: billingDate
-    }
-  });
+
+  const { data: monthCorrect } = useQuery(MONTH_CORRECT_COUNT);
+
   const { data: myInfo } = useQuery(GET_MY_INFO);
   const [createLog, { data: logData }] = useMutation(CREATE_LOG);
   const [fiftyOff] = useMutation(FIFTY_PERCENT_OFF);
@@ -171,54 +157,11 @@ const Homepage = ({ classes }) => {
     }
   }, [data, loading, showNextVerb]);
 
-  const getBillingDate = () => {
-    if (myLogs && myLogs.myLogs) {
-      if (myLogs.myLogs[0]) {
-        const accountCreatedDay = moment(
-          myLogs.myLogs[0].user.createdAt
-        ).date();
-        const todaysDay = moment(new Date()).date();
-        const difference = todaysDay - accountCreatedDay;
-        if (difference > 0) {
-          const billingDateTemp = moment()
-            .subtract(difference, 'day')
-            .format('YYYY-MM-DD');
-          setBillingDate(billingDateTemp);
-        } else {
-          const billingDateTemp = moment()
-            .subtract(1, 'month')
-            .subtract(difference, 'day')
-            .format('YYYY-MM-DD');
-          setBillingDate(billingDateTemp);
-        }
-      }
+  useEffect(() => {
+    if (monthCorrect && monthCorrect.monthCorrectCount) {
+      setMonthlyProgress(monthCorrect.monthCorrectCount);
     }
-  };
-
-  const getMonthlyProgress = () => {
-    if (myLogsSinceBill) {
-      let correctCountSinceBill = 0;
-      for (let i = 0; i < myLogsSinceBill.myLogs.length; i++) {
-        if (myLogsSinceBill.myLogs[i].correct === true) {
-          correctCountSinceBill += 1;
-        }
-      }
-      setMonthlyProgress(correctCountSinceBill);
-    }
-  };
-
-  useEffect(() => {
-    getBillingDate();
-    refetchMyLogsByDate();
-  }, [myLogs]);
-
-  useEffect(() => {
-    getMonthlyProgress();
-  }, [myLogsSinceBill]);
-
-  useEffect(() => {
-    refetchMyLogs();
-  }, []);
+  }, [monthCorrect]);
 
   if (loading) {
     return (
@@ -276,12 +219,7 @@ const Homepage = ({ classes }) => {
                     </Grid> */}
                     <Grid item xs={4}>
                       <Typography className={classes.streakText}>
-                        Monthly Progress:{' '}
-                        {loadingMyLogs || loadingMyLogsByDate ? (
-                          <CircularProgress size={15} />
-                        ) : (
-                          monthlyProgress
-                        )}
+                        Monthly Progress: {monthlyProgress}
                       </Typography>
                     </Grid>
                     <Grid item xs={4}>

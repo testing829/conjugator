@@ -66,6 +66,8 @@ type Query {
     orderBy: BestStreakOrderByInput
     where: BestStreakWhereInput
   ): [BestStreak!]!
+  monthCorrectCount: Int
+  todayCorrectCount: Int
 }
 
 type Mutation {
