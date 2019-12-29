@@ -104,6 +104,7 @@ input CreateUserInput {
 
 input UpdateUserInput {
   email: String
+  id: ID!
   name: String
   password: String
   premium: Boolean

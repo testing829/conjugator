@@ -13,7 +13,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import { FORGOT_PASSWORD, LOGIN } from '../../gql/users.gql';
+import { FORGOT_PASSWORD } from '../../gql/users.gql';
 
 const DialogComponent = ({ open, placeholder, setOpen, subtitle, title }) => {
   const [email, setEmail] = useState();
@@ -37,7 +37,6 @@ const DialogComponent = ({ open, placeholder, setOpen, subtitle, title }) => {
 
   useEffect(() => {
     if (data && !error) {
-      console.log('TCL: DialogComponent -> data', data);
       setSentEmail(true);
       setTimeout(() => {
         setOpen(false);

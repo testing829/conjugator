@@ -34,6 +34,9 @@ const styles = theme => ({
   navLink: {
     textDecoration: 'none'
   },
+  passwordResetText: {
+    margin: theme.spacing(2, 0)
+  },
   priceContainer: {
     padding: theme.spacing(0, 1)
   },

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useMutation } from 'react-apollo-hooks';
 
@@ -9,15 +9,57 @@ import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 
+import { UPDATE_USER } from '../../gql/users.gql';
+
 import styles from './Auth.jss';
 import { withStyles } from '@material-ui/core/styles';
 
-const ForgotPassword = ({ classes, location }) => {
+const ForgotPassword = ({ classes, history, location }) => {
+  const [confirmPassword, setConfirmPassword] = useState();
+  const [passwordMismatch, setPasswordMismatch] = useState(false);
+  const [newPassword, setNewPassword] = useState();
+
   const idIndex = location.pathname.lastIndexOf('/');
   const id = location.pathname.substring(idIndex + 1);
 
-  //   const [{ data }] = useQuery(GET_MY_INFO);
+  const [updateUser, { data, error }] = useMutation(UPDATE_USER);
 
+  const handleSubmit = async () => {
+    if (newPassword === confirmPassword) {
+      setPasswordMismatch(false);
+
+      await updateUser({
+        variables: {
+          id,
+          password: newPassword
+        }
+      });
+    } else {
+      setPasswordMismatch(true);
+    }
+  };
+
+  const goToLogin = () => {
+    history.push('/login');
+  };
+
+  if (data) {
+    return (
+      <Grid container>
+        <Grid item className={classes.userDetails} xs={12}>
+          <Typography className={classes.passwordResetText} variant="h5">
+            Password updated
+          </Typography>
+          <Typography className={classes.passwordResetText} variant="subtitle1">
+            Your password has been successfully updated.
+          </Typography>
+          <Button color="primary" onClick={goToLogin} variant="contained">
+            Login
+          </Button>
+        </Grid>
+      </Grid>
+    );
+  }
   return (
     <Grid container justify="center">
       <Grid item className={classes.userDetails} xs={9} sm={7} md={3}>
@@ -25,19 +67,20 @@ const ForgotPassword = ({ classes, location }) => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Login {id}
+          Please create your new password
         </Typography>
         <Grid container className={classes.form} spacing={2}>
           <Grid item xs={12}>
             <TextField
-              autoComplete="email"
+              autoComplete="password"
               autoFocus
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              //   onChange={event => setEmail(event.target.value)}
+              id="newPassword"
+              label="New password"
+              name="password"
+              onChange={event => setNewPassword(event.target.value)}
               required
+              type="password"
               variant="outlined"
             />
           </Grid>
@@ -45,26 +88,36 @@ const ForgotPassword = ({ classes, location }) => {
             <TextField
               autoComplete="password"
               fullWidth
-              id="password"
-              label="Password"
+              id="confirmPassword"
+              label="Confirm new password"
               name="password"
-              //   onChange={event => setPassword(event.target.value)}
+              onChange={event => setConfirmPassword(event.target.value)}
               required
               type="password"
               variant="outlined"
             />
           </Grid>
           <Grid item xs={12}>
-            {/* {error ? (
+            {passwordMismatch && (
               <Typography className={classes.errorMessage}>
-                Unable to login
+                Are you sure your password and confirmed password are identical?
+                If the error persists, please send a message on the Feedback
+                page and we'll get back to you right away.
               </Typography>
-            ) : null} */}
+            )}
+            {error && (
+              <Typography className={classes.errorMessage}>
+                Unable to update password. Please try again. If the error
+                persists, please send a message on the Feedback page and we'll
+                get back to you right away.
+              </Typography>
+            )}
             <Button
               className={classes.submit}
               color="primary"
+              disabled={!newPassword || !confirmPassword}
               fullWidth
-              //   onClick={handleSubmit}
+              onClick={handleSubmit}
               type="submit"
               variant="contained"
             >

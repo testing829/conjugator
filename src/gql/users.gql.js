@@ -75,20 +75,8 @@ const LOGIN = gql`
 `;
 
 const UPDATE_USER = gql`
-  mutation(
-    $name: String!
-    $email: String!
-    $password: String!
-    $premium: Boolean!
-  ) {
-    updateUser(
-      data: {
-        name: $name
-        email: $email
-        password: $password
-        premium: $premium
-      }
-    ) {
+  mutation($id: ID!, $password: String) {
+    updateUser(data: { id: $id, password: $password }) {
       id
       email
       name
