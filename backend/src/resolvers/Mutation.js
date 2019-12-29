@@ -121,8 +121,6 @@ const Mutation = {
   async updateUser(parent, args, { prisma, request }, info) {
     // const userId = getUserId(request);
 
-    console.log('ARGS', args.data);
-
     if (typeof args.data.password === 'string') {
       args.data.password = await hashPassword(args.data.password);
     }
