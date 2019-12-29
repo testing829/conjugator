@@ -101,44 +101,21 @@ function YearlyChart() {
   }
 
   return (
-    <div
-      style={{
-        textAlign: 'left',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}
-    >
-      <div style={{ width: '100px' }}>
-        <div>
-          <h2>{`${((correct() / answers()) * 100).toFixed(1)} %`}</h2>
-          <p>Percent</p>
-        </div>
-        <div>
-          <h2>{correct()}</h2>
-          <p>Correct answers</p>
-        </div>
-        <div>
-          <h2>{answers()}</h2>
-          <p>Total answers</p>
-        </div>
-      </div>
-      <div style={{ width: '100%', height: '300px' }}>
-        <ResponsiveContainer>
-          <AreaChart width={600} height={200} data={yearData} syncId="anyId">
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              dataKey="name"
-              padding={{ left: 15, right: 15 }}
-              interval={2}
-            />
-            <YAxis />
-            <Tooltip />
-            <Area type="monotone" dataKey="answers" />
-            <Area type="monotone" dataKey="correct" />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
+    <div style={{ width: '100%', height: '300px' }}>
+      <ResponsiveContainer>
+        <AreaChart width={600} height={200} data={yearData} syncId="anyId">
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis
+            dataKey="name"
+            padding={{ left: 15, right: 15 }}
+            interval={2}
+          />
+          <YAxis />
+          <Tooltip />
+          <Area type="monotone" dataKey="answers" />
+          <Area type="monotone" dataKey="correct" />
+        </AreaChart>
+      </ResponsiveContainer>
     </div>
   );
 }

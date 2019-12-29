@@ -111,7 +111,7 @@ const Query = {
       where: args.where
     };
     return prisma.query.bestStreaks(opArgs, info);
-  }
+  },
 };
 
 export { Query as default };

@@ -7,6 +7,9 @@ import verbsFile from '../../csvjson';
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
 // const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
 
+const nodemailer = require('nodemailer');
+const smtpTransport = require('nodemailer-smtp-transport');
+
 const Mutation = {
   async createUser(parent, args, { prisma }, info) {
     let customer;
@@ -116,18 +119,23 @@ const Mutation = {
     );
   },
   async updateUser(parent, args, { prisma, request }, info) {
-    const userId = getUserId(request);
+    // const userId = getUserId(request);
 
     if (typeof args.data.password === 'string') {
       args.data.password = await hashPassword(args.data.password);
     }
 
-    return prisma.mutation.updateUser(
+    return await prisma.mutation.updateUser(
       {
         where: {
-          id: userId
+          id: args.data.id
         },
-        data: args.data
+        data: {
+          email: args.data.email,
+          name: args.data.name,
+          password: args.data.password,
+          premium: args.data.premium
+        }
       },
       info
     );
@@ -306,6 +314,32 @@ const Mutation = {
         info
       });
     });
+  },
+  async forgotPassword(parent, args, { prisma, request }, info) {
+    const user = await prisma.query.user({
+      where: {
+        email: args.data
+      }
+    });
+
+    const transporter = nodemailer.createTransport(
+      smtpTransport({
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS
+        }
+      })
+    );
+    const sendingMail = await transporter.sendMail({
+      from: '"Conjugator" <conjugator.app@gmail.com>',
+      to: `${user.email}`,
+      subject: 'Reset password',
+      html: `<div>Hey ${user.name}, \n <p>Here’s the password reset link you requested. Please click the link to reset your password and regain access to your account: <a href="https://conjugator.io/#/forgot-password/${user.id}">https://conjugator.io/#/forgot-password/${user.id}</a></p>\n <p>If you have any problems resetting your password, just leave a message on the Feedback page and we'll get back to you as soon as possible.</p></div>`
+    });
+
+    return JSON.stringify(sendingMail);
   }
 };
 

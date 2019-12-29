@@ -33,16 +33,9 @@ const CREATE_USER = gql`
   }
 `;
 
-const LOGIN = gql`
-  mutation($email: String!, $password: String!) {
-    login(data: { email: $email, password: $password }) {
-      user {
-        id
-        name
-        email
-      }
-      token
-    }
+const FORGOT_PASSWORD = gql`
+  mutation($email: String!) {
+    forgotPassword(data: $email)
   }
 `;
 
@@ -68,21 +61,22 @@ const GET_MY_INFO = gql`
   }
 `;
 
-const UPDATE_USER = gql`
-  mutation(
-    $name: String!
-    $email: String!
-    $password: String!
-    $premium: Boolean!
-  ) {
-    updateUser(
-      data: {
-        name: $name
-        email: $email
-        password: $password
-        premium: $premium
+const LOGIN = gql`
+  mutation($email: String!, $password: String!) {
+    login(data: { email: $email, password: $password }) {
+      user {
+        id
+        name
+        email
       }
-    ) {
+      token
+    }
+  }
+`;
+
+const UPDATE_USER = gql`
+  mutation($id: ID!, $password: String) {
+    updateUser(data: { id: $id, password: $password }) {
       id
       email
       name
@@ -93,4 +87,11 @@ const UPDATE_USER = gql`
   }
 `;
 
-export { CANCEL_SUBSCRIPTION, CREATE_USER, LOGIN, GET_MY_INFO, UPDATE_USER };
+export {
+  CANCEL_SUBSCRIPTION,
+  CREATE_USER,
+  FORGOT_PASSWORD,
+  GET_MY_INFO,
+  LOGIN,
+  UPDATE_USER
+};
