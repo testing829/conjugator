@@ -321,7 +321,6 @@ const Mutation = {
         email: args.data
       }
     });
-
     const transporter = nodemailer.createTransport(
       smtpTransport({
         service: 'gmail',
@@ -332,13 +331,14 @@ const Mutation = {
         }
       })
     );
+    const names = user.name.split(' ');
+    const firstName = names[0];
     const sendingMail = await transporter.sendMail({
       from: '"Conjugator" <conjugator.app@gmail.com>',
       to: `${user.email}`,
       subject: 'Reset password',
-      html: `<div>Hey ${user.name}, \n <p>Here’s the password reset link you requested. Please click the link to reset your password and regain access to your account: <a href="https://conjugator.io/#/forgot-password/${user.id}">https://conjugator.io/#/forgot-password/${user.id}</a></p>\n <p>If you have any problems resetting your password, just leave a message on the Feedback page and we'll get back to you as soon as possible.</p></div>`
+      html: `<div>Hey ${firstName}, \n <p>Here’s the password reset link you requested. Please click the link to reset your password and regain access to your account: <a href="https://conjugator.io/#/forgot-password/${user.id}">https://conjugator.io/#/forgot-password/${user.id}</a></p>\n <p>If you have any problems resetting your password, just leave a message on the Feedback page and we'll get back to you as soon as possible.</p></div>`
     });
-
     return JSON.stringify(sendingMail);
   }
 };

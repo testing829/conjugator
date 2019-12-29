@@ -28,6 +28,12 @@ const AM_I_LOGGED_IN = gql`
   }
 `;
 
+const MONTH_CORRECT_COUNT = gql`
+  query {
+    monthCorrectCount
+  }
+`;
+
 const CREATE_LOG = gql`
   mutation(
     $correct: Boolean!
@@ -107,4 +113,18 @@ const MY_LOGS_BY_DATE = gql`
   }
 `;
 
-export { LOGS, AM_I_LOGGED_IN, CREATE_LOG, MY_LOGS_BY_DATE, MY_LOGS };
+const TODAY_CORRECT_COUNT = gql`
+  query {
+    todayCorrectCount
+  }
+`;
+
+export {
+  LOGS,
+  AM_I_LOGGED_IN,
+  CREATE_LOG,
+  MONTH_CORRECT_COUNT,
+  MY_LOGS_BY_DATE,
+  MY_LOGS,
+  TODAY_CORRECT_COUNT
+};

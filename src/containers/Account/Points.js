@@ -116,8 +116,9 @@ const Points = ({
                       )}. Congratulations! You won't pay anything this month!`
                     : `You've got ${monthlyProgress} correct conjugations since ${moment(
                         billingDate
-                      ).format('MMM Do')}. Only ${1000 -
-                        monthlyProgress} to go!`
+                      ).format('MMM Do')}. Only ${
+                        monthlyProgress > 500 ? 1000 : 500 - monthlyProgress
+                      } to go!`
                 }
               />
             </ListItem>
