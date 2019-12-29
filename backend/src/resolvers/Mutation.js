@@ -334,9 +334,9 @@ const Mutation = {
     );
     const sendingMail = await transporter.sendMail({
       from: '"Conjugator" <conjugator.app@gmail.com>',
-      to: `nickoferrall@gmail.com`,
+      to: `${user.email}`,
       subject: 'Reset password',
-      html: `<div>Hey ${user.name}, \n <p>Here’s the password reset link you requested. Please click the link to reset your password and regain access to your account: <a href="https://conjugator.io/#/forgot-password/${user.id}">https://conjugator.io/#/forgot-password/${user.id}</a></p>\n <p>If you have any problems resetting your password, just respond to this email and we'll be happy to help.</p></div>`
+      html: `<div>Hey ${user.name}, \n <p>Here’s the password reset link you requested. Please click the link to reset your password and regain access to your account: <a href="https://conjugator.io/#/forgot-password/${user.id}">https://conjugator.io/#/forgot-password/${user.id}</a></p>\n <p>If you have any problems resetting your password, just leave a message on the Feedback page and we'll get back to you as soon as possible.</p></div>`
     });
 
     return JSON.stringify(sendingMail);
