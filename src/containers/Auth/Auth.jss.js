@@ -38,7 +38,7 @@ const styles = theme => ({
     padding: theme.spacing(0, 1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(1, 0, 2),
     width: '100%'
   },
   subtitle: {

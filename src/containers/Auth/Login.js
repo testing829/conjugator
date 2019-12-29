@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { Context } from '../../contexts/index';
 import ForgotDialog from './ForgotDialog';
-import { FORGOT_PASSWORD, LOGIN } from '../../gql/users.gql';
+import { LOGIN } from '../../gql/users.gql';
 import Snackbar from '../../components/Snackbar/index';
 
 import styles from './Auth.jss';

@@ -329,16 +329,16 @@ const Mutation = {
     );
     let mail;
     console.log('TCL: forgotPassword -> mail', mail);
-    try {
-      mail = await transporter.sendMail({
-        from: '"Conjugator" <conjugator.app@gmail.com>',
-        to: `nickoferrall@gmail.com`,
-        subject: 'Reset password',
-        html: `<div>Hey ${user.name}, \n <p>Here’s the password reset link you requested. Please click the link to reset your password and regain access to your account: <a href="https://conjugator.io/#/forgot-password/${user.id}">https://conjugator.io/#/forgot-password/${user.id}</a></p>\n <p>If you have any problems resetting your password, just respond to this email and we'll be happy to help.</p></div>`
-      });
-    } catch (err) {
-      console.log('Error sending mail:', err);
-    }
+    // try {
+    mail = await transporter.sendMail({
+      from: '"Conjugator" <conjugator.app@gmail.com>',
+      to: `nickoferrall@gmail.com`,
+      subject: 'Reset password',
+      html: `<div>Hey ${user.name}, \n <p>Here’s the password reset link you requested. Please click the link to reset your password and regain access to your account: <a href="https://conjugator.io/#/forgot-password/${user.id}">https://conjugator.io/#/forgot-password/${user.id}</a></p>\n <p>If you have any problems resetting your password, just respond to this email and we'll be happy to help.</p></div>`
+    });
+    // } catch (err) {
+    //   console.log('Error sending mail:', err);
+    // }
 
     return 'hello';
   }
