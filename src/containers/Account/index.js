@@ -38,9 +38,11 @@ function Account({ history }) {
 
   const { setLoggedIn } = useContext(Context);
   const { data: userData, loading } = useQuery(AM_I_LOGGED_IN);
-  const { data: correctCount, loading: loadingCount } = useQuery(
-    MONTH_CORRECT_COUNT
-  );
+  const {
+    data: correctCount,
+    loading: loadingCount,
+    refetch: refetchMonthCount
+  } = useQuery(MONTH_CORRECT_COUNT);
   const monthCorrectCount = correctCount
     ? correctCount.monthCorrectCount
     : null;
@@ -127,6 +129,7 @@ function Account({ history }) {
 
   useEffect(() => {
     refetchMyLogs();
+    refetchMonthCount();
   }, []);
 
   if (loading | loadingMyLogs | loadingMyLogsByDate | (chartData === 0))
