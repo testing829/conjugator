@@ -32,8 +32,8 @@ function App() {
 
   const client = token
     ? new ApolloClient({
-        // uri: process.env.REACT_APP_HEROKU_URL,
-        uri: 'http://localhost:4000/',
+        uri: process.env.REACT_APP_HEROKU_URL,
+        // uri: 'http://localhost:4000/',
         request: async operation => {
           operation.setContext({
             headers: {
@@ -43,8 +43,8 @@ function App() {
         }
       })
     : new ApolloClient({
-        // uri: process.env.REACT_APP_HEROKU_URL
-        uri: 'http://localhost:4000/'
+        uri: process.env.REACT_APP_HEROKU_URL
+        // uri: 'http://localhost:4000/'
       });
 
   return (
