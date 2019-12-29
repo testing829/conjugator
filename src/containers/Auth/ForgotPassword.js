@@ -121,7 +121,7 @@ const ForgotPassword = ({ classes, history, location }) => {
                 type="submit"
                 variant="contained"
               >
-                Login
+                Reset Password
               </Button>
             </Grid>
           </Grid>
