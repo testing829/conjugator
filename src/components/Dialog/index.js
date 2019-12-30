@@ -6,9 +6,16 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 
-const DialogComponent = ({ open, placeholder, handleSubmit, setOpen, subtitle, title }) => {
+const DialogComponent = ({
+  open,
+  placeholder,
+  handleSubmit,
+  setOpen,
+  subtitle,
+  title
+}) => {
   const handleClose = () => {
     setOpen(false);
   };
@@ -18,12 +25,12 @@ const DialogComponent = ({ open, placeholder, handleSubmit, setOpen, subtitle, t
       <DialogTitle>{title}</DialogTitle>
 
       <DialogContent>
-      <Typography variant="subtitle1">{subtitle}</Typography>
+        <Typography variant="subtitle1">{subtitle}</Typography>
       </DialogContent>
 
       <DialogContent>
         <TextField autoFocus fullWidth placeholder={placeholder} />
-    </DialogContent>
+      </DialogContent>
 
       <DialogActions>
         <Button color="primary" onClick={handleClose}>
