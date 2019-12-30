@@ -25,7 +25,8 @@ import { VERB_QUERY } from '../../gql/verbs.gql';
 import AccentButtons from './AccentButtons';
 import PromoAchievedDialog from './PromoAchievedDialog';
 import TransformVerbEng from './TransformVerbEng';
-import Snackbar from '../../components/Snackbar/index';
+import CorretSnackbar from '../../components/Snackbar/CorrectAnswer';
+import Speech from './Speech';
 
 import styles from './HomepageStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
@@ -37,6 +38,7 @@ const Homepage = ({ classes }) => {
   const [monthlyProgress, setMonthlyProgress] = useState(0);
   const [promoAchieved, setPromoAchieved] = useState(false);
   const [showNextVerb, setShowNextVerb] = useState(true);
+  // const [speak, setSpeak] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [totalAnswers, setTotalAnswers] = useState(0);
   const [totalCorrect, setTotalCorrect] = useState(0);
@@ -291,6 +293,16 @@ const Homepage = ({ classes }) => {
                                     {personObj[verb.pronoun]}
                                   </Typography>
                                 </InputAdornment>
+                              ),
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <Speech
+                                    proAccount={
+                                      myInfo && myInfo.me ? true : false
+                                    }
+                                    verb={verb.infinitive}
+                                  />
+                                </InputAdornment>
                               )
                             }}
                             className={classes.input}
@@ -343,12 +355,7 @@ const Homepage = ({ classes }) => {
           promoAchieved={promoAchieved}
           setPromoAchieved={setPromoAchieved}
         />
-        <Snackbar
-          duration={10000000}
-          open={correct}
-          setOpen={setCorrect}
-          text="Correct!"
-        />
+        <CorretSnackbar open={correct} text="Correct!" />
       </>
     );
   }
