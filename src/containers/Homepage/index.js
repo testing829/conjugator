@@ -142,9 +142,17 @@ const Homepage = ({ classes }) => {
   useEffect(() => {
     const getRandomVerb = () => {
       const verbsLength = Object.keys(data.verbs).length;
-      const randomNum = Math.floor(Math.random() * verbsLength);
+      let randomNum = Math.floor(Math.random() * verbsLength);
       const randomPerson = Math.floor(Math.random() * 5); // this grabs the 6 yo, tu, ellos etc that we want to use
-      const randomVerb = data.verbs[randomNum];
+      let randomVerb = data.verbs[randomNum];
+      if (randomVerb.infinitive === verb.infinitive) {
+        if (randomNum === 0) {
+          randomNum === 1;
+          randomVerb = data.verbs[randomNum];
+        } else {
+          randomVerb = data.verbs[randomNum - 1];
+        }
+      }
       setVerb({
         answer: Object.values(randomVerb)[randomPerson],
         englishAnswer: randomVerb.verbEnglish,
