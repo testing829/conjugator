@@ -26,7 +26,7 @@ const styles = theme => ({
     marginTop: theme.spacing(3)
   },
   infoSection: {
-    marginTop: '10%',
+    marginTop: '8%',
     [theme.breakpoints.down('sm')]: {
       marginTop: '1%'
     }

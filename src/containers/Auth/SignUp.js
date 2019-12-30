@@ -55,6 +55,12 @@ const SignUp = ({ classes }) => {
               <ListItemIcon>
                 <StarIcon />
               </ListItemIcon>
+              <ListItemText primary={`Listen to a native pronounce the verb`} />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <StarIcon />
+              </ListItemIcon>
               <ListItemText primary={`Save your settings`} />
             </ListItem>
             <ListItem>

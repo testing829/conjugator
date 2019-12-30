@@ -25,7 +25,8 @@ import { VERB_QUERY } from '../../gql/verbs.gql';
 import AccentButtons from './AccentButtons';
 import PromoAchievedDialog from './PromoAchievedDialog';
 import TransformVerbEng from './TransformVerbEng';
-import Snackbar from '../../components/Snackbar/index';
+import CorretSnackbar from '../../components/Snackbar/CorrectAnswer';
+import Speech from './Speech';
 
 import styles from './HomepageStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
@@ -37,6 +38,7 @@ const Homepage = ({ classes }) => {
   const [monthlyProgress, setMonthlyProgress] = useState(0);
   const [promoAchieved, setPromoAchieved] = useState(false);
   const [showNextVerb, setShowNextVerb] = useState(true);
+  // const [speak, setSpeak] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [totalAnswers, setTotalAnswers] = useState(0);
   const [totalCorrect, setTotalCorrect] = useState(0);
@@ -140,9 +142,17 @@ const Homepage = ({ classes }) => {
   useEffect(() => {
     const getRandomVerb = () => {
       const verbsLength = Object.keys(data.verbs).length;
-      const randomNum = Math.floor(Math.random() * verbsLength);
+      let randomNum = Math.floor(Math.random() * verbsLength);
       const randomPerson = Math.floor(Math.random() * 5); // this grabs the 6 yo, tu, ellos etc that we want to use
-      const randomVerb = data.verbs[randomNum];
+      let randomVerb = data.verbs[randomNum];
+      if (randomVerb.infinitive === verb.infinitive) {
+        if (randomNum === 0) {
+          randomNum === 1;
+          randomVerb = data.verbs[randomNum];
+        } else {
+          randomVerb = data.verbs[randomNum - 1];
+        }
+      }
       setVerb({
         answer: Object.values(randomVerb)[randomPerson],
         englishAnswer: randomVerb.verbEnglish,
@@ -291,6 +301,16 @@ const Homepage = ({ classes }) => {
                                     {personObj[verb.pronoun]}
                                   </Typography>
                                 </InputAdornment>
+                              ),
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <Speech
+                                    proAccount={
+                                      myInfo && myInfo.me ? true : false
+                                    }
+                                    verb={verb.infinitive}
+                                  />
+                                </InputAdornment>
                               )
                             }}
                             className={classes.input}
@@ -343,12 +363,7 @@ const Homepage = ({ classes }) => {
           promoAchieved={promoAchieved}
           setPromoAchieved={setPromoAchieved}
         />
-        <Snackbar
-          duration={10000000}
-          open={correct}
-          setOpen={setCorrect}
-          text="Correct!"
-        />
+        <CorretSnackbar open={correct} text="Correct!" />
       </>
     );
   }
