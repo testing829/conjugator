@@ -23,6 +23,7 @@ const Sidebar = ({ open, loggedIn, logOut, setOpen }) => {
 
         <NavLink
           exact
+          activeStyle={{ textDecoration: 'underline' }}
           to="/"
           style={{ textDecoration: 'none', color: 'black' }}
         >
@@ -35,6 +36,7 @@ const Sidebar = ({ open, loggedIn, logOut, setOpen }) => {
 
         <NavLink
           exact
+          activeStyle={{ textDecoration: 'underline' }}
           to="/settings"
           style={{ textDecoration: 'none', color: 'black' }}
         >
@@ -46,6 +48,7 @@ const Sidebar = ({ open, loggedIn, logOut, setOpen }) => {
         </NavLink>
         <NavLink
           exact
+          activeStyle={{ textDecoration: 'underline' }}
           to="/feedback"
           style={{ textDecoration: 'none', color: 'black' }}
         >
@@ -59,6 +62,7 @@ const Sidebar = ({ open, loggedIn, logOut, setOpen }) => {
         {loggedIn ? (
           <NavLink
             exact
+            activeStyle={{ textDecoration: 'underline' }}
             to="/account"
             style={{ textDecoration: 'none', color: 'black' }}
           >
@@ -76,6 +80,7 @@ const Sidebar = ({ open, loggedIn, logOut, setOpen }) => {
         ) : (
           <NavLink
             exact
+            activeStyle={{ textDecoration: 'underline' }}
             to="/sign-up"
             style={{ textDecoration: 'none', color: 'black' }}
           >

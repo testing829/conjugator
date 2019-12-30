@@ -68,6 +68,17 @@ export default function Nav() {
           <Hidden smDown>
             <NavLink
               exact
+              to="/"
+              activeStyle={{ textDecoration: 'underline' }}
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              <Button className={classes.navItem} color="inherit">
+                Home
+              </Button>
+            </NavLink>
+            <NavLink
+              exact
+              activeStyle={{ textDecoration: 'underline' }}
               to="/settings"
               style={{ textDecoration: 'none', color: 'white' }}
             >
@@ -77,6 +88,7 @@ export default function Nav() {
             </NavLink>
             <NavLink
               exact
+              activeStyle={{ textDecoration: 'underline' }}
               to="/feedback"
               style={{ textDecoration: 'none', color: 'white' }}
             >
@@ -87,6 +99,7 @@ export default function Nav() {
             {loggedIn ? (
               <NavLink
                 exact
+                activeStyle={{ textDecoration: 'underline' }}
                 to="/account"
                 style={{ textDecoration: 'none', color: 'white' }}
               >
@@ -97,6 +110,7 @@ export default function Nav() {
             ) : (
               <NavLink
                 exact
+                activeStyle={{ textDecoration: 'underline' }}
                 to="/sign-up"
                 style={{ textDecoration: 'none', color: 'white' }}
               >
