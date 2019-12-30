@@ -49,34 +49,38 @@ const Speech = ({ proAccount, verb }) => {
 
   if (speak)
     return <VolumeOnIcon color="primary" onClick={() => setSpeak(!speak)} />;
-  else if (openDialog) {
+  else {
     return (
-      <Dialog fullWidth open={open} onClose={handleClose}>
-        <DialogTitle>
-          Pro feature
-          <IconButton style={{ marginBottom: '2px' }}>
-            <StarIcon />
-          </IconButton>
-        </DialogTitle>
+      <>
+        <VolumeOffIcon color="primary" onClick={handleActivate} />
+        <Dialog fullWidth open={openDialog} onClose={handleClose}>
+          <DialogTitle>
+            <Typography variant="h5">
+              Pro feature
+              <IconButton style={{ marginBottom: '2px' }}>
+                <StarIcon />
+              </IconButton>
+            </Typography>
+          </DialogTitle>
 
-        <DialogContent>
-          <Typography variant="subtitle1">
-            You can listen to a local say each verb by signing up for an account
-          </Typography>
-        </DialogContent>
+          <DialogContent style={{ marginBottom: '4%' }}>
+            <Typography variant="subtitle1">
+              To listen to a local pronounce each verb, simply sign-up for an
+              account.
+            </Typography>
+          </DialogContent>
 
-        <DialogActions>
-          <Button color="primary" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button color="primary" onClick={goToSignUp} variant="contained">
-            Sign-up
-          </Button>
-        </DialogActions>
-      </Dialog>
+          <DialogActions>
+            <Button color="primary" onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button color="primary" onClick={goToSignUp} variant="contained">
+              Sign-up
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </>
     );
-  } else {
-    return <VolumeOffIcon color="primary" onClick={handleActivate} />;
   }
 };
 
