@@ -65,7 +65,7 @@ const Speech = ({ proAccount, verb }) => {
 
           <DialogContent style={{ marginBottom: '4%' }}>
             <Typography variant="subtitle1">
-              To listen to a local pronounce each verb, simply sign-up for an
+              To listen to a native pronounce each verb, simply sign-up for an
               account.
             </Typography>
           </DialogContent>
