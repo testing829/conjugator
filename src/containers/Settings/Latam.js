@@ -13,7 +13,7 @@ const Latam = () => {
 
   return (
     <List>
-      <ListSubheader>Latam Spanish or Spain Spanish</ListSubheader>
+      <ListSubheader>Latam Spanish or Castilian Spanish</ListSubheader>
       <ListItem>
         <Checkbox checked={!latam} onClick={() => setLatam(!latam)} />
         <ListItemText>Include "Vosotros"</ListItemText>
