@@ -89,7 +89,6 @@ const Settings = ({ classes }) => {
         if (mySetting.subjPresentPerfect) dbSubjArr.push('Present Perfect');
         setArr(dbTensesArr);
         setSubjArr(dbSubjArr);
-
         setGotSettingData(true);
       }
     }

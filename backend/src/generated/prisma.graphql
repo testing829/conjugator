@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sun Dec 29 2019 12:51:21 GMT+0000 (Greenwich Mean Time)
+# timestamp: Tue Dec 31 2019 17:15:55 GMT+0000 (Greenwich Mean Time)
 
 type AggregateBestStreak {
   count: Int!
@@ -10,6 +10,14 @@ type AggregateDailyTarget {
 }
 
 type AggregateFeedback {
+  count: Int!
+}
+
+type AggregateFrenchSetting {
+  count: Int!
+}
+
+type AggregateFrenchVerb {
   count: Int!
 }
 
@@ -1038,6 +1046,1042 @@ input FeedbackWhereUniqueInput {
   id: ID
 }
 
+type FrenchSetting implements Node {
+  id: ID!
+  difficulty: Int!
+  present: Boolean!
+  preterite: Boolean!
+  imperfect: Boolean!
+  future: Boolean!
+  conditional: Boolean!
+  subjPresent: Boolean!
+  subjImperfect: Boolean!
+  user: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type FrenchSettingConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [FrenchSettingEdge]!
+  aggregate: AggregateFrenchSetting!
+}
+
+input FrenchSettingCreateInput {
+  id: ID
+  difficulty: Int!
+  present: Boolean!
+  preterite: Boolean!
+  imperfect: Boolean!
+  future: Boolean!
+  conditional: Boolean!
+  subjPresent: Boolean!
+  subjImperfect: Boolean!
+  user: UserCreateOneWithoutFrenchSettingInput!
+}
+
+input FrenchSettingCreateOneWithoutUserInput {
+  create: FrenchSettingCreateWithoutUserInput
+  connect: FrenchSettingWhereUniqueInput
+}
+
+input FrenchSettingCreateWithoutUserInput {
+  id: ID
+  difficulty: Int!
+  present: Boolean!
+  preterite: Boolean!
+  imperfect: Boolean!
+  future: Boolean!
+  conditional: Boolean!
+  subjPresent: Boolean!
+  subjImperfect: Boolean!
+}
+
+"""An edge in a connection."""
+type FrenchSettingEdge {
+  """The item at the end of the edge."""
+  node: FrenchSetting!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum FrenchSettingOrderByInput {
+  id_ASC
+  id_DESC
+  difficulty_ASC
+  difficulty_DESC
+  present_ASC
+  present_DESC
+  preterite_ASC
+  preterite_DESC
+  imperfect_ASC
+  imperfect_DESC
+  future_ASC
+  future_DESC
+  conditional_ASC
+  conditional_DESC
+  subjPresent_ASC
+  subjPresent_DESC
+  subjImperfect_ASC
+  subjImperfect_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type FrenchSettingPreviousValues {
+  id: ID!
+  difficulty: Int!
+  present: Boolean!
+  preterite: Boolean!
+  imperfect: Boolean!
+  future: Boolean!
+  conditional: Boolean!
+  subjPresent: Boolean!
+  subjImperfect: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type FrenchSettingSubscriptionPayload {
+  mutation: MutationType!
+  node: FrenchSetting
+  updatedFields: [String!]
+  previousValues: FrenchSettingPreviousValues
+}
+
+input FrenchSettingSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FrenchSettingSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FrenchSettingSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FrenchSettingSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: FrenchSettingWhereInput
+}
+
+input FrenchSettingUpdateInput {
+  difficulty: Int
+  present: Boolean
+  preterite: Boolean
+  imperfect: Boolean
+  future: Boolean
+  conditional: Boolean
+  subjPresent: Boolean
+  subjImperfect: Boolean
+  user: UserUpdateOneRequiredWithoutFrenchSettingInput
+}
+
+input FrenchSettingUpdateManyMutationInput {
+  difficulty: Int
+  present: Boolean
+  preterite: Boolean
+  imperfect: Boolean
+  future: Boolean
+  conditional: Boolean
+  subjPresent: Boolean
+  subjImperfect: Boolean
+}
+
+input FrenchSettingUpdateOneWithoutUserInput {
+  create: FrenchSettingCreateWithoutUserInput
+  connect: FrenchSettingWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: FrenchSettingUpdateWithoutUserDataInput
+  upsert: FrenchSettingUpsertWithoutUserInput
+}
+
+input FrenchSettingUpdateWithoutUserDataInput {
+  difficulty: Int
+  present: Boolean
+  preterite: Boolean
+  imperfect: Boolean
+  future: Boolean
+  conditional: Boolean
+  subjPresent: Boolean
+  subjImperfect: Boolean
+}
+
+input FrenchSettingUpsertWithoutUserInput {
+  update: FrenchSettingUpdateWithoutUserDataInput!
+  create: FrenchSettingCreateWithoutUserInput!
+}
+
+input FrenchSettingWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FrenchSettingWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FrenchSettingWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FrenchSettingWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  difficulty: Int
+
+  """All values that are not equal to given value."""
+  difficulty_not: Int
+
+  """All values that are contained in given list."""
+  difficulty_in: [Int!]
+
+  """All values that are not contained in given list."""
+  difficulty_not_in: [Int!]
+
+  """All values less than the given value."""
+  difficulty_lt: Int
+
+  """All values less than or equal the given value."""
+  difficulty_lte: Int
+
+  """All values greater than the given value."""
+  difficulty_gt: Int
+
+  """All values greater than or equal the given value."""
+  difficulty_gte: Int
+  present: Boolean
+
+  """All values that are not equal to given value."""
+  present_not: Boolean
+  preterite: Boolean
+
+  """All values that are not equal to given value."""
+  preterite_not: Boolean
+  imperfect: Boolean
+
+  """All values that are not equal to given value."""
+  imperfect_not: Boolean
+  future: Boolean
+
+  """All values that are not equal to given value."""
+  future_not: Boolean
+  conditional: Boolean
+
+  """All values that are not equal to given value."""
+  conditional_not: Boolean
+  subjPresent: Boolean
+
+  """All values that are not equal to given value."""
+  subjPresent_not: Boolean
+  subjImperfect: Boolean
+
+  """All values that are not equal to given value."""
+  subjImperfect_not: Boolean
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  user: UserWhereInput
+}
+
+input FrenchSettingWhereUniqueInput {
+  id: ID
+}
+
+type FrenchVerb implements Node {
+  id: ID!
+  form1p: String
+  form1s: String
+  form2p: String
+  form2s: String
+  form3p: String
+  form3s: String
+  gerund: String
+  infinitive: String
+  moodEnglish: String
+  tense: String
+  tenseEnglish: String
+  verbEnglish: String
+}
+
+"""A connection to a list of items."""
+type FrenchVerbConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [FrenchVerbEdge]!
+  aggregate: AggregateFrenchVerb!
+}
+
+input FrenchVerbCreateInput {
+  id: ID
+  form1p: String
+  form1s: String
+  form2p: String
+  form2s: String
+  form3p: String
+  form3s: String
+  gerund: String
+  infinitive: String
+  moodEnglish: String
+  tense: String
+  tenseEnglish: String
+  verbEnglish: String
+}
+
+"""An edge in a connection."""
+type FrenchVerbEdge {
+  """The item at the end of the edge."""
+  node: FrenchVerb!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum FrenchVerbOrderByInput {
+  id_ASC
+  id_DESC
+  form1p_ASC
+  form1p_DESC
+  form1s_ASC
+  form1s_DESC
+  form2p_ASC
+  form2p_DESC
+  form2s_ASC
+  form2s_DESC
+  form3p_ASC
+  form3p_DESC
+  form3s_ASC
+  form3s_DESC
+  gerund_ASC
+  gerund_DESC
+  infinitive_ASC
+  infinitive_DESC
+  moodEnglish_ASC
+  moodEnglish_DESC
+  tense_ASC
+  tense_DESC
+  tenseEnglish_ASC
+  tenseEnglish_DESC
+  verbEnglish_ASC
+  verbEnglish_DESC
+}
+
+type FrenchVerbPreviousValues {
+  id: ID!
+  form1p: String
+  form1s: String
+  form2p: String
+  form2s: String
+  form3p: String
+  form3s: String
+  gerund: String
+  infinitive: String
+  moodEnglish: String
+  tense: String
+  tenseEnglish: String
+  verbEnglish: String
+}
+
+type FrenchVerbSubscriptionPayload {
+  mutation: MutationType!
+  node: FrenchVerb
+  updatedFields: [String!]
+  previousValues: FrenchVerbPreviousValues
+}
+
+input FrenchVerbSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FrenchVerbSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FrenchVerbSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FrenchVerbSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: FrenchVerbWhereInput
+}
+
+input FrenchVerbUpdateInput {
+  form1p: String
+  form1s: String
+  form2p: String
+  form2s: String
+  form3p: String
+  form3s: String
+  gerund: String
+  infinitive: String
+  moodEnglish: String
+  tense: String
+  tenseEnglish: String
+  verbEnglish: String
+}
+
+input FrenchVerbUpdateManyMutationInput {
+  form1p: String
+  form1s: String
+  form2p: String
+  form2s: String
+  form3p: String
+  form3s: String
+  gerund: String
+  infinitive: String
+  moodEnglish: String
+  tense: String
+  tenseEnglish: String
+  verbEnglish: String
+}
+
+input FrenchVerbWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FrenchVerbWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FrenchVerbWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FrenchVerbWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  form1p: String
+
+  """All values that are not equal to given value."""
+  form1p_not: String
+
+  """All values that are contained in given list."""
+  form1p_in: [String!]
+
+  """All values that are not contained in given list."""
+  form1p_not_in: [String!]
+
+  """All values less than the given value."""
+  form1p_lt: String
+
+  """All values less than or equal the given value."""
+  form1p_lte: String
+
+  """All values greater than the given value."""
+  form1p_gt: String
+
+  """All values greater than or equal the given value."""
+  form1p_gte: String
+
+  """All values containing the given string."""
+  form1p_contains: String
+
+  """All values not containing the given string."""
+  form1p_not_contains: String
+
+  """All values starting with the given string."""
+  form1p_starts_with: String
+
+  """All values not starting with the given string."""
+  form1p_not_starts_with: String
+
+  """All values ending with the given string."""
+  form1p_ends_with: String
+
+  """All values not ending with the given string."""
+  form1p_not_ends_with: String
+  form1s: String
+
+  """All values that are not equal to given value."""
+  form1s_not: String
+
+  """All values that are contained in given list."""
+  form1s_in: [String!]
+
+  """All values that are not contained in given list."""
+  form1s_not_in: [String!]
+
+  """All values less than the given value."""
+  form1s_lt: String
+
+  """All values less than or equal the given value."""
+  form1s_lte: String
+
+  """All values greater than the given value."""
+  form1s_gt: String
+
+  """All values greater than or equal the given value."""
+  form1s_gte: String
+
+  """All values containing the given string."""
+  form1s_contains: String
+
+  """All values not containing the given string."""
+  form1s_not_contains: String
+
+  """All values starting with the given string."""
+  form1s_starts_with: String
+
+  """All values not starting with the given string."""
+  form1s_not_starts_with: String
+
+  """All values ending with the given string."""
+  form1s_ends_with: String
+
+  """All values not ending with the given string."""
+  form1s_not_ends_with: String
+  form2p: String
+
+  """All values that are not equal to given value."""
+  form2p_not: String
+
+  """All values that are contained in given list."""
+  form2p_in: [String!]
+
+  """All values that are not contained in given list."""
+  form2p_not_in: [String!]
+
+  """All values less than the given value."""
+  form2p_lt: String
+
+  """All values less than or equal the given value."""
+  form2p_lte: String
+
+  """All values greater than the given value."""
+  form2p_gt: String
+
+  """All values greater than or equal the given value."""
+  form2p_gte: String
+
+  """All values containing the given string."""
+  form2p_contains: String
+
+  """All values not containing the given string."""
+  form2p_not_contains: String
+
+  """All values starting with the given string."""
+  form2p_starts_with: String
+
+  """All values not starting with the given string."""
+  form2p_not_starts_with: String
+
+  """All values ending with the given string."""
+  form2p_ends_with: String
+
+  """All values not ending with the given string."""
+  form2p_not_ends_with: String
+  form2s: String
+
+  """All values that are not equal to given value."""
+  form2s_not: String
+
+  """All values that are contained in given list."""
+  form2s_in: [String!]
+
+  """All values that are not contained in given list."""
+  form2s_not_in: [String!]
+
+  """All values less than the given value."""
+  form2s_lt: String
+
+  """All values less than or equal the given value."""
+  form2s_lte: String
+
+  """All values greater than the given value."""
+  form2s_gt: String
+
+  """All values greater than or equal the given value."""
+  form2s_gte: String
+
+  """All values containing the given string."""
+  form2s_contains: String
+
+  """All values not containing the given string."""
+  form2s_not_contains: String
+
+  """All values starting with the given string."""
+  form2s_starts_with: String
+
+  """All values not starting with the given string."""
+  form2s_not_starts_with: String
+
+  """All values ending with the given string."""
+  form2s_ends_with: String
+
+  """All values not ending with the given string."""
+  form2s_not_ends_with: String
+  form3p: String
+
+  """All values that are not equal to given value."""
+  form3p_not: String
+
+  """All values that are contained in given list."""
+  form3p_in: [String!]
+
+  """All values that are not contained in given list."""
+  form3p_not_in: [String!]
+
+  """All values less than the given value."""
+  form3p_lt: String
+
+  """All values less than or equal the given value."""
+  form3p_lte: String
+
+  """All values greater than the given value."""
+  form3p_gt: String
+
+  """All values greater than or equal the given value."""
+  form3p_gte: String
+
+  """All values containing the given string."""
+  form3p_contains: String
+
+  """All values not containing the given string."""
+  form3p_not_contains: String
+
+  """All values starting with the given string."""
+  form3p_starts_with: String
+
+  """All values not starting with the given string."""
+  form3p_not_starts_with: String
+
+  """All values ending with the given string."""
+  form3p_ends_with: String
+
+  """All values not ending with the given string."""
+  form3p_not_ends_with: String
+  form3s: String
+
+  """All values that are not equal to given value."""
+  form3s_not: String
+
+  """All values that are contained in given list."""
+  form3s_in: [String!]
+
+  """All values that are not contained in given list."""
+  form3s_not_in: [String!]
+
+  """All values less than the given value."""
+  form3s_lt: String
+
+  """All values less than or equal the given value."""
+  form3s_lte: String
+
+  """All values greater than the given value."""
+  form3s_gt: String
+
+  """All values greater than or equal the given value."""
+  form3s_gte: String
+
+  """All values containing the given string."""
+  form3s_contains: String
+
+  """All values not containing the given string."""
+  form3s_not_contains: String
+
+  """All values starting with the given string."""
+  form3s_starts_with: String
+
+  """All values not starting with the given string."""
+  form3s_not_starts_with: String
+
+  """All values ending with the given string."""
+  form3s_ends_with: String
+
+  """All values not ending with the given string."""
+  form3s_not_ends_with: String
+  gerund: String
+
+  """All values that are not equal to given value."""
+  gerund_not: String
+
+  """All values that are contained in given list."""
+  gerund_in: [String!]
+
+  """All values that are not contained in given list."""
+  gerund_not_in: [String!]
+
+  """All values less than the given value."""
+  gerund_lt: String
+
+  """All values less than or equal the given value."""
+  gerund_lte: String
+
+  """All values greater than the given value."""
+  gerund_gt: String
+
+  """All values greater than or equal the given value."""
+  gerund_gte: String
+
+  """All values containing the given string."""
+  gerund_contains: String
+
+  """All values not containing the given string."""
+  gerund_not_contains: String
+
+  """All values starting with the given string."""
+  gerund_starts_with: String
+
+  """All values not starting with the given string."""
+  gerund_not_starts_with: String
+
+  """All values ending with the given string."""
+  gerund_ends_with: String
+
+  """All values not ending with the given string."""
+  gerund_not_ends_with: String
+  infinitive: String
+
+  """All values that are not equal to given value."""
+  infinitive_not: String
+
+  """All values that are contained in given list."""
+  infinitive_in: [String!]
+
+  """All values that are not contained in given list."""
+  infinitive_not_in: [String!]
+
+  """All values less than the given value."""
+  infinitive_lt: String
+
+  """All values less than or equal the given value."""
+  infinitive_lte: String
+
+  """All values greater than the given value."""
+  infinitive_gt: String
+
+  """All values greater than or equal the given value."""
+  infinitive_gte: String
+
+  """All values containing the given string."""
+  infinitive_contains: String
+
+  """All values not containing the given string."""
+  infinitive_not_contains: String
+
+  """All values starting with the given string."""
+  infinitive_starts_with: String
+
+  """All values not starting with the given string."""
+  infinitive_not_starts_with: String
+
+  """All values ending with the given string."""
+  infinitive_ends_with: String
+
+  """All values not ending with the given string."""
+  infinitive_not_ends_with: String
+  moodEnglish: String
+
+  """All values that are not equal to given value."""
+  moodEnglish_not: String
+
+  """All values that are contained in given list."""
+  moodEnglish_in: [String!]
+
+  """All values that are not contained in given list."""
+  moodEnglish_not_in: [String!]
+
+  """All values less than the given value."""
+  moodEnglish_lt: String
+
+  """All values less than or equal the given value."""
+  moodEnglish_lte: String
+
+  """All values greater than the given value."""
+  moodEnglish_gt: String
+
+  """All values greater than or equal the given value."""
+  moodEnglish_gte: String
+
+  """All values containing the given string."""
+  moodEnglish_contains: String
+
+  """All values not containing the given string."""
+  moodEnglish_not_contains: String
+
+  """All values starting with the given string."""
+  moodEnglish_starts_with: String
+
+  """All values not starting with the given string."""
+  moodEnglish_not_starts_with: String
+
+  """All values ending with the given string."""
+  moodEnglish_ends_with: String
+
+  """All values not ending with the given string."""
+  moodEnglish_not_ends_with: String
+  tense: String
+
+  """All values that are not equal to given value."""
+  tense_not: String
+
+  """All values that are contained in given list."""
+  tense_in: [String!]
+
+  """All values that are not contained in given list."""
+  tense_not_in: [String!]
+
+  """All values less than the given value."""
+  tense_lt: String
+
+  """All values less than or equal the given value."""
+  tense_lte: String
+
+  """All values greater than the given value."""
+  tense_gt: String
+
+  """All values greater than or equal the given value."""
+  tense_gte: String
+
+  """All values containing the given string."""
+  tense_contains: String
+
+  """All values not containing the given string."""
+  tense_not_contains: String
+
+  """All values starting with the given string."""
+  tense_starts_with: String
+
+  """All values not starting with the given string."""
+  tense_not_starts_with: String
+
+  """All values ending with the given string."""
+  tense_ends_with: String
+
+  """All values not ending with the given string."""
+  tense_not_ends_with: String
+  tenseEnglish: String
+
+  """All values that are not equal to given value."""
+  tenseEnglish_not: String
+
+  """All values that are contained in given list."""
+  tenseEnglish_in: [String!]
+
+  """All values that are not contained in given list."""
+  tenseEnglish_not_in: [String!]
+
+  """All values less than the given value."""
+  tenseEnglish_lt: String
+
+  """All values less than or equal the given value."""
+  tenseEnglish_lte: String
+
+  """All values greater than the given value."""
+  tenseEnglish_gt: String
+
+  """All values greater than or equal the given value."""
+  tenseEnglish_gte: String
+
+  """All values containing the given string."""
+  tenseEnglish_contains: String
+
+  """All values not containing the given string."""
+  tenseEnglish_not_contains: String
+
+  """All values starting with the given string."""
+  tenseEnglish_starts_with: String
+
+  """All values not starting with the given string."""
+  tenseEnglish_not_starts_with: String
+
+  """All values ending with the given string."""
+  tenseEnglish_ends_with: String
+
+  """All values not ending with the given string."""
+  tenseEnglish_not_ends_with: String
+  verbEnglish: String
+
+  """All values that are not equal to given value."""
+  verbEnglish_not: String
+
+  """All values that are contained in given list."""
+  verbEnglish_in: [String!]
+
+  """All values that are not contained in given list."""
+  verbEnglish_not_in: [String!]
+
+  """All values less than the given value."""
+  verbEnglish_lt: String
+
+  """All values less than or equal the given value."""
+  verbEnglish_lte: String
+
+  """All values greater than the given value."""
+  verbEnglish_gt: String
+
+  """All values greater than or equal the given value."""
+  verbEnglish_gte: String
+
+  """All values containing the given string."""
+  verbEnglish_contains: String
+
+  """All values not containing the given string."""
+  verbEnglish_not_contains: String
+
+  """All values starting with the given string."""
+  verbEnglish_starts_with: String
+
+  """All values not starting with the given string."""
+  verbEnglish_not_starts_with: String
+
+  """All values ending with the given string."""
+  verbEnglish_ends_with: String
+
+  """All values not ending with the given string."""
+  verbEnglish_not_ends_with: String
+}
+
+input FrenchVerbWhereUniqueInput {
+  id: ID
+}
+
 """Raw JSON value"""
 scalar Json
 
@@ -1850,42 +2894,54 @@ type Mutation {
   createLog(data: LogCreateInput!): Log!
   createFeedback(data: FeedbackCreateInput!): Feedback!
   createSetting(data: SettingCreateInput!): Setting!
+  createFrenchSetting(data: FrenchSettingCreateInput!): FrenchSetting!
   createVerb(data: VerbCreateInput!): Verb!
+  createFrenchVerb(data: FrenchVerbCreateInput!): FrenchVerb!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateDailyTarget(data: DailyTargetUpdateInput!, where: DailyTargetWhereUniqueInput!): DailyTarget
   updateBestStreak(data: BestStreakUpdateInput!, where: BestStreakWhereUniqueInput!): BestStreak
   updateLog(data: LogUpdateInput!, where: LogWhereUniqueInput!): Log
   updateFeedback(data: FeedbackUpdateInput!, where: FeedbackWhereUniqueInput!): Feedback
   updateSetting(data: SettingUpdateInput!, where: SettingWhereUniqueInput!): Setting
+  updateFrenchSetting(data: FrenchSettingUpdateInput!, where: FrenchSettingWhereUniqueInput!): FrenchSetting
   updateVerb(data: VerbUpdateInput!, where: VerbWhereUniqueInput!): Verb
+  updateFrenchVerb(data: FrenchVerbUpdateInput!, where: FrenchVerbWhereUniqueInput!): FrenchVerb
   deleteUser(where: UserWhereUniqueInput!): User
   deleteDailyTarget(where: DailyTargetWhereUniqueInput!): DailyTarget
   deleteBestStreak(where: BestStreakWhereUniqueInput!): BestStreak
   deleteLog(where: LogWhereUniqueInput!): Log
   deleteFeedback(where: FeedbackWhereUniqueInput!): Feedback
   deleteSetting(where: SettingWhereUniqueInput!): Setting
+  deleteFrenchSetting(where: FrenchSettingWhereUniqueInput!): FrenchSetting
   deleteVerb(where: VerbWhereUniqueInput!): Verb
+  deleteFrenchVerb(where: FrenchVerbWhereUniqueInput!): FrenchVerb
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertDailyTarget(where: DailyTargetWhereUniqueInput!, create: DailyTargetCreateInput!, update: DailyTargetUpdateInput!): DailyTarget!
   upsertBestStreak(where: BestStreakWhereUniqueInput!, create: BestStreakCreateInput!, update: BestStreakUpdateInput!): BestStreak!
   upsertLog(where: LogWhereUniqueInput!, create: LogCreateInput!, update: LogUpdateInput!): Log!
   upsertFeedback(where: FeedbackWhereUniqueInput!, create: FeedbackCreateInput!, update: FeedbackUpdateInput!): Feedback!
   upsertSetting(where: SettingWhereUniqueInput!, create: SettingCreateInput!, update: SettingUpdateInput!): Setting!
+  upsertFrenchSetting(where: FrenchSettingWhereUniqueInput!, create: FrenchSettingCreateInput!, update: FrenchSettingUpdateInput!): FrenchSetting!
   upsertVerb(where: VerbWhereUniqueInput!, create: VerbCreateInput!, update: VerbUpdateInput!): Verb!
+  upsertFrenchVerb(where: FrenchVerbWhereUniqueInput!, create: FrenchVerbCreateInput!, update: FrenchVerbUpdateInput!): FrenchVerb!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyDailyTargets(data: DailyTargetUpdateManyMutationInput!, where: DailyTargetWhereInput): BatchPayload!
   updateManyBestStreaks(data: BestStreakUpdateManyMutationInput!, where: BestStreakWhereInput): BatchPayload!
   updateManyLogs(data: LogUpdateManyMutationInput!, where: LogWhereInput): BatchPayload!
   updateManyFeedbacks(data: FeedbackUpdateManyMutationInput!, where: FeedbackWhereInput): BatchPayload!
   updateManySettings(data: SettingUpdateManyMutationInput!, where: SettingWhereInput): BatchPayload!
+  updateManyFrenchSettings(data: FrenchSettingUpdateManyMutationInput!, where: FrenchSettingWhereInput): BatchPayload!
   updateManyVerbs(data: VerbUpdateManyMutationInput!, where: VerbWhereInput): BatchPayload!
+  updateManyFrenchVerbs(data: FrenchVerbUpdateManyMutationInput!, where: FrenchVerbWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyDailyTargets(where: DailyTargetWhereInput): BatchPayload!
   deleteManyBestStreaks(where: BestStreakWhereInput): BatchPayload!
   deleteManyLogs(where: LogWhereInput): BatchPayload!
   deleteManyFeedbacks(where: FeedbackWhereInput): BatchPayload!
   deleteManySettings(where: SettingWhereInput): BatchPayload!
+  deleteManyFrenchSettings(where: FrenchSettingWhereInput): BatchPayload!
   deleteManyVerbs(where: VerbWhereInput): BatchPayload!
+  deleteManyFrenchVerbs(where: FrenchVerbWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
@@ -1927,21 +2983,27 @@ type Query {
   logs(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Log]!
   feedbacks(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Feedback]!
   settings(where: SettingWhereInput, orderBy: SettingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Setting]!
+  frenchSettings(where: FrenchSettingWhereInput, orderBy: FrenchSettingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FrenchSetting]!
   verbs(where: VerbWhereInput, orderBy: VerbOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Verb]!
+  frenchVerbs(where: FrenchVerbWhereInput, orderBy: FrenchVerbOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FrenchVerb]!
   user(where: UserWhereUniqueInput!): User
   dailyTarget(where: DailyTargetWhereUniqueInput!): DailyTarget
   bestStreak(where: BestStreakWhereUniqueInput!): BestStreak
   log(where: LogWhereUniqueInput!): Log
   feedback(where: FeedbackWhereUniqueInput!): Feedback
   setting(where: SettingWhereUniqueInput!): Setting
+  frenchSetting(where: FrenchSettingWhereUniqueInput!): FrenchSetting
   verb(where: VerbWhereUniqueInput!): Verb
+  frenchVerb(where: FrenchVerbWhereUniqueInput!): FrenchVerb
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   dailyTargetsConnection(where: DailyTargetWhereInput, orderBy: DailyTargetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DailyTargetConnection!
   bestStreaksConnection(where: BestStreakWhereInput, orderBy: BestStreakOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BestStreakConnection!
   logsConnection(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LogConnection!
   feedbacksConnection(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FeedbackConnection!
   settingsConnection(where: SettingWhereInput, orderBy: SettingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SettingConnection!
+  frenchSettingsConnection(where: FrenchSettingWhereInput, orderBy: FrenchSettingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FrenchSettingConnection!
   verbsConnection(where: VerbWhereInput, orderBy: VerbOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): VerbConnection!
+  frenchVerbsConnection(where: FrenchVerbWhereInput, orderBy: FrenchVerbOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FrenchVerbConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -2373,7 +3435,9 @@ type Subscription {
   log(where: LogSubscriptionWhereInput): LogSubscriptionPayload
   feedback(where: FeedbackSubscriptionWhereInput): FeedbackSubscriptionPayload
   setting(where: SettingSubscriptionWhereInput): SettingSubscriptionPayload
+  frenchSetting(where: FrenchSettingSubscriptionWhereInput): FrenchSettingSubscriptionPayload
   verb(where: VerbSubscriptionWhereInput): VerbSubscriptionPayload
+  frenchVerb(where: FrenchVerbSubscriptionWhereInput): FrenchVerbSubscriptionPayload
 }
 
 type User implements Node {
@@ -2386,11 +3450,13 @@ type User implements Node {
   premium: Boolean!
   bestStreak: BestStreak
   dailyTarget: DailyTarget
+  defaultLanguage: String
   logs(where: LogWhereInput, orderBy: LogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Log!]
   feedbacks(where: FeedbackWhereInput, orderBy: FeedbackOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Feedback!]
   stripeSubId: String
   stripeSource: String
   setting: Setting
+  frenchSetting: FrenchSetting
   successfulPromo: Boolean
 }
 
@@ -2410,6 +3476,7 @@ input UserCreateInput {
   name: String
   password: String
   premium: Boolean!
+  defaultLanguage: String
   stripeSubId: String
   stripeSource: String
   successfulPromo: Boolean
@@ -2418,6 +3485,7 @@ input UserCreateInput {
   logs: LogCreateManyWithoutUserInput
   feedbacks: FeedbackCreateManyWithoutUserInput
   setting: SettingCreateOneWithoutUserInput
+  frenchSetting: FrenchSettingCreateOneWithoutUserInput
 }
 
 input UserCreateOneWithoutBestStreakInput {
@@ -2432,6 +3500,11 @@ input UserCreateOneWithoutDailyTargetInput {
 
 input UserCreateOneWithoutFeedbacksInput {
   create: UserCreateWithoutFeedbacksInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutFrenchSettingInput {
+  create: UserCreateWithoutFrenchSettingInput
   connect: UserWhereUniqueInput
 }
 
@@ -2451,6 +3524,7 @@ input UserCreateWithoutBestStreakInput {
   name: String
   password: String
   premium: Boolean!
+  defaultLanguage: String
   stripeSubId: String
   stripeSource: String
   successfulPromo: Boolean
@@ -2458,6 +3532,7 @@ input UserCreateWithoutBestStreakInput {
   logs: LogCreateManyWithoutUserInput
   feedbacks: FeedbackCreateManyWithoutUserInput
   setting: SettingCreateOneWithoutUserInput
+  frenchSetting: FrenchSettingCreateOneWithoutUserInput
 }
 
 input UserCreateWithoutDailyTargetInput {
@@ -2466,6 +3541,7 @@ input UserCreateWithoutDailyTargetInput {
   name: String
   password: String
   premium: Boolean!
+  defaultLanguage: String
   stripeSubId: String
   stripeSource: String
   successfulPromo: Boolean
@@ -2473,6 +3549,7 @@ input UserCreateWithoutDailyTargetInput {
   logs: LogCreateManyWithoutUserInput
   feedbacks: FeedbackCreateManyWithoutUserInput
   setting: SettingCreateOneWithoutUserInput
+  frenchSetting: FrenchSettingCreateOneWithoutUserInput
 }
 
 input UserCreateWithoutFeedbacksInput {
@@ -2481,12 +3558,31 @@ input UserCreateWithoutFeedbacksInput {
   name: String
   password: String
   premium: Boolean!
+  defaultLanguage: String
   stripeSubId: String
   stripeSource: String
   successfulPromo: Boolean
   bestStreak: BestStreakCreateOneWithoutUserInput
   dailyTarget: DailyTargetCreateOneWithoutUserInput
   logs: LogCreateManyWithoutUserInput
+  setting: SettingCreateOneWithoutUserInput
+  frenchSetting: FrenchSettingCreateOneWithoutUserInput
+}
+
+input UserCreateWithoutFrenchSettingInput {
+  id: ID
+  email: String
+  name: String
+  password: String
+  premium: Boolean!
+  defaultLanguage: String
+  stripeSubId: String
+  stripeSource: String
+  successfulPromo: Boolean
+  bestStreak: BestStreakCreateOneWithoutUserInput
+  dailyTarget: DailyTargetCreateOneWithoutUserInput
+  logs: LogCreateManyWithoutUserInput
+  feedbacks: FeedbackCreateManyWithoutUserInput
   setting: SettingCreateOneWithoutUserInput
 }
 
@@ -2496,6 +3592,7 @@ input UserCreateWithoutLogsInput {
   name: String
   password: String
   premium: Boolean!
+  defaultLanguage: String
   stripeSubId: String
   stripeSource: String
   successfulPromo: Boolean
@@ -2503,6 +3600,7 @@ input UserCreateWithoutLogsInput {
   dailyTarget: DailyTargetCreateOneWithoutUserInput
   feedbacks: FeedbackCreateManyWithoutUserInput
   setting: SettingCreateOneWithoutUserInput
+  frenchSetting: FrenchSettingCreateOneWithoutUserInput
 }
 
 input UserCreateWithoutSettingInput {
@@ -2511,6 +3609,7 @@ input UserCreateWithoutSettingInput {
   name: String
   password: String
   premium: Boolean!
+  defaultLanguage: String
   stripeSubId: String
   stripeSource: String
   successfulPromo: Boolean
@@ -2518,6 +3617,7 @@ input UserCreateWithoutSettingInput {
   dailyTarget: DailyTargetCreateOneWithoutUserInput
   logs: LogCreateManyWithoutUserInput
   feedbacks: FeedbackCreateManyWithoutUserInput
+  frenchSetting: FrenchSettingCreateOneWithoutUserInput
 }
 
 """An edge in a connection."""
@@ -2544,6 +3644,8 @@ enum UserOrderByInput {
   updatedAt_DESC
   premium_ASC
   premium_DESC
+  defaultLanguage_ASC
+  defaultLanguage_DESC
   stripeSubId_ASC
   stripeSubId_DESC
   stripeSource_ASC
@@ -2560,6 +3662,7 @@ type UserPreviousValues {
   createdAt: DateTime!
   updatedAt: DateTime!
   premium: Boolean!
+  defaultLanguage: String
   stripeSubId: String
   stripeSource: String
   successfulPromo: Boolean
@@ -2607,6 +3710,7 @@ input UserUpdateInput {
   name: String
   password: String
   premium: Boolean
+  defaultLanguage: String
   stripeSubId: String
   stripeSource: String
   successfulPromo: Boolean
@@ -2615,6 +3719,7 @@ input UserUpdateInput {
   logs: LogUpdateManyWithoutUserInput
   feedbacks: FeedbackUpdateManyWithoutUserInput
   setting: SettingUpdateOneWithoutUserInput
+  frenchSetting: FrenchSettingUpdateOneWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
@@ -2622,9 +3727,17 @@ input UserUpdateManyMutationInput {
   name: String
   password: String
   premium: Boolean
+  defaultLanguage: String
   stripeSubId: String
   stripeSource: String
   successfulPromo: Boolean
+}
+
+input UserUpdateOneRequiredWithoutFrenchSettingInput {
+  create: UserCreateWithoutFrenchSettingInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutFrenchSettingDataInput
+  upsert: UserUpsertWithoutFrenchSettingInput
 }
 
 input UserUpdateOneRequiredWithoutSettingInput {
@@ -2675,6 +3788,7 @@ input UserUpdateWithoutBestStreakDataInput {
   name: String
   password: String
   premium: Boolean
+  defaultLanguage: String
   stripeSubId: String
   stripeSource: String
   successfulPromo: Boolean
@@ -2682,6 +3796,7 @@ input UserUpdateWithoutBestStreakDataInput {
   logs: LogUpdateManyWithoutUserInput
   feedbacks: FeedbackUpdateManyWithoutUserInput
   setting: SettingUpdateOneWithoutUserInput
+  frenchSetting: FrenchSettingUpdateOneWithoutUserInput
 }
 
 input UserUpdateWithoutDailyTargetDataInput {
@@ -2689,6 +3804,7 @@ input UserUpdateWithoutDailyTargetDataInput {
   name: String
   password: String
   premium: Boolean
+  defaultLanguage: String
   stripeSubId: String
   stripeSource: String
   successfulPromo: Boolean
@@ -2696,6 +3812,7 @@ input UserUpdateWithoutDailyTargetDataInput {
   logs: LogUpdateManyWithoutUserInput
   feedbacks: FeedbackUpdateManyWithoutUserInput
   setting: SettingUpdateOneWithoutUserInput
+  frenchSetting: FrenchSettingUpdateOneWithoutUserInput
 }
 
 input UserUpdateWithoutFeedbacksDataInput {
@@ -2703,12 +3820,30 @@ input UserUpdateWithoutFeedbacksDataInput {
   name: String
   password: String
   premium: Boolean
+  defaultLanguage: String
   stripeSubId: String
   stripeSource: String
   successfulPromo: Boolean
   bestStreak: BestStreakUpdateOneWithoutUserInput
   dailyTarget: DailyTargetUpdateOneWithoutUserInput
   logs: LogUpdateManyWithoutUserInput
+  setting: SettingUpdateOneWithoutUserInput
+  frenchSetting: FrenchSettingUpdateOneWithoutUserInput
+}
+
+input UserUpdateWithoutFrenchSettingDataInput {
+  email: String
+  name: String
+  password: String
+  premium: Boolean
+  defaultLanguage: String
+  stripeSubId: String
+  stripeSource: String
+  successfulPromo: Boolean
+  bestStreak: BestStreakUpdateOneWithoutUserInput
+  dailyTarget: DailyTargetUpdateOneWithoutUserInput
+  logs: LogUpdateManyWithoutUserInput
+  feedbacks: FeedbackUpdateManyWithoutUserInput
   setting: SettingUpdateOneWithoutUserInput
 }
 
@@ -2717,6 +3852,7 @@ input UserUpdateWithoutLogsDataInput {
   name: String
   password: String
   premium: Boolean
+  defaultLanguage: String
   stripeSubId: String
   stripeSource: String
   successfulPromo: Boolean
@@ -2724,6 +3860,7 @@ input UserUpdateWithoutLogsDataInput {
   dailyTarget: DailyTargetUpdateOneWithoutUserInput
   feedbacks: FeedbackUpdateManyWithoutUserInput
   setting: SettingUpdateOneWithoutUserInput
+  frenchSetting: FrenchSettingUpdateOneWithoutUserInput
 }
 
 input UserUpdateWithoutSettingDataInput {
@@ -2731,6 +3868,7 @@ input UserUpdateWithoutSettingDataInput {
   name: String
   password: String
   premium: Boolean
+  defaultLanguage: String
   stripeSubId: String
   stripeSource: String
   successfulPromo: Boolean
@@ -2738,6 +3876,7 @@ input UserUpdateWithoutSettingDataInput {
   dailyTarget: DailyTargetUpdateOneWithoutUserInput
   logs: LogUpdateManyWithoutUserInput
   feedbacks: FeedbackUpdateManyWithoutUserInput
+  frenchSetting: FrenchSettingUpdateOneWithoutUserInput
 }
 
 input UserUpsertWithoutBestStreakInput {
@@ -2753,6 +3892,11 @@ input UserUpsertWithoutDailyTargetInput {
 input UserUpsertWithoutFeedbacksInput {
   update: UserUpdateWithoutFeedbacksDataInput!
   create: UserCreateWithoutFeedbacksInput!
+}
+
+input UserUpsertWithoutFrenchSettingInput {
+  update: UserUpdateWithoutFrenchSettingDataInput!
+  create: UserCreateWithoutFrenchSettingInput!
 }
 
 input UserUpsertWithoutLogsInput {
@@ -2982,6 +4126,46 @@ input UserWhereInput {
 
   """All values that are not equal to given value."""
   premium_not: Boolean
+  defaultLanguage: String
+
+  """All values that are not equal to given value."""
+  defaultLanguage_not: String
+
+  """All values that are contained in given list."""
+  defaultLanguage_in: [String!]
+
+  """All values that are not contained in given list."""
+  defaultLanguage_not_in: [String!]
+
+  """All values less than the given value."""
+  defaultLanguage_lt: String
+
+  """All values less than or equal the given value."""
+  defaultLanguage_lte: String
+
+  """All values greater than the given value."""
+  defaultLanguage_gt: String
+
+  """All values greater than or equal the given value."""
+  defaultLanguage_gte: String
+
+  """All values containing the given string."""
+  defaultLanguage_contains: String
+
+  """All values not containing the given string."""
+  defaultLanguage_not_contains: String
+
+  """All values starting with the given string."""
+  defaultLanguage_starts_with: String
+
+  """All values not starting with the given string."""
+  defaultLanguage_not_starts_with: String
+
+  """All values ending with the given string."""
+  defaultLanguage_ends_with: String
+
+  """All values not ending with the given string."""
+  defaultLanguage_not_ends_with: String
   stripeSubId: String
 
   """All values that are not equal to given value."""
@@ -3075,6 +4259,7 @@ input UserWhereInput {
   feedbacks_some: FeedbackWhereInput
   feedbacks_none: FeedbackWhereInput
   setting: SettingWhereInput
+  frenchSetting: FrenchSettingWhereInput
 }
 
 input UserWhereUniqueInput {

@@ -10,12 +10,15 @@ type User {
     @relation(link: TABLE, name: "BestStreakToUser", onDelete: CASCADE)
   dailyTarget: DailyTarget
     @relation(link: TABLE, name: "DailyTargetToUser", onDelete: CASCADE)
+  defaultLanguage: String
   logs: [Log] @relation(name: "LogToUser", onDelete: CASCADE)
   feedbacks: [Feedback] @relation(name: "FeedbackToUser", onDelete: CASCADE)
   stripeSubId: String
   stripeSource: String
   setting: Setting
     @relation(link: TABLE, name: "SettingToUser", onDelete: CASCADE)
+  frenchSetting: FrenchSetting
+    @relation(link: TABLE, name: "FrenchSettingToUser", onDelete: CASCADE)
   successfulPromo: Boolean
 }
 
@@ -78,6 +81,22 @@ type Setting {
   updatedAt: DateTime! @updatedAt
 }
 
+type FrenchSetting {
+  id: ID! @id
+  difficulty: Int!
+  present: Boolean!
+  preterite: Boolean!
+  imperfect: Boolean!
+  future: Boolean!
+  conditional: Boolean!
+  subjPresent: Boolean!
+  subjImperfect: Boolean!
+  user: User! @relation(name: "FrenchSettingToUser", onDelete: CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+
 type Verb {
   id: ID! @id
   form1p: String
@@ -98,3 +117,20 @@ type Verb {
   tenseEnglish: String
   verbEnglish: String
 }
+
+type FrenchVerb {
+  id: ID! @id
+  form1p: String
+  form1s: String
+  form2p: String
+  form2s: String
+  form3p: String
+  form3s: String
+  gerund: String
+  infinitive: String
+  moodEnglish: String
+  tense: String
+  tenseEnglish: String
+  verbEnglish: String
+}
+

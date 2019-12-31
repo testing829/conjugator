@@ -75,6 +75,7 @@ type Mutation {
   createBestStreak(data: CreateBestStreakInput!): BestStreak!
   createDailyTarget(data: CreateDailyTargetInput!): DailyTarget!
   createFeedback(data: CreateFeedbackInput!): Feedback!
+  createFrenchVerb(data: VerbCreateInput!): FrenchVerb!
   createLog(data: CreateLogInput!): Log!
   createUser(data: CreateUserInput!): AuthPayload!
   createVerb(data: VerbCreateInput!): Verb!
@@ -185,6 +186,21 @@ input VerbUpdateInput {
   verbEnglish: String
 }
 
+# input FrenchVerbUpdateInput {
+#   form1p: String
+#   form1s: String
+#   form2p: String
+#   form2s: String
+#   form3p: String
+#   form3s: String
+#   gerund: String
+#   infinitive: String
+#   moodEnglish: String
+#   tense: String
+#   tenseEnglish: String
+#   verbEnglish: String
+# }
+
 type User {
   id: ID!
   email: String
@@ -282,6 +298,28 @@ type Verb {
   tenseEnglish: String
   verbEnglish: String
 }
+
+type FrenchVerb {
+  form1p: String
+  form1s: String
+  form2p: String
+  form2s: String
+  form3p: String
+  form3s: String
+  gerund: String
+  gerundEnglish: String
+  index: ID
+  infinitive: String
+  infinitiveEnglish: String
+  mood: String
+  moodEnglish: String
+  pastparticiple: String
+  pastparticipleEnglish: String
+  tense: String
+  tenseEnglish: String
+  verbEnglish: String
+}
+
 
 input UserWhereInput {
   AND: [UserWhereInput!]
