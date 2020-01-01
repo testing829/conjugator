@@ -18,7 +18,7 @@ const PromoDialog = ({
 }) => {
   const [userCode, setUserCode] = useState('');
   const [error, setError] = useState(false);
-  const validCodes = ['oneMonthFree!'];
+  const validCodes = ['oneMonthFree!', 'happy2020'];
 
   const handleSubmit = () => {
     const foundCode = validCodes.find(code => code === userCode);
