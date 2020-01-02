@@ -1,21 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import * as React from 'react';
+
+import { NavLink } from 'react-router-dom';
+
 import Button from '@material-ui/core/Button';
-import Popper from '@material-ui/core/Popper';
+import Icon from '@material-ui/core/Icon';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Typography from '@material-ui/core/Typography';
 import {
   usePopupState,
-  bindToggle,
-  bindPopper
+  bindTrigger,
+  bindMenu
 } from 'material-ui-popup-state/hooks';
-import Fade from '@material-ui/core/Fade';
-import Paper from '@material-ui/core/Paper';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import Icon from '@material-ui/core/Icon';
 
 import FrenchFlag from './france.svg';
 import SpanishFlag from './spain.svg';
+
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   navItem: {
@@ -25,27 +26,28 @@ const styles = theme => ({
     }
   },
   typography: {
-    padding: theme.spacing.unit * 2
+    color: theme.palette.primary.main,
+    padding: theme.spacing.unit,
+    textDecoration: 'none'
   }
 });
 
-const PopperPopupState = ({ classes, language }) => {
+const MenuPopupState = ({ classes, language }) => {
   const popupState = usePopupState({
-    variant: 'popper',
-    popupId: 'demoPopper'
+    variant: 'popover',
+    popupId: 'demoMenu'
   });
 
   let flag;
   if (language === 'spanish') flag = SpanishFlag;
-  console.log('TCL: PopperPopupState -> language', language);
   if (language === 'french') flag = FrenchFlag;
 
   return (
-    <div>
+    <>
       <Button
         className={classes.navItem}
         color="inherit"
-        {...bindToggle(popupState)}
+        {...bindTrigger(popupState)}
       >
         <Icon
           style={{
@@ -62,22 +64,23 @@ const PopperPopupState = ({ classes, language }) => {
           />
         </Icon>
       </Button>
-      <Popper {...bindPopper(popupState)} transition>
-        {({ TransitionProps }) => (
-          <Fade {...TransitionProps} timeout={350}>
-            <Paper>
-              <Typography className={classes.typography}>Spanish</Typography>
-              <Typography className={classes.typography}>French</Typography>
-            </Paper>
-          </Fade>
-        )}
-      </Popper>
-    </div>
+      <Menu
+        {...bindMenu(popupState)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        getContentAnchorEl={null}
+      >
+        <NavLink exact to="/es" style={{ textDecoration: 'none' }}>
+          <MenuItem className={classes.menuItem} onClick={popupState.close}>
+            <Typography className={classes.typography}>Spanish</Typography>
+          </MenuItem>
+        </NavLink>
+        <NavLink exact to="/fr" style={{ textDecoration: 'none' }}>
+          <MenuItem onClick={popupState.close}>
+            <Typography className={classes.typography}>French</Typography>
+          </MenuItem>
+        </NavLink>
+      </Menu>
+    </>
   );
 };
-
-PopperPopupState.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(PopperPopupState);
+export default withStyles(styles)(MenuPopupState);
