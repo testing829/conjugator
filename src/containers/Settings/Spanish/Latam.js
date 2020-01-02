@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 
-import { Context } from '../../contexts/index';
+import { Context } from '../../../contexts/index';
 
 const Latam = () => {
   const { latam, setLatam } = useContext(Context);

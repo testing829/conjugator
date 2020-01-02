@@ -7,6 +7,7 @@ export const Context = createContext();
 
 export function Provider(props) {
   const [difficulty, setDifficulty] = useState(0);
+  // const [frenchDifficulty, setDifficulty] = useState(0);
   const [gotSettingData, setGotSettingData] = useState(false);
   const [latam, setLatam] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);

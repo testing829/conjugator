@@ -8,9 +8,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import withWidth from '@material-ui/core/withWidth';
 
-import { Context } from '../../contexts/index';
+import { Context } from '../../../contexts/index';
 
-import styles from './SettingsStyles.jss';
+import styles from '../SettingsStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
 
 const Difficulty = ({ classes, width }) => {
@@ -55,15 +55,6 @@ const Difficulty = ({ classes, width }) => {
                 Frequently used regular and irregular verbs
               </ListItemText>
             </ListItem>
-            <ListItem>
-              <Checkbox
-                checked={difficulty === 3}
-                onClick={() => {
-                  setDifficulty(3);
-                }}
-              />
-              <ListItemText>All verbs</ListItemText>
-            </ListItem>
           </List>
         </Grid>
       </Grid>
@@ -98,13 +89,6 @@ const Difficulty = ({ classes, width }) => {
               <ListItemText>
                 Frequently used regular and irregular verbs
               </ListItemText>
-              <Checkbox
-                checked={difficulty === 3}
-                onClick={() => {
-                  setDifficulty(3);
-                }}
-              />
-              <ListItemText>All verbs</ListItemText>
             </ListItem>
           </List>
         </Grid>

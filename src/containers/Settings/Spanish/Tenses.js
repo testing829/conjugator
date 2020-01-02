@@ -11,7 +11,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import StarBorder from '@material-ui/icons/StarBorder';
 import Typography from '@material-ui/core/Typography';
 
-import { Context } from '../../contexts/index';
+import { Context } from '../../../contexts/index';
 import { createHashHistory } from 'history';
 
 const Tenses = ({ data }) => {
