@@ -44,15 +44,17 @@ export default function Nav() {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6" className={classes.title}>
-          <NavLink
-            exact
-            to="/"
-            style={{ textDecoration: 'none', color: 'white' }}
-          >
-            Conjugator
-          </NavLink>
-        </Typography>
+        <Box className={classes.title}>
+          <Typography variant="h6">
+            <NavLink
+              exact
+              to="/"
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              Conjugator
+            </NavLink>
+          </Typography>
+        </Box>
 
         <Box className={classes.navItemContainer}>
           <Hidden mdUp>

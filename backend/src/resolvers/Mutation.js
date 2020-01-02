@@ -3,7 +3,7 @@ import getUserId from '../utils/getUserId';
 import generateToken from '../utils/generateToken';
 import hashPassword from '../utils/hashPassword';
 import verbsFile from '../../csvjson';
-import frenchFile from '../../french_verbs.json';
+import frenchFile from '../../french_verbs_new.json';
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
 // const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
@@ -317,6 +317,8 @@ const Mutation = {
     });
   },
   async createFrenchVerb(parent, args, { prisma, request }, info) {
+    console.log('FRENCH', args.data.start, args.data.end);
+    console.log(frenchFile.length);
     return await Object.values(
       frenchFile.slice(args.data.start, args.data.end)
     ).map(file => {
