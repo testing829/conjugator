@@ -50,8 +50,10 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <CssBaseline />
-      <Nav />
+      {/* <Nav /> */}
       <Switch>
+        <Route path="/es" render={() => <Nav language="spanish" />} />
+        <Route path="/fr" render={() => <Nav language="french" />} />
         <Route exact path="/" render={() => <Homepage />} />
         <Route
           exact
