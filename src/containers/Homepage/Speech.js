@@ -19,6 +19,8 @@ const Speech = ({ proAccount, verb }) => {
   const [speak, setSpeak] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
 
+  const language = history.location.pathname.split('/')[1];
+
   const handleActivate = () => {
     if (proAccount) {
       setSpeak(true);
@@ -32,7 +34,7 @@ const Speech = ({ proAccount, verb }) => {
   };
 
   const goToSignUp = () => {
-    history.push('/sign-up');
+    history.push(`/${language}/sign-up`);
   };
 
   useEffect(() => {

@@ -19,8 +19,10 @@ const Tenses = ({ data }) => {
   const me = data ? data.me : null;
   const { changeSubj, subjArr, tenseArr, updateTense } = useContext(Context);
 
+  const language = history.location.pathname.split('/')[1];
+
   const redirect = () => {
-    history.push('/sign-up');
+    history.push(`/${language}/sign-up`);
   };
 
   return (

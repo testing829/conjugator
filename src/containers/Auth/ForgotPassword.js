@@ -21,6 +21,7 @@ const ForgotPassword = ({ classes, history, location }) => {
 
   const idIndex = location.pathname.lastIndexOf('/');
   const id = location.pathname.substring(idIndex + 1);
+  const language = location.pathname.split('/')[1];
 
   const [updateUser, { data, error }] = useMutation(UPDATE_USER);
 
@@ -40,7 +41,7 @@ const ForgotPassword = ({ classes, history, location }) => {
   };
 
   const goToLogin = () => {
-    history.push('/login');
+    history.push(`/${language}/login`);
   };
 
   if (data) {

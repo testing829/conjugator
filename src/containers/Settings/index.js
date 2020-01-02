@@ -5,13 +5,8 @@ import { useMutation, useQuery } from 'react-apollo-hooks';
 
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
-import Select from '@material-ui/core/Select';
-import SvgIcon from '@material-ui/core/SvgIcon';
 
 import { Context } from '../../contexts/index';
 import { MY_SETTING, UPSERT_SETTING } from '../../gql/settings.gql';

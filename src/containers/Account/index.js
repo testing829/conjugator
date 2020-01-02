@@ -25,7 +25,7 @@ import Points from './Points';
 import WeekChart from './Week';
 import YearChart from './Year';
 
-function Account({ history }) {
+function Account({ history, location }) {
   const [billingDate, setBillingDate] = useState();
   const [nextBillingDate, setNextBillingDate] = useState();
   const [monthlyProgress, setMonthlyProgress] = useState();
@@ -62,14 +62,16 @@ function Account({ history }) {
     }
   });
 
+  const language = location.pathname.split('/')[1];
+
   const cancelAccount = () => {
-    history.push('/cancel-account');
+    history.push(`/${language}/cancel-account`);
   };
 
   const logOut = () => {
     localStorage.clear();
     setLoggedIn(false);
-    history.push('/login');
+    history.push(`/${language}/login`);
   };
 
   const getBillingDate = () => {
@@ -135,7 +137,7 @@ function Account({ history }) {
   if (loading | loadingMyLogs | loadingMyLogsByDate | (chartData === 0))
     return <CircularProgress />;
   else if (!userData.me) {
-    history.push('/sign-up');
+    history.push(`/${language}/sign-up`);
   }
 
   return (

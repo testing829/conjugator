@@ -17,7 +17,7 @@ import {
 import styles from './AccountStyles.jss';
 import { withStyles } from '@material-ui/core/styles';
 
-const CancelSubscription = ({ classes, history }) => {
+const CancelSubscription = ({ classes, history, location }) => {
   const [cancelled, setCancelled] = useState(false);
   const { setLoggedIn } = useContext(Context);
 
@@ -26,6 +26,8 @@ const CancelSubscription = ({ classes, history }) => {
     CANCEL_SUBSCRIPTION
   );
   const [updateUser, { data: updatedUser }] = useMutation(UPDATE_USER);
+
+  const language = location.pathname.split('/')[1];
 
   const handleDelete = async () => {
     try {
@@ -41,7 +43,7 @@ const CancelSubscription = ({ classes, history }) => {
   };
 
   const backHome = () => {
-    history.push('/');
+    history.push(`/${language}`);
   };
 
   const handleUpdate = async () => {
