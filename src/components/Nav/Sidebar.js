@@ -10,7 +10,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 
-const Sidebar = ({ open, loggedIn, logOut, setOpen }) => {
+const Sidebar = ({ language, loggedIn, logOut, open, setOpen }) => {
   return (
     <Drawer anchor="right" onClose={() => setOpen(false)} open={open}>
       <List>
@@ -24,7 +24,7 @@ const Sidebar = ({ open, loggedIn, logOut, setOpen }) => {
         <NavLink
           exact
           activeStyle={{ textDecoration: 'underline' }}
-          to="/"
+          to={`/${language}`}
           style={{ textDecoration: 'none', color: 'black' }}
         >
           <ListItem>
@@ -37,7 +37,7 @@ const Sidebar = ({ open, loggedIn, logOut, setOpen }) => {
         <NavLink
           exact
           activeStyle={{ textDecoration: 'underline' }}
-          to="/settings"
+          to={`/${language}/settings`}
           style={{ textDecoration: 'none', color: 'black' }}
         >
           <ListItem>
@@ -49,7 +49,7 @@ const Sidebar = ({ open, loggedIn, logOut, setOpen }) => {
         <NavLink
           exact
           activeStyle={{ textDecoration: 'underline' }}
-          to="/feedback"
+          to={`/${language}/feedback`}
           style={{ textDecoration: 'none', color: 'black' }}
         >
           <ListItem>
@@ -63,7 +63,7 @@ const Sidebar = ({ open, loggedIn, logOut, setOpen }) => {
           <NavLink
             exact
             activeStyle={{ textDecoration: 'underline' }}
-            to="/account"
+            to={`/${language}/account`}
             style={{ textDecoration: 'none', color: 'black' }}
           >
             <ListItem>
@@ -81,7 +81,7 @@ const Sidebar = ({ open, loggedIn, logOut, setOpen }) => {
           <NavLink
             exact
             activeStyle={{ textDecoration: 'underline' }}
-            to="/sign-up"
+            to={`/${language}/sign-up`}
             style={{ textDecoration: 'none', color: 'black' }}
           >
             <ListItem>

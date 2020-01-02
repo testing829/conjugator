@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { NavLink } from 'react-router-dom';
 
@@ -32,15 +32,15 @@ const styles = theme => ({
   }
 });
 
-const MenuPopupState = ({ classes, language }) => {
+const MenuPopupState = ({ classes, language, location }) => {
   const popupState = usePopupState({
     variant: 'popover',
     popupId: 'demoMenu'
   });
 
   let flag;
-  if (language === 'spanish') flag = SpanishFlag;
-  if (language === 'french') flag = FrenchFlag;
+  if (language === 'es') flag = SpanishFlag;
+  if (language === 'fr') flag = FrenchFlag;
 
   return (
     <>
@@ -70,12 +70,21 @@ const MenuPopupState = ({ classes, language }) => {
         getContentAnchorEl={null}
       >
         <NavLink exact to="/es" style={{ textDecoration: 'none' }}>
-          <MenuItem className={classes.menuItem} onClick={popupState.close}>
+          <MenuItem
+            className={classes.menuItem}
+            onClick={() => {
+              popupState.close();
+            }}
+          >
             <Typography className={classes.typography}>Spanish</Typography>
           </MenuItem>
         </NavLink>
         <NavLink exact to="/fr" style={{ textDecoration: 'none' }}>
-          <MenuItem onClick={popupState.close}>
+          <MenuItem
+            onClick={() => {
+              popupState.close();
+            }}
+          >
             <Typography className={classes.typography}>French</Typography>
           </MenuItem>
         </NavLink>

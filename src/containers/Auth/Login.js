@@ -19,15 +19,16 @@ import Snackbar from '../../components/Snackbar/index';
 import styles from './Auth.jss';
 import { withStyles } from '@material-ui/core/styles';
 
-const Login = ({ classes, history }) => {
+const Login = ({ classes, history, location }) => {
   const [email, setEmail] = useState('');
-
   const [open, setOpen] = useState(false);
   const [forgotPassword, setForgotPassword] = useState(false);
   const [password, setPassword] = useState('');
 
   const { setLoggedIn } = useContext(Context);
   const [login, { data, error }] = useMutation(LOGIN);
+
+  const language = location.pathname.split('/')[1];
 
   const delay = 500;
 
@@ -47,14 +48,14 @@ const Login = ({ classes, history }) => {
       setLoggedIn(true);
       setOpen(true);
       setTimeout(() => {
-        history.push('/');
+        history.push(`/${language}`);
       }, delay);
     };
 
     if (!error && data) {
       redirect();
     }
-  }, [data, error, history, setLoggedIn]);
+  }, [data, error, history, language, setLoggedIn]);
 
   useEffect(() => {
     localStorage.clear();
@@ -125,7 +126,7 @@ const Login = ({ classes, history }) => {
 
           <Grid container justify="flex-end">
             <Grid item className={classes.switch}>
-              <NavLink to={'/sign-up'} className={classes.navLink}>
+              <NavLink to={`/${language}/sign-up`} className={classes.navLink}>
                 <Typography>Don't have an account? Sign-up</Typography>
               </NavLink>
             </Grid>

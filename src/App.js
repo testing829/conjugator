@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo-hooks';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -50,31 +50,39 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <CssBaseline />
-      {/* <Nav /> */}
+      <Route path="/es" component={() => <Nav language="es" />} />
+      <Route path="/fr" render={() => <Nav language="fr" />} />
       <Switch>
-        <Route path="/es" render={() => <Nav language="spanish" />} />
-        <Route path="/fr" render={() => <Nav language="french" />} />
-        <Route exact path="/" render={() => <Homepage />} />
+        <Route exact path="/">
+          <Redirect to="/es" />
+        </Route>
+        <Route exact path="/es" render={() => <Homepage />} />
+        <Route exact path="/fr" render={() => <Homepage />} />
         <Route
           exact
-          path="/settings"
+          path="/:language/settings"
           render={props => <Settings {...props} />}
         />
         <Route
           exact
-          path="/feedback"
+          path="/:language/feedback"
           render={props => <Feedback {...props} />}
         />
-        <Route exact path="/login" render={props => <Login {...props} />} />
-        <Route exact path="/sign-up" render={props => <SignUp {...props} />} />
-        <Route exact path="/account" render={props => <Account {...props} />} />
+        <Route path="/:language/login" render={props => <Login {...props} />} />
         <Route
-          exact
-          path="/cancel-account"
+          path="/:language/sign-up"
+          render={props => <SignUp {...props} />}
+        />
+        <Route
+          path="/:language/account"
+          render={props => <Account {...props} />}
+        />
+        <Route
+          path="/:language/cancel-account"
           render={props => <CancelSubscription {...props} />}
         />
         <Route
-          path="/forgot-password"
+          path="/:language/forgot-password"
           render={props => <ForgotPassword {...props} />}
         />
         <Route render={() => <h1>URL not found!</h1>} />

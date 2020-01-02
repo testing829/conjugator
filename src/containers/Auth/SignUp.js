@@ -27,7 +27,7 @@ import StarIcon from '@material-ui/icons/Star';
 import styles from './Auth.jss';
 import { withStyles } from '@material-ui/core/styles';
 
-const SignUp = ({ classes }) => {
+const SignUp = ({ classes, location }) => {
   const [activatePromo, setActivatePromo] = useState(false);
   const [email, setEmail] = useState('');
   const [error, setError] = useState(false);
@@ -36,6 +36,8 @@ const SignUp = ({ classes }) => {
   const [password, setPassword] = useState('');
   // const [shortPassword, setShortPassword] = useState(false);
   const [successfulPromo, setSuccessfulPromo] = useState(false);
+
+  const language = location.pathname.split('/')[1];
 
   return (
     <>
@@ -250,7 +252,7 @@ const SignUp = ({ classes }) => {
 
           <Grid container justify="flex-end">
             <Grid item className={classes.switch}>
-              <NavLink to={'/login'}>
+              <NavLink to={`/${language}/login`}>
                 <Typography>Already have an account? Login</Typography>
               </NavLink>
             </Grid>

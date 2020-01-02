@@ -5,35 +5,17 @@ import { NavLink } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import MenuIcon from '@material-ui/icons/Menu';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import SvgIcon from '@material-ui/core/SvgIcon';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-
-import AcUnitIcon from '@material-ui/icons/AcUnit';
 
 import { Context } from '../../contexts/index';
 import LanguagePopover from './LanguagePopver';
 import Sidebar from './Sidebar';
 
 import { makeStyles } from '@material-ui/core/styles';
-
-import Popover from '@material-ui/core/Popover';
-import {
-  usePopupState,
-  bindTrigger,
-  bindPopover
-} from 'material-ui-popup-state/hooks';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -60,12 +42,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Nav({ language }) {
-  console.log('TCL: Nav -> language', language);
-  const classes = useStyles();
-  const { loggedIn } = useContext(Context);
   const [open, setOpen] = useState(false);
-
-  const popupState = usePopupState({ variant: 'popover', popupId: 'demoMenu' });
+  const { loggedIn } = useContext(Context);
+  const classes = useStyles();
 
   return (
     <AppBar position="static">
@@ -74,7 +53,7 @@ export default function Nav({ language }) {
           <Typography variant="h6">
             <NavLink
               exact
-              to="/"
+              to={`/${language}`}
               style={{ textDecoration: 'none', color: 'white' }}
             >
               Conjugator
@@ -98,7 +77,7 @@ export default function Nav({ language }) {
           <Hidden smDown>
             <NavLink
               exact
-              to="/"
+              to={`/${language}`}
               activeStyle={{ textDecoration: 'underline' }}
               style={{ textDecoration: 'none', color: 'white' }}
             >
@@ -109,7 +88,7 @@ export default function Nav({ language }) {
             <NavLink
               exact
               activeStyle={{ textDecoration: 'underline' }}
-              to="/settings"
+              to={`/${language}/settings`}
               style={{ textDecoration: 'none', color: 'white' }}
             >
               <Button className={classes.navItem} color="inherit">
@@ -119,7 +98,7 @@ export default function Nav({ language }) {
             <NavLink
               exact
               activeStyle={{ textDecoration: 'underline' }}
-              to="/feedback"
+              to={`/${language}/feedback`}
               style={{ textDecoration: 'none', color: 'white' }}
             >
               <Button className={classes.navItem} color="inherit">
@@ -130,7 +109,7 @@ export default function Nav({ language }) {
               <NavLink
                 exact
                 activeStyle={{ textDecoration: 'underline' }}
-                to="/account"
+                to={`/${language}/account`}
                 style={{ textDecoration: 'none', color: 'white' }}
               >
                 <Button className={classes.navItem} color="inherit">
@@ -141,7 +120,7 @@ export default function Nav({ language }) {
               <NavLink
                 exact
                 activeStyle={{ textDecoration: 'underline' }}
-                to="/sign-up"
+                to={`/${language}/sign-up`}
                 style={{ textDecoration: 'none', color: 'white' }}
               >
                 <Button className={classes.navItem} color="inherit">
@@ -152,7 +131,12 @@ export default function Nav({ language }) {
           </Hidden>
         </Box>
       </Toolbar>
-      <Sidebar open={open} loggedIn={loggedIn} setOpen={setOpen} />
+      <Sidebar
+        language={language}
+        loggedIn={loggedIn}
+        open={open}
+        setOpen={setOpen}
+      />
     </AppBar>
   );
 }
