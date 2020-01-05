@@ -222,7 +222,8 @@ const SignUp = ({ classes, location }) => {
             />
 
             <Grid item xs={12}>
-              <StripeProvider apiKey={process.env.REACT_APP_STRIPE_API_KEY}>
+              {/* <StripeProvider apiKey={process.env.REACT_APP_STRIPE_API_KEY}> */}
+              <StripeProvider apiKey={process.env.REACT_APP_STRIPE_TEST}>
                 <Elements>
                   <ChargeMoney
                     classes={classes}

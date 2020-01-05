@@ -21,29 +21,26 @@ const Settings = ({ classes }) => {
   const [open, setOpen] = useState(false);
 
   const {
-    difficulty,
+    frenchDifficulty,
     gotSettingData,
-    latam,
     loggedIn,
-    setArr,
-    setDifficulty,
+    setFrenchArr,
+    setFrenchDifficulty,
     setGotSettingData,
-    setSubjArr,
-    subjArr,
-    tenseArr,
-    setLatam
+    setFrenchSubjArr,
+    subjFrenchArr,
+    tenseFrenchArr
   } = useContext(Context);
 
-  const [upsertSetting] = useMutation(UPSERT_SETTING);
+  const [upsertFrenchSetting] = useMutation(UPSERT_SETTING);
   const { data, loading } = useQuery(MY_SETTING);
 
   const handleUpdate = async () => {
     if (loggedIn) {
       try {
-        await upsertSetting({
+        await upsertFrenchSetting({
           variables: {
             difficulty,
-            latam,
             present: tenseArr.includes('Present'),
             preterite: tenseArr.includes('Preterite'),
             imperfect: tenseArr.includes('Imperfect'),

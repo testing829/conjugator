@@ -5,8 +5,8 @@ import hashPassword from '../utils/hashPassword';
 import verbsFile from '../../csvjson';
 import frenchFile from '../../french_verbs_new.json';
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET);
-// const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
+// const stripe = require('stripe')(process.env.STRIPE_SECRET);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
 
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
@@ -30,12 +30,12 @@ const Mutation = {
     try {
       subscription = await stripe.subscriptions.create({
         coupon: args.data.successfulPromo
-          ? process.env.STRIPE_MONTH_FREE_COUPON
+          ? process.env.STRIPE_MONTH_FREE_COUPON_TEST
           : null,
         customer: customer.id,
         items: [
           {
-            plan: process.env.STRIPE_PLAN
+            plan: process.env.STRIPE_PLAN_TEST
           }
         ]
       });
@@ -50,6 +50,25 @@ const Mutation = {
         stripeSubId: subscription.id,
         password
       }
+    });
+
+    const transporter = nodemailer.createTransport(
+      smtpTransport({
+        service: 'gmail',
+        host: 'smtp.gmail.com',
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS
+        }
+      })
+    );
+    const names = args.data.name.split(' ');
+    const firstName = names[0];
+    await transporter.sendMail({
+      from: '"Conjugator" <conjugator.app@gmail.com>',
+      to: `${user.email}`,
+      subject: 'Welcome!',
+      html: `<div>Hey ${firstName}, \n <p>Thanks for signing up to Conjugator!</p>\n <p>Now that you have a premium account, can now access all of the verb tenses, listen to a native pronounce the verbs, save your settings and track your learning progress.</p>\n<p>If you have any questions or feedback, please send us a message on the Feedback page: <a href="https://conjugator.io/#/feedback">https://conjugator.io/#/feedback</a></p>\n<p>Best of luck with your language learning journey!</p></div>`
     });
 
     return {

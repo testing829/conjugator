@@ -96,7 +96,6 @@ type FrenchSetting {
   updatedAt: DateTime! @updatedAt
 }
 
-
 type Verb {
   id: ID! @id
   form1p: String
@@ -133,4 +132,3 @@ type FrenchVerb {
   tenseEnglish: String
   verbEnglish: String
 }
-
