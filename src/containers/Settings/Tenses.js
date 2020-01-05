@@ -205,7 +205,7 @@ const Tenses = ({ data }) => {
                 onClick={() => changeSubj('Present')}
               />
               <ListItemText
-                primary="Subjunctive Present"
+                primary="Subjunctive Present Perfect"
                 secondary={'Haya hablado'}
               />
               <ListItemSecondaryAction>
