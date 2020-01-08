@@ -63,6 +63,18 @@ const Query = {
 
     return prisma.query.verbs(opArgs, info);
   },
+  frenchVerbs(parent, args, { prisma }, info) {
+    console.log("PRISMA", prisma.query)
+    const opArgs = {
+      first: args.first,
+      skip: args.skip,
+      after: args.after,
+      orderBy: args.orderBy,
+      where: args.where
+    };
+
+    return prisma.query.frenchVerbs(opArgs, info);
+  },
   logs(parent, args, { prisma }, info) {
     const opArgs = {
       first: args.first,

@@ -26,6 +26,14 @@ type Query {
     orderBy: VerbOrderByInput
     where: VerbWhereInput
   ): [Verb]
+  frenchVerbs(
+    query: String
+    first: Int
+    skip: Int
+    after: String
+    orderBy: VerbOrderByInput
+    where: VerbWhereInput
+  ): [FrenchVerb]
   logs(
     query: String
     first: Int
@@ -307,14 +315,10 @@ type FrenchVerb {
   form3p: String
   form3s: String
   gerund: String
-  gerundEnglish: String
   index: ID
   infinitive: String
-  infinitiveEnglish: String
-  mood: String
   moodEnglish: String
   pastparticiple: String
-  pastparticipleEnglish: String
   tense: String
   tenseEnglish: String
   verbEnglish: String

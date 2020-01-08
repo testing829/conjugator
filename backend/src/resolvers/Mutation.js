@@ -3,7 +3,7 @@ import getUserId from '../utils/getUserId';
 import generateToken from '../utils/generateToken';
 import hashPassword from '../utils/hashPassword';
 import verbsFile from '../../csvjson';
-import frenchFile from '../../french_verbs_new.json';
+import frenchFile from '../../french_verbs.json';
 
 // const stripe = require('stripe')(process.env.STRIPE_SECRET);
 const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST);
