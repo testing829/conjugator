@@ -16,6 +16,10 @@ import { withStyles } from '@material-ui/core/styles';
 const Difficulty = ({ classes, width }) => {
   const { difficulty, setDifficulty } = useContext(Context);
 
+  const handleClick = (event) => {
+    setDifficulty(event.target.value);
+  };
+
   if (width === 'xs') {
     return (
       <Grid container>
@@ -24,19 +28,23 @@ const Difficulty = ({ classes, width }) => {
             <ListSubheader>Difficulty</ListSubheader>
             <ListItem>
               <Checkbox
-                checked={difficulty === 0}
-                onClick={() => {
-                  setDifficulty(0);
-                }}
+                // checked={difficulty === 0}
+                // onClick={() => {
+                //   setDifficulty(0);
+                // }}
+                onClick={handleClick}
+                value={0}
               />
               <ListItemText>Frequently used regular verbs</ListItemText>
             </ListItem>
             <ListItem>
               <Checkbox
-                checked={difficulty === 1}
-                onClick={() => {
-                  setDifficulty(1);
-                }}
+                // checked={difficulty === 1}
+                // onClick={() => {
+                //   setDifficulty(1);
+                // }}
+                onClick={handleClick}
+                value={1}
               />
               <ListItemText>Frequently used irregular verbs</ListItemText>
             </ListItem>

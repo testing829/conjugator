@@ -29,8 +29,8 @@ const Feedback = ({ classes }) => {
       await createFeedback({
         variables: {
           email,
-          text
-        }
+          text,
+        },
       });
       setOpenSnackbar(true);
     } catch (err) {
@@ -68,7 +68,7 @@ const Feedback = ({ classes }) => {
                 fullWidth
                 id="email"
                 name="email"
-                onChange={event => setEmail(event.target.value)}
+                onChange={(event) => setEmail(event.target.value)}
                 placeholder="Your email address"
                 required
                 variant="outlined"
@@ -77,7 +77,7 @@ const Feedback = ({ classes }) => {
                 className={classes.input}
                 multiline
                 placeholder="Describe your experience here.."
-                onChange={event => setText(event.target.value)}
+                onChange={(event) => setText(event.target.value)}
                 rows="15"
                 variant="outlined"
               />

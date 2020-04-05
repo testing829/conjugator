@@ -32,7 +32,7 @@ const Settings = ({ classes }) => {
     setSubjArr,
     subjArr,
     tenseArr,
-    setLatam
+    setLatam,
   } = useContext(Context);
 
   const [upsertSetting] = useMutation(UPSERT_SETTING);
@@ -56,8 +56,8 @@ const Settings = ({ classes }) => {
             conditionalPerfect: tenseArr.includes('Conditional Perfect'),
             subjPresent: subjArr.includes('Present'),
             subjImperfect: subjArr.includes('Imperfect'),
-            subjPresentPerfect: subjArr.includes('Present Perfect')
-          }
+            subjPresentPerfect: subjArr.includes('Present Perfect'),
+          },
         });
       } catch (err) {
         console.log('Error creating setting:', err);
@@ -94,8 +94,6 @@ const Settings = ({ classes }) => {
       }
     }
   }, [loading]);
-
-  if (loading && !gotSettingData) return <CircularProgress />;
 
   return (
     <>

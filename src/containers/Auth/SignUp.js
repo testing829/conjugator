@@ -125,7 +125,7 @@ const SignUp = ({ classes }) => {
                 id="fullname"
                 label="Full Name"
                 name="fullname"
-                onChange={event => setFullName(event.target.value)}
+                onChange={(event) => setFullName(event.target.value)}
                 required
                 variant="outlined"
               />
@@ -137,7 +137,7 @@ const SignUp = ({ classes }) => {
                 id="email"
                 label="Email Address"
                 name="email"
-                onChange={event => setEmail(event.target.value)}
+                onChange={(event) => setEmail(event.target.value)}
                 required
                 variant="outlined"
               />
@@ -149,7 +149,7 @@ const SignUp = ({ classes }) => {
                 id="password"
                 label="Password"
                 name="password"
-                onChange={event => setPassword(event.target.value)}
+                onChange={(event) => setPassword(event.target.value)}
                 required
                 type="password"
                 variant="outlined"
@@ -250,7 +250,7 @@ const SignUp = ({ classes }) => {
 
           <Grid container justify="flex-end">
             <Grid item className={classes.switch}>
-              <NavLink to={'/login'}>
+              <NavLink to={'/login'} className={classes.navLink}>
                 <Typography>Already have an account? Login</Typography>
               </NavLink>
             </Grid>
