@@ -1,47 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-import { useMutation } from 'react-apollo-hooks';
+import { useMutation } from 'react-apollo-hooks'
 
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar'
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import Typography from '@material-ui/core/Typography'
 
-import { UPDATE_USER } from '../../gql/users.gql';
+import { UPDATE_USER } from '../../gql/users.gql'
 
-import styles from './Auth.jss';
-import { withStyles } from '@material-ui/core/styles';
+import styles from './Auth.jss'
+import { withStyles } from '@material-ui/core/styles'
 
 const ForgotPassword = ({ classes, history, location }) => {
-  const [confirmPassword, setConfirmPassword] = useState();
-  const [passwordMismatch, setPasswordMismatch] = useState(false);
-  const [newPassword, setNewPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState()
+  const [passwordMismatch, setPasswordMismatch] = useState(false)
+  const [newPassword, setNewPassword] = useState()
 
-  const idIndex = location.pathname.lastIndexOf('/');
-  const id = location.pathname.substring(idIndex + 1);
+  const idIndex = location.pathname.lastIndexOf('/')
+  const id = location.pathname.substring(idIndex + 1)
 
-  const [updateUser, { data, error }] = useMutation(UPDATE_USER);
+  const [updateUser, { data, error }] = useMutation(UPDATE_USER)
 
   const handleSubmit = async () => {
     if (newPassword === confirmPassword) {
-      setPasswordMismatch(false);
+      setPasswordMismatch(false)
 
       await updateUser({
         variables: {
           id,
-          password: newPassword
-        }
-      });
+          password: newPassword,
+        },
+      })
     } else {
-      setPasswordMismatch(true);
+      setPasswordMismatch(true)
     }
-  };
+  }
 
   const goToLogin = () => {
-    history.push('/login');
-  };
+    history.push('/login')
+  }
 
   if (data) {
     return (
@@ -58,7 +58,7 @@ const ForgotPassword = ({ classes, history, location }) => {
           </Button>
         </Grid>
       </Grid>
-    );
+    )
   } else {
     return (
       <Grid container justify="center">
@@ -78,7 +78,7 @@ const ForgotPassword = ({ classes, history, location }) => {
                 id="newPassword"
                 label="New password"
                 name="password"
-                onChange={event => setNewPassword(event.target.value)}
+                onChange={(event) => setNewPassword(event.target.value)}
                 required
                 type="password"
                 variant="outlined"
@@ -91,7 +91,7 @@ const ForgotPassword = ({ classes, history, location }) => {
                 id="confirmPassword"
                 label="Confirm new password"
                 name="password"
-                onChange={event => setConfirmPassword(event.target.value)}
+                onChange={(event) => setConfirmPassword(event.target.value)}
                 required
                 type="password"
                 variant="outlined"
@@ -105,6 +105,7 @@ const ForgotPassword = ({ classes, history, location }) => {
                   Feedback page and we'll get back to you right away.
                 </Typography>
               )}
+
               {error && (
                 <Typography className={classes.errorMessage}>
                   Unable to update password. Please try again. If the error
@@ -127,8 +128,8 @@ const ForgotPassword = ({ classes, history, location }) => {
           </Grid>
         </Grid>
       </Grid>
-    );
+    )
   }
-};
+}
 
-export default withStyles(styles)(ForgotPassword);
+export default withStyles(styles)(ForgotPassword)
