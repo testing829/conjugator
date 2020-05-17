@@ -102,7 +102,7 @@ const ForgotPassword = ({ classes, history, location }) => {
                 <Typography className={classes.errorMessage}>
                   Are you sure your password and confirmed password are
                   identical? If the error persists, please send a message on the
-                  Feedback page and we'll get back to you right away.
+                  Feedback page and we'll get back to you right away. s
                 </Typography>
               )}
 
