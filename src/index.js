@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import { HashRouter } from 'react-router-dom';
 import { Provider } from './contexts/index';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
-
 import App from './App';
 
 const theme = createMuiTheme({
